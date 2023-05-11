@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build --environment=production",
+    "build": "npm run tailwind:build && ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
@@ -20,11 +20,15 @@
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
     "test": "npm-run-all lint test:*",
-    "test:ember": "ember test"
+    "test:ember": "ember test",
+    "tailwind:build": "npx tailwindcss -c ./config/tailwind/tailwind.config.js -i ./config/tailwind/tailwind-input.css -o ./public/assets/tailwind.css",
+    "tailwind:watch": "npx tailwindcss -c ./config/tailwind/tailwind.config.js -i ./config/tailwind/tailwind-input.css -o ./public/assets/tailwind.css --watch"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.8.1",
+    "@fortawesome/ember-fontawesome": "^0.4.1",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "babel-eslint": "^10.1.0",
@@ -36,12 +40,18 @@
     "ember-cli-dependency-checker": "^3.3.1",
     "ember-cli-htmlbars": "^6.1.0",
     "ember-cli-inject-live-reload": "^2.1.0",
+    "ember-cli-notifications": "^8.0.0",
+    "ember-cli-sass": "^11.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
+    "ember-composable-helpers": "^5.0.0",
     "ember-data": "~4.4.0",
     "ember-fetch": "^8.1.1",
     "ember-load-initializers": "^2.1.2",
+    "ember-moment": "^10.0.0",
     "ember-page-title": "^7.0.0",
+    "ember-power-calendar": "^0.19.0",
+    "ember-power-calendar-moment": "^0.2.0",
     "ember-qunit": "^5.1.5",
     "ember-resolver": "^8.0.3",
     "ember-source": "~4.6.0",
@@ -54,10 +64,14 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-qunit": "^7.3.1",
     "loader.js": "^4.7.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "qunit": "^2.19.1",
     "qunit-dom": "^2.0.0",
+    "sass": "^1.62.1",
+    "tailwindcss": "^3.0.0",
     "webpack": "^5.74.0"
   },
   "engines": {
@@ -65,5 +79,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "dependencies": {
+    "daisyui": "^2.51.6"
   }
 }

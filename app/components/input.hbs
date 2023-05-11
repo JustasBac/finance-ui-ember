@@ -1,0 +1,15 @@
+<div class="form-control w-full" ...attributes>
+  <label class="label py-1">
+    <span class="label-text leading-none">
+      {{@label}}
+    </span>
+  </label>
+  <input
+    value={{@value}}
+    type={{this.type}}
+    placeholder={{@placeholder}}
+    class="input input-bordered w-full
+      {{unless this.isFormValidated 'input-error'}}"
+    {{on 'input' this.updateInputValue}}
+  />
+</div>

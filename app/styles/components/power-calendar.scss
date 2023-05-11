@@ -1,0 +1,40 @@
+.ember-power-calendar {
+  @include ember-power-calendar($cell-size: 40px, $primary-color: #26243a);
+
+  // border: 1px solid rgba(0, 40, 100, 0.1);
+  background: #fff;
+  // border-radius: 1rem;
+  top: 3px;
+
+  .ember-power-calendar-day {
+    border-radius: 0.7rem;
+
+    &.ember-power-calendar-day--current-month {
+      color: #3b3b3b;
+      background: transparent;
+    }
+
+    &.ember-power-calendar-day--selected {
+      color: #fff;
+      background-color: hsl(var(--n));
+      &:hover {
+        background-color: hsl(var(--n));
+        color: #fff;
+      }
+    }
+
+    &.ember-power-calendar-day--focused {
+      box-shadow: none;
+    }
+  }
+
+  .ember-power-calendar-nav-title {
+    color: grey;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .ember-power-calendar-weekdays {
+    color: grey;
+  }
+}
