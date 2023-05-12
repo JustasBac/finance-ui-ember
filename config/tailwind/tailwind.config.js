@@ -10,7 +10,9 @@ const relevantFilesGlob = '**/*.{html,js,ts,hbs,gjs,gts}';
 module.exports = {
   content: [path.join(appEntry, relevantFilesGlob)],
   theme: {
-    extend: {},
+    extend: {
+      // colors: { olive: '#e9edc9' },
+    },
   },
   plugins: [require('daisyui')],
 };

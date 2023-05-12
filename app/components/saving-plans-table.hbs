@@ -1,0 +1,62 @@
+{{#if this.savingPlanService.savingPlans}}
+  <div class="overflow-x-auto w-2/4">
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>
+            Saving goal
+          </th>
+          <th>
+            Goal amount
+          </th>
+          <th>
+            Deadline
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.savingPlanService.savingPlans as |savingPlan index|}}
+          <tr class="hover">
+            <th>
+              {{add 1 index}}
+            </th>
+            <td>
+              {{savingPlan.title}}
+            </td>
+            <td>
+              {{savingPlan.goalAmount}}
+              {{savingPlan.currency}}
+            </td>
+            <td>
+              {{moment-format savingPlan.deadlineDate 'MMMM DD, YYYY'}}
+            </td>
+            <th>
+              <label for="my-modal-4" class="btn btn-ghost btn-xs">
+                Edit
+              </label>
+            </th>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+{{else}}
+  <Alert @text="You have no saving plans" />
+{{/if}}
+{{! Edit Modal: }}
+<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label for="my-modal-4" class="modal cursor-pointer">
+  <label class="modal-box relative" for="">
+    <h3 class="text-lg font-bold">
+      Saving plan
+    </h3>
+    <p class="py-4">
+      <label for="my-modal-4" class="btn btn-ghost btn-xs">
+        Close
+      </label>
+    </p>
+  </label>
+</label>

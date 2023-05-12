@@ -10,18 +10,16 @@ export default class InputComponent extends Component {
       return this.args.type;
     }
 
-    return 'text';
+    return 'text'; //default
   }
 
-  @computed('validationService.validationWasTriggered')
+  @computed('args.value.length', 'validationService.validationWasTriggered')
   get isFormValidated() {
     if (!this.validationService.validationWasTriggered) {
       return true;
     }
 
     if (!this.args.value || this.args.value.length === 0) {
-      console.log('length is zero');
-
       return false;
     }
 
@@ -30,6 +28,12 @@ export default class InputComponent extends Component {
 
   @action
   updateInputValue(e) {
+    if (this.type === 'number' && e.target.value < this.args.min) {
+      //if input has type 'number' prevent user from entering value lower than allowed min value
+      e.target.value = null;
+      return;
+    }
+
     this.args.onInput(e.target.value);
   }
 }
