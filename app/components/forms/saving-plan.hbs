@@ -1,0 +1,28 @@
+<Input
+  @value={{@savingPlanInformation.title}}
+  @label="Goal name"
+  @onInput={{fn (mut @savingPlanInformation.title)}}
+  placeholder="Enter goal name"
+/>
+<div class="flex">
+  <Input
+    class="mt-3"
+    @type="number"
+    @value={{@savingPlanInformation.goalAmount}}
+    min={{1}}
+    @label="Goal amount"
+    @onInput={{fn (mut @savingPlanInformation.goalAmount)}}
+    placeholder="Enter goal amount"
+  />
+  <Input
+    class="mt-3 basis-1/3 ml-2"
+    @value={{@savingPlanInformation.currency}}
+    @onInput={{fn (mut @savingPlanInformation.currency)}}
+    @label="Currency"
+    placeholder="€"
+  />
+</div>
+<DatePicker
+  @selectedDate={{@savingPlanInformation.deadlineDate}}
+  @onDateChange={{fn (mut @savingPlanInformation.deadlineDate)}}
+/>

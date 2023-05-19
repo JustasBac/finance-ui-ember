@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import moment from 'moment';
 import { inject as service } from '@ember/service';
+import SavingPlan from 'finance-ui-ember/models/saving-plan';
 
 export default class HomeController extends Controller {
   @service('input-validation') validationService;
@@ -13,9 +14,13 @@ export default class HomeController extends Controller {
   @tracked isSavingPlanCreationBlockOpen = false;
   @tracked selectedDate = moment().add(1, 'days'); //default deadline is tomorrow
 
+  @tracked newSavingPlan = new SavingPlan();
+
   @action
   createSavingPlan() {
-    if (!this.savingGoalTitle || !this.goalAmount || !this.enteredCurrency) {
+    const { currency, goalAmount, title } = this.newSavingPlan;
+
+    if (!title || !goalAmount || !currency) {
       this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
 
       this.notifications.error('Make sure all fields are filled!', {
@@ -24,20 +29,16 @@ export default class HomeController extends Controller {
       return;
     }
 
-    this.savingPlanService.addNewSavingPlan(
-      this.savingGoalTitle,
-      this.goalAmount,
-      this.enteredCurrency,
-      this.selectedDate
-    );
+    this.savingPlanService.addNewSavingPlan(this.newSavingPlan);
 
     this.notifications.success(
-      `New saving plan for ${this.savingGoalTitle} was successfully created`,
+      `New saving plan for ${title} was successfully created`,
       {
         autoClear: true,
       }
     );
 
     this.isSavingPlanCreationBlockOpen = false;
+    this.newSavingPlan = new SavingPlan();
   }
 }

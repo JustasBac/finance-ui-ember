@@ -8,9 +8,7 @@ export default class SavingPlanService extends Service {
     new SavingPlan('Aparmtnet', '2000000', 'SEK', moment().add(1, 'years')),
   ];
 
-  addNewSavingPlan(title, moneyAmount, currency, deadlineDate) {
-    this.savingPlans.pushObject(
-      new SavingPlan(title, moneyAmount, currency, deadlineDate)
-    );
+  addNewSavingPlan(newSavingPlan) {
+    this.savingPlans.pushObject(newSavingPlan);
   }
 }

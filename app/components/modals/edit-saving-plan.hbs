@@ -1,0 +1,31 @@
+<Modals::-TriggerButton>
+  <span
+    class="btn btn-ghost btn-xs"
+    {{on 'click' (fn (mut this.isModalOpen) true)}}
+  >
+    Edit
+  </span>
+</Modals::-TriggerButton>
+{{#if this.isModalOpen}}
+  <Modals::-base>
+    <:header>
+      Edit saving plan
+    </:header>
+    <:body>
+      <Forms::SavingPlan
+        @savingPlanInformation={{this.copyOfEditableSavingPlan}}
+      />
+      <div class="flex justify-between mt-5">
+        <Modals::-TriggerButton>
+          <span class="btn btn-ghost btn-xs">
+            Close
+          </span>
+        </Modals::-TriggerButton>
+        <Button class="mt-3" {{on 'click' this.saveChanges}}>
+          <FaIcon @icon="floppy-disk" class="mr-1" />
+          Save
+        </Button>
+      </div>
+    </:body>
+  </Modals::-base>
+{{/if}}

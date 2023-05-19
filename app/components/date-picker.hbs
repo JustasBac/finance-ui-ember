@@ -1,66 +1,71 @@
-<span class="mt-3 label-text ml-1">
-  Deadline
-</span>
-<div class="dropdown">
-  <label
-    tabindex="0"
-    class="border bg-white rounded p-3 flex justify-between items-center cursor-pointer hover:bg-gray-50"
-  >
-    {{moment-format this.selectedDate 'YYYY.MM.DD'}}
-    <FaIcon @icon="calendar-days" />
-  </label>
-  <div
-    tabindex="0"
-    class="dropdown-content card card-compact p-2 shadow bg-white"
-  >
-    <div class="card-body">
-      <h3 class="card-title">
-        Pick a date
-      </h3>
-      <PowerCalendar
-        @selected={{this.selectedDate}}
-        @onSelect={{this.changeDate}}
-        @center={{this.month}}
-        @onCenterChange={{action (mut this.month) value='date'}} as |calendar|
+<div class="flex flex-col">
+  <span class="mt-3 label-text ml-1">
+    Deadline
+  </span>
+  <div class="dropdown">
+    <label
+      tabindex="0"
+      class="border bg-white rounded p-3 flex justify-between items-center cursor-pointer hover:bg-gray-50"
+    >
+      {{moment-format this.selectedDate 'YYYY.MM.DD'}}
+      <FaIcon @icon="calendar-days" />
+    </label>
+    <EmberWormhole @to="date-picker-wormhole" @renderInPlace={{true}}>
+      <div
+        tabindex="0"
+        class="dropdown-content card card-compact p-2 shadow bg-white"
       >
-        <nav class="flex items-center justify-center">
-          <button
-            type="button"
-            class="btn btn-ghost btn-sm"
-            onclick={{fn calendar.actions.moveCenter -1 'month'}}
+        <div class="card-body">
+          <h3 class="card-title">
+            Pick a date
+          </h3>
+          <PowerCalendar
+            @selected={{this.selectedDate}}
+            @onSelect={{this.changeDate}}
+            @center={{this.month}}
+            @onCenterChange={{action (mut this.month) value='date'
+            }} as |calendar|
           >
-            <FaIcon @icon="angle-left" />
-          </button>
-          <span class="w-20 flex justify-center font-bold">
-            {{moment-format calendar.center 'MMMM'}}
-          </span>
-          <button
-            class="btn btn-ghost btn-sm"
-            onclick={{fn calendar.actions.moveCenter 1 'month'}}
-            type="button"
-          >
-            <FaIcon @icon="angle-right" />
-          </button>
-          <button
-            type="button"
-            class="btn btn-ghost btn-sm mr-2"
-            onclick={{fn calendar.actions.moveCenter -12 'month'}}
-          >
-            <FaIcon @icon="angle-left" />
-          </button>
-          <span class="font-bold">
-            {{moment-format calendar.center 'YYYY'}}
-          </span>
-          <button
-            class="btn btn-ghost btn-sm ml-2"
-            onclick={{fn calendar.actions.moveCenter 12 'month'}}
-            type="button"
-          >
-            <FaIcon @icon="angle-right" />
-          </button>
-        </nav>
-        <calendar.Days />
-      </PowerCalendar>
-    </div>
+            <nav class="flex items-center justify-center">
+              <button
+                type="button"
+                class="btn btn-ghost btn-sm"
+                onclick={{fn calendar.actions.moveCenter -1 'month'}}
+              >
+                <FaIcon @icon="angle-left" />
+              </button>
+              <span class="w-20 flex justify-center font-bold">
+                {{moment-format calendar.center 'MMMM'}}
+              </span>
+              <button
+                class="btn btn-ghost btn-sm"
+                onclick={{fn calendar.actions.moveCenter 1 'month'}}
+                type="button"
+              >
+                <FaIcon @icon="angle-right" />
+              </button>
+              <button
+                type="button"
+                class="btn btn-ghost btn-sm mr-2"
+                onclick={{fn calendar.actions.moveCenter -12 'month'}}
+              >
+                <FaIcon @icon="angle-left" />
+              </button>
+              <span class="font-bold">
+                {{moment-format calendar.center 'YYYY'}}
+              </span>
+              <button
+                class="btn btn-ghost btn-sm ml-2"
+                onclick={{fn calendar.actions.moveCenter 12 'month'}}
+                type="button"
+              >
+                <FaIcon @icon="angle-right" />
+              </button>
+            </nav>
+            <calendar.Days />
+          </PowerCalendar>
+        </div>
+      </div>
+    </EmberWormhole>
   </div>
 </div>
