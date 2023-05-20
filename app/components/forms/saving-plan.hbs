@@ -4,6 +4,10 @@
   @onInput={{fn (mut @savingPlanInformation.title)}}
   placeholder="Enter goal name"
 />
+<DatePicker
+  @selectedDate={{@savingPlanInformation.deadlineDate}}
+  @onDateChange={{fn (mut @savingPlanInformation.deadlineDate)}}
+/>
 <div class="flex">
   <Input
     class="mt-3"
@@ -22,7 +26,3 @@
     placeholder="€"
   />
 </div>
-<DatePicker
-  @selectedDate={{@savingPlanInformation.deadlineDate}}
-  @onDateChange={{fn (mut @savingPlanInformation.deadlineDate)}}
-/>

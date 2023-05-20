@@ -2,19 +2,18 @@
   <span class="mt-3 label-text ml-1">
     Deadline
   </span>
-  <div class="dropdown">
-    <label
-      tabindex="0"
-      class="border bg-white rounded p-3 flex justify-between items-center cursor-pointer hover:bg-gray-50"
-    >
-      {{moment-format this.selectedDate 'YYYY.MM.DD'}}
-      <FaIcon @icon="calendar-days" />
-    </label>
-    <EmberWormhole @to="date-picker-wormhole" @renderInPlace={{true}}>
-      <div
+  <BasicDropdown @verticalPosition="below" as |dd|>
+    <dd.Trigger>
+      <label
         tabindex="0"
-        class="dropdown-content card card-compact p-2 shadow bg-white"
+        class="border bg-white rounded p-3 flex justify-between items-center cursor-pointer hover:bg-gray-50"
       >
+        {{moment-format this.selectedDate 'MMMM DD, YYYY'}}
+        <FaIcon @icon="calendar-days" />
+      </label>
+    </dd.Trigger>
+    <dd.Content>
+      <div class="card card-compact p-2 shadow bg-white">
         <div class="card-body">
           <h3 class="card-title">
             Pick a date
@@ -66,6 +65,6 @@
           </PowerCalendar>
         </div>
       </div>
-    </EmberWormhole>
-  </div>
+    </dd.Content>
+  </BasicDropdown>
 </div>
