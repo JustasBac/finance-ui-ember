@@ -1,33 +1,34 @@
 <Modals::-TriggerButton>
-  <div class="tooltip font-light" data-tip="Edit saving plan">
-    <span
-      class="btn btn-ghost btn-xs"
-      {{on 'click' (fn (mut this.isModalOpen) true)}}
-    >
-      <FaIcon @icon="pen-to-square" />
-    </span>
-  </div>
-</Modals::-TriggerButton>
-{{#if this.isModalOpen}}
-  <Modals::-base>
-    <:header>
+  <span
+    class="btn btn-ghost bg-gray-200/80 btn-xs"
+    {{on 'click' (fn (mut this.isModalOpen) true)}}
+  >
+    <FaIcon @icon="pen-to-square" />
+    <Tooltip>
       Edit saving plan
-    </:header>
-    <:body>
-      <Forms::SavingPlan
-        @savingPlanInformation={{this.copyOfEditableSavingPlan}}
-      />
-      <div class="flex justify-between items-center mt-5">
-        <Modals::-TriggerButton>
-          <span class="btn btn-ghost">
-            Close
-          </span>
-        </Modals::-TriggerButton>
-        <Button {{on 'click' this.saveChanges}}>
-          <FaIcon @icon="floppy-disk" class="mr-1" />
-          Save
-        </Button>
-      </div>
-    </:body>
-  </Modals::-base>
-{{/if}}
+    </Tooltip>
+  </span>
+</Modals::-TriggerButton>
+<Modals::-base @isOpen={{this.isModalOpen}}>
+  <:header>
+    <div>
+      Edit saving plan
+    </div>
+  </:header>
+  <:body>
+    <Forms::SavingPlan
+      @savingPlanInformation={{this.copyOfEditableSavingPlan}}
+    />
+    <div class="flex justify-between items-center mt-5">
+      <Modals::-TriggerButton>
+        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+          Close
+        </span>
+      </Modals::-TriggerButton>
+      <Button {{on 'click' this.saveChanges}}>
+        <FaIcon @icon="floppy-disk" class="mr-1" />
+        Save
+      </Button>
+    </div>
+  </:body>
+</Modals::-base>

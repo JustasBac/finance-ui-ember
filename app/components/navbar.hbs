@@ -4,6 +4,52 @@
       AlinaFinancito
     </a>
   </div>
+  <div>
+    {{!-- <PowerSelect
+      class="w-[10rem]"
+      @options={{this.currencyService.currencies}}
+      @selected={{this.currencyService.selectedCurrency}}
+      @onChange={{fn (noop)}} as |currency|
+    >
+      <span class="no-wrap text-sm">
+        {{currency.name}}
+      </span>
+      <div class="text-xs font-light">
+        {{currency.code}}
+        {{currency.symbol}}
+      </div>
+    </PowerSelect> --}}
+    <BasicDropdown as |dd|>
+      <dd.Trigger>
+        <label
+          tabindex="0"
+          class="border bg-white rounded cursor-pointer hover:bg-gray-50"
+        >
+          {{this.currencyService.selectedCurrency.code}}
+          {{this.currencyService.selectedCurrency.symbol}}
+        </label>
+      </dd.Trigger>
+      <dd.Content>
+        <div class="card-body">
+          <h2 class="card-title">
+            Choose a currency
+          </h2>
+          <div class="grid grid-cols-10 gap-4">
+            {{#each this.currencyService.currencies as |currency|}}
+              <span class="no-wrap text-sm">
+                {{currency.symbol}}
+                -
+                {{currency.code}}
+                <Tooltip>
+                  {{currency.name}}
+                </Tooltip>
+              </span>
+            {{/each}}
+          </div>
+        </div>
+      </dd.Content>
+    </BasicDropdown>
+  </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
       <li>

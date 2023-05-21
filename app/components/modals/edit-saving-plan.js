@@ -6,8 +6,9 @@ import { inject as service } from '@ember/service';
 export default class ModalsEditSavingPlanComponent extends Component {
   @service notifications;
 
-  @tracked copyOfEditableSavingPlan = this.args.savingPlan.copy();
   @tracked isModalOpen = false;
+
+  @tracked copyOfEditableSavingPlan = this.args.savingPlan.copy();
 
   @action
   saveChanges() {

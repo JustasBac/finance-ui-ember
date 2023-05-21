@@ -1,32 +1,30 @@
 <Modals::-TriggerButton>
-  <div class="tooltip font-light" data-tip="Delete saving plan">
-    <span
-      class="btn btn-ghost btn-xs"
-      {{on 'click' (fn (mut this.isModalOpen) true)}}
-    >
-      <FaIcon @icon="trash" />
-    </span>
-  </div>
-</Modals::-TriggerButton>
-{{#if this.isModalOpen}}
-  <Modals::-base>
-    <:header>
+  <span
+    class="btn btn-ghost bg-gray-200/80 hover:bg-red-800/40 btn-xs"
+    {{on 'click' (fn (mut this.isModalOpen) true)}}
+  >
+    <FaIcon @icon="trash" />
+    <Tooltip>
       Delete saving plan
-    </:header>
-    <:body>
-      Are you sure you want to delete saving plan for
-      {{@savingPlan.title}}
-      ?
-      <div class="flex justify-between items-center mt-5">
-        <Modals::-TriggerButton>
-          <span class="btn btn-ghost">
-            Cancel
-          </span>
-        </Modals::-TriggerButton>
-        <Button {{on 'click' this.deleteSavingPlan}}>
-          Confirm
-        </Button>
-      </div>
-    </:body>
-  </Modals::-base>
-{{/if}}
+    </Tooltip>
+  </span>
+</Modals::-TriggerButton>
+<Modals::-base @isOpen={{this.isModalOpen}}>
+  <:header>
+    Delete saving plan
+  </:header>
+  <:body>
+    Are you sure you want to delete saving plan for
+    {{concat @savingPlan.title '?'}}
+    <div class="flex justify-between items-center mt-5">
+      <Modals::-TriggerButton>
+        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+          Cancel
+        </span>
+      </Modals::-TriggerButton>
+      <Button {{on 'click' this.deleteSavingPlan}}>
+        Confirm
+      </Button>
+    </div>
+  </:body>
+</Modals::-base>

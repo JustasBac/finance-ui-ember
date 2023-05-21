@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         {{#each this.savingPlanService.savingPlans as |savingPlan index|}}
-          <tr class="hover">
+          <tr>
             <th>
               {{add 1 index}}
             </th>
@@ -34,8 +34,12 @@
               {{moment-format savingPlan.deadlineDate 'MMMM DD, YYYY'}}
             </td>
             <th>
-              <Modals::EditSavingPlan @savingPlan={{savingPlan}} />
-              <Modals::DeleteSavingPlan @savingPlan={{savingPlan}} />
+              <div class="flex">
+                <span class="mr-1">
+                  <Modals::EditSavingPlan @savingPlan={{savingPlan}} />
+                </span>
+                <Modals::DeleteSavingPlan @savingPlan={{savingPlan}} />
+              </div>
             </th>
           </tr>
         {{/each}}

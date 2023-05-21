@@ -39,6 +39,11 @@ export default class HomeController extends Controller {
     );
 
     this.isSavingPlanCreationBlockOpen = false;
+  }
+
+  @action
+  resetNewSavingPlan() {
+    //when component gets destroyed we need to reset this.newSavingPlan because, otherwise, when user goes back and reopens the input again, he sees earlier entered values
     this.newSavingPlan = new SavingPlan();
   }
 }
