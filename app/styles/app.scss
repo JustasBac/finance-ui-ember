@@ -2,6 +2,7 @@
 @import 'ember-power-select';
 
 //components:
-@import 'components/power-calendar';
-@import 'components/notifications';
-@import 'components/dropdown';
+@import 'vendor/power-calendar';
+@import 'vendor/notifications';
+@import 'vendor/dropdown';
+@import 'vendor/ember-tooltip';

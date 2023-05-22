@@ -1,0 +1,50 @@
+<BasicDropdown as |dd|>
+  <dd.Trigger>
+    <label
+      tabindex="0"
+      class="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
+    >
+      {{this.currencyService.selectedCurrency.code}}
+      {{this.currencyService.selectedCurrency.symbol}}
+    </label>
+  </dd.Trigger>
+  <dd.Content>
+    <div class="card-body w-[70rem]">
+      <h2 class="card-title">
+        Choose a currency
+      </h2>
+      <InputField
+        class="mb-2"
+        @size="sm"
+        @value={{this.searchString}}
+        @onInput={{fn (mut this.searchString)}}
+        @placeholder="Or search for a currency"
+      />
+      x
+      <div class="grid grid-cols-10 gap-4">
+        {{#each this.currencies as |currency|}}
+          <span
+            class="whitespace-nowrap text-sm hover:bg-gray-100 rounded p-2 cursor-pointer
+              {{if
+                (eq currency.code this.currencyService.selectedCurrency.code)
+                'bg-gray-100'
+              }}"
+            {{on
+              'click'
+              (fn (mut this.currencyService.selectedCurrency) currency)
+            }}
+          >
+            {{currency.code}}
+            <span class="opacity-60">
+              {{concat '(' currency.symbol ')'}}
+            </span>
+            <Tooltip>
+              {{currency.name}}
+            </Tooltip>
+          </span>
+        {{/each}}
+      </div>
+    </div>
+    done
+  </dd.Content>
+</BasicDropdown>

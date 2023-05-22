@@ -10,6 +10,8 @@
     min={{@min}}
     placeholder={{@placeholder}}
     class="input input-bordered w-full
+      {{this.size}}
+
       {{unless this.isFormValidated 'input-error'}}"
     {{on 'input' this.updateInputValue}}
   />

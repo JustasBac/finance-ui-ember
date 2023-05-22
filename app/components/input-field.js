@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-export default class InputComponent extends Component {
+export default class InputFieldComponent extends Component {
   @service('input-validation') validationService;
 
   get type() {
@@ -35,5 +35,11 @@ export default class InputComponent extends Component {
     }
 
     this.args.onInput(e.target.value);
+  }
+
+  get size() {
+    const { size } = this.args;
+
+    return size ? `input-${size}` : ''; //returns for example: input-sm
   }
 }
