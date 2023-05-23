@@ -14,7 +14,8 @@
     class="input input-bordered w-full
       {{this.size}}
 
-      {{unless this.isFormValidated 'input-error'}}"
+      {{unless this.isFormValidated (unless @exceptFromValidation 'input-error')
+      }}"
     {{on 'input' this.updateInputValue}}
   />
 </div>
