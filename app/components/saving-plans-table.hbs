@@ -28,7 +28,12 @@
             </td>
             <td>
               {{savingPlan.goalAmount}}
-              {{savingPlan.currency}}
+              {{get
+                (find-by
+                  'code' savingPlan.currencyCode this.currencyService.currencies
+                )
+                'symbol'
+              }}
             </td>
             <td>
               {{moment-format savingPlan.deadlineDate 'MMMM DD, YYYY'}}

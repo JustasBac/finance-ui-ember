@@ -1,0 +1,20 @@
+.ember-power-select-trigger {
+  border-color: rgba(31, 41, 55, 0.2);
+  border-radius: 0.4rem;
+}
+
+.ember-power-select-search-input {
+  border-color: lightgray;
+  border-radius: 0.2rem;
+  &:focus {
+    outline: none;
+  }
+}
+
+.ember-power-select-option[aria-current='true'] {
+  background-color: gray;
+}
+
+.ember-power-select-dropdown {
+  border: none;
+}

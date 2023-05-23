@@ -1,9 +1,11 @@
 <div class="form-control w-full" ...attributes>
-  <label class="label py-1">
-    <span class="label-text leading-none">
-      {{@label}}
-    </span>
-  </label>
+  {{#if @label}}
+    <label class="label py-1">
+      <span class="label-text leading-none">
+        {{@label}}
+      </span>
+    </label>
+  {{/if}}
   <input
     value={{@value}}
     type={{this.type}}

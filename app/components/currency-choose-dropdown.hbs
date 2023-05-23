@@ -4,23 +4,44 @@
       tabindex="0"
       class="p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
     >
-      {{this.currencyService.selectedCurrency.code}}
       {{this.currencyService.selectedCurrency.symbol}}
+      {{!-- <span class="font-light text-sm">
+        {{this.currencyService.selectedCurrency.symbol}}
+      </span> --}}
+      <Tooltip>
+        <span class="font-bold">
+          Selected currency:
+        </span>
+        <div>
+          {{this.currencyService.selectedCurrency.name}}
+          <span class="text-xs">
+            {{concat '(' this.currencyService.selectedCurrency.code ')'}}
+          </span>
+        </div>
+      </Tooltip>
     </label>
   </dd.Trigger>
   <dd.Content>
     <div class="card-body w-[70rem]">
-      <h2 class="card-title">
-        Choose a currency
-      </h2>
-      <InputField
-        class="mb-2"
-        @size="sm"
-        @value={{this.searchString}}
-        @onInput={{fn (mut this.searchString)}}
-        @placeholder="Or search for a currency"
-      />
-      x
+      <div class="flex items-center mb-3">
+        <h2 class="card-title mr-4">
+          Choose a currency
+        </h2>
+        <InputField
+          class="max-w-xs"
+          @size="sm"
+          @value={{this.searchString}}
+          @onInput={{fn (mut this.searchString)}}
+          @placeholder="Search for a currency"
+        />
+        <span
+          class="px-2 py-1 rounded ml-1 hover:bg-gray-100 cursor-pointer
+            {{unless this.searchString.length 'invisible'}}"
+          {{on 'click' (fn (mut this.searchString) '')}}
+        >
+          <FaIcon @icon="xmark" />
+        </span>
+      </div>
       <div class="grid grid-cols-10 gap-4">
         {{#each this.currencies as |currency|}}
           <span
@@ -35,7 +56,7 @@
             }}
           >
             {{currency.code}}
-            <span class="opacity-60">
+            <span class="opacity-60 text-xs">
               {{concat '(' currency.symbol ')'}}
             </span>
             <Tooltip>
@@ -44,7 +65,11 @@
           </span>
         {{/each}}
       </div>
+      <div class="card-actions justify-end">
+        <Button class="btn-sm" {{on 'click' dd.actions.close}}>
+          Close
+        </Button>
+      </div>
     </div>
-    done
   </dd.Content>
 </BasicDropdown>
