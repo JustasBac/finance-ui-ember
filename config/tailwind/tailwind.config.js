@@ -13,6 +13,9 @@ module.exports = {
     extend: {
       // colors: { olive: '#e9edc9' },
     },
+    screens: {
+      qHd: '2000px',
+    },
   },
   plugins: [require('daisyui')],
 };
