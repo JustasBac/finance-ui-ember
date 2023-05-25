@@ -1,15 +1,13 @@
 {{#if @isOpen}}
   <EmberWormhole @to="wormhole">
-    <div>
-      <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-      <div class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
-          <h3 class="text-lg font-bold mb-4">
-            {{yield to='header'}}
-          </h3>
-          <div class="font-normal">
-            {{yield to='body'}}
-          </div>
+    <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold mb-4">
+          {{yield to='header'}}
+        </h3>
+        <div class="font-normal">
+          {{yield to='body'}}
         </div>
       </div>
     </div>

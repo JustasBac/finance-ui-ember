@@ -6,7 +6,7 @@ import moment from 'moment';
 export default class SavingPlanService extends Service {
   @tracked savingPlans = [
     new SavingPlan('Apartment', '2000000', 'EUR', moment().add(1, 'years')),
-    new SavingPlan('Car', '20000', 'EUR', moment().add(1, 'years')),
+    new SavingPlan('Car', '20000', 'EUR', moment().add(6, 'months')),
   ];
 
   addNewSavingPlan(newSavingPlan) {

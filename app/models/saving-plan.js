@@ -3,18 +3,18 @@ import moment from 'moment';
 
 export default class SavingPlan {
   @tracked title;
-  @tracked goalAmount;
+  @tracked targetAmount;
   @tracked currencyCode;
   @tracked deadlineDate;
 
   constructor(
     title = '',
-    goalAmount = null,
+    targetAmount = null,
     currencyCode = '',
     deadlineDate = moment().add(1, 'days')
   ) {
     this.title = title;
-    this.goalAmount = goalAmount;
+    this.targetAmount = targetAmount;
     this.currencyCode = currencyCode;
     this.deadlineDate = deadlineDate;
   }
@@ -22,7 +22,7 @@ export default class SavingPlan {
   copy() {
     return new SavingPlan(
       this.title,
-      this.goalAmount,
+      this.targetAmount,
       this.currencyCode,
       this.deadlineDate
     );

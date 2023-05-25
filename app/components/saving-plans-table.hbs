@@ -9,7 +9,19 @@
             Saving goal
           </th>
           <th>
-            Goal amount
+            Target amount
+          </th>
+          <th>
+            Savings to reach the target
+            <span class="ml-1">
+              <FaIcon @icon="circle-info" />
+              <Tooltip>
+                Amount of money needed to save per month to reach the target until the deadline
+              </Tooltip>
+            </span>
+          </th>
+          <th>
+            Time until the deadline
           </th>
           <th>
             Deadline
@@ -19,7 +31,7 @@
       </thead>
       <tbody>
         {{#each this.savingPlanService.savingPlans as |savingPlan index|}}
-          <tr>
+          <tr class="text-sm">
             <th>
               {{add 1 index}}
             </th>
@@ -27,13 +39,14 @@
               {{savingPlan.title}}
             </td>
             <td>
-              {{savingPlan.goalAmount}}
-              {{get
-                (find-by
-                  'code' savingPlan.currencyCode this.currencyService.currencies
-                )
-                'symbol'
-              }}
+              {{savingPlan.targetAmount}}
+              {{compute (fn this.getCurrencySymbol savingPlan.currencyCode)}}
+            </td>
+            <td>
+              {{compute (fn this.calculateMonthlySavingsNeeded savingPlan)}}
+            </td>
+            <td>
+              {{compute (fn this.getTimeUntilDeadline savingPlan.deadlineDate)}}
             </td>
             <td>
               {{moment-format savingPlan.deadlineDate 'MMMM DD, YYYY'}}

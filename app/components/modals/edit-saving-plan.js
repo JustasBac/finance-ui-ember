@@ -12,13 +12,13 @@ export default class ModalsEditSavingPlanComponent extends Component {
 
   @action
   saveChanges() {
-    const { title, currencyCode, deadlineDate, goalAmount } =
+    const { title, currencyCode, deadlineDate, targetAmount } =
       this.copyOfEditableSavingPlan;
 
     this.args.savingPlan.title = title;
     this.args.savingPlan.currencyCode = currencyCode;
     this.args.savingPlan.deadlineDate = deadlineDate;
-    this.args.savingPlan.goalAmount = goalAmount;
+    this.args.savingPlan.targetAmount = targetAmount;
 
     this.notifications.success('Saving plan was successfully updated', {
       autoClear: true,

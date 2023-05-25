@@ -18,9 +18,9 @@ export default class HomeController extends Controller {
 
   @action
   createSavingPlan() {
-    const { currency, goalAmount, title } = this.newSavingPlan;
+    const { currency, targetAmount, title } = this.newSavingPlan;
 
-    if (!title || !goalAmount || !currency) {
+    if (!title || !targetAmount || !currency) {
       this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
 
       this.notifications.error('Make sure all fields are filled!', {
