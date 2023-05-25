@@ -1,12 +1,12 @@
 <div
-  class="navbar bg-neutral text-white h-[15rem] flex flex-col items-start px-12 px-32 qHd:px-96 pt-4"
+  class="navbar bg-neutral text-white h-[15rem] flex flex-col items-start px-32 qHd:px-[34rem] pt-4"
 >
   <div class="w-full flex">
     <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl">
+      <LinkTo class="btn btn-ghost normal-case text-xl mr-2" @route="home">
         <FaIcon @icon="landmark" class="mr-2" />
         Finance App
-      </a>
+      </LinkTo>
     </div>
     <CurrencyChooseDropdown />
     <div class="flex-none">

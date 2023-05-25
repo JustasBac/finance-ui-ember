@@ -8,4 +8,7 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   this.route('home', { path: '/' });
+  this.route('saving-plan-detailed-view', {
+    path: 'saving-plan/:saving_plan_id',
+  });
 });

@@ -27,18 +27,6 @@
       </div>
     </div>
   {{else}}
-    <div class="ml-10 grow">
-      <SavingPlansTable />
-      <div class="flex justify-center">
-        <Button
-          class="mt-3"
-          {{on 'click' (fn (mut this.isSavingPlanCreationBlockOpen) true)}}
-        >
-          <FaIcon @icon="plus" class="mr-1" />
-          Create a new saving plan
-        </Button>
-      </div>
-      Predictions?
-    </div>
+    <SavingPlansCard />
   {{/if}}
 </EmberWormhole>

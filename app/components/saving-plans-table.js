@@ -13,7 +13,8 @@ export default class SavingPlansTableComponent extends Component {
 
     const differenceFromNowUntilDeadline = deadlineDate.diff(
       moment(),
-      'months'
+      'months',
+      true // return a floating point number instead of an integer
     );
 
     const amountToSavePerMonth = targetAmount / differenceFromNowUntilDeadline;
@@ -22,6 +23,18 @@ export default class SavingPlansTableComponent extends Component {
     return `${Math.round(
       amountToSavePerMonth
     )} ${savingPlanCurrencySymbol}/month`;
+  }
+
+  @action
+  calculateDailySavingsNeeded(savingPlanInfo) {
+    const { deadlineDate, targetAmount, currencyCode } = savingPlanInfo;
+
+    const differenceFromNowUntilDeadline = deadlineDate.diff(moment(), 'days');
+
+    const amountToSavePerDay = targetAmount / differenceFromNowUntilDeadline;
+    const savingPlanCurrencySymbol = this.getCurrencySymbol(currencyCode);
+
+    return `${Math.round(amountToSavePerDay)} ${savingPlanCurrencySymbol}/day`;
   }
 
   @action
