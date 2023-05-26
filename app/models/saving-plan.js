@@ -7,19 +7,22 @@ export default class SavingPlan {
   @tracked targetAmount;
   @tracked currencyCode;
   @tracked deadlineDate;
+  @tracked savedAmount;
 
   constructor(
     id = 0,
     title = '',
     targetAmount = null,
     currencyCode = '',
-    deadlineDate = moment().add(1, 'days')
+    deadlineDate = moment().add(1, 'days'),
+    savedAmount = 0
   ) {
     this.id = id;
     this.title = title;
     this.targetAmount = targetAmount;
     this.currencyCode = currencyCode;
     this.deadlineDate = deadlineDate;
+    this.savedAmount = savedAmount;
   }
 
   copy() {
@@ -28,7 +31,8 @@ export default class SavingPlan {
       this.title,
       this.targetAmount,
       this.currencyCode,
-      this.deadlineDate
+      this.deadlineDate,
+      this.savedAmount
     );
   }
 }

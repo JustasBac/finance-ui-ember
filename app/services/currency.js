@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import currencies from 'finance-ui-ember/static-data/currencies';
 import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
 export default class CurrencyService extends Service {
   @tracked selectedCurrency = this.getDefaultSelectedCurrency();
@@ -18,5 +19,11 @@ export default class CurrencyService extends Service {
 
   getDefaultSelectedCurrency() {
     return this.currencies.find((currency) => currency.code === 'EUR');
+  }
+
+  @action
+  getCurrencySymbol(currencyCode) {
+    return this.currencies.find((currency) => currency.code === currencyCode)
+      .symbol;
   }
 }

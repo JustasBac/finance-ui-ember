@@ -18,7 +18,8 @@ export default class SavingPlansTableComponent extends Component {
     );
 
     const amountToSavePerMonth = targetAmount / differenceFromNowUntilDeadline;
-    const savingPlanCurrencySymbol = this.getCurrencySymbol(currencyCode);
+    const savingPlanCurrencySymbol =
+      this.currencyService.getCurrencySymbol(currencyCode);
 
     return `${Math.round(
       amountToSavePerMonth
@@ -32,16 +33,10 @@ export default class SavingPlansTableComponent extends Component {
     const differenceFromNowUntilDeadline = deadlineDate.diff(moment(), 'days');
 
     const amountToSavePerDay = targetAmount / differenceFromNowUntilDeadline;
-    const savingPlanCurrencySymbol = this.getCurrencySymbol(currencyCode);
+    const savingPlanCurrencySymbol =
+      this.currencyService.getCurrencySymbol(currencyCode);
 
     return `${Math.round(amountToSavePerDay)} ${savingPlanCurrencySymbol}/day`;
-  }
-
-  @action
-  getCurrencySymbol(currencyCode) {
-    return this.currencyService.currencies.find(
-      (currency) => currency.code === currencyCode
-    ).symbol;
   }
 
   getTimeUntilDeadline(deadlineDate) {

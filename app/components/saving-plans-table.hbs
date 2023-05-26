@@ -40,7 +40,11 @@
             </td>
             <td>
               {{savingPlan.targetAmount}}
-              {{compute (fn this.getCurrencySymbol savingPlan.currencyCode)}}
+              {{compute
+                (fn
+                  this.currencyService.getCurrencySymbol savingPlan.currencyCode
+                )
+              }}
             </td>
             <td class="flex flex-col">
               {{compute (fn this.calculateMonthlySavingsNeeded savingPlan)}}

@@ -1,5 +1,53 @@
-{{page-title 'SavingPlanDetailedView'}}
-{{outlet}}
-{{log @model}}
-{{@model.title}}
-<Modals::EditSavingPlan @savingPlan={{@model}} />
+{{page-title 'Details'}}
+<EmberWormhole @to="page-body-wormhole">
+  <div class="flex flex-col w-full">
+    <div class="flex gap-8 mb-8">
+      <Card class="basis-1/4">
+        <:header>
+          Target name
+        </:header>
+        <:body>
+          {{@model.title}}
+        </:body>
+      </Card>
+      <Card class="basis-1/4">
+        <:header>
+          Target amount
+        </:header>
+        <:body>
+          {{@model.targetAmount}}
+        </:body>
+      </Card>
+      <Card class="basis-1/4">
+        <:header>
+          Saved amount
+        </:header>
+        <:body>
+          {{@model.savedAmount}}
+        </:body>
+      </Card>
+      <Card class="basis-1/4">
+        <:header>
+          Deadline
+        </:header>
+        <:body>
+          asd
+        </:body>
+      </Card>
+    </div>
+    <div class="card grow bg-base-100 shadow-xl p-8">
+      <h2 class="text-xl">
+        Saving Plan -
+        {{@model.title}}
+      </h2>
+      <div class="card-body flex flex-col justify-between">
+        <HighCharts
+          @chartOptions={{this.chartOptions}}
+          @content={{this.chartData}}
+        />
+      </div>
+      <Modals::EditSavingPlan @savingPlan={{@model}} />
+    </div>
+    <GoBackButton class="mt-8" />
+  </div>
+</EmberWormhole>

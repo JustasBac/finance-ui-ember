@@ -45,9 +45,11 @@
     "ember-cli-sass": "^11.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
+    "ember-click-outside": "^6.0.1",
     "ember-composable-helpers": "^5.0.0",
     "ember-data": "~4.4.0",
     "ember-fetch": "^8.1.1",
+    "ember-highcharts": "^3.2.1",
     "ember-load-initializers": "^2.1.2",
     "ember-math-helpers": "^3.0.0",
     "ember-moment": "^10.0.0",
@@ -70,6 +72,7 @@
     "eslint-plugin-qunit": "^7.3.1",
     "loader.js": "^4.7.0",
     "moment": "^2.29.4",
+    "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.43",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
@@ -77,8 +80,7 @@
     "qunit-dom": "^2.0.0",
     "sass": "^1.62.1",
     "tailwindcss": "^3.0.0",
-    "webpack": "^5.74.0",
-    "moment-duration-format": "^2.3.2"
+    "webpack": "^5.74.0"
   },
   "engines": {
     "node": "14.* || >= 16"
@@ -87,6 +89,7 @@
     "edition": "octane"
   },
   "dependencies": {
-    "daisyui": "^2.51.6"
+    "daisyui": "^2.51.6",
+    "highcharts": "^11.0.1"
   }
 }
