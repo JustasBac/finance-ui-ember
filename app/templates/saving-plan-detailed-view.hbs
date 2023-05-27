@@ -2,36 +2,54 @@
 <EmberWormhole @to="page-body-wormhole">
   <div class="flex flex-col w-full">
     <div class="flex gap-8 mb-8">
-      <Card class="basis-1/4">
-        <:header>
-          Target name
-        </:header>
-        <:body>
-          {{@model.title}}
-        </:body>
-      </Card>
-      <Card class="basis-1/4">
+      <Card class="basis-1/4" @icon="sack-dollar">
         <:header>
           Target amount
         </:header>
         <:body>
           {{@model.targetAmount}}
+          {{this.currency}}
         </:body>
       </Card>
-      <Card class="basis-1/4">
+      <Card class="basis-1/4" @icon="hand-holding-dollar">
         <:header>
           Saved amount
         </:header>
         <:body>
-          {{@model.savedAmount}}
+          <div class="flex justify-between items-center">
+            {{@model.savedAmount}}
+            {{this.currency}}
+            <span class="badge bg-lime-700/50 border-none text-white">
+              <FaIcon @icon="arrow-up" class="mr-1 text-xs" />
+              20%
+            </span>
+          </div>
         </:body>
       </Card>
-      <Card class="basis-1/4">
+      <Card class="basis-1/4" @icon="calendar-days">
         <:header>
           Deadline
         </:header>
         <:body>
-          asd
+          <span class="text-xl">
+            {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
+          </span>
+          <span class="text-sm opacity-50 font-light">
+            {{this.timeUntilDeadline}}
+          </span>
+        </:body>
+      </Card>
+      <Card class="basis-1/4" @icon="hammer">
+        <:header>
+          Actions
+        </:header>
+        <:body>
+          <div class="flex">
+            <span class="mr-2">
+              <Modals::EditSavingPlan @savingPlan={{@model}} />
+            </span>
+            <Modals::DeleteSavingPlan @savingPlan={{@model}} />
+          </div>
         </:body>
       </Card>
     </div>
@@ -41,12 +59,11 @@
         {{@model.title}}
       </h2>
       <div class="card-body flex flex-col justify-between">
-        <HighCharts
+        {{!-- <HighCharts
           @chartOptions={{this.chartOptions}}
           @content={{this.chartData}}
-        />
+        /> --}}
       </div>
-      <Modals::EditSavingPlan @savingPlan={{@model}} />
     </div>
     <GoBackButton class="mt-8" />
   </div>

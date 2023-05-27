@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
-import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import moment from 'moment';
 
 export default class SavingPlanDetailedViewController extends Controller {
   @service('currency') currencyService;
@@ -67,8 +67,11 @@ export default class SavingPlanDetailedViewController extends Controller {
     ];
   }
 
-  @action
-  showMe() {
-    console.log('this.model;', this.model.targetAmount);
+  get timeUntilDeadline() {
+    const now = moment();
+    const end = moment(this.model.deadlineDate);
+    const duration = moment.duration(end.diff(now), 'ms');
+
+    return moment.duration(duration).format();
   }
 }

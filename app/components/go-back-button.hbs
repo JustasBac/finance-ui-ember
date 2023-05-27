@@ -1,9 +1,12 @@
-<LinkTo @route={{this.link}} class="btn w-28" ...attributes>
-  <div class="flex whitespace-nowrap">
-    {{#if this.router.previousRouteName}}
-      <FaIcon @icon="arrow-left" class="mr-1" />Go back
-    {{else}}
-      <FaIcon @icon="house" class="mr-1" />Home
-    {{/if}}
-  </div>
-</LinkTo>
+{{#if this.router.previousRouteName}}
+  <LinkTo
+    @route={{this.router.previousRouteName}}
+    class="btn w-28"
+    ...attributes
+  >
+    <div class="flex whitespace-nowrap">
+      <FaIcon @icon="arrow-left" class="mr-1" />
+      Go back
+    </div>
+  </LinkTo>
+{{/if}}

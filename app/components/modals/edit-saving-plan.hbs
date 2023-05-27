@@ -1,6 +1,6 @@
 <Modals::-TriggerButton>
   <span
-    class="btn btn-ghost bg-gray-200/80 btn-xs"
+    class="btn btn-ghost bg-gray-200/80"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
     <FaIcon @icon="pen-to-square" />
@@ -9,10 +9,7 @@
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
-<Modals::-base
-  @isOpen={{this.isModalOpen}}
-  @onClickOutside={{fn (mut this.isModalOpen) false}}
->
+<Modals::-base @isOpen={{this.isModalOpen}} @onClickOutside={{this.reportMe}}>
   <:header>
     <div>
       Edit saving plan

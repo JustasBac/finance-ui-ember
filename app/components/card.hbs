@@ -1,8 +1,13 @@
-<div class="card bg-base-100 shadow-xl p-8" ...attributes>
-  <h2 class="text-xl">
+<div class="card bg-base-100 shadow-xl px-8 py-5 h-32" ...attributes>
+  <h2 class="text-base opacity-70 flex items-center justify-between">
     {{yield to='header'}}
+    {{#if @icon}}
+      <FaIcon @icon={{@icon}} class="text-xl opacity-40" />
+    {{/if}}
   </h2>
-  <div class="card-body flex flex-col justify-between">
+  <div
+    class="card-body flex flex-col justify-between text-4xl font-bold px-0 py-2"
+  >
     {{yield to='body'}}
   </div>
 </div>

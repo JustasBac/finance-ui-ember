@@ -27,4 +27,9 @@ export default class ModalsEditSavingPlanComponent extends Component {
 
     this.isModalOpen = false;
   }
+
+  @action
+  reportMe() {
+    console.log('out');
+  }
 }
