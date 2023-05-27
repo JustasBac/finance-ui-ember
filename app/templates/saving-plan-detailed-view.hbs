@@ -1,6 +1,6 @@
 {{page-title 'Details'}}
 <EmberWormhole @to="page-body-wormhole">
-  <div class="flex flex-col w-full">
+  <PageLayout @pageTitle="Saving Plan">
     <div class="flex gap-8 mb-8">
       <Card class="basis-1/4" @icon="sack-dollar">
         <:header>
@@ -35,6 +35,7 @@
             {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
           </span>
           <span class="text-sm opacity-50 font-light">
+            in
             {{this.timeUntilDeadline}}
           </span>
         </:body>
@@ -53,18 +54,38 @@
         </:body>
       </Card>
     </div>
-    <div class="card grow bg-base-100 shadow-xl p-8">
-      <h2 class="text-xl">
+    <div class="card grow bg-base-100 shadow-xl p-2 px-8">
+      {{!-- <h2 class="text-xl">
         Saving Plan -
         {{@model.title}}
-      </h2>
-      <div class="card-body flex flex-col justify-between">
+      </h2> --}}
+      <div class="tabs flex justify-center">
+        <a
+          class="tab tab-bordered
+            {{if (eq this.activeTab 'progress') 'tab-active'}}"
+          {{on 'click' (fn (mut this.activeTab) 'progress')}}
+        >
+          Saving progress
+        </a>
+        <a
+          class="tab tab-bordered
+            {{if (eq this.activeTab 'planning') 'tab-active'}}"
+          {{on 'click' (fn (mut this.activeTab) 'planning')}}
+        >
+          Monthly planning
+        </a>
+      </div>
+      <div class="card-body p-4">
         {{!-- <HighCharts
           @chartOptions={{this.chartOptions}}
           @content={{this.chartData}}
         /> --}}
+        {{#each this.monthsListUntilDeadline as |month|}}
+          {{month}}
+        {{/each}}
       </div>
+      {{log 'op' this.monthsListUntilDeadline}}
     </div>
     <GoBackButton class="mt-8" />
-  </div>
+  </PageLayout>
 </EmberWormhole>

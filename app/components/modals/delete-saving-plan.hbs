@@ -9,10 +9,7 @@
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
-<Modals::-base
-  @isOpen={{this.isModalOpen}}
-  @onClickOutside={{fn (mut this.isModalOpen) false}}
->
+<Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     Delete saving plan
   </:header>

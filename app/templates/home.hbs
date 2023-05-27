@@ -1,32 +1,38 @@
 {{page-title 'Home'}}
 <EmberWormhole @to="page-body-wormhole">
-  <TotalBalance />
-  {{#if this.isSavingPlanCreationBlockOpen}}
-    <div
-      class="flex flex-col items-center justify-center"
-      {{will-destroy this.resetNewSavingPlan}}
-    >
-      <div class="w-[30rem] flex flex-col">
-        <h3 class="card-title mb-3">
-          Create a new saving plan
-        </h3>
-        <Forms::SavingPlan @savingPlanInformation={{this.newSavingPlan}} />
-        <div class="flex justify-between mt-5">
-          <Button
-            class="mt-3 btn-ghost bg-gray-300"
-            {{on 'click' (fn (mut this.isSavingPlanCreationBlockOpen) false)}}
-          >
-            <FaIcon @icon="arrow-left" class="mr-1" />
-            Go back
-          </Button>
-          <Button class="mt-3" {{on 'click' this.createSavingPlan}}>
-            <FaIcon @icon="floppy-disk" class="mr-1" />
-            Save
-          </Button>
+  <PageLayout @pageTitle="Overview">
+    <div class="flex">
+      <TotalBalance />
+      <SavingPlansCard />
+    </div>
+    monthly earnings
+    monthly spendings
+    {{!-- {{#if this.isSavingPlanCreationBlockOpen}}
+      <div
+        class="flex flex-col items-center justify-center"
+        {{will-destroy this.resetNewSavingPlan}}
+      >
+        <div class="w-[30rem] flex flex-col">
+          <h3 class="card-title mb-3">
+            Create a new saving plan
+          </h3>
+          <Forms::SavingPlan @savingPlanInformation={{this.newSavingPlan}} />
+          <div class="flex justify-between mt-5">
+            <Button
+              class="mt-3 btn-ghost bg-gray-300"
+              {{on 'click' (fn (mut this.isSavingPlanCreationBlockOpen) false)}}
+            >
+              <FaIcon @icon="arrow-left" class="mr-1" />
+              Go back
+            </Button>
+            <Button class="mt-3" {{on 'click' this.createSavingPlan}}>
+              <FaIcon @icon="floppy-disk" class="mr-1" />
+              Save
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  {{else}}
-    <SavingPlansCard />
-  {{/if}}
+    {{else}} --}}
+    {{!-- {{/if}} --}}
+  </PageLayout>
 </EmberWormhole>

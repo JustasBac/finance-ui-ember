@@ -1,9 +1,12 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
+import { tracked } from '@glimmer/tracking';
 
 export default class SavingPlanDetailedViewController extends Controller {
   @service('currency') currencyService;
+
+  @tracked activeTab = 'planning'; //default
 
   get currency() {
     return this.currencyService.getCurrencySymbol(this.model.currencyCode);
@@ -29,7 +32,14 @@ export default class SavingPlanDetailedViewController extends Controller {
         allowPointSelect: true,
         cursor: 'pointer',
         dataLabels: {
-          enabled: false,
+          enabled: true,
+          format: '{point.percentage:.1f} %',
+          distance: -50,
+          filter: {
+            property: 'percentage',
+            operator: '>',
+            value: 4,
+          },
         },
         showInLegend: true,
       },
@@ -73,5 +83,21 @@ export default class SavingPlanDetailedViewController extends Controller {
     const duration = moment.duration(end.diff(now), 'ms');
 
     return moment.duration(duration).format();
+  }
+
+  get monthsListUntilDeadline() {
+    const startDate = moment(); //now
+    const endDate = this.model.deadlineDate; //it is already saved as a moment class, so we don't need to format it
+    const betweenMonths = [];
+
+    if (startDate < endDate) {
+      const date = startDate.startOf('month');
+
+      while (date < endDate.endOf('month')) {
+        betweenMonths.push(date.format('YYYY-MM'));
+        date.add(1, 'month');
+      }
+    }
+    return betweenMonths;
   }
 }
