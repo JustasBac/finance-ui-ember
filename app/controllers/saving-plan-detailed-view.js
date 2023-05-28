@@ -87,17 +87,51 @@ export default class SavingPlanDetailedViewController extends Controller {
 
   get monthsListUntilDeadline() {
     const startDate = moment(); //now
-    const endDate = this.model.deadlineDate; //it is already saved as a moment class, so we don't need to format it
+    const endDate = this.model.deadlineDate.clone(); //clone (comes from momentjs) it so we don't use a reference. It is already saved as a moment class, so we don't need to format it
     const betweenMonths = [];
+
+    const daysUntilDeadline = this.getDatesUntilDeadline(startDate, endDate);
+
+    const targetDailySavings =
+      this.model.targetAmount / daysUntilDeadline.length;
 
     if (startDate < endDate) {
       const date = startDate.startOf('month');
 
       while (date < endDate.endOf('month')) {
-        betweenMonths.push(date.format('YYYY-MM'));
+        const filtered = daysUntilDeadline.filter(
+          (el) => el.month === moment(date).format('YYYY-MM')
+        );
+
+        console.log('filtered', filtered);
+
+        betweenMonths.push({
+          date: date.format('YYYY-MM'),
+          targetMonthSavings: Math.round(filtered.length * targetDailySavings),
+          daysThatYouNeedToSaveOn: filtered.length,
+          totalDaysInMonth: moment(date).daysInMonth(),
+          percentage: (filtered.length * 100) / moment(date).daysInMonth(),
+        });
         date.add(1, 'month');
       }
     }
+
+    console.log('between', betweenMonths);
     return betweenMonths;
+  }
+
+  getDatesUntilDeadline(startDate, endDate) {
+    const nowDate = startDate.clone();
+    const daysUntilDeadline = [];
+
+    while (nowDate.isSameOrBefore(endDate)) {
+      daysUntilDeadline.push({
+        date: nowDate.format('YYYY-MM-DD'),
+        month: nowDate.format('YYYY-MM'),
+      });
+      nowDate.add(1, 'days');
+    }
+
+    return daysUntilDeadline;
   }
 }

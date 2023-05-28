@@ -7,7 +7,7 @@ import { inject as service } from '@ember/service';
 export default class DatePickerComponent extends Component {
   @service notifications;
 
-  @tracked selectedDate = this.args.selectedDate;
+  // @tracked selectedDate = this.args.selectedDate;
 
   @action
   changeDate(date) {
@@ -18,7 +18,7 @@ export default class DatePickerComponent extends Component {
       return;
     }
 
-    this.selectedDate = date.moment;
+    // this.selectedDate = date.moment;
     this.args.onDateChange(date.moment);
   }
 }

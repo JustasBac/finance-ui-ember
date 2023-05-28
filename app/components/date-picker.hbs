@@ -8,7 +8,8 @@
         tabindex="0"
         class="border bg-white rounded p-3 flex justify-between items-center cursor-pointer hover:bg-gray-50"
       >
-        {{moment-format this.selectedDate 'MMMM DD, YYYY'}}
+        {{moment-format @selectedDate 'MMMM DD, YYYY'}}
+        {{log 'selected date: ' @selectedDate}}
         <FaIcon @icon="calendar-days" />
       </label>
     </dd.Trigger>
@@ -19,7 +20,7 @@
             Pick a date
           </h3>
           <PowerCalendar
-            @selected={{this.selectedDate}}
+            @selected={{@selectedDate}}
             @onSelect={{this.changeDate}}
             @center={{this.month}}
             @onCenterChange={{action (mut this.month) value='date'
