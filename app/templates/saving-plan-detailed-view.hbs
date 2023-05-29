@@ -78,7 +78,10 @@
               <div class="flex flex-col w-28 text-center">
                 <span>
                   Target:
-                  {{month.targetMonthSavings}}
+                  {{round month.targetSavings}}
+                  <Tooltip>
+                    {{round month.targetSavings decimals=2}}
+                  </Tooltip>
                 </span>
                 <span>
                   {{moment-format month.date 'MMMM'}}
