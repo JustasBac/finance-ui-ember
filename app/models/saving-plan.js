@@ -6,6 +6,7 @@ export default class SavingPlan {
   @tracked title;
   @tracked targetAmount;
   @tracked currencyCode;
+  @tracked startDate;
   @tracked deadlineDate;
   @tracked savedAmount;
 
@@ -14,6 +15,7 @@ export default class SavingPlan {
     title = '',
     targetAmount = null,
     currencyCode = '',
+    startDate = moment(),
     deadlineDate = moment().add(1, 'days'),
     savedAmount = 0
   ) {
@@ -21,6 +23,7 @@ export default class SavingPlan {
     this.title = title;
     this.targetAmount = targetAmount;
     this.currencyCode = currencyCode;
+    this.startDate = startDate;
     this.deadlineDate = deadlineDate;
     this.savedAmount = savedAmount;
   }
@@ -31,6 +34,7 @@ export default class SavingPlan {
       this.title,
       this.targetAmount,
       this.currencyCode,
+      this.startDate,
       this.deadlineDate,
       this.savedAmount
     );

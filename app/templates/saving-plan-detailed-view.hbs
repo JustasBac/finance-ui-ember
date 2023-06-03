@@ -2,7 +2,7 @@
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Saving Plan">
     <div class="flex gap-8 mb-8">
-      <Card class="basis-1/4" @icon="sack-dollar">
+      <Card class="basis-1/5" @icon="sack-dollar">
         <:header>
           Target amount
         </:header>
@@ -11,7 +11,7 @@
           {{this.currency}}
         </:body>
       </Card>
-      <Card class="basis-1/4" @icon="hand-holding-dollar">
+      <Card class="basis-1/5" @icon="hand-holding-dollar">
         <:header>
           Saved amount
         </:header>
@@ -26,12 +26,22 @@
           </div>
         </:body>
       </Card>
-      <Card class="basis-1/4" @icon="calendar-days">
+      <Card class="basis-1/5" @icon="calendar-days">
+        <:header>
+          Start date
+        </:header>
+        <:body>
+          <span class="text-xl">
+            {{moment-format @model.startDate 'MMMM DD, YYYY'}}
+          </span>
+        </:body>
+      </Card>
+      <Card class="basis-1/5" @icon="calendar-days">
         <:header>
           Deadline
         </:header>
         <:body>
-          <span class="text-xl">
+          <span class="text-lg">
             {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
           </span>
           <span class="text-sm opacity-50 font-light">
@@ -40,7 +50,7 @@
           </span>
         </:body>
       </Card>
-      <Card class="basis-1/4" @icon="hammer">
+      <Card class="basis-1/5" @icon="hammer">
         <:header>
           Actions
         </:header>
@@ -73,24 +83,40 @@
       </div>
       <div class="card-body p-4">
         {{#if (eq this.activeTab 'planning')}}
-          <div class="grid grid-cols-9 gap-4">
-            {{#each this.monthsListUntilDeadline as |month|}}
-              <div class="flex flex-col w-28 text-center">
+          <div class="flex gap-4 flex-wrap">
+            Start
+            {{#each this.monthsListUntilDeadline as |monthInfo index|}}
+              <div
+                class="flex flex-col w-28 gap-2 text-center bg-gray-200/80 rounded shadow p-2 text-sm
+                  {{if (eq index 0) 'bg-lime-500/20'}}
+
+                  {{if
+                    (eq this.monthsListUntilDeadline.length (sum index 1))
+                    'bg-red-500/20'
+                  }}"
+              >
                 <span>
                   Target:
-                  {{round month.targetSavings}}
+                  {{concat (round monthInfo.targetSavings) this.currency}}
                   <Tooltip>
-                    {{round month.targetSavings decimals=2}}
+                    In
+                    {{moment-format monthInfo.momentDate 'MMMM YYYY'}}
+                    you are expected to save
+                    {{round monthInfo.targetSavings decimals=2}}
+                    {{this.currency}}
                   </Tooltip>
                 </span>
-                <span>
-                  {{moment-format month.date 'MMMM'}}
-                </span>
-                <span>
-                  {{moment-format month.date 'YYYY'}}
-                </span>
+                <div class="flex flex-col">
+                  <span>
+                    {{monthInfo.month}}
+                  </span>
+                  <span>
+                    {{monthInfo.year}}
+                  </span>
+                </div>
               </div>
             {{/each}}
+            End
           </div>
         {{else}}
           <HighCharts

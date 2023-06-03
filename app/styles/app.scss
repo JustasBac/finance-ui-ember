@@ -8,3 +8,7 @@
 @import 'vendor/ember-tooltip';
 @import 'vendor/power-select';
 @import 'vendor/scrollbar';
+
+body {
+  overflow: hidden;
+}

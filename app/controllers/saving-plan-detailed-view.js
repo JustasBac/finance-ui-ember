@@ -82,16 +82,11 @@ export default class SavingPlanDetailedViewController extends Controller {
     const end = moment(this.model.deadlineDate);
     const duration = moment.duration(end.diff(now), 'ms');
 
-    return moment.duration(duration).format('MM', {
-      usePlural: true,
-      trim: 'both',
-    });
+    return moment.duration(duration).format();
   }
 
   get monthsListUntilDeadline() {
-    const { targetAmount, deadlineDate } = this.model;
-
-    const startDate = moment(); //now (TO-DO Start date for saving plan)
+    const { targetAmount, startDate, deadlineDate } = this.model;
 
     const monthsUntilDeadline = this.getMonthsUntilDeadline(
       startDate,
@@ -124,6 +119,7 @@ export default class SavingPlanDetailedViewController extends Controller {
         month: el.month,
         year: el.year,
         targetSavings: savePerFullMonth,
+        momentDate: el.momentObject,
       };
     });
 
