@@ -1,0 +1,47 @@
+<Modals::-TriggerButton>
+  <span {{on 'click' (fn (mut this.isModalOpen) true)}}>
+    <FaIcon @icon="pen-to-square" />
+  </span>
+</Modals::-TriggerButton>
+<Modals::-base @isOpen={{this.isModalOpen}}>
+  <:header>
+    <div>
+      Edit savings
+    </div>
+  </:header>
+  <:body>
+    <div class="text-base text-left mt-2">
+      Month:
+      {{@monthInfo.formatedDate}}
+    </div>
+    <div class="text-base text-left mt-1 mb-2">
+      Target:
+      {{concat (round @monthInfo.targetSavings decimals=2) @currency}}
+    </div>
+    <InputField
+      @label="Amount saved this month"
+      @value={{this.savedAmount}}
+      @type="number"
+      @onInput={{fn (mut this.savedAmount)}}
+    />
+    <div class="flex justify-between items-center mt-5">
+      <Modals::-TriggerButton>
+        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+          Close me
+        </span>
+      </Modals::-TriggerButton>
+      <Button
+        {{on
+          'click'
+          (queue
+            this.closeModalAndUpdateDatabase
+            (fn (mut @monthInfo.savedAmount) this.savedAmount)
+          )
+        }}
+      >
+        <FaIcon @icon="floppy-disk" class="mr-1" />
+        Save
+      </Button>
+    </div>
+  </:body>
+</Modals::-base>

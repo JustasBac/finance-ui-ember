@@ -20,6 +20,8 @@
     min={{@min}}
     placeholder={{@placeholder}}
     class="input input-bordered w-full
+      {{if @size (concat 'input-' @size)}}
+
       {{this.size}}
 
       {{unless this.isFormValidated (unless @exceptFromValidation 'input-error')

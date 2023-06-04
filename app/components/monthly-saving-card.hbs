@@ -19,24 +19,20 @@
   </span>
   <span class="flex flex-col text-xs mt-2">
     Saved
-    {{#if this.isEditEnabled}}
-      editenabled<InputField @value={{@monthInfo.savedAmount}} />
-    {{else}}
-      <div class="flex justify-center items-center gap-1">
-        <span class="font-bold text-base leading-none">
-          {{concat @monthInfo.savedAmount @currency}}
-        </span>
-        <FaIcon
-          @icon="pen-to-square"
-          {{on 'click' (fn (mut this.isEditEnabled) true)}}
-        />
-      </div>
-      <Tooltip>
-        In
-        {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
-        you saved
+    <div class="flex justify-center items-center gap-1">
+      <span class="font-bold text-base leading-none">
         {{concat @monthInfo.savedAmount @currency}}
-      </Tooltip>
-    {{/if}}
+      </span>
+      <Modals::EditMonthSavings
+        @monthInfo={{@monthInfo}}
+        @currency={{@currency}}
+      />
+    </div>
+    <Tooltip>
+      In
+      {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
+      you saved
+      {{concat @monthInfo.savedAmount @currency}}
+    </Tooltip>
   </span>
 </div>

@@ -19,8 +19,6 @@
     <Forms::SavingPlan
       @savingPlanInformation={{this.copyOfEditableSavingPlan}}
     />
-    {{log 'copy from' @savingPlan}}
-    {{log 'copy of' this.copyOfEditableSavingPlan}}
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>

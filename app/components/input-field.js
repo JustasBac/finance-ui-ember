@@ -36,10 +36,4 @@ export default class InputFieldComponent extends Component {
 
     this.args.onInput(e.target.value);
   }
-
-  get size() {
-    const { size } = this.args;
-
-    return size ? `input-${size}` : ''; //returns for example: input-sm
-  }
 }
