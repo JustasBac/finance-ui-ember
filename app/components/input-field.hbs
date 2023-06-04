@@ -3,6 +3,14 @@
     <label class="label py-1">
       <span class="label-text leading-none">
         {{@label}}
+        {{#if @tooltipText}}
+          <span class="ml-1">
+            <FaIcon @icon="circle-info" />
+            <Tooltip>
+              {{@tooltipText}}
+            </Tooltip>
+          </span>
+        {{/if}}
       </span>
     </label>
   {{/if}}

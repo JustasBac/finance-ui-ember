@@ -12,7 +12,7 @@ export default class SavingPlanService extends Service {
       'EUR',
       moment(),
       moment().add(1, 'years'),
-      0
+      [{ month: 'June 2023', amountSaved: 1000 }]
     ),
     new SavingPlan(
       2,
@@ -21,16 +21,17 @@ export default class SavingPlanService extends Service {
       'EUR',
       moment(),
       moment().add(6, 'months'),
+      [{ month: 'June 2023', amountSaved: 500 }],
       100
     ),
     new SavingPlan(
-      3,
-      'Test',
-      2000,
-      'EUR',
-      moment(),
-      moment('2024-04-15', 'YYYY-MM-DD'),
-      0
+      3, //id
+      'Test', //saving plan name (goal)
+      2000, //goal amount
+      'EUR', //selected currency code
+      moment(), //starting date
+      moment('2024-04-15', 'YYYY-MM-DD'), //deadline
+      [{ month: 'June 2023', amountSaved: 300 }] //savings [June, July, August, Sep ....]
     ),
   ];
 

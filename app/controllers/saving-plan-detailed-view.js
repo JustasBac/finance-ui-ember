@@ -47,9 +47,9 @@ export default class SavingPlanDetailedViewController extends Controller {
   };
 
   get chartData() {
-    const { savedAmount, targetAmount } = this.model;
+    const { startingCapital, targetAmount } = this.model;
 
-    const alreadySavedInPercent = (savedAmount * 100) / targetAmount;
+    const alreadySavedInPercent = (startingCapital * 100) / targetAmount;
 
     return [
       {
@@ -62,19 +62,31 @@ export default class SavingPlanDetailedViewController extends Controller {
             y: 100 - alreadySavedInPercent,
             sliced: true,
             custom: {
-              extraInformation: `${targetAmount - savedAmount}${this.currency}`,
+              extraInformation: `${targetAmount - startingCapital}${
+                this.currency
+              }`,
             },
           },
           {
             name: 'Already saved',
             y: alreadySavedInPercent,
             custom: {
-              extraInformation: `${savedAmount}${this.currency}`,
+              extraInformation: `${startingCapital}${this.currency}`,
             },
           },
         ],
       },
     ];
+  }
+
+  get totalAmountSaved() {
+    let sum = 0;
+
+    this.monthsListUntilDeadline.forEach((el) => {
+      sum += el.savedAmount;
+    });
+
+    return sum + +this.model.startingCapital; //+ in front to 'integrify'
   }
 
   get timeUntilDeadline() {
@@ -86,71 +98,72 @@ export default class SavingPlanDetailedViewController extends Controller {
   }
 
   get monthsListUntilDeadline() {
-    const { targetAmount, startDate, deadlineDate } = this.model;
-
-    const monthsUntilDeadline = this.getMonthsUntilDeadline(
+    const {
+      targetAmount,
       startDate,
-      deadlineDate
-    );
+      deadlineDate,
+      startingCapital,
+      monthsListUntilDeadline,
+    } = this.model;
 
     let monthlySavingPlanningInfo = [];
 
-    let savePerFullMonth = targetAmount / monthsUntilDeadline.length; // when selecting full months meaning, for example, 1st to 31st of May 2023
+    let savingsPerFullMonthNeeded =
+      (targetAmount - startingCapital) / monthsListUntilDeadline.length; // when selecting full months meaning, for example, 1st to 31st of May 2023
 
     const startingMonthInfo = this.getSavingPlanningForNotAFullMonth(
-      monthsUntilDeadline,
       startDate,
-      savePerFullMonth
+      savingsPerFullMonthNeeded
     );
 
-    savePerFullMonth += startingMonthInfo.missingAmountPerFullMonth;
+    savingsPerFullMonthNeeded += startingMonthInfo.missingAmountPerFullMonth;
 
     const endingMonthInfo = this.getSavingPlanningForNotAFullMonth(
-      monthsUntilDeadline,
       deadlineDate,
-      savePerFullMonth,
+      savingsPerFullMonthNeeded,
       true
     );
 
-    savePerFullMonth += endingMonthInfo.missingAmountPerFullMonth;
+    savingsPerFullMonthNeeded += endingMonthInfo.missingAmountPerFullMonth;
 
-    monthlySavingPlanningInfo = monthsUntilDeadline.map((el) => {
+    monthlySavingPlanningInfo = monthsListUntilDeadline.map((month) => {
       return {
-        month: el.month,
-        year: el.year,
-        targetSavings: savePerFullMonth,
-        momentDate: el.momentObject,
+        formatedDate: month.date,
+        targetSavings: savingsPerFullMonthNeeded,
+        momentDate: month.momentObject,
+        savedAmount: month.savedAmount,
       };
     });
 
     monthlySavingPlanningInfo[0].targetSavings =
       startingMonthInfo.monthSavingsTarget; //overwrite first month needed savings
 
-    monthlySavingPlanningInfo[0].month = startDate.format('MMMM DD'); //overwrite first month saving date (to include a day)
+    // monthlySavingPlanningInfo[0].formatedData =
+    //   startDate.format('MMM DD, YYYY'); //overwrite first month saving date (to include a day)
 
     monthlySavingPlanningInfo[
       monthlySavingPlanningInfo.length - 1
     ].targetSavings = endingMonthInfo.monthSavingsTarget; //overwrite last month needed savings
 
-    monthlySavingPlanningInfo[monthlySavingPlanningInfo.length - 1].month =
-      deadlineDate.format('MMMM DD'); //overwrite end month saving date (to include a day)
-
-    console.log('monthlySavingPlanningInfo', monthlySavingPlanningInfo);
+    // monthlySavingPlanningInfo[
+    //   monthlySavingPlanningInfo.length - 1
+    // ].formatedData = deadlineDate.format('MMM DD, YYYY'); //overwrite end month saving date (to include a day)
 
     return monthlySavingPlanningInfo;
   }
 
   getSavingPlanningForNotAFullMonth(
-    monthsUntilDeadline,
     date,
-    savePerFullMonth,
+    savingsPerFullMonthNeeded,
     isEndMonth = false
   ) {
     const dateClone = date.clone(); //clone so the original date doesn't get overwritten in the logic below
 
+    const { monthsListUntilDeadline } = this.model;
+
     const totalDaysInFirstMonth =
-      monthsUntilDeadline[
-        isEndMonth ? monthsUntilDeadline.length - 1 : 0
+      monthsListUntilDeadline[
+        isEndMonth ? monthsListUntilDeadline.length - 1 : 0
       ].momentObject.daysInMonth(); //how many days does a month have
 
     const dayOfMonthAsLimit = dateClone.format('DD'); // if we save for example until 12 of April then it returns 12
@@ -162,37 +175,16 @@ export default class SavingPlanDetailedViewController extends Controller {
     const monthSavingPercentageRatio =
       daysWhereSavingIsNeeded / totalDaysInFirstMonth; //if for example we need to save until 15 of April, then it is 0.5
 
-    const monthSavingsTarget = savePerFullMonth * monthSavingPercentageRatio; //how much do we still have to save per month, considering, that we don't have the whole month to save
+    const monthSavingsTarget =
+      savingsPerFullMonthNeeded * monthSavingPercentageRatio; //how much do we still have to save per month, considering, that we don't have the whole month to save
 
-    const missingSavingsFromMonth = savePerFullMonth - monthSavingsTarget; //amount of money that won't be saved, because we don't save the whole month. Needs to be 'compensated' by other months
+    const missingSavingsFromMonth =
+      savingsPerFullMonthNeeded - monthSavingsTarget; //amount of money that won't be saved, because we don't save the whole month. Needs to be 'compensated' by other months
 
     const missingAmountPerFullMonth =
       missingSavingsFromMonth /
-      (monthsUntilDeadline.length - (isEndMonth ? 2 : 1)); //if the calculation is performed for the last month than we have to except first and last month (2 months). If just for the first month, then we need to except just the first month (1)
+      (monthsListUntilDeadline.length - (isEndMonth ? 2 : 1)); //if the calculation is performed for the last month than we have to except first and last month (2 months). If just for the first month, then we need to except just the first month (1)
 
     return { missingAmountPerFullMonth, monthSavingsTarget };
-  }
-
-  getMonthsUntilDeadline(startDate, endDate) {
-    // we need to clone the dates (comes from momentjs) so the dates don't get changed (because of two way binding):
-    const stardDateClone = startDate.clone();
-    const endDateClone = endDate.clone();
-
-    const betweenMonths = [];
-
-    if (stardDateClone < endDateClone) {
-      const date = stardDateClone.startOf('month');
-
-      while (date < endDateClone.endOf('month')) {
-        betweenMonths.push({
-          month: date.format('MMMM'),
-          year: date.format('YYYY'),
-          momentObject: moment(date),
-        });
-        date.add(1, 'month');
-      }
-    }
-
-    return betweenMonths;
   }
 }

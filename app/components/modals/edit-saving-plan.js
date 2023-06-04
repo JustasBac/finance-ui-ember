@@ -18,7 +18,7 @@ export default class ModalsEditSavingPlanComponent extends Component {
       startDate,
       deadlineDate,
       targetAmount,
-      savedAmount,
+      startingCapital,
     } = this.copyOfEditableSavingPlan;
 
     this.args.savingPlan.title = title;
@@ -26,7 +26,7 @@ export default class ModalsEditSavingPlanComponent extends Component {
     this.args.savingPlan.startDate = startDate;
     this.args.savingPlan.deadlineDate = deadlineDate;
     this.args.savingPlan.targetAmount = targetAmount;
-    this.args.savingPlan.savedAmount = savedAmount;
+    this.args.savingPlan.startingCapital = startingCapital;
 
     this.notifications.success('Saving plan was successfully updated', {
       autoClear: true,

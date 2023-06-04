@@ -48,9 +48,10 @@
 <InputField
   class="mt-3"
   @type="number"
-  @value={{@savingPlanInformation.savedAmount}}
+  @value={{@savingPlanInformation.startingCapital}}
   @min={{1}}
-  @label="Saved amount"
-  @onInput={{fn (mut @savingPlanInformation.savedAmount)}}
-  @placeholder="Enter saved amount"
+  @label="Starting capital"
+  @onInput={{fn (mut @savingPlanInformation.startingCapital)}}
+  @placeholder="Enter starting capital"
+  @tooltipText="Amount of money that you have already saved for this goal"
 />

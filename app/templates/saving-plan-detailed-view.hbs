@@ -1,6 +1,6 @@
 {{page-title 'Details'}}
 <EmberWormhole @to="page-body-wormhole">
-  <PageLayout @pageTitle="Saving Plan">
+  <PageLayout @pageTitle="Saving Plan - {{this.model.title}}">
     <div class="flex gap-8 mb-8">
       <Card class="basis-1/5" @icon="sack-dollar">
         <:header>
@@ -13,16 +13,28 @@
       </Card>
       <Card class="basis-1/5" @icon="hand-holding-dollar">
         <:header>
-          Saved amount
+          Savings
         </:header>
         <:body>
-          <div class="flex justify-between items-center">
-            {{@model.savedAmount}}
-            {{this.currency}}
-            <span class="badge bg-lime-700/50 border-none text-white">
-              <FaIcon @icon="arrow-up" class="mr-1 text-xs" />
-              20%
+          <div class="flex flex-col text-sm font-normal">
+            <span>
+              Starting capital:
+              <span class="font-bold">
+                {{@model.startingCapital}}
+              </span>
+              {{this.currency}}
             </span>
+            <div class="flex justify-between items-center">
+              Total saved:
+              <span class="font-bold">
+                {{this.totalAmountSaved}}
+              </span>
+              {{this.currency}}
+              <span class="badge bg-lime-700/50 border-none text-white text-xs">
+                <FaIcon @icon="arrow-up" class="mr-1" />
+                20%
+              </span>
+            </div>
           </div>
         </:body>
       </Card>
@@ -81,42 +93,17 @@
           Monthly planning
         </a>
       </div>
-      <div class="card-body p-4">
+      <div class="card-body px-4 py-10">
         {{#if (eq this.activeTab 'planning')}}
+          Current month:
+          {{moment-format (now) 'MMMM YYYY'}}
           <div class="flex gap-4 flex-wrap">
-            Start
-            {{#each this.monthsListUntilDeadline as |monthInfo index|}}
-              <div
-                class="flex flex-col w-28 gap-2 text-center bg-gray-200/80 rounded shadow p-2 text-sm
-                  {{if (eq index 0) 'bg-lime-500/20'}}
-
-                  {{if
-                    (eq this.monthsListUntilDeadline.length (sum index 1))
-                    'bg-red-500/20'
-                  }}"
-              >
-                <span>
-                  Target:
-                  {{concat (round monthInfo.targetSavings) this.currency}}
-                  <Tooltip>
-                    In
-                    {{moment-format monthInfo.momentDate 'MMMM YYYY'}}
-                    you are expected to save
-                    {{round monthInfo.targetSavings decimals=2}}
-                    {{this.currency}}
-                  </Tooltip>
-                </span>
-                <div class="flex flex-col">
-                  <span>
-                    {{monthInfo.month}}
-                  </span>
-                  <span>
-                    {{monthInfo.year}}
-                  </span>
-                </div>
-              </div>
+            {{#each this.monthsListUntilDeadline as |monthInfo|}}
+              <MonthlySavingCard
+                @monthInfo={{monthInfo}}
+                @currency={{this.currency}}
+              />
             {{/each}}
-            End
           </div>
         {{else}}
           <HighCharts
