@@ -11,5 +11,10 @@ export default class ModalsEditMonthSavingsComponent extends Component {
     this.isModalOpen = false;
 
     //TODO: API Connection to update savedAmount
+    console.log(
+      'this.args.monthInfo.formatedDate',
+      this.args.monthInfo.formatedDate
+    );
+    console.log('this.savedAmount', this.savedAmount);
   }
 }

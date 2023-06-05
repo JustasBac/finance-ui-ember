@@ -63,7 +63,7 @@ export default class SavingPlan {
         )?.amountSaved;
 
         betweenMonths.push({
-          date: date.format('MMM YYYY'),
+          date: date.format('MMMM YYYY'),
           momentObject: moment(date),
           savedAmount: monthlySavings ? monthlySavings : 0,
         });

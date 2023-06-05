@@ -1,12 +1,12 @@
 <div
-  class="flex flex-col w-28 text-center bg-gray-200/80 rounded shadow p-2 text-sm"
+  class="flex flex-col w-36 text-center bg-gray-200/80 rounded shadow p-2 text-sm"
 >
   <span class="text-xs text-gray-500">
     {{@monthInfo.formatedDate}}
   </span>
   <span class="flex flex-col text-xs mt-2">
     Target
-    <span class="font-bold text-base leading-none">
+    <span class="font-bold text-base leading-tight">
       {{concat (round @monthInfo.targetSavings) @currency}}
     </span>
     <Tooltip>
@@ -17,22 +17,37 @@
       {{@currency}}
     </Tooltip>
   </span>
-  <span class="flex flex-col text-xs mt-2">
-    Saved
-    <div class="flex justify-center items-center gap-1">
-      <span class="font-bold text-base leading-none">
-        {{concat @monthInfo.savedAmount @currency}}
-      </span>
-      <Modals::EditMonthSavings
-        @monthInfo={{@monthInfo}}
-        @currency={{@currency}}
-      />
+  <span class="flex flex-col text-xs mt-2 relative">
+    <div class="flex justify-center items-center">
+      Saved
+      <div class="absolute right-0">
+        <Modals::EditMonthSavings
+          @monthInfo={{@monthInfo}}
+          @currency={{@currency}}
+          @savingPlan={{@savingPlan}}
+        />
+      </div>
     </div>
-    <Tooltip>
-      In
-      {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
-      you saved
-      {{concat @monthInfo.savedAmount @currency}}
-    </Tooltip>
+    <div class="flex justify-center items-center relative">
+      <span class="font-bold text-base leading-tight">
+        {{concat @monthInfo.savedAmount @currency}}
+        <Tooltip>
+          In
+          {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
+          you saved
+          {{concat @monthInfo.savedAmount @currency}}
+        </Tooltip>
+      </span>
+      {{#if this.progressPercentage}}
+        <div
+          class="absolute right-0 top-0 mt-0.5 text-xs bg-lime-700/70 px-1 text-white rounded"
+        >
+          <FaIcon @icon="arrow-trend-up" />
+          <Tooltip>
+            {{this.progressPercentage}}
+          </Tooltip>
+        </div>
+      {{/if}}
+    </div>
   </span>
 </div>
