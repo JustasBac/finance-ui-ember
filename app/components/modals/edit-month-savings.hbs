@@ -22,11 +22,12 @@
       </span>
     </div>
     <InputField
-      @label="Amount saved this month"
+      @label="Amount saved this month ({{@currency}})"
+      @placeholder="Enter value {{@currency}}"
       @value={{this.savedAmount}}
       @type="number"
       @onInput={{fn (mut this.savedAmount)}}
-      @min="1"
+      @min="0"
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>

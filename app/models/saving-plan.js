@@ -3,14 +3,15 @@ import moment from 'moment';
 
 export default class SavingPlan {
   id;
-  @tracked title;
+  @tracked title = '';
   @tracked targetAmount;
-  @tracked currencyCode;
+  @tracked currencyCode = '';
   @tracked startDate;
   @tracked deadlineDate;
   @tracked savingsPerMonth = [];
   @tracked startingCapital;
   @tracked monthsListUntilDeadline = [];
+  @tracked totalSavings;
 
   constructor(
     id = 0,
@@ -31,6 +32,7 @@ export default class SavingPlan {
     this.savingsPerMonth = savingsPerMonth;
     this.startingCapital = startingCapital;
     this.monthsListUntilDeadline = this.getMonthsUntilDeadline();
+    this.totalSavings = this.calculateTotalSavings();
   }
 
   copy() {
@@ -43,7 +45,8 @@ export default class SavingPlan {
       this.deadlineDate,
       this.savingsPerMonth,
       this.startingCapital,
-      this.monthsListUntilDeadline
+      this.monthsListUntilDeadline,
+      this.totalSavings
     );
   }
 
@@ -65,12 +68,22 @@ export default class SavingPlan {
         betweenMonths.push({
           date: date.format('MMMM YYYY'),
           momentObject: moment(date),
-          savedAmount: monthlySavings ? monthlySavings : 0,
+          savedAmount: monthlySavings ? monthlySavings : null,
         });
         date.add(1, 'month');
       }
     }
 
     return betweenMonths;
+  }
+
+  calculateTotalSavings() {
+    let sum = 0;
+
+    this.savingsPerMonth.forEach((el) => {
+      sum += el.amountSaved;
+    });
+
+    return sum + +this.startingCapital; //+ in front to 'integrify'
   }
 }

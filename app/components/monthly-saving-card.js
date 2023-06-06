@@ -13,8 +13,13 @@ export default class MonthlySavingCardComponent extends Component {
 
     const difference = (+savedAmount * 100) / +targetSavings - 100;
 
-    return difference > 0
-      ? `+${Math.round(difference)}%`
-      : `${Math.round(difference)}%`; //minus is automatically added because the difference is negative
+    const roundedDifference =
+      Math.round((difference + Number.EPSILON) * 100) / 100;
+
+    if (Math.round(savedAmount) === Math.round(targetSavings)) {
+      return;
+    }
+
+    return difference > 0 ? `+${roundedDifference}` : roundedDifference; //minus is automatically added to a negative value
   }
 }

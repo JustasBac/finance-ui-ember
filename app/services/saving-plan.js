@@ -10,9 +10,12 @@ export default class SavingPlanService extends Service {
       'Apartment',
       100000,
       'EUR',
-      moment(),
-      moment('2024-05-02', 'YYYY-MM-DD'),
-      [{ month: 'June 2023', amountSaved: 1000 }],
+      moment('2023-05-28', 'YYYY-MM-DD'),
+      moment('2026-05-02', 'YYYY-MM-DD'),
+      [
+        { month: 'May 2023', amountSaved: 186 },
+        { month: 'June 2023', amountSaved: 1000 },
+      ],
       75000
     ),
     new SavingPlan(

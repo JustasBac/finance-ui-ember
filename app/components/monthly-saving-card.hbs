@@ -30,7 +30,11 @@
     </div>
     <div class="flex justify-center items-center relative">
       <span class="font-bold text-base leading-tight">
-        {{concat @monthInfo.savedAmount @currency}}
+        {{concat
+          (if
+            @monthInfo.savedAmount (concat @monthInfo.savedAmount @currency) '-'
+          )
+        }}
         <Tooltip>
           In
           {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
@@ -40,11 +44,20 @@
       </span>
       {{#if this.progressPercentage}}
         <div
-          class="absolute right-0 top-0 mt-0.5 text-xs bg-lime-700/70 px-1 text-white rounded"
+          class="absolute right-0 top-0 mt-0.5 text-xs
+            {{if (gt this.progressPercentage 0) 'bg-lime-700/60' 'bg-red-700/60'
+            }}
+             px-1 text-white rounded"
         >
-          <FaIcon @icon="arrow-trend-up" />
+          <FaIcon
+            @icon={{if
+              (gt this.progressPercentage 0)
+              'arrow-trend-up'
+              'arrow-trend-down'
+            }}
+          />
           <Tooltip>
-            {{this.progressPercentage}}
+            {{concat this.progressPercentage '%'}}
           </Tooltip>
         </div>
       {{/if}}

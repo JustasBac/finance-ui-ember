@@ -10,11 +10,23 @@ export default class ModalsEditMonthSavingsComponent extends Component {
   closeModalAndUpdateDatabase() {
     this.isModalOpen = false;
 
+    const { savingPlan } = this.args;
+
     //TODO: API Connection to update savedAmount
-    console.log(
-      'this.args.monthInfo.formatedDate',
-      this.args.monthInfo.formatedDate
+
+    const monthThatAlreadyHasSavedAmount = savingPlan.savingsPerMonth.find(
+      (el) => el.month === this.args.monthInfo.formatedDate
     );
-    console.log('this.savedAmount', this.savedAmount);
+
+    if (monthThatAlreadyHasSavedAmount) {
+      monthThatAlreadyHasSavedAmount.amountSaved = +this.savedAmount;
+    } else {
+      savingPlan.savingsPerMonth.pushObject({
+        month: this.args.monthInfo.formatedDate,
+        amountSaved: +this.savedAmount,
+      });
+    }
+
+    savingPlan.totalSavings = savingPlan.calculateTotalSavings();
   }
 }

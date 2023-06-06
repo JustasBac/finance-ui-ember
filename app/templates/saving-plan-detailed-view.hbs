@@ -20,19 +20,22 @@
             <span>
               Starting capital:
               <span class="font-bold">
-                {{@model.startingCapital}}
+                {{concat @model.startingCapital this.currency}}
               </span>
-              {{this.currency}}
             </span>
-            <div class="flex justify-between items-center">
+            <div>
               Total saved:
               <span class="font-bold">
-                {{this.totalAmountSaved}}
+                {{concat @model.totalSavings this.currency}}
               </span>
-              {{this.currency}}
-              <span class="badge bg-lime-700/50 border-none text-white text-xs">
-                <FaIcon @icon="arrow-up" class="mr-1" />
-                20%
+            </div>
+            <div>
+              Remaining:
+              <span class="font-bold">
+                {{concat
+                  (sub @model.targetAmount @model.totalSavings)
+                  this.currency
+                }}
               </span>
             </div>
           </div>
@@ -76,7 +79,7 @@
         </:body>
       </Card>
     </div>
-    <div class="card grow bg-base-100 shadow-xl p-2 px-8">
+    <div class="card grow bg-base-100 shadow-xl p-2 px-8 min-h-[35rem]">
       <div class="tabs flex justify-center">
         <a
           class="tab tab-bordered
@@ -92,25 +95,39 @@
         >
           Monthly planning
         </a>
+        <a
+          class="tab tab-bordered
+            {{if (eq this.activeTab 'monthly-analysis') 'tab-active'}}"
+          {{on 'click' (fn (mut this.activeTab) 'monthly-analysis')}}
+        >
+          Monthly analysis
+        </a>
       </div>
-      <div class="card-body px-4 py-10">
+      <div class="card-body px-4 py-6 overflow-auto">
         {{#if (eq this.activeTab 'planning')}}
-          Current month:
-          {{moment-format (now) 'MMMM YYYY'}}
-          <div class="flex gap-4 flex-wrap">
-            {{#each this.monthsListUntilDeadline as |monthInfo|}}
-              <MonthlySavingCard
-                @savingPlan={{@model}}
-                @monthInfo={{monthInfo}}
-                @currency={{this.currency}}
-              />
-            {{/each}}
+          <div class="fade-in-animation">
+            <span class="text-center">
+              Current month:
+              {{moment-format (now) 'MMMM YYYY'}}
+            </span>
+            <div class="flex gap-4 flex-wrap">
+              {{#each this.monthsListUntilDeadline as |monthInfo|}}
+                <MonthlySavingCard
+                  @savingPlan={{@model}}
+                  @monthInfo={{monthInfo}}
+                  @currency={{this.currency}}
+                />
+              {{/each}}
+            </div>
           </div>
-        {{else}}
-          <HighCharts
-            @chartOptions={{this.chartOptions}}
-            @content={{this.chartData}}
-          />
+        {{else if (eq this.activeTab 'progress')}}
+          <div class="fade-in-animation">
+            <Charts::SavingProgressPie @data={{this.model}} />
+          </div>
+        {{else if (eq this.activeTab 'monthly-analysis')}}
+          <div class="fade-in-animation">
+            analysis
+          </div>
         {{/if}}
       </div>
     </div>

@@ -12,3 +12,16 @@
 body {
   overflow: hidden;
 }
+
+.fade-in-animation {
+  animation: 0.2s linear fadeIn;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
