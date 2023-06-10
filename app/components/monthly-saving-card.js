@@ -17,6 +17,7 @@ export default class MonthlySavingCardComponent extends Component {
     const roundedDifference = roundNumber(difference, 2); //round to 2 decimals
 
     if (Math.round(savedAmount) === Math.round(targetSavings)) {
+      //we show rounded target with no decimals, so when a user enters saved amount that matches with rounded target amount we don't show any %
       return;
     }
 

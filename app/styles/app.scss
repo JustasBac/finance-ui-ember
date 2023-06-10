@@ -9,6 +9,12 @@
 @import 'vendor/power-select';
 @import 'vendor/scrollbar';
 
+html {
+  //used for example in charts:
+  --success-green: rgb(101 163 13);
+  --light-gray: rgb(156 163 175 / 0.5);
+}
+
 body {
   overflow: hidden;
 }

@@ -59,7 +59,7 @@
           <span class="text-lg">
             {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
           </span>
-          <span class="text-sm opacity-50 font-light">
+          <span class="text-sm opacity-50 font-light whitespace-nowrap">
             in
             {{this.timeUntilDeadline}}
           </span>
@@ -130,6 +130,7 @@
           <div class="fade-in-animation overflow-hidden">
             <Charts::MonthlySavingStats
               @data={{this.monthsListUntilDeadline}}
+              @currency={{this.currency}}
             />
           </div>
         {{/if}}

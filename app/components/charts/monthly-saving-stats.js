@@ -5,85 +5,91 @@ import { roundNumber } from 'finance-ui-ember/helpers/round-number';
 export default class ChartsMonthlySavingStatsComponent extends Component {
   @tracked savedData = [];
 
-  chartOptions = {
-    chart: {
-      type: 'column',
-    },
-    title: {
-      text: null,
-    },
-    accessibility: {
-      announceNewData: {
-        enabled: true,
-      },
-    },
-    xAxis: {
-      categories: this.xAxisCategories,
-    },
-    yAxis: {
-      title: {
-        text: '%',
-      },
-    },
-    legend: {
-      enabled: false,
-    },
-    plotOptions: {
-      column: {
-        stacking: 'percent',
-      },
-    },
+  get chartOptions() {
+    const _this = this;
 
-    tooltip: {
-      pointFormat:
-        '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-      shared: true,
-    },
-  };
+    return {
+      chart: {
+        type: 'column',
+      },
+      title: {
+        text: null,
+      },
+      accessibility: {
+        announceNewData: {
+          enabled: true,
+        },
+      },
+      xAxis: {
+        categories: this.xAxisCategories,
+      },
+      yAxis: {
+        title: {
+          text: this.args.currency,
+        },
+      },
+      legend: {
+        enabled: false,
+      },
+      plotOptions: {
+        column: {
+          stacking: 'normal',
+          tooltip: {
+            pointFormatter: function () {
+              const { currency } = _this.args;
+
+              const savedAmount = this.custom.savedAmount
+                ? this.custom.savedAmount
+                : 0;
+
+              return `Target amount: <b>${roundNumber(
+                this.custom.targetSavings
+              )}</b>${currency}<br/>Saved amount: <b>${savedAmount}</b>${currency}`;
+            },
+            shared: true,
+          },
+        },
+      },
+    };
+  }
 
   get xAxisCategories() {
-    const xAxies = this.args.data.map((el) => el.formatedDate);
-
-    console.log('x', xAxies);
-
-    return xAxies;
+    return this.args.data.map((el) => el.formatedDate);
   }
 
   get chartData() {
-    // const { totalSavings, targetAmount, currencyCode } = this.args.data;
-
-    console.log('thi', this.args.data);
-
-    // const alreadySavedInPercent = (totalSavings * 100) / targetAmount;
-
-    // const chartSeries = this.args.data.map((el) => {
-    //   return {
-    //     name: el.formatedDate,
-    //     data: [8, 2, 3, 5, 6],
-    //   };
-    // });
-
-    const chartSeries = [
+    return [
       {
-        name: 'Target savings',
-        data: this.args.data.map(
-          (
-            el //if saved amount is higher than (or equal to) target amount, then show target amount pecentage as 0%, so it looks that saved amount is 100%
-          ) =>
-            el.savedAmount >= el.targetSavings
-              ? 0
-              : roundNumber(el.targetSavings - el.savedAmount, 2) //2 decimals
-        ),
+        name: 'Target savings', //if saved amount is higher than (or equal to) target amount, then show target amount pecentage as 0%, so it looks that saved amount is 100%
+        data: this.args.data.map((el) => {
+          return {
+            y:
+              el.savedAmount >= el.targetSavings
+                ? 0
+                : roundNumber(el.targetSavings - el.savedAmount),
+            custom: {
+              //needed for tooltip
+              savedAmount: el.savedAmount,
+              targetSavings: el.targetSavings,
+            },
+          };
+        }),
+        color: 'var(--light-gray)', //very light gray
       },
       {
         name: 'Saved amount',
-        data: this.args.data.map((el) => (el.savedAmount ? el.savedAmount : 0)),
-        color: 'green',
+        data: this.args.data.map((el) => {
+          return {
+            y: el.savedAmount ? el.savedAmount : 0,
+            custom: {
+              //needed for tooltip
+              savedAmount: el.savedAmount,
+              targetSavings: el.targetSavings,
+            },
+          };
+        }),
+        color: 'var(--success-green)', //green
       },
     ];
-
-    console.log('chatr', chartSeries);
-
-    return chartSeries;
   }
 }

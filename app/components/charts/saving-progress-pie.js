@@ -54,6 +54,7 @@ export default class ChartsSavingProgressPieComponent extends Component {
                 targetAmount - totalSavings
               } ${currencyCode}`,
             },
+            color: 'var(--light-gray)',
           },
           {
             name: 'Already saved',
@@ -61,6 +62,7 @@ export default class ChartsSavingProgressPieComponent extends Component {
             custom: {
               extraInformation: `${totalSavings} ${currencyCode}`,
             },
+            color: 'var(--success-green)',
           },
         ],
       },
