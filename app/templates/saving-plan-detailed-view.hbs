@@ -79,7 +79,9 @@
         </:body>
       </Card>
     </div>
-    <div class="card grow bg-base-100 shadow-xl p-2 px-8 min-h-[35rem]">
+    <div
+      class="card grow bg-base-100 shadow-xl p-2 px-8 min-h-[30rem] qHd:min-h-[35rem]"
+    >
       <div class="tabs flex justify-center">
         <a
           class="tab tab-bordered
@@ -121,12 +123,14 @@
             </div>
           </div>
         {{else if (eq this.activeTab 'progress')}}
-          <div class="fade-in-animation">
+          <div class="fade-in-animation overflow-hidden">
             <Charts::SavingProgressPie @data={{this.model}} />
           </div>
         {{else if (eq this.activeTab 'monthly-analysis')}}
-          <div class="fade-in-animation">
-            analysis
+          <div class="fade-in-animation overflow-hidden">
+            <Charts::MonthlySavingStats
+              @data={{this.monthsListUntilDeadline}}
+            />
           </div>
         {{/if}}
       </div>

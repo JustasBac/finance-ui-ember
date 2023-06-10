@@ -13,8 +13,8 @@ export default class SavingPlanService extends Service {
       moment('2023-05-28', 'YYYY-MM-DD'),
       moment('2026-05-02', 'YYYY-MM-DD'),
       [
-        { month: 'May 2023', amountSaved: 186 },
-        { month: 'June 2023', amountSaved: 1000 },
+        { month: 'May 2023', amountSaved: 125 },
+        { month: 'June 2023', amountSaved: 500 },
       ],
       75000
     ),

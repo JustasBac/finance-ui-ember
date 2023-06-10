@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { computed } from '@ember/object';
+import { roundNumber } from 'finance-ui-ember/helpers/round-number';
 export default class MonthlySavingCardComponent extends Component {
   @computed('args.monthInfo.savedAmount')
   get progressPercentage() {
@@ -13,8 +14,7 @@ export default class MonthlySavingCardComponent extends Component {
 
     const difference = (+savedAmount * 100) / +targetSavings - 100;
 
-    const roundedDifference =
-      Math.round((difference + Number.EPSILON) * 100) / 100;
+    const roundedDifference = roundNumber(difference, 2); //round to 2 decimals
 
     if (Math.round(savedAmount) === Math.round(targetSavings)) {
       return;

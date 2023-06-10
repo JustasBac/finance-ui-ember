@@ -8,6 +8,7 @@ export default class ChartsSavingProgressPieComponent extends Component {
       plotShadow: false,
       type: 'pie',
     },
+    title: { text: null },
     tooltip: {
       pointFormat: `<b>{point.percentage:.1f}%</b> ({point.custom.extraInformation})`,
     },
@@ -43,8 +44,6 @@ export default class ChartsSavingProgressPieComponent extends Component {
     return [
       {
         colorByPoint: true,
-        type: 'pie',
-        // name: 'opa',
         data: [
           {
             name: 'Left to save',
