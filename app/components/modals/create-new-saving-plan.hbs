@@ -1,0 +1,30 @@
+<Modals::-TriggerButton>
+  <span
+    class="btn btn-primary btn-sm"
+    {{on 'click' (fn (mut this.isModalOpen) true)}}
+  >
+    <FaIcon @icon="plus" class="mr-1" />
+    Create a new
+  </span>
+</Modals::-TriggerButton>
+<Modals::-base @isOpen={{this.isModalOpen}}>
+  <:header>
+    <div>
+      Create new saving plan
+    </div>
+  </:header>
+  <:body>
+    <Forms::SavingPlan @savingPlanInformation={{this.newSavingPlan}} />
+    <div class="flex justify-between items-center mt-5">
+      <Modals::-TriggerButton>
+        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+          Close me
+        </span>
+      </Modals::-TriggerButton>
+      <Button {{on 'click' this.createSavingPlan}}>
+        <FaIcon @icon="floppy-disk" class="mr-1" />
+        Save
+      </Button>
+    </div>
+  </:body>
+</Modals::-base>

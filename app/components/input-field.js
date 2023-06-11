@@ -19,7 +19,7 @@ export default class InputFieldComponent extends Component {
       return true;
     }
 
-    if (!this.args.value || this.args.value.length === 0) {
+    if (this.args.value === null || this.args.value.length === 0) {
       return false;
     }
 

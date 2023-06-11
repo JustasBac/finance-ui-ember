@@ -29,7 +29,7 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
         },
       },
       legend: {
-        enabled: false,
+        enabled: true,
       },
       plotOptions: {
         column: {
@@ -60,16 +60,16 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
   get chartData() {
     return [
       {
-        name: 'Target savings', //if saved amount is higher than (or equal to) target amount, then show target amount pecentage as 0%, so it looks that saved amount is 100%
+        name: 'Left to save', //if saved amount is higher than (or equal to) target amount, then show target amount pecentage as 0%, so it looks that saved amount is 100%
         data: this.args.data.map((el) => {
           return {
             y:
-              el.savedAmount >= el.targetSavings
+              +el.savedAmount >= el.targetSavings
                 ? 0
-                : roundNumber(el.targetSavings - el.savedAmount),
+                : roundNumber(el.targetSavings - +el.savedAmount),
             custom: {
               //needed for tooltip
-              savedAmount: el.savedAmount,
+              savedAmount: +el.savedAmount,
               targetSavings: el.targetSavings,
             },
           };
@@ -80,10 +80,10 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
         name: 'Saved amount',
         data: this.args.data.map((el) => {
           return {
-            y: el.savedAmount ? el.savedAmount : 0,
+            y: +el.savedAmount ? +el.savedAmount : 0,
             custom: {
               //needed for tooltip
-              savedAmount: el.savedAmount,
+              savedAmount: +el.savedAmount,
               targetSavings: el.targetSavings,
             },
           };

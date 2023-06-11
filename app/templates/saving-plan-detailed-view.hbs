@@ -11,6 +11,34 @@
           {{this.currency}}
         </:body>
       </Card>
+      <Card class="basis-1/5" @icon="calendar-days">
+        <:header>
+          Start date
+        </:header>
+        <:body>
+          <span class="text-xl">
+            {{moment-format @model.startDate 'MMMM DD, YYYY'}}
+          </span>
+          <span class="text-sm opacity-50 font-light whitespace-nowrap">
+            {{this.timeFromStartDate}}
+            ago
+          </span>
+        </:body>
+      </Card>
+      <Card class="basis-1/5" @icon="calendar-days">
+        <:header>
+          Deadline
+        </:header>
+        <:body>
+          <span class="text-lg">
+            {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
+          </span>
+          <span class="text-sm opacity-50 font-light whitespace-nowrap">
+            in
+            {{this.timeUntilDeadline}}
+          </span>
+        </:body>
+      </Card>
       <Card class="basis-1/5" @icon="hand-holding-dollar">
         <:header>
           Savings
@@ -39,30 +67,6 @@
               </span>
             </div>
           </div>
-        </:body>
-      </Card>
-      <Card class="basis-1/5" @icon="calendar-days">
-        <:header>
-          Start date
-        </:header>
-        <:body>
-          <span class="text-xl">
-            {{moment-format @model.startDate 'MMMM DD, YYYY'}}
-          </span>
-        </:body>
-      </Card>
-      <Card class="basis-1/5" @icon="calendar-days">
-        <:header>
-          Deadline
-        </:header>
-        <:body>
-          <span class="text-lg">
-            {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
-          </span>
-          <span class="text-sm opacity-50 font-light whitespace-nowrap">
-            in
-            {{this.timeUntilDeadline}}
-          </span>
         </:body>
       </Card>
       <Card class="basis-1/5" @icon="hammer">
@@ -107,20 +111,14 @@
       </div>
       <div class="card-body px-4 py-6 overflow-auto">
         {{#if (eq this.activeTab 'planning')}}
-          <div class="fade-in-animation">
-            <span class="text-center">
-              Current month:
-              {{moment-format (now) 'MMMM YYYY'}}
-            </span>
-            <div class="flex gap-4 flex-wrap">
-              {{#each this.monthsListUntilDeadline as |monthInfo|}}
-                <MonthlySavingCard
-                  @savingPlan={{@model}}
-                  @monthInfo={{monthInfo}}
-                  @currency={{this.currency}}
-                />
-              {{/each}}
-            </div>
+          <div class="flex gap-8 flex-wrap mt-1 fade-in-animation">
+            {{#each @model.monthsListUntilDeadline as |monthInfo|}}
+              <MonthlySavingCard
+                @savingPlan={{@model}}
+                @monthInfo={{monthInfo}}
+                @currency={{this.currency}}
+              />
+            {{/each}}
           </div>
         {{else if (eq this.activeTab 'progress')}}
           <div class="fade-in-animation overflow-hidden">
@@ -129,7 +127,7 @@
         {{else if (eq this.activeTab 'monthly-analysis')}}
           <div class="fade-in-animation overflow-hidden">
             <Charts::MonthlySavingStats
-              @data={{this.monthsListUntilDeadline}}
+              @data={{@model.monthsListUntilDeadline}}
               @currency={{this.currency}}
             />
           </div>

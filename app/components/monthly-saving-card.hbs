@@ -1,7 +1,11 @@
 <div
-  class="flex flex-col w-36 text-center bg-gray-200/80 rounded shadow p-2 text-sm"
+  class="flex flex-col w-36 text-center rounded shadow p-2 text-sm
+    {{if this.isCurrentMonth 'bg-gray-300/70' 'bg-gray-200/70'}}"
 >
-  <span class="text-xs text-gray-500">
+  <span
+    class="text-xs
+      {{if this.isCurrentMonth 'text-gray-800 font-semibold' 'text-gray-500'}}"
+  >
     {{@monthInfo.formatedDate}}
   </span>
   <span class="flex flex-col text-xs mt-2">
@@ -20,13 +24,15 @@
   <span class="flex flex-col text-xs mt-2 relative">
     <div class="flex justify-center items-center">
       Saved
-      <div class="absolute right-0">
-        <Modals::EditMonthSavings
-          @monthInfo={{@monthInfo}}
-          @currency={{@currency}}
-          @savingPlan={{@savingPlan}}
-        />
-      </div>
+      {{#if this.isEditAllowed}}
+        <div class="absolute right-0">
+          <Modals::EditMonthSavings
+            @monthInfo={{@monthInfo}}
+            @currency={{@currency}}
+            @savingPlan={{@savingPlan}}
+          />
+        </div>
+      {{/if}}
     </div>
     <div class="flex justify-center items-center relative">
       <span class="font-bold text-base leading-tight">

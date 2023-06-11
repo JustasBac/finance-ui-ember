@@ -8,6 +8,7 @@
   @label="Start date"
   @selectedDate={{@savingPlanInformation.startDate}}
   @onDateChange={{fn (mut @savingPlanInformation.startDate)}}
+  @allowToSelectDayInThePast={{true}}
 />
 <DatePicker
   @label="Deadline"

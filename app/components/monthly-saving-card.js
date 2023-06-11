@@ -1,6 +1,8 @@
 import Component from '@glimmer/component';
 import { computed } from '@ember/object';
 import { roundNumber } from 'finance-ui-ember/helpers/round-number';
+import moment from 'moment';
+
 export default class MonthlySavingCardComponent extends Component {
   @computed('args.monthInfo.savedAmount')
   get progressPercentage() {
@@ -22,5 +24,16 @@ export default class MonthlySavingCardComponent extends Component {
     }
 
     return difference > 0 ? `+${roundedDifference}` : roundedDifference; //minus is automatically added to a negative value
+  }
+
+  get isCurrentMonth() {
+    const currentMonth = moment().format('MMMM YYYY'); //now
+
+    return currentMonth === this.args.monthInfo.formatedDate;
+  }
+
+  get isEditAllowed() {
+    //don't allow to edit your savings for months that are in the future
+    return moment().isAfter(this.args.monthInfo.formatedDate, 'MMMM YYYY');
   }
 }

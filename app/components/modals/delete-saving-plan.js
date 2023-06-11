@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 export default class ModalsDeleteSavingPlanComponent extends Component {
   @service('saving-plan') savingPlanService;
   @service notifications;
+  @service router;
 
   @tracked isModalOpen = false;
 
@@ -18,5 +19,6 @@ export default class ModalsDeleteSavingPlanComponent extends Component {
     });
 
     this.isModalOpen = false;
+    this.router.transitionTo('home');
   }
 }

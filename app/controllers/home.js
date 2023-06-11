@@ -14,8 +14,6 @@ export default class HomeController extends Controller {
   @tracked isSavingPlanCreationBlockOpen = false;
   @tracked selectedDate = moment().add(1, 'days'); //default deadline is tomorrow
 
-  @tracked newSavingPlan = new SavingPlan();
-
   @action
   createSavingPlan() {
     const { currency, targetAmount, title } = this.newSavingPlan;
