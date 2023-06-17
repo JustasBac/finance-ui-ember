@@ -1,10 +1,7 @@
 import { tracked } from '@glimmer/tracking';
 import moment from 'moment';
-import { inject as service } from '@ember/service';
 
 export default class SavingPlan {
-  @service('currency') currencyService;
-
   id;
   @tracked title = '';
   @tracked targetAmount;
@@ -73,6 +70,17 @@ export default class SavingPlan {
     let savingsPerFullMonthNeeded =
       (targetAmount - totalSavings) / monthsListUntilDeadline.length; // when selecting full months meaning, for example, 1st to 31st of May 2023
 
+    if (monthsListUntilDeadline.length <= 2) {
+      //if there are just 1 or 2 months to save the calculation logic is different
+      return this.getShortTimeMonthsListWithInfo(
+        monthsListUntilDeadline,
+        savingsPerFullMonthNeeded,
+        startDate,
+        deadlineDate,
+        targetAmount
+      );
+    }
+
     const startingMonthInfo = this.getSavingPlanningForNotAFullMonth(
       monthsListUntilDeadline,
       startDate,
@@ -102,18 +110,51 @@ export default class SavingPlan {
     monthlySavingPlanningInfo[0].targetSavings =
       startingMonthInfo.monthSavingsTarget; //overwrite first month needed savings
 
-    // monthlySavingPlanningInfo[0].formatedData =
-    //   startDate.format('MMM DD, YYYY'); //overwrite first month saving date (to include a day)
-
     monthlySavingPlanningInfo[
       monthlySavingPlanningInfo.length - 1
     ].targetSavings = endingMonthInfo.monthSavingsTarget; //overwrite last month needed savings
 
-    // monthlySavingPlanningInfo[
-    //   monthlySavingPlanningInfo.length - 1
-    // ].formatedData = deadlineDate.format('MMM DD, YYYY'); //overwrite end month saving date (to include a day)
-
     return monthlySavingPlanningInfo;
+  }
+
+  getShortTimeMonthsListWithInfo(
+    monthsListUntilDeadline,
+    savingsPerFullMonthNeeded,
+    startDate,
+    deadlineDate,
+    targetAmount
+  ) {
+    return monthsListUntilDeadline.map((month, index) => {
+      let targetSavings = savingsPerFullMonthNeeded;
+
+      if (monthsListUntilDeadline.length === 2) {
+        const daysBetweenStartAndDeadlineDate =
+          deadlineDate.diff(startDate, 'days') + 1; // +1 to include start date
+
+        let diff;
+
+        if (index === 0) {
+          //first month
+          const endOfMonth = moment(startDate).endOf('month');
+          diff = endOfMonth.diff(startDate, 'days') + 1; // +1 to include start date
+        }
+
+        if (index === 1) {
+          //second (last) month
+          const startOfMonth = moment(deadlineDate).startOf('month');
+          diff = deadlineDate.diff(startOfMonth, 'days');
+        }
+
+        targetSavings = (diff / daysBetweenStartAndDeadlineDate) * targetAmount;
+      }
+
+      return {
+        formatedDate: month.date,
+        targetSavings,
+        momentDate: month.momentObject,
+        savedAmount: month.savedAmount,
+      };
+    });
   }
 
   getListedMonthsUntilDeadline() {

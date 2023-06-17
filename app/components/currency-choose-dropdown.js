@@ -7,8 +7,6 @@ export default class CurrencyChooseDropdownComponent extends Component {
 
   @computed('currencyService.currencies', 'searchString')
   get currencies() {
-    console.log('this.search', this.searchString);
-
     if (this.searchString) {
       return this.currencyService.currencies.filter((currency) =>
         currency.searchableText

@@ -6,6 +6,8 @@ import { inject as service } from '@ember/service';
 
 export default class ModalsCreateNewSavingPlanComponent extends Component {
   @service('input-validation') validationService;
+  @service('currency') currencyService;
+  @service('saving-plan') savingPlanService;
   @service notifications;
 
   @tracked newSavingPlan = new SavingPlan();
@@ -15,14 +17,13 @@ export default class ModalsCreateNewSavingPlanComponent extends Component {
   createSavingPlan() {
     const { currencyCode, targetAmount, title } = this.newSavingPlan;
 
-    //todo continue
-    let currencyCode = currencyCode
-      ? currencyCode
-      : this.currencyService.selectedCurrency.code;
+    if (!currencyCode) {
+      //if no currency was selected, apply currency that is selected as a global app currency
+      this.newSavingPlan.currencyCode =
+        this.currencyService.selectedCurrency.code;
+    }
 
-    console.log('newSavingPlan', this.newSavingPlan);
-    if (!title || !targetAmount || !currencyCode) {
-      console.log('op');
+    if (!title || !targetAmount) {
       this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
 
       this.notifications.error('Make sure all fields are filled!', {
@@ -33,11 +34,6 @@ export default class ModalsCreateNewSavingPlanComponent extends Component {
 
     this.savingPlanService.addNewSavingPlan(this.newSavingPlan);
 
-    this.notifications.success(
-      `New saving plan for ${title} was successfully created`,
-      {
-        autoClear: true,
-      }
-    );
+    this.isModalOpen = false;
   }
 }

@@ -2,6 +2,7 @@
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Saving Plan - {{this.model.title}}">
     <div class="flex gap-8 mb-8">
+      {{log 'model' this.model}}
       <Card class="basis-1/5" @icon="sack-dollar">
         <:header>
           Target amount

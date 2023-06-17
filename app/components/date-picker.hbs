@@ -9,7 +9,6 @@
         class="border bg-white rounded p-3 flex justify-between items-center cursor-pointer hover:bg-gray-50"
       >
         {{moment-format @selectedDate 'MMMM DD, YYYY'}}
-        {{log 'selected date: ' @selectedDate}}
         <FaIcon @icon="calendar-days" />
       </label>
     </dd.Trigger>
