@@ -1,52 +1,36 @@
-<div class="ml-16 card grow bg-base-100 shadow-xl">
-  <div class="card-body flex flex-col justify-between">
+<div class="card bg-base-100 shadow-xl" ...attributes>
+  <div class="card-body flex flex-col justify-between max-h-[20rem] p-6">
     <h2 class="text-xl ml-4">
       Saving Plans
     </h2>
     {{#if this.savingPlanService.savingPlans}}
-      <table class="table w-full">
-        {{! head }}
-        <thead>
-          <tr>
-            <th class="bg-base-100">
-              Name
-            </th>
-            <th class="bg-base-100">
-              Progress
-            </th>
-            <th class="bg-base-100">
-              Deadline
-            </th>
-            <th class="bg-base-100"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each this.savingPlanService.savingPlans as |savingPlan|}}
+      <div class="overflow-auto">
+        <table class="table w-full">
+          {{! head }}
+          <thead>
             <tr>
-              <td>
-                {{savingPlan.title}}
-              </td>
-              <td>
-                <div class="flex flex-col">
-                  <span class="text-xs leading-[0]">
-                    {{savingPlan.totalSavings}}
-                    {{get
-                      (find-by
-                        'code'
-                        savingPlan.currencyCode
-                        this.currencyService.currencies
-                      )
-                      'symbol'
-                    }}
-                  </span>
-                  <div>
-                    <progress
-                      class="progress progress-primary w-60"
-                      value="10"
-                      max="100"
-                    ></progress>
-                    <span class="opacity-50 text-xs">
-                      {{savingPlan.targetAmount}}
+              <th class="bg-base-100">
+                Name
+              </th>
+              <th class="bg-base-100">
+                Progress
+              </th>
+              <th class="bg-base-100">
+                Deadline
+              </th>
+              <th class="bg-base-100"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each this.savingPlanService.savingPlans as |savingPlan|}}
+              <tr>
+                <td>
+                  {{savingPlan.title}}
+                </td>
+                <td>
+                  <div class="flex flex-col">
+                    <span class="text-xs leading-[0]">
+                      {{savingPlan.totalSavings}}
                       {{get
                         (find-by
                           'code'
@@ -56,32 +40,50 @@
                         'symbol'
                       }}
                     </span>
+                    <div>
+                      <progress
+                        class="progress progress-primary w-60"
+                        value="10"
+                        max="100"
+                      ></progress>
+                      <span class="opacity-50 text-xs">
+                        {{savingPlan.targetAmount}}
+                        {{get
+                          (find-by
+                            'code'
+                            savingPlan.currencyCode
+                            this.currencyService.currencies
+                          )
+                          'symbol'
+                        }}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td>
-                {{moment-format savingPlan.deadlineDate 'MMMM DD, YYYY'}}
-              </td>
-              <td>
-                <LinkTo
-                  class="btn btn-outline btn-primary btn-sm"
-                  type="button"
-                  @route="saving-plan-detailed-view"
-                  @model={{savingPlan.id}}
-                >
-                  Details
-                </LinkTo>
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
+                </td>
+                <td>
+                  {{moment-format savingPlan.deadlineDate 'MMMM DD, YYYY'}}
+                </td>
+                <td>
+                  <LinkTo
+                    class="btn btn-outline btn-primary btn-sm"
+                    type="button"
+                    @route="saving-plan-detailed-view"
+                    @model={{savingPlan.id}}
+                  >
+                    Details
+                  </LinkTo>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
     {{else}}
       <div class="flex justify-center">
         <Alert @text="You have no saving plans" />
       </div>
     {{/if}}
-    <div class="self-end">
+    <div class="self-end mt-4">
       <Modals::CreateNewSavingPlan />
     </div>
   </div>

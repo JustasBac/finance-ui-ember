@@ -36,6 +36,24 @@ export default class SavingPlanService extends Service {
       moment('2024-04-15', 'YYYY-MM-DD'), //deadline
       [{ month: 'June 2023', amountSaved: 300 }] //savings [June, July, August, Sep ....]
     ),
+    new SavingPlan(
+      4, //id
+      'Test', //saving plan name (goal)
+      2000, //goal amount
+      'EUR', //selected currency code
+      moment(), //starting date
+      moment('2024-04-15', 'YYYY-MM-DD'), //deadline
+      [{ month: 'June 2023', amountSaved: 300 }] //savings [June, July, August, Sep ....]
+    ),
+    new SavingPlan(
+      5, //id
+      'Test', //saving plan name (goal)
+      2000, //goal amount
+      'EUR', //selected currency code
+      moment(), //starting date
+      moment('2024-04-15', 'YYYY-MM-DD'), //deadline
+      [{ month: 'June 2023', amountSaved: 300 }] //savings [June, July, August, Sep ....]
+    ),
   ];
 
   addNewSavingPlan(newSavingPlan) {

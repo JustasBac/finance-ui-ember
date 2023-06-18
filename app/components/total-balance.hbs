@@ -1,36 +1,44 @@
-<div class="card w-96 h-56 bg-base-100 shadow-xl">
-  <div class="card-body flex flex-col justify-between">
-    <h2 class="text-xl text-gray-600">
+<div class="card h-36 bg-base-100 shadow-xl" ...attributes>
+  <div class="card-body flex flex-col justify-between p-6">
+    <h2 class="text-lg text-gray-600">
       Total Balance
-      <span class="text-lg ml-1">
+      <span class="ml-1">
         <FaIcon @icon="circle-info" />
         <Tooltip>
           Your total savings. You can edit it any time
         </Tooltip>
       </span>
     </h2>
-    {{#if this.isEditBlockOpen}}
-      <InputField
-        class="mt-3"
-        @type="number"
-        @value={{this.totalBalance}}
-        @onInput={{fn (mut this.totalBalance)}}
-      />
-    {{else}}
-      <p class="text-4xl mt-3 font-bold">
-        {{this.totalBalance}}
-        {{this.currencyService.selectedCurrency.symbol}}
-      </p>
-    {{/if}}
-    <div class="card-actions justify-end">
-      <button
-        class="btn btn-primary"
-        type="button"
-        {{on 'click' (fn (mut this.isEditBlockOpen) (not this.isEditBlockOpen))
-        }}
-      >
-        {{if this.isEditBlockOpen 'Save' 'Update'}}
-      </button>
+    <div class="flex items-center">
+      {{#if this.isEditBlockOpen}}
+        <InputField
+          class="mr-2"
+          @type="number"
+          @value={{this.totalBalance}}
+          @onInput={{fn (mut this.totalBalance)}}
+        />
+      {{else}}
+        <p class="text-2xl font-bold">
+          {{this.totalBalance}}
+          {{this.currencyService.selectedCurrency.symbol}}
+        </p>
+      {{/if}}
+      <div class="card-actions justify-end">
+        <button
+          class="btn btn-sm btn-primary"
+          type="button"
+          {{on
+            'click'
+            (fn (mut this.isEditBlockOpen) (not this.isEditBlockOpen))
+          }}
+        >
+          {{#if this.isEditBlockOpen}}
+            <FaIcon @icon="floppy-disk" />
+          {{else}}
+            <FaIcon @icon="pen-to-square" />
+          {{/if}}
+        </button>
+      </div>
     </div>
   </div>
 </div>

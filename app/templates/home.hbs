@@ -1,9 +1,15 @@
 {{page-title 'Home'}}
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Overview">
-    <div class="flex">
-      <TotalBalance />
-      <SavingPlansCard />
+    <div class="flex gap-12">
+      <div class="basis-1/4 flex flex-col justify-between gap-3">
+        <TotalBalance class="basis-1/2" />
+        <div class="flex gap-3 basis-1/2">
+          <IncomeCard class="basis-1/2" />
+          <SpendingCard class="basis-1/2" />
+        </div>
+      </div>
+      <SavingPlansCard class="basis-3/4" />
     </div>
     monthly earnings
     monthly spendings
