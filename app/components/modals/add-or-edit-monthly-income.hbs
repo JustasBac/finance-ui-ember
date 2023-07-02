@@ -1,0 +1,35 @@
+<Modals::-TriggerButton>
+  <p
+    class="text-xl text-center btn btn-ghost font-bold whitespace-nowrap"
+    {{on 'click' (fn (mut this.isModalOpen) true)}}
+  >
+    {{@monthIncome}}
+    {{this.currencyService.selectedCurrency.symbol}}
+  </p>
+</Modals::-TriggerButton>
+<Modals::-base @isOpen={{this.isModalOpen}}>
+  <:header>
+    <div>
+      Income June 2023
+    </div>
+  </:header>
+  <:body>
+    <InputField
+      class="mr-2"
+      @type="number"
+      @value={{this.monthIncome}}
+      @onInput={{fn (mut this.monthIncome)}}
+    />
+    <div class="flex justify-between items-center mt-5">
+      <Modals::-TriggerButton>
+        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+          Close
+        </span>
+      </Modals::-TriggerButton>
+      <Button {{on 'click' this.saveChanges}}>
+        <FaIcon @icon="floppy-disk" class="mr-1" />
+        Save
+      </Button>
+    </div>
+  </:body>
+</Modals::-base>

@@ -1,5 +1,5 @@
 <div class="card h-36 bg-base-100 shadow-xl" ...attributes>
-  <div class="card-body flex flex-col justify-between p-6">
+  <div class="card-body flex flex-col justify-start p-6">
     <h2 class="text-lg text-gray-600">
       Total Balance
       <span class="ml-1">
@@ -9,7 +9,7 @@
         </Tooltip>
       </span>
     </h2>
-    <div class="flex items-center">
+    <div class="flex items-center mt-3">
       {{#if this.isEditBlockOpen}}
         <InputField
           class="mr-2"
@@ -17,28 +17,22 @@
           @value={{this.totalBalance}}
           @onInput={{fn (mut this.totalBalance)}}
         />
+        <button
+          class="btn btn-sm btn-primary"
+          type="button"
+          {{on 'click' (fn (mut this.isEditBlockOpen) false)}}
+        >
+          <FaIcon @icon="floppy-disk" />
+        </button>
       {{else}}
-        <p class="text-2xl font-bold">
+        <p
+          class="text-2xl text-center font-bold btn btn-ghost"
+          {{on 'click' (fn (mut this.isEditBlockOpen) true)}}
+        >
           {{this.totalBalance}}
           {{this.currencyService.selectedCurrency.symbol}}
         </p>
       {{/if}}
-      <div class="card-actions justify-end">
-        <button
-          class="btn btn-sm btn-primary"
-          type="button"
-          {{on
-            'click'
-            (fn (mut this.isEditBlockOpen) (not this.isEditBlockOpen))
-          }}
-        >
-          {{#if this.isEditBlockOpen}}
-            <FaIcon @icon="floppy-disk" />
-          {{else}}
-            <FaIcon @icon="pen-to-square" />
-          {{/if}}
-        </button>
-      </div>
     </div>
   </div>
 </div>

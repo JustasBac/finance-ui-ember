@@ -11,7 +11,9 @@
       </div>
       <SavingPlansCard class="basis-3/4" />
     </div>
-    monthly earnings
-    monthly spendings
+    <div class="card bg-base-100 shadow-xl mt-6">
+      STATYSTYK: 3 lines: total amount saved + monthly savings + monthly spendings
+      <Charts::EconomyOverview @data="opa" />
+    </div>
   </PageLayout>
 </EmberWormhole>
