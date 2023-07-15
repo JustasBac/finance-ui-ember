@@ -3,10 +3,10 @@
   <PageLayout @pageTitle="Overview">
     <div class="flex gap-12">
       <div class="basis-1/4 flex flex-col justify-between gap-3">
-        <TotalBalance class="basis-1/2" />
+        <TotalBalance @data={{this.totalSavingsByMonth}} class="basis-1/2" />
         <div class="flex gap-3 basis-1/2">
-          <IncomeCard class="basis-1/2" />
-          <SpendingCard class="basis-1/2" />
+          <IncomeCard @data={{this.incomeByMonth}} class="basis-1/2" />
+          <SpendingCard @data={{this.spendingsByMonth}} class="basis-1/2" />
         </div>
       </div>
       <SavingPlansCard class="basis-3/4" />

@@ -31,6 +31,9 @@
         >
           {{this.totalBalance}}
           {{this.currencyService.selectedCurrency.symbol}}
+          <Tooltip @side="bottom">
+            Click to edit
+          </Tooltip>
         </p>
       {{/if}}
     </div>

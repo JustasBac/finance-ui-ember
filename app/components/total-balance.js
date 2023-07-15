@@ -6,5 +6,17 @@ export default class TotalBalanceComponent extends Component {
   @service('currency') currencyService;
 
   @tracked isEditBlockOpen = false;
-  @tracked totalBalance = 37000;
+  @tracked totalBalance = this.getLatestTotalBalance();
+
+  getLatestTotalBalance() {
+    console.log('this.a', this.args.data);
+    const latestMonthInfo = this.args.data?.pop();
+
+    if (!latestMonthInfo) {
+      return 0;
+    }
+
+    console.log('latestMonthInfo', latestMonthInfo);
+    return latestMonthInfo.value;
+  }
 }

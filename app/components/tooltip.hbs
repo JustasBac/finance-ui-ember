@@ -1,4 +1,4 @@
-<EmberTooltip @popperContainer="#wormhole">
+<EmberTooltip @popperContainer="#wormhole" @side={{if @side @side 'top'}}>
   <span class="font-light text-center">
     {{yield}}
   </span>

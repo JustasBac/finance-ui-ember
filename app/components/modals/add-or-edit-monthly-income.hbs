@@ -5,6 +5,9 @@
   >
     {{@monthIncome}}
     {{this.currencyService.selectedCurrency.symbol}}
+    <Tooltip @side="bottom">
+      Click to edit
+    </Tooltip>
   </p>
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
