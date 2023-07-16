@@ -1,76 +1,69 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
 
 export default class ChartsEconomyOverviewComponent extends Component {
+  @service('currency') currencyService;
+
   @tracked savedData = [];
 
   get chartOptions() {
     return {
       chart: {
         type: 'spline',
-        height: '350px',
+        height: '360px',
         backgroundColor: 'transparent',
       },
+      title: {
+        text: 'My finance overview',
+      },
       xAxis: {
-        categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
-        ],
+        categories: this.xAxisCategories,
         accessibility: {
           description: 'Months of the year',
         },
       },
       yAxis: {
         title: {
-          text: 'Temperature',
-        },
-        labels: {
-          format: '{value}°',
+          text: this.currencyService.selectedCurrency.symbol,
         },
       },
       tooltip: {
         crosshairs: true,
         shared: true,
+        valueSuffix: this.currencyService.selectedCurrency.symbol,
       },
     };
   }
 
+  get xAxisCategories() {
+    return this.args.data.income.map((el) => el.date); //assuming all three have the same date
+  }
+
   get chartData() {
+    const { income, totalBalance, spendings } = this.args.data;
+
     return [
       {
-        name: 'Tokyo',
+        name: 'Total Savings',
+        marker: {
+          symbol: 'diamond',
+        },
+        data: totalBalance.map((el) => el.value),
+      },
+      {
+        name: 'Income',
         marker: {
           symbol: 'square',
         },
-        data: [
-          5.2, 5.7, 8.7, 13.9, 18.2, 21.4, 25.0, 26.4, 22.8, 17.5, 12.1, 7.6,
-        ],
+        data: income.map((el) => el.value),
       },
       {
-        name: 'Bergen',
+        name: 'Spendings',
         marker: {
           symbol: 'diamond',
         },
-        data: [1.5, 1.6, 3.3, 5.9, 10.5, 13.5, 14.5, 14.4, 11.5, 8.7, 4.7, 2.6],
-      },
-      {
-        name: 'Total',
-        marker: {
-          symbol: 'diamond',
-        },
-        data: [
-          10.5, 10.6, 3.3, 50.9, 10.5, 130.5, 14.5, 14.4, 11.5, 8.7, 4.7, 2.6,
-        ],
+        data: spendings.map((el) => el.value),
       },
     ];
   }

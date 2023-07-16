@@ -9,7 +9,7 @@
     <div class="flex justify-center items-center">
       <Modals::AddOrEditMonthlySpendings
         @monthSpendings={{this.currentMonthSpending}}
-        @onChange={{fn (mut this.currentMonthSpending)}}
+        @onChange={{this.onChange}}
       />
     </div>
   </div>

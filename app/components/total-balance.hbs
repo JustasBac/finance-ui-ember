@@ -8,34 +8,22 @@
           Your total savings. You can edit it any time
         </Tooltip>
       </span>
+      <LinkTo
+        @route="finance-overview"
+        class="btn btn-sm btn-ghost text-sm float-right"
+        type="button"
+      >
+        <FaIcon @icon="sliders" />
+        <Tooltip>
+          Open finance overview panel
+        </Tooltip>
+      </LinkTo>
     </h2>
-    <div class="flex items-center mt-3">
-      {{#if this.isEditBlockOpen}}
-        <InputField
-          class="mr-2"
-          @type="number"
-          @value={{this.totalBalance}}
-          @onInput={{fn (mut this.totalBalance)}}
-        />
-        <button
-          class="btn btn-sm btn-primary"
-          type="button"
-          {{on 'click' (fn (mut this.isEditBlockOpen) false)}}
-        >
-          <FaIcon @icon="floppy-disk" />
-        </button>
-      {{else}}
-        <p
-          class="text-2xl text-center font-bold btn btn-ghost"
-          {{on 'click' (fn (mut this.isEditBlockOpen) true)}}
-        >
-          {{this.totalBalance}}
-          {{this.currencyService.selectedCurrency.symbol}}
-          <Tooltip @side="bottom">
-            Click to edit
-          </Tooltip>
-        </p>
-      {{/if}}
+    <div class="flex justify-center items-center mt-3">
+      <Modals::AddOrEditMonthlyTotalSavings
+        @totalBalance={{this.totalBalance}}
+        @onChange={{this.onChange}}
+      />
     </div>
   </div>
 </div>

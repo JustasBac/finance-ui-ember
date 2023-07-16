@@ -11,4 +11,5 @@ Router.map(function () {
   this.route('saving-plan-detailed-view', {
     path: 'saving-plan/:saving_plan_id',
   });
+  this.route('finance-overview');
 });

@@ -55,14 +55,14 @@
             <div>
               Total saved:
               <span class="font-bold">
-                {{concat @model.totalSavings this.currency}}
+                {{concat @model.totalBalance this.currency}}
               </span>
             </div>
             <div>
               Remaining:
               <span class="font-bold">
                 {{concat
-                  (sub @model.targetAmount @model.totalSavings)
+                  (sub @model.targetAmount @model.totalBalance)
                   this.currency
                 }}
               </span>

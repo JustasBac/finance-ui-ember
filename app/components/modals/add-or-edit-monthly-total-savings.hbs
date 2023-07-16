@@ -1,0 +1,38 @@
+<Modals::-TriggerButton>
+  <p
+    class="text-2xl text-center font-bold btn btn-ghost whitespace-nowrap"
+    {{on 'click' (fn (mut this.isModalOpen) true)}}
+  >
+    {{@totalBalance}}
+    {{this.currencyService.selectedCurrency.symbol}}
+    <Tooltip @side="bottom">
+      Click to edit
+    </Tooltip>
+  </p>
+</Modals::-TriggerButton>
+<Modals::-base @isOpen={{this.isModalOpen}}>
+  <:header>
+    <div>
+      Total Savings (June 2023)
+    </div>
+  </:header>
+  <:body>
+    <InputField
+      class="mr-2"
+      @type="number"
+      @value={{this.totalBalance}}
+      @onInput={{fn (mut this.totalBalance)}}
+    />
+    <div class="flex justify-between items-center mt-5">
+      <Modals::-TriggerButton>
+        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+          Close
+        </span>
+      </Modals::-TriggerButton>
+      <Button {{on 'click' this.saveChanges}}>
+        <FaIcon @icon="floppy-disk" class="mr-1" />
+        Save
+      </Button>
+    </div>
+  </:body>
+</Modals::-base>

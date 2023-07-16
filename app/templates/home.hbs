@@ -3,17 +3,34 @@
   <PageLayout @pageTitle="Overview">
     <div class="flex gap-12">
       <div class="basis-1/4 flex flex-col justify-between gap-3">
-        <TotalBalance @data={{this.totalSavingsByMonth}} class="basis-1/2" />
+        <TotalBalance
+          @data={{this.totalBalanceByMonth}}
+          @onChange={{this.updateLatestTotalBalance}}
+          class="basis-1/2"
+        />
         <div class="flex gap-3 basis-1/2">
-          <IncomeCard @data={{this.incomeByMonth}} class="basis-1/2" />
-          <SpendingCard @data={{this.spendingsByMonth}} class="basis-1/2" />
+          <IncomeCard
+            @data={{this.incomeByMonth}}
+            @onChange={{this.updateLatestMonthIncome}}
+            class="basis-1/2"
+          />
+          <SpendingCard
+            @data={{this.spendingsByMonth}}
+            @onChange={{this.updateLatestMonthSpendings}}
+            class="basis-1/2"
+          />
         </div>
       </div>
       <SavingPlansCard class="basis-3/4" />
     </div>
-    <div class="card bg-base-100 shadow-xl mt-6">
-      STATYSTYK: 3 lines: total amount saved + monthly savings + monthly spendings
-      <Charts::EconomyOverview @data="opa" />
+    <div class="card bg-base-100 shadow-xl mt-6 pt-2">
+      <Charts::EconomyOverview
+        @data={{hash
+          totalBalance=this.totalBalanceByMonth
+          income=this.incomeByMonth
+          spendings=this.spendingsByMonth
+        }}
+      />
     </div>
   </PageLayout>
 </EmberWormhole>

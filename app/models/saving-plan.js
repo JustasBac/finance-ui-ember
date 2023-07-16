@@ -10,7 +10,7 @@ export default class SavingPlan {
   @tracked deadlineDate;
   @tracked savingsPerMonth = [];
   @tracked startingCapital;
-  @tracked totalSavings;
+  @tracked totalBalance;
   @tracked monthsListUntilDeadline = [];
 
   constructor(
@@ -31,7 +31,7 @@ export default class SavingPlan {
     this.deadlineDate = deadlineDate;
     this.savingsPerMonth = savingsPerMonth;
     this.startingCapital = startingCapital;
-    this.totalSavings = this.calculateTotalSavings();
+    this.totalBalance = this.calculateTotalBalance();
     this.monthsListUntilDeadline = this.getMonthsListUntilDeadline();
   }
 
@@ -45,12 +45,12 @@ export default class SavingPlan {
       this.deadlineDate,
       this.savingsPerMonth,
       this.startingCapital,
-      this.totalSavings,
+      this.totalBalance,
       this.monthsListUntilDeadline
     );
   }
 
-  calculateTotalSavings() {
+  calculateTotalBalance() {
     let sum = 0;
 
     this.savingsPerMonth.forEach((el) => {
@@ -61,14 +61,14 @@ export default class SavingPlan {
   }
 
   getMonthsListUntilDeadline() {
-    const { targetAmount, startDate, deadlineDate, totalSavings } = this;
+    const { targetAmount, startDate, deadlineDate, totalBalance } = this;
 
     const monthsListUntilDeadline = this.getListedMonthsUntilDeadline();
 
     let monthlySavingPlanningInfo = [];
 
     let savingsPerFullMonthNeeded =
-      (targetAmount - totalSavings) / monthsListUntilDeadline.length; // when selecting full months meaning, for example, 1st to 31st of May 2023
+      (targetAmount - totalBalance) / monthsListUntilDeadline.length; // when selecting full months meaning, for example, 1st to 31st of May 2023
 
     if (monthsListUntilDeadline.length <= 2) {
       //if there are just 1 or 2 months to save the calculation logic is different

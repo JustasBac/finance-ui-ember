@@ -1,10 +1,25 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
 export default class SpendingCardComponent extends Component {
-  @service('currency') currencyService;
-
   @tracked isEditBlockOpen = false;
-  @tracked currentMonthSpending = 900;
+  @tracked currentMonthSpending = this.getLatestSpendings();
+
+  getLatestSpendings() {
+    const { data } = this.args;
+    const latestMonthInfo = data[data.length - 1];
+
+    if (!latestMonthInfo) {
+      return 0;
+    }
+
+    return latestMonthInfo.value;
+  }
+
+  @action
+  onChange(newValue) {
+    this.args.onChange(+newValue);
+    this.currentMonthSpending = +newValue; //+ converts to int
+  }
 }

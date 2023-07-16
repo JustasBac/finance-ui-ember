@@ -1,22 +1,34 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class HomeController extends Controller {
   @service('economy') economyService;
 
-  get incomeByMonth() {
-    return (async () => {
-      return await this.economyService.getIncomeByMonth();
-    })();
+  @tracked incomeByMonth = this.model.incomeByMonth;
+  @tracked spendingsByMonth = this.model.spendingsByMonth;
+  @tracked totalBalanceByMonth = this.model.totalBalanceByMonth;
+
+  @action
+  updateLatestMonthIncome(newValue) {
+    this.incomeByMonth[this.incomeByMonth.length - 1].value = newValue;
+
+    this.incomeByMonth = [...this.incomeByMonth];
   }
 
-  get spendingsByMonth() {
-    return (async () => {
-      return await this.economyService.getSpendingsByMonth();
-    })();
+  @action
+  updateLatestMonthSpendings(newValue) {
+    this.spendingsByMonth[this.spendingsByMonth.length - 1].value = newValue;
+
+    this.spendingsByMonth = [...this.spendingsByMonth];
   }
 
-  get totalSavingsByMonth() {
-    return this.economyService.getTotalSavingsByMonth();
+  @action
+  updateLatestTotalBalance(newValue) {
+    this.totalBalanceByMonth[this.totalBalanceByMonth.length - 1].value =
+      newValue;
+
+    this.totalBalanceByMonth = [...this.totalBalanceByMonth];
   }
 }

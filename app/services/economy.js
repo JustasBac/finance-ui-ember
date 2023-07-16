@@ -4,7 +4,7 @@ import Service from '@ember/service';
 export default class EconomyService extends Service {
   // @tracked incomeByMonth = [];
   // @tracked spendingsByMonth = [];
-  // @tracked totalSavingsByMonth = [];
+  // @tracked totalBalanceByMonth = [];
 
   getIncomeByMonth() {
     //api request
@@ -28,7 +28,7 @@ export default class EconomyService extends Service {
     return response;
   }
 
-  getTotalSavingsByMonth() {
+  getTotalBalanceByMonth() {
     //api request
     const response = [
       { date: 'April 2023', value: 36800 },

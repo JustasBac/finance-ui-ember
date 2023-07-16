@@ -27,6 +27,6 @@ export default class ModalsEditMonthSavingsComponent extends Component {
       });
     }
 
-    savingPlan.totalSavings = savingPlan.calculateTotalSavings();
+    savingPlan.totalBalance = savingPlan.calculateTotalBalance();
   }
 }

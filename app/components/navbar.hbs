@@ -9,12 +9,15 @@
       </LinkTo>
     </div>
     <CurrencyChooseDropdown />
-    <div class="flex-none">
+    <div class="flex-none ml-6">
       <ul class="menu menu-horizontal px-1">
         <li>
-          <a>
-            Item 1
-          </a>
+          <LinkTo @route="home">
+            Home
+          </LinkTo>
+          <LinkTo @route="finance-overview">
+            Finance overview
+          </LinkTo>
         </li>
         <li tabindex="0">
           <a>
