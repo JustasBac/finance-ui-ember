@@ -52,18 +52,18 @@ export default class ChartsEconomyOverviewComponent extends Component {
         data: totalBalance.map((el) => el.value),
       },
       {
-        name: 'Income',
-        marker: {
-          symbol: 'square',
-        },
-        data: income.map((el) => el.value),
-      },
-      {
         name: 'Spendings',
         marker: {
           symbol: 'diamond',
         },
         data: spendings.map((el) => el.value),
+      },
+      {
+        name: 'Income',
+        marker: {
+          symbol: 'square',
+        },
+        data: income.map((el) => el.value),
       },
     ];
   }

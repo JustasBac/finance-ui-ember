@@ -9,9 +9,9 @@ export default class EconomyService extends Service {
   getIncomeByMonth() {
     //api request
     const response = [
-      { date: 'April 2023', value: 2650 },
-      { date: 'May 2023', value: 2650 },
-      { date: 'June 2023', value: 2860 },
+      { date: 'April 2023', value: 2650, currencyCode: 'EUR' },
+      { date: 'May 2023', value: 2650, currencyCode: 'EUR' },
+      { date: 'June 2023', value: 2860, currencyCode: 'EUR' },
     ];
 
     return response;
@@ -20,9 +20,9 @@ export default class EconomyService extends Service {
   getSpendingsByMonth() {
     //api request
     const response = [
-      { date: 'April 2023', value: 800 },
-      { date: 'May 2023', value: 850 },
-      { date: 'June 2023', value: 1300 },
+      { date: 'April 2023', value: 800, currencyCode: 'EUR' },
+      { date: 'May 2023', value: 850, currencyCode: 'EUR' },
+      { date: 'June 2023', value: 1300, currencyCode: 'EUR' },
     ];
 
     return response;
@@ -31,9 +31,9 @@ export default class EconomyService extends Service {
   getTotalBalanceByMonth() {
     //api request
     const response = [
-      { date: 'April 2023', value: 36800 },
-      { date: 'May 2023', value: 38000 },
-      { date: 'June 2023', value: 39000 },
+      { date: 'April 2023', value: 36800, currencyCode: 'EUR' },
+      { date: 'May 2023', value: 38000, currencyCode: 'EUR' },
+      { date: 'June 2023', value: 39000, currencyCode: 'EUR' },
     ];
 
     return response;

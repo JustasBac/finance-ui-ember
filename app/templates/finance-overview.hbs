@@ -2,7 +2,51 @@
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Finance overview">
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
-      op
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>
+                Date
+              </th>
+              <th>
+                Income
+              </th>
+              <th>
+                Spendings
+              </th>
+              <th>
+                Total Balance
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each this.rows as |row|}}
+              <tr>
+                <td>
+                  {{row.date}}
+                </td>
+                <td>
+                  {{row.income}}
+                  {{row.currency}}
+                </td>
+                <td>
+                  {{row.spendings}}
+                  {{row.currency}}
+                </td>
+                <td>
+                  {{row.totalBalance}}
+                  {{row.currency}}
+                </td>
+                <td>
+                  X
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
     </div>
   </PageLayout>
 </EmberWormhole>

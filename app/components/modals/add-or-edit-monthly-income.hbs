@@ -3,8 +3,8 @@
     class="text-xl text-center btn btn-ghost font-bold whitespace-nowrap"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
-    {{@monthIncome}}
-    {{this.currencyService.selectedCurrency.symbol}}
+    {{this.monthIncome}}
+    {{this.currency}}
     <Tooltip @side="bottom">
       Click to edit
     </Tooltip>
@@ -20,8 +20,8 @@
     <InputField
       class="mr-2"
       @type="number"
-      @value={{this.monthIncome}}
-      @onInput={{fn (mut this.monthIncome)}}
+      @value={{this.editedMonthIncome}}
+      @onInput={{fn (mut this.editedMonthIncome)}}
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>

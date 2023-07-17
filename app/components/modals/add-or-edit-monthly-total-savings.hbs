@@ -3,8 +3,8 @@
     class="text-2xl text-center font-bold btn btn-ghost whitespace-nowrap"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
-    {{@totalBalance}}
-    {{this.currencyService.selectedCurrency.symbol}}
+    {{this.totalBalance}}
+    {{this.currency}}
     <Tooltip @side="bottom">
       Click to edit
     </Tooltip>
@@ -13,15 +13,19 @@
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     <div>
-      Total Savings (June 2023)
+      Total Savings
+      {{concat '(' this.currency ')'}}
+      <div class="font-normal">
+        June 2023
+      </div>
     </div>
   </:header>
   <:body>
     <InputField
       class="mr-2"
       @type="number"
-      @value={{this.totalBalance}}
-      @onInput={{fn (mut this.totalBalance)}}
+      @value={{this.editedTotalBalance}}
+      @onInput={{fn (mut this.editedTotalBalance)}}
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>

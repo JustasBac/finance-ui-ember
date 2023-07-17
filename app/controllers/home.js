@@ -26,6 +26,8 @@ export default class HomeController extends Controller {
 
   @action
   updateLatestTotalBalance(newValue) {
+    console.log('new', newValue);
+
     this.totalBalanceByMonth[this.totalBalanceByMonth.length - 1].value =
       newValue;
 

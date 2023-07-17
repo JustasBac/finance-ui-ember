@@ -7,11 +7,32 @@ export default class ModalsAddOrEditMonthlyTotalSavingsComponent extends Compone
   @service('currency') currencyService;
 
   @tracked isModalOpen = false;
-  @tracked totalBalance = this.args.totalBalance; //make copy so we don't update the intitial value if not saved
+  @tracked totalBalance = this.getLatestTotalBalance();
+  @tracked editedTotalBalance = this.totalBalance; //used for input because we don't want to update the value without user confirming it
+
+  currency = '';
+
+  getLatestTotalBalance() {
+    const { data } = this.args;
+
+    const latestMonthInfo = data[data.length - 1];
+
+    if (!latestMonthInfo) {
+      return 0;
+    }
+
+    this.currency = this.currencyService.getCurrencySymbol(
+      latestMonthInfo.currencyCode
+    );
+
+    return latestMonthInfo.value;
+  }
 
   @action
   saveChanges() {
-    this.args.onChange(this.totalBalance);
+    this.totalBalance = this.editedTotalBalance;
+
+    this.args.onChange(+this.editedTotalBalance);
 
     this.isModalOpen = false;
   }
