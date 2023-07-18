@@ -1,0 +1,31 @@
+<Modals::-TriggerButton>
+  <span
+    class="ml-2 btn btn-sm btn-ghost bg-red-800/20 hover:bg-red-800/40"
+    {{on 'click' (fn (mut this.isModalOpen) true)}}
+  >
+    <FaIcon @icon="trash" />
+    <Tooltip>
+      Delete financial data for
+      {{@data.date}}
+    </Tooltip>
+  </span>
+</Modals::-TriggerButton>
+<Modals::-base @isOpen={{this.isModalOpen}}>
+  <:header>
+    Delete financial data
+  </:header>
+  <:body>
+    Are you sure you want to delete data for
+    {{@data.date}}
+    <div class="flex justify-between items-center mt-5">
+      <Modals::-TriggerButton>
+        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+          Cancel
+        </span>
+      </Modals::-TriggerButton>
+      <Button {{on 'click' (fn @onConfirmDeletion @data)}}>
+        Confirm
+      </Button>
+    </div>
+  </:body>
+</Modals::-base>

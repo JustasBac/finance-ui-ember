@@ -2,7 +2,18 @@
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Finance overview">
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
-      <div class="overflow-x-auto">
+      <div class="overflow-x-auto p-3">
+        <div class="mb-3 flex justify-center">
+          <span class="btn btn-sm btn-ghost bg-gray-200/80">
+            <FaIcon @icon="plus" />
+            <Tooltip>
+              Add financial data for
+              <span class="whitespace-nowrap font-bold">
+                {{this.previousMonth}}
+              </span>
+            </Tooltip>
+          </span>
+        </div>
         <table class="table w-full">
           <thead>
             <tr>
@@ -28,19 +39,26 @@
                   {{row.date}}
                 </td>
                 <td>
-                  {{row.income}}
+                  {{if row.income row.income '-'}}
                   {{row.currency}}
                 </td>
                 <td>
-                  {{row.spendings}}
+                  {{if row.spendings row.spendings '-'}}
                   {{row.currency}}
                 </td>
                 <td>
-                  {{row.totalBalance}}
+                  {{if row.totalBalance row.totalBalance '-'}}
                   {{row.currency}}
                 </td>
-                <td>
-                  X
+                <td class="flex">
+                  <Modals::EditFinanceData
+                    @data={{row}}
+                    @onSave={{fn this.saveChangedData row}}
+                  />
+                  <Modals::DeleteFinanceData
+                    @data={{row}}
+                    @onConfirmDeletion={{this.deleteRow}}
+                  />
                 </td>
               </tr>
             {{/each}}

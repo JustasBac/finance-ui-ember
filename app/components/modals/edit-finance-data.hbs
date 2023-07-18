@@ -1,0 +1,74 @@
+<Modals::-TriggerButton>
+  <span
+    class="btn btn-sm btn-ghost bg-gray-200/80"
+    {{on 'click' (fn (mut this.isModalOpen) true)}}
+  >
+    <FaIcon @icon="pen-to-square" />
+    <Tooltip>
+      Edit income, spendings, total balance for
+      {{@data.date}}
+    </Tooltip>
+  </span>
+</Modals::-TriggerButton>
+<Modals::-base @isOpen={{this.isModalOpen}}>
+  <:header>
+    <div>
+      Edit saving plan
+    </div>
+  </:header>
+  <:body>
+    <div class="flex justify-between items-center">
+      {{@data.date}}
+      <Button
+        class="btn-sm btn-outline"
+        {{on 'click' this.resetEditableValuesToDefault}}
+      >
+        <FaIcon @icon="rotate-right" class="mr-1" />
+        Reset
+      </Button>
+    </div>
+    <InputField
+      class="mt-3"
+      @type="number"
+      @value={{this.copiedData.totalBalance}}
+      @min={{1}}
+      @label="Total balance ({{this.copiedData.currency}})"
+      @onInput={{fn (mut this.copiedData.totalBalance)}}
+      @placeholder="Enter total balance"
+    />
+    <InputField
+      class="mt-3"
+      @type="number"
+      @value={{this.copiedData.income}}
+      @min={{1}}
+      @label="Income ({{this.copiedData.currency}})"
+      @onInput={{fn (mut this.copiedData.income)}}
+      @placeholder="Enter income"
+    />
+    <InputField
+      class="mt-3"
+      @type="number"
+      @value={{this.copiedData.spendings}}
+      @min={{1}}
+      @label="Spendings ({{this.copiedData.currency}})"
+      @onInput={{fn (mut this.copiedData.spendings)}}
+      @placeholder="Enter spendings"
+    />
+    <div class="flex justify-between items-center mt-5">
+      <Modals::-TriggerButton>
+        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+          Close
+        </span>
+      </Modals::-TriggerButton>
+      <Button
+        {{on
+          'click'
+          (queue (fn @onSave this.copiedData) (fn (mut this.isModalOpen) false))
+        }}
+      >
+        <FaIcon @icon="floppy-disk" class="mr-1" />
+        Save
+      </Button>
+    </div>
+  </:body>
+</Modals::-base>
