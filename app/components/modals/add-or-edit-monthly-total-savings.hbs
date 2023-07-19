@@ -3,7 +3,7 @@
     class="text-2xl text-center font-bold btn btn-ghost whitespace-nowrap"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
-    {{this.totalBalance}}
+    {{if this.totalBalance this.totalBalance '-'}}
     {{this.currency}}
     <Tooltip @side="bottom">
       Click to edit

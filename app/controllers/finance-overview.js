@@ -45,6 +45,17 @@ export default class FinanceOverviewController extends Controller {
   saveChangedData(currentRowData, newRowData) {
     this.rows.removeObject(currentRowData);
     this.rows.pushObject(newRowData);
-    this.rows.sort((a, b) => new Date(a.date) - new Date(b.date)); //sort by date --> earliest to latest
+    this.sortRowsFromEarliestToLatest();
+  }
+
+  sortRowsFromEarliestToLatest() {
+    this.rows.sort((a, b) => new Date(a.date) - new Date(b.date));
+  }
+
+  @action
+  addNewMonth(newMonthData) {
+    this.rows.pushObject(newMonthData);
+    this.sortRowsFromEarliestToLatest();
+    console.log('save');
   }
 }

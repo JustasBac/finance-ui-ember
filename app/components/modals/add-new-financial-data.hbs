@@ -3,40 +3,43 @@
     class="btn btn-sm btn-ghost bg-gray-200/80"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
-    <FaIcon @icon="pen-to-square" />
+    <FaIcon @icon="plus" />
     <Tooltip>
-      Edit income, spendings, total balance for
-      {{@data.date}}
+      Add financial data for
+      <span class="whitespace-nowrap font-bold">
+        {{@candidateMonth}}
+      </span>
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     <div>
-      Edit financial data
+      Add data for
+      {{@candidateMonth}}
     </div>
   </:header>
   <:body>
     <div class="flex justify-between items-center">
-      {{@data.date}}
+      {{@candidateMonth}}
       <Button
         class="btn-sm btn-outline"
-        {{on 'click' this.resetEditableValuesToDefault}}
+        {{on 'click' this.resetEditableValues}}
       >
         <FaIcon @icon="rotate-right" class="mr-1" />
         Reset
       </Button>
     </div>
-    <Forms::FinanceData @data={{this.copiedData}} />
+    <Forms::FinanceData @data={{this.financeData}} />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
           Close
         </span>
       </Modals::-TriggerButton>
-      <Button {{on 'click' this.saveChanges}}>
+      <Button {{on 'click' this.addDataForNewMonth}}>
         <FaIcon @icon="floppy-disk" class="mr-1" />
-        Save
+        Add & Save
       </Button>
     </div>
   </:body>

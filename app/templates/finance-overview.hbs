@@ -4,15 +4,10 @@
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
       <div class="overflow-x-auto p-3">
         <div class="mb-3 flex justify-center">
-          <span class="btn btn-sm btn-ghost bg-gray-200/80">
-            <FaIcon @icon="plus" />
-            <Tooltip>
-              Add financial data for
-              <span class="whitespace-nowrap font-bold">
-                {{this.previousMonth}}
-              </span>
-            </Tooltip>
-          </span>
+          <Modals::AddNewFinancialData
+            @candidateMonth={{this.previousMonth}}
+            @onAddNewMonth={{this.addNewMonth}}
+          />
         </div>
         <table class="table w-full">
           <thead>
