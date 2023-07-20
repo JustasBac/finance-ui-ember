@@ -18,11 +18,6 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
   };
 
   @action
-  confirmCandidateMonth() {
-    console.log('conf');
-  }
-
-  @action
   resetEditableValues() {
     this.financeData = {
       date: this.args.candidateMonth,
@@ -36,6 +31,8 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
   @action
   addDataForNewMonth() {
     const { income, spendings, totalBalance } = this.financeData;
+
+    console.log('this.financeData', this.financeData);
 
     if (!income || !spendings || !totalBalance) {
       this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues

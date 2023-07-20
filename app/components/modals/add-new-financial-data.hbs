@@ -20,7 +20,10 @@
     </div>
   </:header>
   <:body>
-    <div class="flex justify-between items-center">
+    <div
+      class="flex justify-between items-center"
+      {{did-insert this.resetEditableValues}}
+    >
       {{@candidateMonth}}
       <Button
         class="btn-sm btn-outline"

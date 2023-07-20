@@ -15,6 +15,8 @@ export default class HomeController extends Controller {
     this.incomeByMonth[this.incomeByMonth.length - 1].value = newValue;
 
     this.incomeByMonth = [...this.incomeByMonth];
+
+    //TODO: api call
   }
 
   @action
@@ -22,15 +24,17 @@ export default class HomeController extends Controller {
     this.spendingsByMonth[this.spendingsByMonth.length - 1].value = newValue;
 
     this.spendingsByMonth = [...this.spendingsByMonth];
+
+    //TODO: api call
   }
 
   @action
   updateLatestTotalBalance(newValue) {
-    console.log('new', newValue);
-
     this.totalBalanceByMonth[this.totalBalanceByMonth.length - 1].value =
       newValue;
 
     this.totalBalanceByMonth = [...this.totalBalanceByMonth];
+
+    //TODO: api call
   }
 }

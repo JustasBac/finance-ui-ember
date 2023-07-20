@@ -1,6 +1,6 @@
 <div class="card h-36 bg-base-100 shadow-xl" ...attributes>
-  <div class="card-body flex flex-col justify-start p-6">
-    <h2 class="text-lg text-gray-600">
+  <div class="card-body flex flex-col justify-start items-center p-4 relative">
+    <h2 class="text-base text-gray-600">
       Total Balance
       <span class="ml-1">
         <FaIcon @icon="circle-info" />
@@ -8,9 +8,12 @@
           Your total savings. You can edit it any time
         </Tooltip>
       </span>
+      <div class="text-sm text-gray-500 text-center">
+        {{moment-format (now) 'MMMM YYYY'}}
+      </div>
       <LinkTo
         @route="finance-overview"
-        class="btn btn-sm btn-ghost text-sm float-right"
+        class="btn btn-sm btn-ghost text-sm float-right absolute top-3 right-2"
         type="button"
       >
         <FaIcon @icon="sliders" />
@@ -19,11 +22,9 @@
         </Tooltip>
       </LinkTo>
     </h2>
-    <div class="flex justify-center items-center mt-3">
-      <Modals::AddOrEditMonthlyTotalSavings
-        @data={{@data}}
-        @onChange={{@onChange}}
-      />
-    </div>
+    <Modals::AddOrEditMonthlyTotalSavings
+      @data={{@data}}
+      @onChange={{@onChange}}
+    />
   </div>
 </div>

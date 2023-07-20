@@ -36,6 +36,13 @@ export default class FinanceOverviewController extends Controller {
       .format('MMMM YYYY');
   }
 
+  get nextMonth() {
+    return moment(this.rows[this.rows.length - 1].date, 'MMMM YYYY')
+      .add(1, 'months')
+      .endOf('month')
+      .format('MMMM YYYY');
+  }
+
   @action
   deleteRow(row) {
     this.rows.removeObject(row);

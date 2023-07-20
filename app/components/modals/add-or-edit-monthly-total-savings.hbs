@@ -16,7 +16,7 @@
       Total Savings
       {{concat '(' this.currency ')'}}
       <div class="font-normal">
-        June 2023
+        {{this.currentMonth}}
       </div>
     </div>
   </:header>
@@ -26,6 +26,7 @@
       @type="number"
       @value={{this.editedTotalBalance}}
       @onInput={{fn (mut this.editedTotalBalance)}}
+      @placeholder="Enter your total balance for {{this.currentMonth}}"
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
