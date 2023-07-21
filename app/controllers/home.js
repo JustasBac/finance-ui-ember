@@ -4,7 +4,6 @@ import { action } from '@ember/object';
 
 export default class HomeController extends Controller {
   @service('economy') economyService;
-  @service('currency') currencyService;
 
   @action
   updateLatestMonthIncome(newValue) {
@@ -13,8 +12,7 @@ export default class HomeController extends Controller {
     ].value = newValue;
 
     this.economyService.incomeByMonth = [...this.economyService.incomeByMonth];
-
-    //TODO: api call
+    // this.economyService.updateIncomeEntry(newData);
   }
 
   @action
@@ -27,31 +25,11 @@ export default class HomeController extends Controller {
       ...this.economyService.spendingsByMonth,
     ];
 
-    //TODO: api call
+    // this.economyService.updateSpendingsEntry(newData);
   }
 
   @action
-  updateLatestTotalBalance({ date, value }) {
-    const { totalBalanceByMonth } = this.economyService;
-
-    const existingEntry = totalBalanceByMonth.find((el) => el.date === date);
-
-    if (!existingEntry) {
-      const currencyCode = this.currencyService.selectedCurrency.code;
-
-      this.economyService.totalBalanceByMonth.pushObject({
-        date,
-        value,
-        currencyCode,
-      });
-
-      return;
-    }
-
-    existingEntry.value = value;
-
-    this.economyService.totalBalanceByMonth = [...totalBalanceByMonth];
-
-    //TODO: api call
+  updateLatestTotalBalance(newData) {
+    this.economyService.updateTotalBalanceEntry(newData);
   }
 }

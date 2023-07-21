@@ -39,9 +39,7 @@ export default class FinanceOverviewController extends Controller {
     const { date, income, spendings, totalBalance } = newRowData;
 
     //update total balance
-    const existingTotalBalanceEntry =
-      this.economyService.totalBalanceByMonth.find((el) => el.date === date);
-    existingTotalBalanceEntry.value = +totalBalance;
+    this.economyService.updateTotalBalanceEntry({ date, value: totalBalance });
 
     //update income
     const incomeEntry = this.economyService.incomeByMonth.find(

@@ -13,7 +13,11 @@
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     <div>
-      Income June 2023
+      Income
+      {{concat '(' this.currency ')'}}
+      <div class="font-normal">
+        {{this.currentMonth}}
+      </div>
     </div>
   </:header>
   <:body>
@@ -22,6 +26,7 @@
       @type="number"
       @value={{this.editedMonthIncome}}
       @onInput={{fn (mut this.editedMonthIncome)}}
+      @placeholder="Enter your income for {{this.currentMonth}}"
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>

@@ -6,32 +6,18 @@ import moment from 'moment';
 
 export default class ModalsAddOrEditMonthlyTotalSavingsComponent extends Component {
   @service('currency') currencyService;
+  @service('economy') economyService;
 
   @tracked isModalOpen = false;
-  @tracked totalBalance = this.getCurrentTotalBalance(); //shown on button
+  @tracked totalBalance = this.economyService.getCurrentMonthsData(
+    this.args.data
+  ); //shown on button
   @tracked editedTotalBalance = this.totalBalance || null; //used for input because we don't want to update the value without user confirming it
 
   currency = '';
-
+  //TODOO: CURRENCY
   get currentMonth() {
     return moment().format('MMMM YYYY');
-  }
-
-  getCurrentTotalBalance() {
-    const { data } = this.args;
-
-    const currentMonthData = data.find((el) => el.date === this.currentMonth);
-
-    if (!currentMonthData) {
-      this.currency = this.currencyService.selectedCurrency.symbol;
-      return null;
-    }
-
-    this.currency = this.currencyService.getCurrencySymbol(
-      currentMonthData.currencyCode
-    );
-
-    return currentMonthData.value;
   }
 
   @action
