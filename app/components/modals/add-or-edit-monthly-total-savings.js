@@ -38,7 +38,10 @@ export default class ModalsAddOrEditMonthlyTotalSavingsComponent extends Compone
   saveChanges() {
     this.totalBalance = this.editedTotalBalance;
 
-    this.args.onChange(+this.editedTotalBalance);
+    this.args.onChange({
+      date: this.currentMonth,
+      value: +this.editedTotalBalance,
+    });
 
     this.isModalOpen = false;
   }

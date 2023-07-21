@@ -1,33 +1,13 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import moment from 'moment';
+import { inject as service } from '@ember/service';
 
 export default class FinanceOverviewController extends Controller {
   @service('economy') economyService;
-  @service('currency') currencyService;
 
-  @tracked rows = this.getRows();
-
-  getRows() {
-    const { incomeByMonth, spendingsByMonth, totalBalanceByMonth } = this.model;
-
-    return incomeByMonth.map((el) => {
-      const spendings = spendingsByMonth.find((obj) => obj.date === el.date);
-      const totalBalance = totalBalanceByMonth.find(
-        (obj) => obj.date === el.date
-      );
-
-      return {
-        date: el.date,
-        income: el.value,
-        spendings: spendings.value,
-        totalBalance: totalBalance.value,
-        currency: this.currencyService.getCurrencySymbol(el.currencyCode),
-      };
-    });
-  }
+  @tracked rows = this.model;
 
   get previousMonth() {
     return moment(this.rows[0].date, 'MMMM YYYY')
@@ -52,7 +32,29 @@ export default class FinanceOverviewController extends Controller {
   saveChangedData(currentRowData, newRowData) {
     this.rows.removeObject(currentRowData);
     this.rows.pushObject(newRowData);
+
     this.sortRowsFromEarliestToLatest();
+
+    //------------------Update service
+    const { date, income, spendings, totalBalance } = newRowData;
+
+    //update total balance
+    const existingTotalBalanceEntry =
+      this.economyService.totalBalanceByMonth.find((el) => el.date === date);
+    existingTotalBalanceEntry.value = +totalBalance;
+
+    //update income
+    const incomeEntry = this.economyService.incomeByMonth.find(
+      (el) => el.date === date
+    );
+    incomeEntry.value = +income;
+
+    //update spendings
+    const spendingsEntry = this.economyService.spendingsByMonth.find(
+      (el) => el.date === date
+    );
+    spendingsEntry.value = +spendings;
+    //todo: move the update logic to service
   }
 
   sortRowsFromEarliestToLatest() {
@@ -63,6 +65,5 @@ export default class FinanceOverviewController extends Controller {
   addNewMonth(newMonthData) {
     this.rows.pushObject(newMonthData);
     this.sortRowsFromEarliestToLatest();
-    console.log('save');
   }
 }

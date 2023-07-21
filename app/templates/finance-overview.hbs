@@ -2,7 +2,7 @@
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Finance overview">
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
-      {{#if this.rows.length}}
+      {{#if this.model.length}}
         <div class="overflow-x-auto p-3">
           <div class="mb-3 flex justify-center">
             <Modals::AddNewFinancialData
@@ -29,7 +29,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each this.rows as |row|}}
+              {{#each this.model as |row|}}
                 <tr>
                   <td>
                     {{row.date}}

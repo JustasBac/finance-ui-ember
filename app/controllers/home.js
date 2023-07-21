@@ -1,39 +1,56 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 
 export default class HomeController extends Controller {
   @service('economy') economyService;
-
-  @tracked incomeByMonth = this.model.incomeByMonth;
-  @tracked spendingsByMonth = this.model.spendingsByMonth;
-  @tracked totalBalanceByMonth = this.model.totalBalanceByMonth;
+  @service('currency') currencyService;
 
   @action
   updateLatestMonthIncome(newValue) {
-    this.incomeByMonth[this.incomeByMonth.length - 1].value = newValue;
+    this.economyService.incomeByMonth[
+      this.economyService.incomeByMonth.length - 1
+    ].value = newValue;
 
-    this.incomeByMonth = [...this.incomeByMonth];
+    this.economyService.incomeByMonth = [...this.economyService.incomeByMonth];
 
     //TODO: api call
   }
 
   @action
   updateLatestMonthSpendings(newValue) {
-    this.spendingsByMonth[this.spendingsByMonth.length - 1].value = newValue;
+    this.economyService.spendingsByMonth[
+      this.economyService.spendingsByMonth.length - 1
+    ].value = newValue;
 
-    this.spendingsByMonth = [...this.spendingsByMonth];
+    this.economyService.spendingsByMonth = [
+      ...this.economyService.spendingsByMonth,
+    ];
 
     //TODO: api call
   }
 
   @action
-  updateLatestTotalBalance(newValue) {
-    this.totalBalanceByMonth[this.totalBalanceByMonth.length - 1].value =
-      newValue;
+  updateLatestTotalBalance({ date, value }) {
+    const { totalBalanceByMonth } = this.economyService;
 
-    this.totalBalanceByMonth = [...this.totalBalanceByMonth];
+    const existingEntry = totalBalanceByMonth.find((el) => el.date === date);
+
+    if (!existingEntry) {
+      const currencyCode = this.currencyService.selectedCurrency.code;
+
+      this.economyService.totalBalanceByMonth.pushObject({
+        date,
+        value,
+        currencyCode,
+      });
+
+      return;
+    }
+
+    existingEntry.value = value;
+
+    this.economyService.totalBalanceByMonth = [...totalBalanceByMonth];
 
     //TODO: api call
   }
