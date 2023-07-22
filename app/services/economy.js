@@ -52,15 +52,10 @@ export default class EconomyService extends Service {
     const currentMonthData = data.find((el) => el.date === currentMonth);
 
     if (!currentMonthData) {
-      this.currency = this.currencyService.selectedCurrency.symbol;
       return null;
     }
 
-    this.currency = this.currencyService.getCurrencySymbol(
-      currentMonthData.currencyCode
-    );
-
-    return currentMonthData.value;
+    return currentMonthData;
   }
 
   updateTotalBalanceEntry({ date, value }) {

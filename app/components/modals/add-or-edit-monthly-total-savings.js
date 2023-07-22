@@ -9,13 +9,26 @@ export default class ModalsAddOrEditMonthlyTotalSavingsComponent extends Compone
   @service('economy') economyService;
 
   @tracked isModalOpen = false;
+
   @tracked totalBalance = this.economyService.getCurrentMonthsData(
     this.args.data
-  ); //shown on button
+  )?.value; //shown on button
   @tracked editedTotalBalance = this.totalBalance || null; //used for input because we don't want to update the value without user confirming it
 
-  currency = '';
-  //TODOO: CURRENCY
+  get currency() {
+    const currentMonthData = this.economyService.getCurrentMonthsData(
+      this.args.data
+    );
+
+    if (!currentMonthData) {
+      return this.currencyService.selectedCurrency.symbol;
+    }
+
+    return this.currencyService.getCurrencySymbol(
+      currentMonthData.currencyCode
+    );
+  }
+
   get currentMonth() {
     return moment().format('MMMM YYYY');
   }
