@@ -4,16 +4,16 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import moment from 'moment';
 
-export default class ModalsAddOrEditMonthlyTotalSavingsComponent extends Component {
+export default class ModalsAddOrEditFinanceDataEntryComponent extends Component {
   @service('currency') currencyService;
   @service('economy') economyService;
 
   @tracked isModalOpen = false;
 
-  @tracked totalBalance = this.economyService.getCurrentMonthsData(
+  @tracked currentMonthValue = this.economyService.getCurrentMonthsData(
     this.args.data
   )?.value; //shown on button
-  @tracked editedTotalBalance = this.totalBalance || null; //used for input because we don't want to update the value without user confirming it
+  @tracked editedCurrentMonthValue = this.currentMonthValue || null; //used for input because we don't want to update the value without user confirming it
 
   get currency() {
     const currentMonthData = this.economyService.getCurrentMonthsData(
@@ -35,11 +35,11 @@ export default class ModalsAddOrEditMonthlyTotalSavingsComponent extends Compone
 
   @action
   saveChanges() {
-    this.totalBalance = this.editedTotalBalance;
+    this.currentMonthValue = this.editedCurrentMonthValue;
 
     this.args.onChange({
       date: this.currentMonth,
-      value: +this.editedTotalBalance,
+      value: +this.editedCurrentMonthValue,
     });
 
     this.isModalOpen = false;

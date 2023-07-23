@@ -61,7 +61,16 @@ export default class FinanceOverviewController extends Controller {
 
   @action
   addNewMonth(newMonthData) {
+    console.log('newMonthData', newMonthData);
+
     this.rows.pushObject(newMonthData);
     this.sortRowsFromEarliestToLatest();
+
+    const { date, income, spendings, totalBalance } = newMonthData;
+
+    //update the database
+    this.economyService.updateIncomeEntry({ date, value: income });
+    this.economyService.updateSpendingsEntry({ date, value: spendings });
+    this.economyService.updateTotalBalanceEntry({ date, value: totalBalance });
   }
 }

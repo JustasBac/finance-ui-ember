@@ -28,7 +28,8 @@ export default class FinanceOverviewRoute extends Route {
         income: income?.value,
         spendings: spendings?.value,
         totalBalance: totalBalance?.value,
-        currency: this.currencyService.getCurrencySymbol(el.currencyCode),
+        currencySymbol: this.currencyService.getCurrencySymbol(el.currencyCode),
+        currencyCode: el.currencyCode,
       };
     });
   }

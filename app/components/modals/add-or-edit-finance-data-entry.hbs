@@ -3,7 +3,7 @@
     class="text-2xl text-center font-bold btn btn-ghost whitespace-nowrap"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
-    {{if this.totalBalance this.totalBalance '-'}}
+    {{if this.currentMonthValue this.currentMonthValue '-'}}
     {{this.currency}}
     <Tooltip @side="bottom">
       Click to edit
@@ -13,7 +13,7 @@
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     <div>
-      Total Savings
+      {{capitalize @type}}
       {{concat '(' this.currency ')'}}
       <div class="font-normal">
         {{this.currentMonth}}
@@ -24,9 +24,9 @@
     <InputField
       class="mr-2"
       @type="number"
-      @value={{this.editedTotalBalance}}
-      @onInput={{fn (mut this.editedTotalBalance)}}
-      @placeholder="Enter your total balance for {{this.currentMonth}}"
+      @value={{this.editedCurrentMonthValue}}
+      @onInput={{fn (mut this.editedCurrentMonthValue)}}
+      @placeholder="Enter your {{@type}} for {{this.currentMonth}}"
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>

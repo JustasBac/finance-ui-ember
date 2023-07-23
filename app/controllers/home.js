@@ -6,26 +6,13 @@ export default class HomeController extends Controller {
   @service('economy') economyService;
 
   @action
-  updateLatestMonthIncome(newValue) {
-    this.economyService.incomeByMonth[
-      this.economyService.incomeByMonth.length - 1
-    ].value = newValue;
-
-    this.economyService.incomeByMonth = [...this.economyService.incomeByMonth];
-    // this.economyService.updateIncomeEntry(newData);
+  updateLatestMonthIncome(newData) {
+    this.economyService.updateIncomeEntry(newData);
   }
 
   @action
-  updateLatestMonthSpendings(newValue) {
-    this.economyService.spendingsByMonth[
-      this.economyService.spendingsByMonth.length - 1
-    ].value = newValue;
-
-    this.economyService.spendingsByMonth = [
-      ...this.economyService.spendingsByMonth,
-    ];
-
-    // this.economyService.updateSpendingsEntry(newData);
+  updateLatestMonthSpendings(newData) {
+    this.economyService.updateSpendingsEntry(newData);
   }
 
   @action

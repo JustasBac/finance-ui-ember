@@ -36,15 +36,15 @@
                   </td>
                   <td>
                     {{if row.income row.income '-'}}
-                    {{row.currency}}
+                    {{row.currencySymbol}}
                   </td>
                   <td>
                     {{if row.spendings row.spendings '-'}}
-                    {{row.currency}}
+                    {{row.currencySymbol}}
                   </td>
                   <td>
                     {{if row.totalBalance row.totalBalance '-'}}
-                    {{row.currency}}
+                    {{row.currencySymbol}}
                   </td>
                   <td class="flex">
                     <Modals::EditFinanceData
