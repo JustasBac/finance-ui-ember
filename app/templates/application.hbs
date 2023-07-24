@@ -2,12 +2,12 @@
   <Navbar />
   <div class="p-4 flex flex-col w-full h-full overflow-y-auto body-block">
     {{outlet}}
+    <div
+      id="page-body-wormhole"
+      class="xl:absolute xl:flex xl:top-20 xl:w-full xl:px-72 xl:h-3/4 xl:qHd:px-[35rem]"
+    ></div>
   </div>
   <Footer />
 </div>
 <NotificationContainer @position="bottom" />
-<div
-  id="page-body-wormhole"
-  class="absolute flex top-20 w-full px-72 h-3/4 qHd:px-[35rem]"
-></div>
 <div id="wormhole"></div>

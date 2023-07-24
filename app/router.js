@@ -12,4 +12,5 @@ Router.map(function () {
     path: 'saving-plan/:saving_plan_id',
   });
   this.route('finance-overview');
+  this.route('currency-selection');
 });

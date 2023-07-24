@@ -16,7 +16,7 @@ export default class FinanceOverviewRoute extends Route {
 
     const longestArrayIndex = lengths.indexOf(Math.max(...lengths));
 
-    return dataArray[longestArrayIndex].map((el) => {
+    const data = dataArray[longestArrayIndex].map((el) => {
       const income = incomeByMonth.find((obj) => obj.date === el.date);
       const spendings = spendingsByMonth.find((obj) => obj.date === el.date);
       const totalBalance = totalBalanceByMonth.find(
@@ -32,5 +32,7 @@ export default class FinanceOverviewRoute extends Route {
         currencyCode: el.currencyCode,
       };
     });
+
+    return data.sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 }

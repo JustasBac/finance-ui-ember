@@ -19,6 +19,17 @@ body {
   overflow: hidden;
 }
 
+body.blured
+  > *:not(
+    #ember-basic-dropdown-wormhole,
+    #ember-factory-wormhole,
+    #qunit,
+    #qunit-fixture
+  ) {
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+}
+
 .fade-in-animation {
   animation: 0.2s linear fadeIn;
 

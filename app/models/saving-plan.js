@@ -21,7 +21,7 @@ export default class SavingPlan {
     startDate = moment(),
     deadlineDate = moment().add(1, 'days'),
     savingsPerMonth = [],
-    startingCapital = 0
+    startingCapital = null
   ) {
     this.id = id;
     this.title = title;

@@ -14,7 +14,8 @@ module.exports = {
       // colors: { olive: '#e9edc9' },
     },
     screens: {
-      qHd: '2000px',
+      xl: '1280px',
+      qHd: '2400px',
     },
   },
   plugins: [require('daisyui')],

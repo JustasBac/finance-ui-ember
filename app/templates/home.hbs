@@ -25,6 +25,7 @@
     </div>
     <div class="card bg-base-100 shadow-xl mt-6 pt-2">
       <Charts::EconomyOverview
+        class="shrink-0"
         @data={{hash
           totalBalance=this.economyService.totalBalanceByMonth
           income=this.economyService.incomeByMonth

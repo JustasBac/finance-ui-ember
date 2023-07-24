@@ -1,56 +1,84 @@
 <div
-  class="navbar bg-neutral text-white h-[15rem] flex flex-col items-start px-72 qHd:px-[34rem] pt-4"
+  class="navbar bg-neutral text-white xl:h-[15rem] flex flex-col items-start xl:px-72 qHd:px-[34rem] xl:pt-4"
 >
-  <div class="w-full flex">
-    <div class="flex-1">
-      <LinkTo class="btn btn-ghost normal-case text-xl p-0" @route="home">
+  <div class="w-full flex flex-col xl:flex-row justify-between">
+    <div class="flex w-full justify-between xl:justify-start">
+      <BasicDropdown
+        @verticalPosition="below"
+        @onOpen={{this.onDropdownOpen}}
+        @onClose={{this.onDropdownClose}} as |dd|
+      >
+        <dd.Trigger>
+          <Button class="btn-square btn-ghost xl:hidden ml-2">
+            <FaIcon @icon="bars" />
+          </Button>
+        </dd.Trigger>
+        <dd.Content>
+          <div class="p-3 shadow-2xl flex flex-col">
+            <div class="w-full flex justify-end">
+              <Button
+                class="btn-sm btn-ghost mb-4 bg-gray-500/20"
+                {{on 'click' dd.actions.close}}
+              >
+                <FaIcon @icon="xmark" />
+              </Button>
+            </div>
+            <ul class="menu menu-vertical">
+              <li class="bg-gray-200 rounded">
+                <LinkTo @route="home" class="gap-x-2">
+                  <FaIcon @icon="house" />
+                  Home
+                </LinkTo>
+              </li>
+              <li class="bg-gray-200 rounded my-3">
+                <LinkTo @route="finance-overview" class="gap-x-2">
+                  <FaIcon @icon="coins" />
+                  Finance overview
+                </LinkTo>
+              </li>
+              <li class="bg-gray-200 rounded">
+                <LinkTo @route="currency-selection" class="gap-x-2">
+                  <FaIcon @icon="money-bill" />
+                  Currency settings
+                </LinkTo>
+              </li>
+            </ul>
+            <div class="flex items-center mt-6">
+              <UserIcon />
+              <span class="ml-2">
+                Nickname
+              </span>
+            </div>
+          </div>
+        </dd.Content>
+      </BasicDropdown>
+      <LinkTo
+        class="btn btn-ghost normal-case text-xl p-0 mr-24 xl:mr-0 xl:ml-8 whitespace-nowrap"
+        @route="home"
+      >
         <FaIcon @icon="landmark" class="mr-2" />
         Finance App
       </LinkTo>
     </div>
-    <CurrencyChooseDropdown />
-    <div class="flex-none ml-6">
+    <div class="ml-6 hidden xl:flex">
       <ul class="menu menu-horizontal px-1">
-        <li>
-          <LinkTo @route="home">
+        <li class="bg-purple-300/10 rounded">
+          <LinkTo @route="home" class="gap-x-2">
+            <FaIcon @icon="house" />
             Home
           </LinkTo>
-          <LinkTo @route="finance-overview">
+        </li>
+        <li class="ml-2 bg-purple-300/10 rounded">
+          <LinkTo @route="finance-overview" class="gap-x-2">
+            <FaIcon @icon="coins" />
             Finance overview
           </LinkTo>
         </li>
-        <li tabindex="0">
-          <a>
-            Parent
-            <svg
-              class="fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
-              ></path>
-            </svg>
-          </a>
-          <ul class="p-2">
-            <li>
-              <a>
-                Submenu 1
-              </a>
-            </li>
-            <li>
-              <a>
-                Submenu 2
-              </a>
-            </li>
-          </ul>
-        </li>
       </ul>
-      <span class="btn !btn-circle bg-slate-400/20 hover:bg-slate-400/40">
-        <FaIcon @icon="user" />
-      </span>
+      <div class="flex">
+        <CurrencyChooseDropdown />
+        <UserIcon />
+      </div>
     </div>
   </div>
 </div>

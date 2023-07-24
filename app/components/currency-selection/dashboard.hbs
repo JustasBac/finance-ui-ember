@@ -1,0 +1,40 @@
+<div class="flex flex-col xl:flex-row items-center mb-3">
+  <h2 class="card-title mr-4 mb-2 xl:mb-0">
+    Choose a currency
+  </h2>
+  <InputField
+    class="max-w-xs"
+    @size="sm"
+    @value={{this.searchString}}
+    @onInput={{fn (mut this.searchString)}}
+    @placeholder="Search for a currency"
+    @exceptFromValidation={{true}}
+  />
+  <span
+    class="px-2 py-1 rounded ml-1 hover:bg-gray-100 cursor-pointer
+      {{unless this.searchString.length 'invisible'}}"
+    {{on 'click' (fn (mut this.searchString) '')}}
+  >
+    <FaIcon @icon="xmark" />
+  </span>
+</div>
+<div class="grid grid-cols-4 xl:grid-cols-10 gap-4">
+  {{#each this.currencies as |currency|}}
+    <span
+      class="whitespace-nowrap text-sm hover:bg-gray-100 rounded p-2 cursor-pointer
+        {{if
+          (eq currency.code this.currencyService.selectedCurrency.code)
+          'bg-gray-100'
+        }}"
+      {{on 'click' (fn (mut this.currencyService.selectedCurrency) currency)}}
+    >
+      {{currency.code}}
+      <span class="opacity-60 text-xs">
+        {{concat '(' currency.symbol ')'}}
+      </span>
+      <Tooltip>
+        {{currency.name}}
+      </Tooltip>
+    </span>
+  {{/each}}
+</div>
