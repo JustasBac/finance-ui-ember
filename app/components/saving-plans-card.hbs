@@ -9,16 +9,15 @@
           {{! head }}
           <thead>
             <tr>
-              <th class="bg-base-100">
+              <th class="bg-base-100 !relative">
                 Name
               </th>
-              <th class="bg-base-100">
+              <th class="bg-base-100 hidden xl:flex">
                 Progress
               </th>
               <th class="bg-base-100">
                 Deadline
               </th>
-              <th class="bg-base-100"></th>
             </tr>
           </thead>
           <tbody>
@@ -27,7 +26,7 @@
                 <td>
                   {{savingPlan.title}}
                 </td>
-                <td>
+                <td class="hidden xl:flex">
                   <div class="flex flex-col">
                     <span class="text-xs leading-[0]">
                       {{savingPlan.totalBalance}}

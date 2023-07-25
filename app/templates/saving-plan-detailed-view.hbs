@@ -1,7 +1,9 @@
 {{page-title 'Details'}}
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Saving Plan - {{this.model.title}}">
-    <div class="flex gap-8 mb-8">
+    <div
+      class="flex justify-center xl:justify-start flex-wrap 3xl:flex-nowrap gap-8 mb-8"
+    >
       <Card class="basis-1/5" @icon="sack-dollar">
         <:header>
           Target amount
@@ -16,7 +18,7 @@
           Start date
         </:header>
         <:body>
-          <span class="text-xl">
+          <span class="xl:text-xl">
             {{moment-format @model.startDate 'MMMM DD, YYYY'}}
           </span>
           <span class="text-sm opacity-50 font-light whitespace-nowrap">
@@ -30,7 +32,7 @@
           Deadline
         </:header>
         <:body>
-          <span class="text-lg">
+          <span class="xl:text-lg">
             {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
           </span>
           <span class="text-sm opacity-50 font-light whitespace-nowrap">
@@ -44,7 +46,7 @@
           Savings
         </:header>
         <:body>
-          <div class="flex flex-col text-sm font-normal">
+          <div class="flex flex-col text-sm font-normal whitespace-nowrap">
             <span>
               Starting capital:
               <span class="font-bold">
@@ -84,7 +86,7 @@
       </Card>
     </div>
     <div
-      class="card grow bg-base-100 shadow-xl p-2 px-8 min-h-[30rem] qHd:min-h-[35rem]"
+      class="card grow bg-base-100 shadow-xl p-2 xl:px-8 min-h-[30rem] qHd:min-h-[35rem]"
     >
       <div class="tabs flex justify-center">
         <a
@@ -102,7 +104,7 @@
           Monthly planning
         </a>
         <a
-          class="tab tab-bordered
+          class="tab tab-bordered mt-3 xl:mt-0
             {{if (eq this.activeTab 'monthly-analysis') 'tab-active'}}"
           {{on 'click' (fn (mut this.activeTab) 'monthly-analysis')}}
         >

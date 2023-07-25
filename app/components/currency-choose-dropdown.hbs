@@ -1,8 +1,11 @@
-<BasicDropdown as |dd|>
+<BasicDropdown
+  @onOpen={{this.onDropdownOpen}}
+  @onClose={{this.onDropdownClose}} as |dd|
+>
   <dd.Trigger>
     <label
       tabindex="0"
-      class="rounded cursor-pointer font-light text-bas btn btn-ghost hover:bg-slate-400/40 mx-4"
+      class="rounded cursor-pointer font-light text-bas btn btn-ghost hover:bg-slate-400/40"
     >
       {{this.currencyService.selectedCurrency.symbol}}
       <Tooltip>
@@ -19,7 +22,7 @@
     </label>
   </dd.Trigger>
   <dd.Content>
-    <div class="card-body w-[70rem]">
+    <div class="shadow-xl card-body w-[70rem]">
       <CurrencySelection::Dashboard />
       <div class="card-actions justify-end">
         <Button class="btn-sm" {{on 'click' dd.actions.close}}>

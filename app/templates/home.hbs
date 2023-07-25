@@ -1,7 +1,7 @@
 {{page-title 'Home'}}
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Overview">
-    <div class="flex gap-12">
+    <div class="flex flex-col xl:flex-row gap-12">
       <div class="basis-1/4 flex flex-col justify-between gap-3">
         <TotalBalance
           @data={{this.economyService.totalBalanceByMonth}}
