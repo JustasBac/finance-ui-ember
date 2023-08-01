@@ -13,4 +13,5 @@ Router.map(function () {
   });
   this.route('finance-overview');
   this.route('currency-selection');
+  this.route('login');
 });

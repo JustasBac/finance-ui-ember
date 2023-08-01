@@ -18,11 +18,11 @@
     {{concat @savingPlan.title '?'}}
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
-        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+        <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
           Cancel
-        </span>
+        </Button>
       </Modals::-TriggerButton>
-      <Button {{on 'click' this.deleteSavingPlan}}>
+      <Button class="btn-primary" {{on 'click' this.deleteSavingPlan}}>
         Confirm
       </Button>
     </div>

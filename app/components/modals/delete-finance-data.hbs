@@ -19,11 +19,11 @@
     {{@data.date}}
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
-        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+        <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
           Cancel
-        </span>
+        </Button>
       </Modals::-TriggerButton>
-      <Button {{on 'click' (fn @onConfirmDeletion @data)}}>
+      <Button class="btn-primary" {{on 'click' (fn @onConfirmDeletion @data)}}>
         Confirm
       </Button>
     </div>

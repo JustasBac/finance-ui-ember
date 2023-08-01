@@ -1,5 +1,7 @@
 'use strict';
 
+const API_URL = process.env.API_URL || '/api/v1';
+
 module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'finance-ui-ember',
@@ -17,6 +19,22 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    apiUrl: API_URL,
+  };
+
+  ENV['ember-simple-auth'] = {
+    authenticationRoute: 'login',
+    routeAfterAuthentication: 'home',
+    routeIfAlreadyAuthenticated: 'home',
+  };
+
+  ENV['ember-simple-auth-token'] = {
+    serverTokenEndpoint: API_URL + '/login',
+    serverTokenRefreshEndpoint: API_URL + '/refresh',
+    refreshAccessTokens: true,
+    refreshLeeway: 300, // Amount of time in seconds to send refresh request before token expiration
+    tokenPropertyName: 'access_token',
+    refreshTokenPropertyName: 'refresh_token',
   };
 
   if (environment === 'development') {

@@ -14,15 +14,14 @@
     </div>
   </:header>
   <:body>
-    {{log 'new' this.newSavingPlan}}
     <Forms::SavingPlan @savingPlanInformation={{this.newSavingPlan}} />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
-        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+        <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
           Close me
-        </span>
+        </Button>
       </Modals::-TriggerButton>
-      <Button {{on 'click' this.createSavingPlan}}>
+      <Button class="btn-primary" {{on 'click' this.createSavingPlan}}>
         <FaIcon @icon="floppy-disk" class="mr-1" />
         Save
       </Button>

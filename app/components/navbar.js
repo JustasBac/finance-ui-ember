@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 
 export default class NavbarComponent extends Component {
   @service('currency') currencyService;
+  @service session;
 
   @action
   onDropdownOpen() {
@@ -15,5 +16,10 @@ export default class NavbarComponent extends Component {
   onDropdownClose() {
     const overlay = document.querySelector('body');
     overlay.classList.remove('blured');
+  }
+
+  @action
+  logout() {
+    this.session.invalidate();
   }
 }

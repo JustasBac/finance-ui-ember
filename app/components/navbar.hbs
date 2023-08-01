@@ -1,89 +1,104 @@
-<div
-  class="navbar bg-neutral text-white xl:h-[15rem] flex items-start xl:pt-4"
-  ...attributes
->
-  <div class="w-full">
-    <div class="flex w-full justify-center xl:justify-start relative">
-      <div class="absolute left-0">
-        <BasicDropdown
-          @verticalPosition="below"
-          @onOpen={{this.onDropdownOpen}}
-          @onClose={{this.onDropdownClose}} as |dd|
-        >
-          <dd.Trigger>
-            <Button class="btn-square btn-ghost xl:hidden ml-2">
-              <FaIcon @icon="bars" />
-            </Button>
-          </dd.Trigger>
-          <dd.Content>
-            <div class="p-3 shadow-2xl flex flex-col">
-              <div class="w-full flex justify-end">
-                <Button
-                  class="btn-sm btn-ghost mb-4 bg-gray-500/20"
-                  {{on 'click' dd.actions.close}}
-                >
-                  <FaIcon @icon="xmark" />
-                </Button>
+{{#if this.session.isAuthenticated}}
+  <div
+    class="navbar bg-neutral text-white xl:h-[15rem] flex items-start xl:pt-4"
+    ...attributes
+  >
+    <div class="w-full">
+      <div class="flex w-full justify-center xl:justify-start relative">
+        <div class="absolute left-0">
+          <BasicDropdown
+            @verticalPosition="below"
+            @onOpen={{this.onDropdownOpen}}
+            @onClose={{this.onDropdownClose}} as |dd|
+          >
+            <dd.Trigger>
+              <Button class="btn-square btn-ghost xl:hidden ml-2">
+                <FaIcon @icon="bars" />
+              </Button>
+            </dd.Trigger>
+            <dd.Content>
+              <div class="p-3 shadow-2xl flex flex-col">
+                <div class="w-full flex justify-end">
+                  <Button
+                    class="btn-sm btn-ghost mb-4 bg-gray-500/20"
+                    {{on 'click' dd.actions.close}}
+                  >
+                    <FaIcon @icon="xmark" />
+                  </Button>
+                </div>
+                <ul class="menu menu-vertical">
+                  <li class="bg-gray-200 rounded">
+                    <LinkTo @route="home" class="gap-x-2">
+                      <FaIcon @icon="house" />
+                      Home
+                    </LinkTo>
+                  </li>
+                  <li class="bg-gray-200 rounded my-3">
+                    <LinkTo @route="finance-overview" class="gap-x-2">
+                      <FaIcon @icon="coins" />
+                      Finance overview
+                    </LinkTo>
+                  </li>
+                  <li class="bg-gray-200 rounded">
+                    <LinkTo @route="currency-selection" class="gap-x-2">
+                      <FaIcon @icon="money-bill" />
+                      Currency settings
+                    </LinkTo>
+                  </li>
+                </ul>
+                <div class="flex items-center mt-6">
+                  <UserIcon />
+                  <span class="ml-2">
+                    Nickname
+                  </span>
+                </div>
               </div>
-              <ul class="menu menu-vertical">
-                <li class="bg-gray-200 rounded">
-                  <LinkTo @route="home" class="gap-x-2">
-                    <FaIcon @icon="house" />
-                    Home
-                  </LinkTo>
-                </li>
-                <li class="bg-gray-200 rounded my-3">
-                  <LinkTo @route="finance-overview" class="gap-x-2">
-                    <FaIcon @icon="coins" />
-                    Finance overview
-                  </LinkTo>
-                </li>
-                <li class="bg-gray-200 rounded">
-                  <LinkTo @route="currency-selection" class="gap-x-2">
-                    <FaIcon @icon="money-bill" />
-                    Currency settings
-                  </LinkTo>
-                </li>
-              </ul>
-              <div class="flex items-center mt-6">
-                <UserIcon />
-                <span class="ml-2">
-                  Nickname
-                </span>
-              </div>
-            </div>
-          </dd.Content>
-        </BasicDropdown>
-      </div>
-      <LinkTo
-        class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
-        @route="home"
-      >
-        <FaIcon @icon="landmark" class="mr-2" />
-        Finance App
-      </LinkTo>
-    </div>
-    <div class="ml-6 hidden xl:flex">
-      <ul class="menu menu-horizontal px-1">
-        <li class="bg-purple-300/10 rounded">
-          <LinkTo @route="home" class="gap-x-2">
-            <FaIcon @icon="house" />
-            Home
-          </LinkTo>
-        </li>
-        <li class="ml-2 bg-purple-300/10 rounded">
-          <LinkTo @route="finance-overview" class="gap-x-2">
-            <FaIcon @icon="coins" />
-            Finance overview
-          </LinkTo>
-        </li>
-      </ul>
-      <div class="flex">
-        <div class="ml-4 mr-3">
-          <CurrencyChooseDropdown />
+            </dd.Content>
+          </BasicDropdown>
         </div>
-        <UserIcon />
+        <LinkTo
+          class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
+          @route="home"
+        >
+          <FaIcon @icon="landmark" class="mr-2" />
+          Finance App
+        </LinkTo>
+      </div>
+      <div class="ml-6 hidden xl:flex">
+        <ul class="menu menu-horizontal px-1">
+          <li class="bg-purple-300/10 rounded">
+            <LinkTo @route="home" class="gap-x-2">
+              <FaIcon @icon="house" />
+              Home
+            </LinkTo>
+          </li>
+          <li class="ml-2 bg-purple-300/10 rounded">
+            <LinkTo @route="finance-overview" class="gap-x-2">
+              <FaIcon @icon="coins" />
+              Finance overview
+            </LinkTo>
+          </li>
+        </ul>
+        <div class="flex">
+          <div class="ml-4 mr-3">
+            <CurrencyChooseDropdown />
+          </div>
+          <div {{on 'click' this.logout}}>
+            LOGOUT
+          </div>
+          <UserIcon />
+        </div>
       </div>
     </div>
   </div>
-</div>
+{{else}}
+  <div class="navbar bg-neutral text-white flex items-start" ...attributes>
+    <LinkTo
+      class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
+      @route="home"
+    >
+      <FaIcon @icon="landmark" class="mr-2" />
+      Finance App
+    </LinkTo>
+  </div>
+{{/if}}

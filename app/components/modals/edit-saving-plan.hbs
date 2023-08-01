@@ -21,11 +21,11 @@
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
-        <span class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
+        <Button class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
           Close
-        </span>
+        </Button>
       </Modals::-TriggerButton>
-      <Button {{on 'click' this.saveChanges}}>
+      <Button class="btn-primary" {{on 'click' this.saveChanges}}>
         <FaIcon @icon="floppy-disk" class="mr-1" />
         Save
       </Button>

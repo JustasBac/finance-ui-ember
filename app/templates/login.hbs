@@ -1,0 +1,35 @@
+{{page-title 'Login'}}
+<div class="flex flex-col gap-4 justify-center items-center h-full z-10 mb-36">
+  <div>
+    <Alert
+      @text="TODO: Info card about test user. With button to fill everything auto"
+    />
+  </div>
+  <div class="bg-white p-12 w-200 rounded-2xl">
+    <div class="mb-4">
+      <h3 class="font-semibold text-2xl text-gray-800">
+        Sign In
+      </h3>
+      <p class="text-gray-500">
+        Please sign in to your account.
+      </p>
+    </div>
+    <InputField
+      class="mb-4"
+      @value={{this.username}}
+      @onInput={{fn (mut this.username)}}
+      @label="Username"
+      @placeholder="Enter your username"
+    />
+    <InputField
+      @value={{this.password}}
+      @onInput={{fn (mut this.password)}}
+      @type="password"
+      @label="Password"
+      @placeholder="Enter your password"
+    />
+    <Button class="w-full mt-8" {{on 'click' this.signIn}}>
+      Log in
+    </Button>
+  </div>
+</div>
