@@ -30,4 +30,16 @@ export default class SavingPlanDetailedViewController extends Controller {
 
     return duration.format(format, { trim: 'both' });
   }
+
+  get remainingAmountToSave() {
+    const { targetAmount, startingCapital, totalBalance } = this.model;
+
+    const remainingAmount = targetAmount - startingCapital - totalBalance;
+
+    if (remainingAmount < 0) {
+      return 0;
+    }
+
+    return remainingAmount;
+  }
 }

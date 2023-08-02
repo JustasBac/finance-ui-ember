@@ -9,12 +9,16 @@ export default class SavingPlanService extends Service {
 
   @tracked savingPlans = [];
 
-  async fetchSavingPlans() {
+  async fetchAndSetSavingPlans() {
     const savingPlans = await this.requestService.fetch('saving_plans');
 
     this.savingPlans = [];
 
     for (const savingPlan of savingPlans) {
+      const monthlySavings = savingPlan['monthly_savings_list'].map((el) => {
+        return { month: el.month, amountSaved: el['amount_saved'], id: el.id };
+      });
+
       this.savingPlans.pushObject(
         new SavingPlan(
           savingPlan['id'],
@@ -23,13 +27,11 @@ export default class SavingPlanService extends Service {
           savingPlan['currency_code'],
           moment(savingPlan['start_date']),
           moment(savingPlan['end_date']),
-          savingPlan['monthly_savings_list'],
+          monthlySavings,
           savingPlan['starting_capital']
         )
       );
     }
-
-    return savingPlans;
   }
 
   async addNewSavingPlan(newSavingPlan) {
@@ -101,5 +103,58 @@ export default class SavingPlanService extends Service {
     }
 
     return true;
+  }
+
+  async addMonthlySavings(savingPlan, monthInfo, savedAmount) {
+    //decide between POST and PUT request
+
+    const monthThatAlreadyHasSavedAmount = savingPlan.savingsPerMonth.find(
+      (el) => el.month === monthInfo.formatedDate
+    );
+
+    if (monthThatAlreadyHasSavedAmount) {
+      //PUT
+
+      const monthId = savingPlan.savingsPerMonth.find(
+        (el) => el.month === monthInfo.formatedDate
+      ).id;
+
+      const body = {
+        amount_saved: +savedAmount,
+      };
+
+      const response = await this.requestService.put(
+        'monthly_savings',
+        body,
+        monthId
+      );
+
+      if (!response.id) {
+        this.notifications.error('Request error');
+        return;
+      }
+
+      monthThatAlreadyHasSavedAmount.amountSaved = +savedAmount;
+    } else {
+      const body = {
+        saving_plan_id: savingPlan.id,
+        month: monthInfo.formatedDate,
+        amount_saved: +savedAmount,
+      };
+
+      const response = await this.requestService.post('monthly_savings', body);
+
+      if (!response.id) {
+        this.notifications.error('Request error');
+        return;
+      }
+
+      savingPlan.savingsPerMonth.pushObject({
+        month: monthInfo.formatedDate,
+        amountSaved: +savedAmount,
+      });
+    }
+
+    savingPlan.totalBalance = savingPlan.calculateTotalBalance();
   }
 }

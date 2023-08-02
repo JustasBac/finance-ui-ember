@@ -1,8 +1,11 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class ModalsEditMonthSavingsComponent extends Component {
+  @service('saving-plan') savingPlanService;
+
   @tracked savedAmount = this.args.monthInfo.savedAmount;
   @tracked isModalOpen = false;
 
@@ -10,23 +13,12 @@ export default class ModalsEditMonthSavingsComponent extends Component {
   closeModalAndUpdateDatabase() {
     this.isModalOpen = false;
 
-    const { savingPlan } = this.args;
+    console.log('this.args.monthInfo', this.args.monthInfo);
 
-    //TODO: API Connection to update savedAmount
-
-    const monthThatAlreadyHasSavedAmount = savingPlan.savingsPerMonth.find(
-      (el) => el.month === this.args.monthInfo.formatedDate
+    this.savingPlanService.addMonthlySavings(
+      this.args.savingPlan,
+      this.args.monthInfo,
+      this.savedAmount
     );
-
-    if (monthThatAlreadyHasSavedAmount) {
-      monthThatAlreadyHasSavedAmount.amountSaved = +this.savedAmount;
-    } else {
-      savingPlan.savingsPerMonth.pushObject({
-        month: this.args.monthInfo.formatedDate,
-        amountSaved: +this.savedAmount,
-      });
-    }
-
-    savingPlan.totalBalance = savingPlan.calculateTotalBalance();
   }
 }

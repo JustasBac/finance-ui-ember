@@ -57,18 +57,18 @@ export default class SavingPlan {
       sum += el.amountSaved;
     });
 
-    return sum + +this.startingCapital; //+ in front to 'integrify'
+    return sum; //+ in front to 'integrify'
   }
 
   getMonthsListUntilDeadline() {
-    const { targetAmount, startDate, deadlineDate, totalBalance } = this;
+    const { targetAmount, startDate, deadlineDate, startingCapital } = this;
 
     const monthsListUntilDeadline = this.getListedMonthsUntilDeadline();
 
     let monthlySavingPlanningInfo = [];
 
     let savingsPerFullMonthNeeded =
-      (targetAmount - totalBalance) / monthsListUntilDeadline.length; // when selecting full months meaning, for example, 1st to 31st of May 2023
+      (targetAmount - startingCapital) / monthsListUntilDeadline.length; // when selecting full months meaning, for example, 1st to 31st of May 2023
 
     if (monthsListUntilDeadline.length <= 2) {
       //if there are just 1 or 2 months to save the calculation logic is different

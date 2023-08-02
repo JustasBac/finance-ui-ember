@@ -8,13 +8,12 @@
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     <div>
-      Edit savings
+      {{@monthInfo.formatedDate}}
+      savings for
+      {{@savingPlan.title}}
     </div>
   </:header>
   <:body>
-    <div class="font-light">
-      {{@monthInfo.formatedDate}}
-    </div>
     <div class="font-light text-left mt-1 mb-2">
       Target:
       <span class="font-normal">

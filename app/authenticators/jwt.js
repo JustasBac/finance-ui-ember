@@ -2,7 +2,6 @@ import JWTAuthenticator from 'ember-simple-auth-token/authenticators/jwt';
 
 export default class JWTInternalAuthenticator extends JWTAuthenticator {
   refreshAccessToken(refreshToken) {
-    console.log('refresh run');
     return this.makeRequest(
       this.serverTokenRefreshEndpoint,
       {},

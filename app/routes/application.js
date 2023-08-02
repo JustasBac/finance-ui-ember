@@ -4,6 +4,7 @@ import momentDurationFormatSetup from 'moment-duration-format';
 import { inject as service } from '@ember/service';
 
 export default class ApplicationRoute extends Route {
+  @service('saving-plan') savingPlanService;
   @service router;
   @service requests;
   @service session;
@@ -17,7 +18,9 @@ export default class ApplicationRoute extends Route {
     this.router.on('routeDidChange', (transition) => {
       this.router.previousRouteName = transition.from?.name;
     });
+  }
 
-    // this.requests.fetch('saving_plans');
+  async model() {
+    await this.savingPlanService.fetchAndSetSavingPlans();
   }
 }

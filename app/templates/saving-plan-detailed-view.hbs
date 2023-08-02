@@ -60,12 +60,9 @@
               </span>
             </div>
             <div>
-              Remaining:
+              Left to save:
               <span class="font-bold">
-                {{concat
-                  (sub @model.targetAmount @model.totalBalance)
-                  this.currency
-                }}
+                {{concat this.remainingAmountToSave this.currency}}
               </span>
             </div>
           </div>

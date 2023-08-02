@@ -4,8 +4,8 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class ModalsEditSavingPlanComponent extends Component {
-  @service notifications;
   @service('saving-plan') savingPlanService;
+  @service notifications;
 
   @tracked isModalOpen = false;
 
