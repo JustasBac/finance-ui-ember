@@ -1,7 +1,19 @@
-<div class="avatar online">
-  <div
-    class="w-12 rounded-full bg-slate-400/20 hover:bg-slate-400/40 cursor-pointer text-center"
-  >
-    <FaIcon @icon="user" class="text-center mt-3.5" />
-  </div>
-</div>
+<BasicDropdown as |dd|>
+  <dd.Trigger>
+    <div class="avatar online">
+      <div
+        class="w-12 rounded-full bg-slate-400/20 hover:bg-slate-400/40 cursor-pointer text-center"
+      >
+        <FaIcon @icon="user" class="text-center mt-3.5" />
+      </div>
+    </div>
+  </dd.Trigger>
+  <dd.Content>
+    <div class="p-3 shadow-2xl flex flex-col">
+      <Button class="btn-ghost" {{on 'click' this.logout}}>
+        <FaIcon @icon="right-from-bracket" class="mr-1" />
+        Logout
+      </Button>
+    </div>
+  </dd.Content>
+</BasicDropdown>

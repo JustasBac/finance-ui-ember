@@ -1,7 +1,20 @@
 import Service from '@ember/service';
 import ENV from 'finance-ui-ember/config/environment';
+import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
 export default class RequestsService extends Service {
+  @service session;
+
+  @computed('session.data.authenticated.access_token')
+  get token() {
+    if (this.session.isAuthenticated) {
+      return `Bearer ${this.session.data.authenticated.access_token}`;
+    }
+
+    return null;
+  }
+
   async fetch(endPoint) {
     console.log(`${ENV.apiUrl}`);
     try {

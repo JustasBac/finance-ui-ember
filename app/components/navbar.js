@@ -17,9 +17,4 @@ export default class NavbarComponent extends Component {
     const overlay = document.querySelector('body');
     overlay.classList.remove('blured');
   }
-
-  @action
-  logout() {
-    this.session.invalidate();
-  }
 }
