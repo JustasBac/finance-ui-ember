@@ -16,15 +16,76 @@ export default class RequestsService extends Service {
   }
 
   async fetch(endPoint) {
-    console.log(`${ENV.apiUrl}`);
     try {
       const response = await fetch(`${ENV.apiUrl}/${endPoint}`, {
         method: 'GET',
         headers: {
           // accept: 'application/json',
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MDg3OTcyMywianRpIjoiOTRjNTNmYmUtMzljMC00NmZmLWEwZjAtNDMxMzRmMDhhM2U0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkwODc5NzIzLCJleHAiOjE2OTA4ODA2MjN9.u84taferecWicJeTxFEP0liEx1ofYK7GNTKBT9wCDfU`,
+          Authorization: this.token,
         },
       });
+      return await response.json();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async post(endPoint, bodyData) {
+    try {
+      const options = {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: this.token,
+        },
+        body: JSON.stringify(bodyData),
+      };
+
+      const response = await fetch(`${ENV.apiUrl}/${endPoint}`, options);
+
+      return await response.json();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async delete(endPoint, id) {
+    try {
+      const options = {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: this.token,
+        },
+      };
+
+      const response = await fetch(`${ENV.apiUrl}/${endPoint}/${id}`, options);
+
+      return await response.json();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async put(endPoint, bodyData, id) {
+    try {
+      const options = {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: this.token,
+        },
+        body: JSON.stringify(bodyData),
+      };
+
+      const response = await fetch(`${ENV.apiUrl}/${endPoint}/${id}`, options);
+
       return await response.json();
     } catch (e) {
       console.log(e);

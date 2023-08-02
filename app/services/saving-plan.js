@@ -5,59 +5,46 @@ import moment from 'moment';
 import { inject as service } from '@ember/service';
 export default class SavingPlanService extends Service {
   @service notifications;
+  @service('requests') requestService;
 
-  @tracked savingPlans = [
-    new SavingPlan(
-      1,
-      'Apartment',
-      100000,
-      'EUR',
-      moment('2023-06-09', 'YYYY-MM-DD'),
-      moment('2024-05-02', 'YYYY-MM-DD'),
-      [{ month: 'June 2023', amountSaved: 2700 }],
-      80000
-    ),
-    new SavingPlan(
-      2,
-      'Car',
-      20000,
-      'EUR',
-      moment(),
-      moment().add(6, 'months'),
-      [{ month: 'June 2023', amountSaved: 500 }],
-      100
-    ),
-    // new SavingPlan(
-    //   3, //id
-    //   'Test', //saving plan name (goal)
-    //   2000, //goal amount
-    //   'EUR', //selected currency code
-    //   moment(), //starting date
-    //   moment('2024-04-15', 'YYYY-MM-DD'), //deadline
-    //   [{ month: 'June 2023', amountSaved: 300 }] //savings [June, July, August, Sep ....]
-    // ),
-    // new SavingPlan(
-    //   4, //id
-    //   'Test', //saving plan name (goal)
-    //   2000, //goal amount
-    //   'EUR', //selected currency code
-    //   moment(), //starting date
-    //   moment('2024-04-15', 'YYYY-MM-DD'), //deadline
-    //   [{ month: 'June 2023', amountSaved: 300 }] //savings [June, July, August, Sep ....]
-    // ),
-    // new SavingPlan(
-    //   5, //id
-    //   'Test', //saving plan name (goal)
-    //   2000, //goal amount
-    //   'EUR', //selected currency code
-    //   moment(), //starting date
-    //   moment('2024-04-15', 'YYYY-MM-DD'), //deadline
-    //   [{ month: 'June 2023', amountSaved: 300 }] //savings [June, July, August, Sep ....]
-    // ),
-  ];
+  @tracked savingPlans = [];
 
-  addNewSavingPlan(newSavingPlan) {
-    newSavingPlan.id = this.savingPlans.length + 1;
+  async fetchSavingPlans() {
+    const savingPlans = await this.requestService.fetch('saving_plans');
+
+    this.savingPlans = [];
+
+    for (const savingPlan of savingPlans) {
+      this.savingPlans.pushObject(
+        new SavingPlan(
+          savingPlan['id'],
+          savingPlan['target_title'],
+          savingPlan['target_amount'],
+          savingPlan['currency_code'],
+          moment(savingPlan['start_date']),
+          moment(savingPlan['end_date']),
+          savingPlan['monthly_savings_list'],
+          savingPlan['starting_capital']
+        )
+      );
+    }
+
+    return savingPlans;
+  }
+
+  async addNewSavingPlan(newSavingPlan) {
+    const body = {
+      target_title: newSavingPlan.title,
+      target_amount: newSavingPlan.targetAmount,
+      currency_code: newSavingPlan.currencyCode,
+      start_date: moment(newSavingPlan.startDate).format(),
+      end_date: moment(newSavingPlan.deadlineDate).format(),
+      starting_capital: newSavingPlan.startingCapital,
+    };
+
+    const response = await this.requestService.post('saving_plans', body);
+
+    newSavingPlan.id = +response['id'];
 
     newSavingPlan.monthsListUntilDeadline =
       newSavingPlan.getMonthsListUntilDeadline();
@@ -70,5 +57,49 @@ export default class SavingPlanService extends Service {
         autoClear: true,
       }
     );
+  }
+
+  async deleteSavingPlan(savingPlan) {
+    const response = await this.requestService.delete(
+      'saving_plan',
+      savingPlan['id']
+    );
+
+    if (!response.ok) {
+      this.notifications.error('Delete request error');
+      return false;
+    }
+
+    this.notifications.success('Saving plan was deleted', {
+      autoClear: true,
+    });
+
+    this.savingPlans.removeObject(savingPlan);
+
+    return true;
+  }
+
+  async updateSavingPlan(savingPlan) {
+    const body = {
+      target_title: savingPlan.title,
+      target_amount: savingPlan.targetAmount,
+      currency_code: savingPlan.currencyCode,
+      start_date: moment(savingPlan.startDate).format(),
+      end_date: moment(savingPlan.deadlineDate).format(),
+      starting_capital: savingPlan.startingCapital,
+    };
+
+    const response = await this.requestService.put(
+      'saving_plan',
+      body,
+      savingPlan['id']
+    );
+
+    if (!response.id) {
+      this.notifications.error('Request error');
+      return false;
+    }
+
+    return true;
   }
 }

@@ -11,12 +11,14 @@ export default class ModalsDeleteSavingPlanComponent extends Component {
   @tracked isModalOpen = false;
 
   @action
-  deleteSavingPlan() {
-    this.savingPlanService.savingPlans.removeObject(this.args.savingPlan);
+  async deleteSavingPlan() {
+    const response = await this.savingPlanService.deleteSavingPlan(
+      this.args.savingPlan
+    );
 
-    this.notifications.success('Saving plan was deleted', {
-      autoClear: true,
-    });
+    if (!response) {
+      return;
+    }
 
     this.isModalOpen = false;
     this.router.transitionTo('home');

@@ -23,7 +23,7 @@ export default class SavingPlan {
     savingsPerMonth = [],
     startingCapital = null
   ) {
-    this.id = id;
+    this.id = +id;
     this.title = title;
     this.targetAmount = targetAmount;
     this.currencyCode = currencyCode;

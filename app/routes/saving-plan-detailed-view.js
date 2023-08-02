@@ -12,6 +12,12 @@ export default class SavingPlanDetailedViewRoute extends Route {
   model(params) {
     const savingPlanIdFromParams = params['saving_plan_id'];
 
+    console.log('id', savingPlanIdFromParams);
+    console.log(
+      'this.savingPlanService.savingPlans',
+      this.savingPlanService.savingPlans
+    );
+
     return this.savingPlanService.savingPlans.find(
       (plan) => plan.id === +savingPlanIdFromParams
     );

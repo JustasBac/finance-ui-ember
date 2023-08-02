@@ -5,13 +5,22 @@ import { inject as service } from '@ember/service';
 
 export default class ModalsEditSavingPlanComponent extends Component {
   @service notifications;
+  @service('saving-plan') savingPlanService;
 
   @tracked isModalOpen = false;
 
   @tracked copyOfEditableSavingPlan = this.args.savingPlan.copy();
 
   @action
-  saveChanges() {
+  async saveChanges() {
+    const response = await this.savingPlanService.updateSavingPlan(
+      this.copyOfEditableSavingPlan
+    );
+
+    if (!response) {
+      return;
+    }
+
     const {
       title,
       currencyCode,
