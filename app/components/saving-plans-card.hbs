@@ -1,11 +1,15 @@
 <div class="card bg-base-100 shadow-xl" ...attributes>
   <div
-    class="card-body flex flex-col justify-between max-h-[20rem] p-6 fade-in-animation"
+    class="card-body flex flex-col justify-between h-[19rem] p-6 fade-in-animation"
   >
     <h2 class="text-xl ml-4">
       Saving Plans
     </h2>
-    {{#if this.savingPlanService.savingPlans}}
+    {{#if this.savingPlanService.isLoading}}
+      <div class="text-center">
+        <span class="loading loading-ring loading-lg"></span>
+      </div>
+    {{else if this.savingPlanService.savingPlans}}
       <div class="overflow-auto">
         <table class="table w-full">
           {{! head }}

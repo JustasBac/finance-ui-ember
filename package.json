@@ -95,7 +95,7 @@
     "edition": "octane"
   },
   "dependencies": {
-    "daisyui": "^2.51.6",
+    "daisyui": "^3.5.0",
     "highcharts": "^11.0.1"
   }
 }

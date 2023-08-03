@@ -6,7 +6,10 @@ import { computed } from '@ember/object';
 export default class RequestsService extends Service {
   @service session;
 
-  @computed('session.data.authenticated.access_token')
+  @computed(
+    'session.data.authenticated.access_token',
+    'session.isAuthenticated'
+  )
   get token() {
     if (this.session.isAuthenticated) {
       return `Bearer ${this.session.data.authenticated.access_token}`;

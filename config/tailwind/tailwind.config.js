@@ -19,5 +19,8 @@ module.exports = {
       qHd: '2400px',
     },
   },
+  daisyui: {
+    themes: ['fantasy'],
+  },
   plugins: [require('daisyui')],
 };

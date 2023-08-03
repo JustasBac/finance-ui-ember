@@ -8,8 +8,11 @@ export default class SavingPlanService extends Service {
   @service('requests') requestService;
 
   @tracked savingPlans = [];
+  @tracked isLoading = true;
 
   async fetchAndSetSavingPlans() {
+    this.isLoading = true;
+
     const savingPlans = await this.requestService.fetch('saving_plans');
 
     this.savingPlans = [];
@@ -32,6 +35,8 @@ export default class SavingPlanService extends Service {
         )
       );
     }
+
+    this.isLoading = false;
   }
 
   async addNewSavingPlan(newSavingPlan) {

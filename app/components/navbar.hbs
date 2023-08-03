@@ -1,6 +1,6 @@
 {{#if this.session.isAuthenticated}}
   <div
-    class="navbar bg-neutral text-white xl:h-[15rem] flex items-start xl:pt-4"
+    class="navbar bg-navbar-footer text-white xl:h-[15rem] flex items-start xl:pt-4"
     ...attributes
   >
     <div class="w-full">
@@ -64,32 +64,34 @@
           Finance App
         </LinkTo>
       </div>
-      <div class="ml-6 hidden xl:flex">
-        <ul class="menu menu-horizontal px-1">
-          <li class="bg-purple-300/10 rounded">
-            <LinkTo @route="home" class="gap-x-2">
+      <div class="hidden xl:flex w-full justify-end">
+        <div class="menu menu-horizontal px-1">
+          <li class="rounded-lg bg-neutral-500/10">
+            <LinkTo @route="home" class="gap-x-2 !text-white">
               <FaIcon @icon="house" />
               Home
             </LinkTo>
           </li>
-          <li class="ml-2 bg-purple-300/10 rounded">
-            <LinkTo @route="finance-overview" class="gap-x-2">
+          <li class="ml-2 rounded-lg bg-neutral-500/10">
+            <LinkTo @route="finance-overview" class="gap-x-2 !text-white">
               <FaIcon @icon="coins" />
               Finance overview
             </LinkTo>
           </li>
-        </ul>
-        <div class="flex">
-          <div class="ml-4 mr-3">
-            <CurrencyChooseDropdown />
-          </div>
+        </div>
+        <div class="flex items-center ml-6">
+          <CurrencyChooseDropdown />
+          <LightDarkModeSwitch class="mx-4" />
           <UserIcon />
         </div>
       </div>
     </div>
   </div>
 {{else}}
-  <div class="navbar bg-neutral text-white flex items-start" ...attributes>
+  <div
+    class="navbar bg-navbar-footer text-white flex items-start"
+    ...attributes
+  >
     <LinkTo
       class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
       @route="home"

@@ -21,6 +21,8 @@ export default class ApplicationRoute extends Route {
   }
 
   async model() {
-    await this.savingPlanService.fetchAndSetSavingPlans();
+    if (this.session.isAuthenticated) {
+      await this.savingPlanService.fetchAndSetSavingPlans();
+    }
   }
 }
