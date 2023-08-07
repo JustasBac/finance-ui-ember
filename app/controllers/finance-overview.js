@@ -9,14 +9,14 @@ export default class FinanceOverviewController extends Controller {
   @service notifications;
 
   get previousMonth() {
-    return moment(this.model[0].date, 'MMMM YYYY')
+    return moment(this.model[0].month, 'MMMM YYYY')
       .subtract(1, 'months')
       .endOf('month')
       .format('MMMM YYYY');
   }
 
   get nextMonth() {
-    return moment(this.model[this.model.length - 1].date, 'MMMM YYYY')
+    return moment(this.model[this.model.length - 1].month, 'MMMM YYYY')
       .add(1, 'months')
       .endOf('month')
       .format('MMMM YYYY');
@@ -28,90 +28,51 @@ export default class FinanceOverviewController extends Controller {
   }
 
   @action
-  deleteRow(row) {
-    this.model.removeObject(row);
+  async deleteRow(rowData) {
+    const response = await this.economyService.deleteFinanceData(rowData);
+
+    if (!response) {
+      return;
+    }
+    rowData.income = null;
+    rowData.spendings = null;
+    rowData.totalBalance = null;
   }
 
   @action
   async saveChangedData(currentRowData, newRowData) {
-    const responses = await this.updateEntriesInService(
-      currentRowData,
-      newRowData
-    ); //result of Promise.all()
+    const response = await this.economyService.updateOrAddNewEntry(newRowData);
 
-    if (responses.some((response) => response === false)) {
+    if (!response) {
       return;
     }
-
+    //TODO: COntinue with strict delete
     this.notifications.success(`Changes for ${newRowData.date} were saved`, {
       autoClear: true,
     });
 
-    this.model.removeObject(currentRowData);
-    this.model.pushObject(newRowData);
+    currentRowData.income = newRowData.income;
+    currentRowData.spendings = newRowData.spendings;
+    currentRowData.totalBalance = newRowData.totalBalance;
+    currentRowData.currencyCode = newRowData.currencyCode;
+
     this.sortRowsFromEarliestToLatest();
   }
 
   @action
-  addNewMonth(newMonthData) {
-    this.model.pushObject(newMonthData);
-    this.sortRowsFromEarliestToLatest();
+  async addNewMonth(newMonthData) {
+    const response = await this.economyService.updateOrAddNewEntry(
+      newMonthData
+    );
 
-    this.updateEntriesInService(newMonthData);
+    if (!response) {
+      return;
+    }
+
+    this.sortRowsFromEarliestToLatest();
   }
 
   sortRowsFromEarliestToLatest() {
-    this.model.sort((a, b) => new Date(a.date) - new Date(b.date));
-  }
-
-  updateEntriesInService(currentRowData, newRowData) {
-    const { date, currencyCode } = newRowData;
-
-    const financialDataTypes = ['income', 'spendings', 'totalBalance'];
-
-    if (currencyCode !== currentRowData.currencyCode) {
-      return this.updateAllEntries(newRowData);
-    }
-
-    const requests = financialDataTypes.map(async (dataType) => {
-      if (currentRowData[dataType] !== +newRowData[dataType]) {
-        //check if there are changes per each data type ---> if yes, then proceed with API PUT request
-        const id = this.economyService[`${dataType}ByMonth`].find(
-          (el) => el.month === date
-        ).id;
-
-        const request = await this.economyService.updateEntry(dataType, {
-          date,
-          value: newRowData[dataType],
-          currencyCode,
-          id,
-        });
-
-        return request;
-      }
-    });
-
-    return Promise.all(requests);
-  }
-
-  updateAllEntries(newRowData) {
-    const financialDataTypes = ['income', 'spendings', 'totalBalance'];
-
-    const requests = financialDataTypes.map(async (dataType) => {
-      const id = this.economyService[`${dataType}ByMonth`].find(
-        (el) => el.month === newRowData.date
-      ).id;
-
-      const request = await this.economyService.updateEntry(dataType, {
-        date: newRowData.date,
-        value: newRowData[dataType],
-        currencyCode: newRowData.currencyCode,
-        id,
-      });
-
-      return request;
-    });
-
-    return Promise.all(requests);
+    this.model.sort((a, b) => new Date(a.month) - new Date(b.month));
   }
 }

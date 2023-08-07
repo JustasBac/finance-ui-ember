@@ -12,53 +12,18 @@ export default class EconomyService extends Service {
   @tracked financeDataList = [];
 
   async fetchAndSetFinanceData() {
-    this.isLoading = true;
+    const financeData = await this.requestService.fetch('finance_data');
 
-    const financeData = await this.requestService.fetch(
-      'finance_overview_data'
-    );
-
-    const incomeList = financeData['income_list'];
-    const spendingsList = financeData['spendings_list'];
-    const totalBalanceList = financeData['total_balance_list'];
-
-    const listOfMonthsWithData = this.getMonthsWithData([
-      incomeList,
-      spendingsList,
-      totalBalanceList,
-    ]);
-
-    this.financeDataList = listOfMonthsWithData.map((month) => {
-      const income = incomeList.find((el) => el.month === month);
-      const spendings = spendingsList.find((el) => el.month === month);
-      const totalBalance = totalBalanceList.find((el) => el.month === month);
-
-      const currencyCode = income
-        ? income['currency_code']
-        : spendings
-        ? spendings['currency_code']
-        : totalBalance['currency_code'];
-
+    this.financeDataList = financeData.map((el) => {
       return new FinanceEntry(
-        month,
-        income?.value,
-        spendings?.value,
-        totalBalance?.value,
-        currencyCode
+        el.id,
+        el.month,
+        el.income,
+        el.spendings,
+        el.total_balance,
+        el.currency_code
       );
     });
-  }
-
-  getMonthsWithData(dataArray) {
-    const monthsList = [];
-
-    for (const dataSetByType of dataArray) {
-      for (const dataElement of dataSetByType) {
-        monthsList.push(dataElement['month']);
-      }
-    }
-
-    return [...new Set(monthsList)]; // to remove duplicates
   }
 
   getCurrentMonthsData() {
@@ -75,71 +40,68 @@ export default class EconomyService extends Service {
     return currentMonthData;
   }
 
-  async updateEntry(dataType, month, newValue) {
-    console.log('this', this.financeDataList);
+  async updateOrAddNewEntry(financeData) {
+    const { month, currencyCode, income, spendings, totalBalance, id } =
+      financeData;
 
-    //TODO: Continue with refactored logic
+    const existingEntry = this.financeDataList.find(
+      (el) => el.month === financeData.month
+    );
 
-    // const existingEntry = this[`${dataType}ByMonth`].find(
-    //   (el) => el.date === month
-    // );
+    const body = {
+      month,
+      currency_code: currencyCode,
+      income,
+      spendings,
+      total_balance: totalBalance,
+    };
 
-    // if (!existingEntry) {
-    //   //POST
-    //   const currencyCode = this.currencyService.selectedCurrency.code;
+    if (!existingEntry) {
+      //POST
+      const response = await this.requestService.post('finance_data', body);
 
-    //   const body = {
-    //     month,
-    //     value,
-    //     currency_code: currencyCode,
-    //   };
+      if (!response || !response.id) {
+        this.notifications.error('Request error');
+        return false;
+      }
 
-    //   const url = `finance_overview_data/${
-    //     dataType === 'totalBalance' ? 'total_balance' : dataType
-    //   }`;
+      this.financeDataList.pushObject(
+        new FinanceEntry(
+          response.id,
+          response.month,
+          response.income,
+          response.spendings,
+          response.total_balance,
+          response.currency_code
+        )
+      );
 
-    //   const response = await this.requestService.post(url, body);
+      return true;
+    }
 
-    //   if (!response || !response.id) {
-    //     this.notifications.error('Request error');
-    //     return false;
-    //   }
+    //PUT
+    const response = await this.requestService.put('finance_data', body, id);
 
-    //   this[`${dataType}ByMonth`].pushObject({
-    //     date: month,
-    //     value,
-    //     currencyCode,
-    //   });
+    if (!response || !response.id) {
+      this.notifications.error('Request error');
+      return false;
+    }
 
-    //   return true;
-    // }
+    return true;
+  }
 
-    // //PUT
-    // const body = {
-    //   value,
-    //   currency_code: currencyCode,
-    // };
+  async deleteFinanceData(data) {
+    const response = await this.requestService.delete('finance_data', data.id);
 
-    // const url = `finance_overview_data/${
-    //   dataType === 'totalBalance' ? 'total_balance' : dataType
-    // }`;
+    if (!response.ok) {
+      this.notifications.error('Delete request error');
+      return false;
+    }
 
-    // const response = await this.requestService.put(url, body, id);
+    this.notifications.success(`Finance data for ${data.month} was deleted`, {
+      autoClear: true,
+    });
 
-    // if (!response || !response.id) {
-    //   this.notifications.error('Request error');
-    //   return false;
-    // }
-
-    // console.log('newDATA', newData);
-
-    // existingEntry.value = value;
-    // existingEntry.currency_code = currencyCode;
-
-    // console.log('existingEntry:', existingEntry);
-
-    // this[`${dataType}ByMonth`] = [...this[`${dataType}ByMonth`]];
-
-    // return true;
+    return true;
   }
 }

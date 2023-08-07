@@ -4,11 +4,11 @@ import { action } from '@ember/object';
 
 export default class ModalsEditFinanceDataComponent extends Component {
   @tracked isModalOpen = false;
-  @tracked copiedData = { ...this.args.data };
+  @tracked copiedData = this.args.data.copy();
 
   @action
   resetEditableValuesToDefault() {
-    this.copiedData = { ...this.args.data };
+    this.copiedData = this.args.data.copy();
   }
 
   @action

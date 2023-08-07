@@ -4,32 +4,17 @@
     <div class="flex flex-col xl:flex-row gap-12">
       <div class="basis-1/4 flex flex-col justify-between gap-3">
         <TotalBalance class="basis-1/2" />
-        {{!-- <div class="flex gap-3 basis-1/2">
-          <IncomeCard
-            @data={{this.economyService.incomeByMonth}}
-            @onChange={{fn this.updateFinancialEntry 'income'}}
-            class="basis-1/2"
-          />
-          <SpendingCard
-            @data={{this.economyService.spendingsByMonth}}
-            @onChange={{fn this.updateFinancialEntry 'spendings'}}
-            class="basis-1/2"
-          />
-        </div> --}}
+        <div class="flex gap-3 basis-1/2">
+          <IncomeCard class="basis-1/2" />
+          <SpendingCard class="basis-1/2" />
+        </div>
       </div>
       <SavingPlansCard class="basis-3/4" />
     </div>
     <div
       class="card bg-base-100 shadow-xl mt-6 qHd:mt-16 pt-2 fade-in-animation"
     >
-      {{!-- <Charts::EconomyOverview
-        class="shrink-0"
-        @data={{hash
-          totalBalance=this.economyService.totalBalanceByMonth
-          income=this.economyService.incomeByMonth
-          spendings=this.economyService.spendingsByMonth
-        }}
-      /> --}}
+      <Charts::EconomyOverview class="shrink-0" />
     </div>
   </PageLayout>
 </EmberWormhole>

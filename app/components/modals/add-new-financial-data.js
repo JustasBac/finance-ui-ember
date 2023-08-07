@@ -10,7 +10,7 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
 
   @tracked isModalOpen = false;
   @tracked financeData = {
-    date: this.args.candidateMonth,
+    month: this.args.candidateMonth,
     income: null,
     spendings: null,
     totalBalance: null,
@@ -21,7 +21,7 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
   @action
   resetEditableValues() {
     this.financeData = {
-      date: this.args.candidateMonth,
+      month: this.args.candidateMonth,
       income: null,
       spendings: null,
       totalBalance: null,
@@ -48,7 +48,7 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
     this.args.onAddNewMonth(this.financeData);
 
     this.notifications.success(
-      `Financial data for ${this.financeData.date} was added`,
+      `Financial data for ${this.financeData.month} was added`,
       {
         autoClear: true,
       }

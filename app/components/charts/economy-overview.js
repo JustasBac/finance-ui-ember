@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default class ChartsEconomyOverviewComponent extends Component {
   @service('currency') currencyService;
+  @service('economy') economyService;
 
   @tracked savedData = [];
 
@@ -37,33 +38,31 @@ export default class ChartsEconomyOverviewComponent extends Component {
   }
 
   get xAxisCategories() {
-    return this.args.data.income.map((el) => el.month); //assuming all three have the same date
+    return this.economyService.financeDataList.map((el) => el.month); //assuming all three have the same date
   }
 
   get chartData() {
-    const { income, totalBalance, spendings } = this.args.data;
-
     return [
       {
         name: 'Total Savings',
         marker: {
           symbol: 'diamond',
         },
-        data: totalBalance.map((el) => +el.value),
+        data: this.economyService.financeDataList.map((el) => el.totalBalance),
       },
       {
         name: 'Spendings',
         marker: {
           symbol: 'diamond',
         },
-        data: spendings.map((el) => +el.value),
+        data: this.economyService.financeDataList.map((el) => el.spendings),
       },
       {
         name: 'Income',
         marker: {
           symbol: 'square',
         },
-        data: income.map((el) => +el.value),
+        data: this.economyService.financeDataList.map((el) => el.income),
       },
     ];
   }

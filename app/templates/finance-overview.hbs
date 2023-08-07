@@ -55,7 +55,7 @@
                     />
                     <Modals::DeleteFinanceData
                       @data={{row}}
-                      @onConfirmDeletion={{this.deleteRow}}
+                      @onConfirmDeletion={{fn this.deleteRow row}}
                     />
                   </td>
                 </tr>
