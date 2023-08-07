@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import moment from 'moment';
 
 export default class ModalsAddOrEditFinanceDataEntryComponent extends Component {
   @service('currency') currencyService;
@@ -10,37 +9,36 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
 
   @tracked isModalOpen = false;
 
-  @tracked currentMonthValue = this.economyService.getCurrentMonthsData(
-    this.args.data
-  )?.value; //shown on button
-  @tracked editedCurrentMonthValue = this.currentMonthValue || null; //used for input because we don't want to update the value without user confirming it
+  @tracked currentMonthData = this.economyService.getCurrentMonthsData();
 
-  get currency() {
-    const currentMonthData = this.economyService.getCurrentMonthsData(
-      this.args.data
-    );
+  @tracked valueInput = this.value || null; //used for input because we don't want to update the value without user confirming it
 
-    if (!currentMonthData) {
-      return this.currencyService.selectedCurrency.symbol;
-    }
-
+  get currencySymbol() {
     return this.currencyService.getCurrencySymbol(
-      currentMonthData.currencyCode
+      this.currentMonthData.currencyCode
     );
   }
 
-  get currentMonth() {
-    return moment().format('MMMM YYYY');
+  get value() {
+    const { type } = this.args;
+
+    return this.currentMonthData[
+      type === 'total balance' ? 'totalBalance' : type
+    ];
   }
 
   @action
   saveChanges() {
-    this.currentMonthValue = this.editedCurrentMonthValue;
+    const type =
+      this.args.type === 'total balance' ? 'totalBalance' : this.args.type;
 
-    this.args.onChange({
-      date: this.currentMonth,
-      value: +this.editedCurrentMonthValue,
-    });
+    console.log('this.currentMonthData', this.currentMonthData);
+
+    this.economyService.updateEntry(
+      type,
+      this.currentMonthData.month,
+      this.valueInput
+    );
 
     this.isModalOpen = false;
   }

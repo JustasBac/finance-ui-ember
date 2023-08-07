@@ -9,7 +9,6 @@ export default class SavingPlanDetailedViewController extends Controller {
   @tracked activeTab = 'planning'; //default
 
   get currency() {
-    console.log('this.model', this.model);
     return this.currencyService.getCurrencySymbol(this.model.currencyCode);
   }
 

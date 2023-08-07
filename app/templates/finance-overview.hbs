@@ -34,19 +34,19 @@
               {{#each this.model as |row|}}
                 <tr>
                   <td>
-                    {{row.date}}
+                    {{row.month}}
                   </td>
                   <td>
                     {{if row.income row.income '-'}}
-                    {{row.currencySymbol}}
+                    {{compute (fn this.getCurrencySymbol row.currencyCode)}}
                   </td>
                   <td>
                     {{if row.spendings row.spendings '-'}}
-                    {{row.currencySymbol}}
+                    {{compute (fn this.getCurrencySymbol row.currencyCode)}}
                   </td>
                   <td>
                     {{if row.totalBalance row.totalBalance '-'}}
-                    {{row.currencySymbol}}
+                    {{compute (fn this.getCurrencySymbol row.currencyCode)}}
                   </td>
                   <td class="flex">
                     <Modals::EditFinanceData

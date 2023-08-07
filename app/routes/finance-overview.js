@@ -11,33 +11,8 @@ export default class FinanceOverviewRoute extends Route {
   }
 
   model() {
-    const { incomeByMonth, spendingsByMonth, totalBalanceByMonth } =
-      this.economyService;
+    const data = this.economyService.financeDataList;
 
-    //we need to find the longest array for cases when income, spendings and totalBalance are entered for different months
-    const dataArray = [incomeByMonth, spendingsByMonth, totalBalanceByMonth];
-
-    const lengths = dataArray.map((a) => a.length);
-
-    const longestArrayIndex = lengths.indexOf(Math.max(...lengths));
-
-    const data = dataArray[longestArrayIndex].map((el) => {
-      const income = incomeByMonth.find((obj) => obj.date === el.date);
-      const spendings = spendingsByMonth.find((obj) => obj.date === el.date);
-      const totalBalance = totalBalanceByMonth.find(
-        (obj) => obj.date === el.date
-      );
-
-      return {
-        date: el.date,
-        income: income?.value,
-        spendings: spendings?.value,
-        totalBalance: totalBalance?.value,
-        currencySymbol: this.currencyService.getCurrencySymbol(el.currencyCode),
-        currencyCode: el.currencyCode,
-      };
-    });
-
-    return data.sort((a, b) => new Date(a.date) - new Date(b.date));
+    return data.sort((a, b) => new Date(a.month) - new Date(b.month));
   }
 }

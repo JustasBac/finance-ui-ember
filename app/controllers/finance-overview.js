@@ -5,6 +5,8 @@ import { inject as service } from '@ember/service';
 
 export default class FinanceOverviewController extends Controller {
   @service('economy') economyService;
+  @service('currency') currencyService;
+  @service notifications;
 
   get previousMonth() {
     return moment(this.model[0].date, 'MMMM YYYY')
@@ -21,18 +23,33 @@ export default class FinanceOverviewController extends Controller {
   }
 
   @action
+  getCurrencySymbol(currencyCode) {
+    return this.currencyService.getCurrencySymbol(currencyCode);
+  }
+
+  @action
   deleteRow(row) {
     this.model.removeObject(row);
   }
 
   @action
-  saveChangedData(currentRowData, newRowData) {
+  async saveChangedData(currentRowData, newRowData) {
+    const responses = await this.updateEntriesInService(
+      currentRowData,
+      newRowData
+    ); //result of Promise.all()
+
+    if (responses.some((response) => response === false)) {
+      return;
+    }
+
+    this.notifications.success(`Changes for ${newRowData.date} were saved`, {
+      autoClear: true,
+    });
+
     this.model.removeObject(currentRowData);
     this.model.pushObject(newRowData);
-
     this.sortRowsFromEarliestToLatest();
-
-    this.updateEntriesInService(newRowData);
   }
 
   @action
@@ -47,11 +64,54 @@ export default class FinanceOverviewController extends Controller {
     this.model.sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
-  updateEntriesInService(newMonthData) {
-    const { date, income, spendings, totalBalance } = newMonthData;
+  updateEntriesInService(currentRowData, newRowData) {
+    const { date, currencyCode } = newRowData;
 
-    this.economyService.updateIncomeEntry({ date, value: income });
-    this.economyService.updateSpendingsEntry({ date, value: spendings });
-    this.economyService.updateTotalBalanceEntry({ date, value: totalBalance });
+    const financialDataTypes = ['income', 'spendings', 'totalBalance'];
+
+    if (currencyCode !== currentRowData.currencyCode) {
+      return this.updateAllEntries(newRowData);
+    }
+
+    const requests = financialDataTypes.map(async (dataType) => {
+      if (currentRowData[dataType] !== +newRowData[dataType]) {
+        //check if there are changes per each data type ---> if yes, then proceed with API PUT request
+        const id = this.economyService[`${dataType}ByMonth`].find(
+          (el) => el.month === date
+        ).id;
+
+        const request = await this.economyService.updateEntry(dataType, {
+          date,
+          value: newRowData[dataType],
+          currencyCode,
+          id,
+        });
+
+        return request;
+      }
+    });
+
+    return Promise.all(requests);
+  }
+
+  updateAllEntries(newRowData) {
+    const financialDataTypes = ['income', 'spendings', 'totalBalance'];
+
+    const requests = financialDataTypes.map(async (dataType) => {
+      const id = this.economyService[`${dataType}ByMonth`].find(
+        (el) => el.month === newRowData.date
+      ).id;
+
+      const request = await this.economyService.updateEntry(dataType, {
+        date: newRowData.date,
+        value: newRowData[dataType],
+        currencyCode: newRowData.currencyCode,
+        id,
+      });
+
+      return request;
+    });
+
+    return Promise.all(requests);
   }
 }

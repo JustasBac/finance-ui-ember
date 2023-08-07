@@ -2,54 +2,71 @@ import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
+import FinanceEntry from 'finance-ui-ember/models/finance-entry';
 
 export default class EconomyService extends Service {
   @service('currency') currencyService;
+  @service('requests') requestService;
+  @service notifications;
 
-  @tracked incomeByMonth = this.getIncomeByMonth();
-  @tracked spendingsByMonth = this.getSpendingsByMonth();
-  @tracked totalBalanceByMonth = this.getTotalBalanceByMonth();
+  @tracked financeDataList = [];
 
-  getIncomeByMonth() {
-    //api request
-    const response = [
-      // { date: 'April 2023', value: 2650, currencyCode: 'EUR' },
-      // { date: 'May 2023', value: 2650, currencyCode: 'EUR' },
-      // { date: 'June 2023', value: 2860, currencyCode: 'EUR' },
-      { date: 'July 2023', value: 2800, currencyCode: 'EUR' },
-    ];
+  async fetchAndSetFinanceData() {
+    this.isLoading = true;
 
-    return response;
+    const financeData = await this.requestService.fetch(
+      'finance_overview_data'
+    );
+
+    const incomeList = financeData['income_list'];
+    const spendingsList = financeData['spendings_list'];
+    const totalBalanceList = financeData['total_balance_list'];
+
+    const listOfMonthsWithData = this.getMonthsWithData([
+      incomeList,
+      spendingsList,
+      totalBalanceList,
+    ]);
+
+    this.financeDataList = listOfMonthsWithData.map((month) => {
+      const income = incomeList.find((el) => el.month === month);
+      const spendings = spendingsList.find((el) => el.month === month);
+      const totalBalance = totalBalanceList.find((el) => el.month === month);
+
+      const currencyCode = income
+        ? income['currency_code']
+        : spendings
+        ? spendings['currency_code']
+        : totalBalance['currency_code'];
+
+      return new FinanceEntry(
+        month,
+        income?.value,
+        spendings?.value,
+        totalBalance?.value,
+        currencyCode
+      );
+    });
   }
 
-  getSpendingsByMonth() {
-    //api request
-    const response = [
-      // { date: 'April 2023', value: 800, currencyCode: 'EUR' },
-      // { date: 'May 2023', value: 850, currencyCode: 'EUR' },
-      // { date: 'June 2023', value: 1300, currencyCode: 'EUR' },
-      { date: 'July 2023', value: 1100, currencyCode: 'EUR' },
-    ];
+  getMonthsWithData(dataArray) {
+    const monthsList = [];
 
-    return response;
+    for (const dataSetByType of dataArray) {
+      for (const dataElement of dataSetByType) {
+        monthsList.push(dataElement['month']);
+      }
+    }
+
+    return [...new Set(monthsList)]; // to remove duplicates
   }
 
-  getTotalBalanceByMonth() {
-    //api request
-    const response = [
-      // { date: 'April 2023', value: 36800, currencyCode: 'EUR' },
-      // { date: 'May 2023', value: 38000, currencyCode: 'EUR' },
-      // { date: 'June 2023', value: 39000, currencyCode: 'EUR' },
-      { date: 'July 2023', value: 39000, currencyCode: 'EUR' },
-    ];
-
-    return response;
-  }
-
-  getCurrentMonthsData(data) {
+  getCurrentMonthsData() {
     const currentMonth = moment().format('MMMM YYYY');
 
-    const currentMonthData = data.find((el) => el.date === currentMonth);
+    const currentMonthData = this.financeDataList.find(
+      (el) => el.month === currentMonth
+    );
 
     if (!currentMonthData) {
       return null;
@@ -58,37 +75,71 @@ export default class EconomyService extends Service {
     return currentMonthData;
   }
 
-  updateTotalBalanceEntry(newData) {
-    this.updateEntry('totalBalance', newData);
-  }
+  async updateEntry(dataType, month, newValue) {
+    console.log('this', this.financeDataList);
 
-  updateIncomeEntry(newData) {
-    this.updateEntry('income', newData);
-  }
+    //TODO: Continue with refactored logic
 
-  updateSpendingsEntry(newData) {
-    this.updateEntry('spendings', newData);
-  }
+    // const existingEntry = this[`${dataType}ByMonth`].find(
+    //   (el) => el.date === month
+    // );
 
-  updateEntry(dateType, { date, value }) {
-    const existingEntry = this[`${dateType}ByMonth`].find(
-      (el) => el.date === date
-    );
+    // if (!existingEntry) {
+    //   //POST
+    //   const currencyCode = this.currencyService.selectedCurrency.code;
 
-    if (!existingEntry) {
-      const currencyCode = this.currencyService.selectedCurrency.code;
+    //   const body = {
+    //     month,
+    //     value,
+    //     currency_code: currencyCode,
+    //   };
 
-      this[`${dateType}ByMonth`].pushObject({
-        date,
-        value,
-        currencyCode,
-      });
+    //   const url = `finance_overview_data/${
+    //     dataType === 'totalBalance' ? 'total_balance' : dataType
+    //   }`;
 
-      return;
-    }
+    //   const response = await this.requestService.post(url, body);
 
-    existingEntry.value = value;
+    //   if (!response || !response.id) {
+    //     this.notifications.error('Request error');
+    //     return false;
+    //   }
 
-    this[`${dateType}ByMonth`] = [...this[`${dateType}ByMonth`]];
+    //   this[`${dataType}ByMonth`].pushObject({
+    //     date: month,
+    //     value,
+    //     currencyCode,
+    //   });
+
+    //   return true;
+    // }
+
+    // //PUT
+    // const body = {
+    //   value,
+    //   currency_code: currencyCode,
+    // };
+
+    // const url = `finance_overview_data/${
+    //   dataType === 'totalBalance' ? 'total_balance' : dataType
+    // }`;
+
+    // const response = await this.requestService.put(url, body, id);
+
+    // if (!response || !response.id) {
+    //   this.notifications.error('Request error');
+    //   return false;
+    // }
+
+    // console.log('newDATA', newData);
+
+    // existingEntry.value = value;
+    // existingEntry.currency_code = currencyCode;
+
+    // console.log('existingEntry:', existingEntry);
+
+    // this[`${dataType}ByMonth`] = [...this[`${dataType}ByMonth`]];
+
+    // return true;
   }
 }

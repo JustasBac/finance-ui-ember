@@ -37,7 +37,7 @@ export default class ChartsEconomyOverviewComponent extends Component {
   }
 
   get xAxisCategories() {
-    return this.args.data.income.map((el) => el.date); //assuming all three have the same date
+    return this.args.data.income.map((el) => el.month); //assuming all three have the same date
   }
 
   get chartData() {

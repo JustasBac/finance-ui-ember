@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default class ApplicationRoute extends Route {
   @service('saving-plan') savingPlanService;
+  @service('economy') economyService;
   @service router;
   @service requests;
   @service session;
@@ -23,6 +24,7 @@ export default class ApplicationRoute extends Route {
   async model() {
     if (this.session.isAuthenticated) {
       await this.savingPlanService.fetchAndSetSavingPlans();
+      await this.economyService.fetchAndSetFinanceData();
     }
   }
 }
