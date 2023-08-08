@@ -4,7 +4,7 @@
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
     {{if this.value this.value '-'}}
-    {{this.currencySymbol}}
+    {{this.currency.symbol}}
     {{#if this.currencyDiffersFromAppCurrency}}
       <FaIcon
         class="text-base text-yellow-600 mb-0.5"
@@ -19,7 +19,7 @@
             Warning!
           </span>
           Currency
-          {{this.currentMonthData.currencyCode}}
+          {{this.currency.code}}
           differs from the selected app currency
           {{this.currencyService.selectedCurrency.code}}
         </div>
@@ -31,7 +31,7 @@
   <:header>
     <div>
       {{capitalize @type}}
-      {{concat '(' this.currencySymbol ')'}}
+      {{concat '(' this.currency.symbol ')'}}
       <div class="font-normal">
         {{this.month}}
       </div>

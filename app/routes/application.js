@@ -4,11 +4,8 @@ import momentDurationFormatSetup from 'moment-duration-format';
 import { inject as service } from '@ember/service';
 
 export default class ApplicationRoute extends Route {
-  @service('saving-plan') savingPlanService;
-  @service('economy') economyService;
-  @service('currency') currencyService;
+  @service('requests') requestService;
   @service router;
-  @service requests;
   @service session;
 
   async beforeModel() {
@@ -25,9 +22,7 @@ export default class ApplicationRoute extends Route {
 
   async model() {
     if (this.session.isAuthenticated) {
-      await this.savingPlanService.fetchAndSetSavingPlans();
-      await this.economyService.fetchAndSetFinanceData();
-      await this.currencyService.fetchAndSetCurrencyData();
+      await this.requestService.loadAppData();
     }
   }
 }

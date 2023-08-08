@@ -1,0 +1,14 @@
+<InputField
+  class="mb-4"
+  @value={{@username}}
+  @onInput={{fn (mut @username)}}
+  @label="Username"
+  @placeholder="Enter your username"
+/>
+<InputField
+  @value={{@password}}
+  @onInput={{fn (mut @password)}}
+  @type="password"
+  @label="Password"
+  @placeholder="Enter your password"
+/>

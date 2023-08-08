@@ -12,7 +12,7 @@ export default class LoginController extends Controller {
   @tracked password = '';
 
   @action
-  signIn() {
+  async signIn() {
     const { username, password } = this;
 
     if (!username || !password) {
@@ -23,6 +23,9 @@ export default class LoginController extends Controller {
       return;
     }
 
-    this.authenticationService.authenticate(username, password);
+    const loginResponse = await this.authenticationService.authenticate(
+      username,
+      password
+    );
   }
 }

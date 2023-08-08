@@ -1,29 +1,24 @@
-{{page-title 'Login'}}
+{{page-title 'Register'}}
 <div
   class="flex flex-col gap-4 justify-center items-center h-full z-10 mb-36 fade-in-animation"
 >
-  <div>
-    <Alert
-      @text="TODO: Info card about test user. With button to fill everything auto"
-    />
-  </div>
   <div class="bg-white p-12 w-200 rounded-2xl">
     <div class="mb-4">
       <h3 class="font-semibold text-2xl text-gray-800">
-        Sign In
+        Welcome!
       </h3>
       <p class="text-gray-500 font-light">
-        Please sign in to your account.
+        Create your account
       </p>
     </div>
     <Forms::User @username={{this.username}} @password={{this.password}} />
-    <Button class="w-full mt-8 btn-neutral" {{on 'click' this.signIn}}>
-      Log in
+    <Button class="w-full mt-8 btn-neutral">
+      Create account
     </Button>
     <div class="text-center mt-8 font-light text-gray-500">
-      Don't have an account?
-      <LinkTo @route="register" class="font-bold hover:underline">
-        Sign up
+      Already have an account?
+      <LinkTo @route="login" class="font-bold hover:underline">
+        Sign in
       </LinkTo>
     </div>
   </div>

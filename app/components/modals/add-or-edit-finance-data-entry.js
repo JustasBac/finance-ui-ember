@@ -11,21 +11,26 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
   @tracked isModalOpen = false;
   @tracked valueInput = this.value || null; //used for input because we don't want to update the value without user confirming it
 
-  @tracked currentMonthData = this.economyService.getCurrentMonthsData();
+  get currentMonthData() {
+    return this.economyService.getCurrentMonthsData();
+  }
 
-  get currencySymbol() {
+  get currency() {
     if (!this.currentMonthData) {
       return this.currencyService.selectedCurrency.symbol;
     }
 
-    return this.currencyService.getCurrencySymbol(
-      this.currentMonthData.currencyCode
-    );
+    return {
+      code: this.currentMonthData.currencyCode,
+      symbol: this.currencyService.getCurrencySymbol(
+        this.currentMonthData.currencyCode
+      ),
+    };
   }
 
   get currencyDiffersFromAppCurrency() {
     return (
-      this.currentMonthData.currencyCode !==
+      this.currentMonthData?.currencyCode !==
       this.currencyService.selectedCurrency.code
     );
   }
@@ -37,15 +42,15 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
   }
 
   get value() {
-    if (!this.currentMonthData) {
+    const currentMonthData = this.economyService.getCurrentMonthsData();
+
+    if (!currentMonthData) {
       return null;
     }
 
     const { type } = this.args;
 
-    return this.currentMonthData[
-      type === 'total balance' ? 'totalBalance' : type
-    ];
+    return currentMonthData[type === 'total balance' ? 'totalBalance' : type];
   }
 
   @action
@@ -76,11 +81,8 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
       return;
     }
 
-    if (!this.currentMonthData) {
-      this.currentMonthData = this.economyService.getCurrentMonthsData();
-      return;
-    }
+    const currentMonthData = this.economyService.getCurrentMonthsData();
 
-    this.currentMonthData[type] = +this.valueInput;
+    currentMonthData[type] = +this.valueInput;
   }
 }

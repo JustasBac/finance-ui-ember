@@ -3,7 +3,8 @@ import { inject as service } from '@ember/service';
 
 export default class AuthenticationService extends Service {
   @service('saving-plan') savingPlanService;
-  @service('requests') requestService;
+  @service('economy') economyService;
+  @service('currency') currencyService;
   @service notifications;
   @service session;
 
@@ -14,7 +15,11 @@ export default class AuthenticationService extends Service {
         password,
       });
 
-      this.savingPlanService.fetchAndSetSavingPlans();
+      await this.savingPlanService.fetchAndSetSavingPlans();
+      await this.economyService.fetchAndSetFinanceData();
+      await this.currencyService.fetchAndSetCurrencyData();
+
+      return true;
       // load initial display name mapping after internal login
     } catch (e) {
       if (e.status === 401) {
@@ -26,6 +31,8 @@ export default class AuthenticationService extends Service {
       this.notifications.error(`Unknown authentication error: ${e}`, {
         autoClear: true,
       });
+
+      return false;
     }
   }
 }

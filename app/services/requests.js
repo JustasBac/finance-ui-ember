@@ -4,6 +4,9 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 
 export default class RequestsService extends Service {
+  @service('saving-plan') savingPlanService;
+  @service('economy') economyService;
+  @service('currency') currencyService;
   @service session;
 
   @computed(
@@ -93,5 +96,13 @@ export default class RequestsService extends Service {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async loadAppData() {
+    await Promise.all([
+      this.savingPlanService.fetchAndSetSavingPlans(),
+      this.economyService.fetchAndSetFinanceData(),
+      this.currencyService.fetchAndSetCurrencyData(),
+    ]);
   }
 }
