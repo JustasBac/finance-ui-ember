@@ -33,6 +33,9 @@ export default class ChartsEconomyOverviewComponent extends Component {
         crosshairs: true,
         shared: true,
         valueSuffix: this.currencyService.selectedCurrency.symbol,
+        pointFormatter: function () {
+          return `<b>${this.series.name}:</b> ${this.y} ${this.currencyCode} <br/>`;
+        },
       },
     };
   }
@@ -48,21 +51,27 @@ export default class ChartsEconomyOverviewComponent extends Component {
         marker: {
           symbol: 'diamond',
         },
-        data: this.economyService.financeDataList.map((el) => el.totalBalance),
+        data: this.economyService.financeDataList.map((el) => {
+          return { y: +el.totalBalance, currencyCode: el.currencyCode };
+        }),
       },
       {
         name: 'Spendings',
         marker: {
           symbol: 'diamond',
         },
-        data: this.economyService.financeDataList.map((el) => el.spendings),
+        data: this.economyService.financeDataList.map((el) => {
+          return { y: +el.spendings, currencyCode: el.currencyCode };
+        }),
       },
       {
         name: 'Income',
         marker: {
           symbol: 'square',
         },
-        data: this.economyService.financeDataList.map((el) => el.income),
+        data: this.economyService.financeDataList.map((el) => {
+          return { y: +el.income, currencyCode: el.currencyCode };
+        }),
       },
     ];
   }

@@ -11,9 +11,9 @@ export default class FinanceEntry {
   constructor(id, month, income, spendings, totalBalance, currencyCode) {
     this.id = id;
     this.month = month;
-    this.income = income;
-    this.spendings = spendings;
-    this.totalBalance = totalBalance;
+    this.income = +income;
+    this.spendings = +spendings;
+    this.totalBalance = +totalBalance;
     this.currencyCode = currencyCode;
   }
 

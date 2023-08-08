@@ -1,12 +1,29 @@
-<Modals::-TriggerButton>
+<Modals::-TriggerButton class="mt-1">
   <p
-    class="text-2xl text-center font-bold btn btn-ghost whitespace-nowrap"
+    class="text-2xl text-center font-bold whitespace-nowrap lowercase btn btn-ghost inline py-2"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
     {{if this.value this.value '-'}}
     {{this.currencySymbol}}
+    {{#if this.currencyDiffersFromAppCurrency}}
+      <FaIcon
+        class="text-base text-yellow-600 mb-0.5"
+        @icon="circle-exclamation"
+      />
+    {{/if}}
     <Tooltip @side="bottom">
       Click to edit
+      {{#if this.currencyDiffersFromAppCurrency}}
+        <div class="mt-2">
+          <span class="font-bold">
+            Warning!
+          </span>
+          Currency
+          {{this.currentMonthData.currencyCode}}
+          differs from the selected app currency
+          {{this.currencyService.selectedCurrency.code}}
+        </div>
+      {{/if}}
     </Tooltip>
   </p>
 </Modals::-TriggerButton>

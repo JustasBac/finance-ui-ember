@@ -13,8 +13,6 @@ export default class ModalsEditMonthSavingsComponent extends Component {
   closeModalAndUpdateDatabase() {
     this.isModalOpen = false;
 
-    console.log('this.args.monthInfo', this.args.monthInfo);
-
     this.savingPlanService.addMonthlySavings(
       this.args.savingPlan,
       this.args.monthInfo,

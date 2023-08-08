@@ -74,7 +74,7 @@ export default class RequestsService extends Service {
     }
   }
 
-  async put(endPoint, bodyData, id) {
+  async put(endPoint, bodyData) {
     try {
       const options = {
         method: 'PUT',
@@ -87,7 +87,7 @@ export default class RequestsService extends Service {
         body: JSON.stringify(bodyData),
       };
 
-      const response = await fetch(`${ENV.apiUrl}/${endPoint}/${id}`, options);
+      const response = await fetch(`${ENV.apiUrl}/${endPoint}`, options);
 
       return await response.json();
     } catch (e) {

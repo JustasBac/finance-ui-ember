@@ -23,6 +23,13 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
     );
   }
 
+  get currencyDiffersFromAppCurrency() {
+    return (
+      this.currentMonthData.currencyCode !==
+      this.currencyService.selectedCurrency.code
+    );
+  }
+
   get month() {
     return this.currentMonthData
       ? this.currentMonthData.month

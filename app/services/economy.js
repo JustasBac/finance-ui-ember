@@ -80,7 +80,7 @@ export default class EconomyService extends Service {
     }
 
     //PUT
-    const response = await this.requestService.put('finance_data', body, id);
+    const response = await this.requestService.put(`finance_data/${id}`, body);
 
     if (!response || !response.id) {
       this.notifications.error('Request error');
@@ -90,8 +90,11 @@ export default class EconomyService extends Service {
     return true;
   }
 
-  async deleteFinanceData(data) {
-    const response = await this.requestService.delete('finance_data', data.id);
+  async deleteFinanceData(data, strictDelete = false) {
+    const response = await this.requestService.delete(
+      'finance_data',
+      `${data.id}?strict_delete=${strictDelete}`
+    );
 
     if (!response.ok) {
       this.notifications.error('Delete request error');

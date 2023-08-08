@@ -6,6 +6,7 @@ import { inject as service } from '@ember/service';
 export default class ApplicationRoute extends Route {
   @service('saving-plan') savingPlanService;
   @service('economy') economyService;
+  @service('currency') currencyService;
   @service router;
   @service requests;
   @service session;
@@ -18,6 +19,7 @@ export default class ApplicationRoute extends Route {
     //save previous route name in the router service. Used for <GoBackButton /> component
     this.router.on('routeDidChange', (transition) => {
       this.router.previousRouteName = transition.from?.name;
+      this.router.params = transition.from?.params;
     });
   }
 
@@ -25,6 +27,7 @@ export default class ApplicationRoute extends Route {
     if (this.session.isAuthenticated) {
       await this.savingPlanService.fetchAndSetSavingPlans();
       await this.economyService.fetchAndSetFinanceData();
+      await this.currencyService.fetchAndSetCurrencyData();
     }
   }
 }

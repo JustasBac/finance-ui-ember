@@ -23,7 +23,13 @@
           Cancel
         </Button>
       </Modals::-TriggerButton>
-      <Button class="btn-primary" {{on 'click' @onConfirmDeletion}}>
+      <Button
+        class="btn-primary"
+        {{on
+          'click'
+          (queue @onConfirmDeletion (fn (mut this.isModalOpen) false))
+        }}
+      >
         Confirm
       </Button>
     </div>

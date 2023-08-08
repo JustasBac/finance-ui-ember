@@ -37,26 +37,34 @@
                     {{row.month}}
                   </td>
                   <td>
-                    {{if row.income row.income '-'}}
-                    {{compute (fn this.getCurrencySymbol row.currencyCode)}}
+                    <span class="flex">
+                      {{if row.income row.income '-'}}
+                      <CurrencyInfo @currencyCode={{row.currencyCode}} />
+                    </span>
                   </td>
                   <td>
-                    {{if row.spendings row.spendings '-'}}
-                    {{compute (fn this.getCurrencySymbol row.currencyCode)}}
+                    <span class="flex">
+                      {{if row.spendings row.spendings '-'}}
+                      <CurrencyInfo @currencyCode={{row.currencyCode}} />
+                    </span>
                   </td>
                   <td>
-                    {{if row.totalBalance row.totalBalance '-'}}
-                    {{compute (fn this.getCurrencySymbol row.currencyCode)}}
+                    <span class="flex">
+                      {{if row.totalBalance row.totalBalance '-'}}
+                      <CurrencyInfo @currencyCode={{row.currencyCode}} />
+                    </span>
                   </td>
                   <td class="flex">
                     <Modals::EditFinanceData
                       @data={{row}}
                       @onSave={{fn this.saveChangedData row}}
                     />
-                    <Modals::DeleteFinanceData
-                      @data={{row}}
-                      @onConfirmDeletion={{fn this.deleteRow row}}
-                    />
+                    {{#if (compute this.isDeleteAllowed row)}}
+                      <Modals::DeleteFinanceData
+                        @data={{row}}
+                        @onConfirmDeletion={{fn this.deleteRow row}}
+                      />
+                    {{/if}}
                   </td>
                 </tr>
               {{/each}}

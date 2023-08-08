@@ -97,9 +97,8 @@ export default class SavingPlanService extends Service {
     };
 
     const response = await this.requestService.put(
-      'saving_plan',
-      body,
-      savingPlan['id']
+      `saving_plan/${savingPlan['id']}`,
+      body
     );
 
     if (!response.id) {
@@ -129,9 +128,8 @@ export default class SavingPlanService extends Service {
       };
 
       const response = await this.requestService.put(
-        'monthly_savings',
-        body,
-        monthId
+        `monthly_savings/${monthId}`,
+        body
       );
 
       if (!response.id) {

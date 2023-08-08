@@ -1,0 +1,20 @@
+<span class="w-fit flex">
+  {{unless @hideCurrencySymbol this.currencySymbol}}
+  {{#if this.currencyDiffersFromAppCurrency}}
+    <span class="ml-1 flex items-center justify-center">
+      <FaIcon
+        class="text-base text-yellow-600 ml-1"
+        @icon="circle-exclamation"
+      />
+      <Popover>
+        <span class="font-bold">
+          Warning!
+        </span>
+        Currency
+        {{concat '(' @currencyCode ')'}}
+        differs from the selected app currency
+        {{this.currencyService.selectedCurrency.code}}
+      </Popover>
+    </span>
+  {{/if}}
+</span>

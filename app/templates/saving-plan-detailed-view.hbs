@@ -9,8 +9,10 @@
           Target amount
         </:header>
         <:body>
-          {{@model.targetAmount}}
-          {{this.currency}}
+          <span class="flex">
+            {{@model.targetAmount}}
+            <CurrencyInfo @currencyCode={{@model.currencyCode}} />
+          </span>
         </:body>
       </Card>
       <Card class="basis-1/5" @icon="calendar-days">
@@ -47,22 +49,25 @@
         </:header>
         <:body>
           <div class="flex flex-col text-sm font-normal whitespace-nowrap">
-            <span>
+            <div class="flex">
               Starting capital:
-              <span class="font-bold">
-                {{concat @model.startingCapital this.currency}}
-              </span>
-            </span>
-            <div>
-              Total saved:
-              <span class="font-bold">
-                {{concat @model.totalBalance this.currency}}
+              <span class="ml-1 font-bold flex">
+                {{@model.startingCapital}}
+                <CurrencyInfo @currencyCode={{@model.currencyCode}} />
               </span>
             </div>
-            <div>
+            <div class="flex">
+              Total saved:
+              <span class="ml-1 font-bold flex">
+                {{@model.totalBalance}}
+                <CurrencyInfo @currencyCode={{@model.currencyCode}} />
+              </span>
+            </div>
+            <div class="flex">
               Left to save:
-              <span class="font-bold">
-                {{concat this.remainingAmountToSave this.currency}}
+              <span class="ml-1 font-bold flex">
+                {{this.remainingAmountToSave}}
+                <CurrencyInfo @currencyCode={{@model.currencyCode}} />
               </span>
             </div>
           </div>

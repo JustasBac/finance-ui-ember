@@ -5,7 +5,7 @@
   <dd.Trigger>
     <label
       tabindex="0"
-      class="rounded cursor-pointer font-light text-bas btn btn-ghost hover:bg-slate-400/40 text-lg"
+      class="rounded cursor-pointer font-light text-bas btn btn-ghost hover:bg-slate-400/40 text-lg lowercase"
     >
       {{this.currencyService.selectedCurrency.symbol}}
       <Tooltip>
@@ -23,7 +23,7 @@
   </dd.Trigger>
   <dd.Content>
     <div class="shadow-xl card-body w-[70rem]">
-      <CurrencySelection::Dashboard />
+      <CurrencySelection::Dashboard @onCurrencyChange={{dd.actions.close}} />
       <div class="card-actions justify-end">
         <Button class="btn-sm" {{on 'click' dd.actions.close}}>
           Close

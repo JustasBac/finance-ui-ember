@@ -1,11 +1,11 @@
-<div class="alert {{this.type}} shadow-lg max-w-[25rem]">
-  <div class="flex w-full">
+<div class="alert {{this.type}} shadow-lg max-w-[25rem]" ...attributes>
+  <div class="flex w-full items-center">
     {{#if (eq @type 'info')}}
       <FaIcon @icon="info-circle" class="text-xl" />
     {{else}}
       <FaIcon @icon="triangle-exclamation" class="text-xl" />
     {{/if}}
-    <span class="w-full text-center">
+    <span class="ml-1.5 w-full text-center">
       {{@text}}
     </span>
   </div>

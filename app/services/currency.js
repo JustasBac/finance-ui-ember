@@ -2,9 +2,13 @@ import Service from '@ember/service';
 import currencies from 'finance-ui-ember/static-data/currencies';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class CurrencyService extends Service {
-  @tracked selectedCurrency = this.getDefaultSelectedCurrency();
+  @service('requests') requestService;
+  @service notifications;
+
+  @tracked selectedCurrency = {};
 
   currencies = this.getCurrencies();
 
@@ -17,8 +21,31 @@ export default class CurrencyService extends Service {
     return currencies;
   }
 
-  getDefaultSelectedCurrency() {
-    return this.currencies.find((currency) => currency.code === 'EUR');
+  async fetchAndSetCurrencyData() {
+    const response = await this.requestService.fetch('app_currency');
+
+    const userCurrencyCode = response['app_currency_code'];
+
+    this.selectedCurrency = this.currencies.find(
+      (currency) => currency.code === userCurrencyCode
+    );
+  }
+
+  async selectNewCurrency(newCurrencyCode) {
+    const body = {
+      app_currency_code: newCurrencyCode,
+    };
+
+    const response = await this.requestService.put('app_currency', body);
+
+    if (response['app_currency_code']) {
+      this.selectedCurrency = this.currencies.find(
+        (currency) => currency.code === newCurrencyCode
+      );
+      return;
+    }
+
+    this.notifications.error('Request error');
   }
 
   @action

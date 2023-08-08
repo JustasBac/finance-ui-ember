@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import { action } from '@ember/object';
 
 export default class CurrencySelectionDashboardComponent extends Component {
   @service('currency') currencyService;
@@ -16,5 +17,13 @@ export default class CurrencySelectionDashboardComponent extends Component {
     }
 
     return this.currencyService.currencies;
+  }
+
+  @action
+  selectCurrency(currency) {
+    this.currencyService.selectNewCurrency(currency.code);
+    if (typeof this.args.onCurrencyChange === 'function') {
+      this.args.onCurrencyChange();
+    }
   }
 }
