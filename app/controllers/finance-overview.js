@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default class FinanceOverviewController extends Controller {
   @service('economy') economyService;
-  @service('currency') currencyService;
+  @service('user') userService;
   @service notifications;
 
   get previousMonth() {

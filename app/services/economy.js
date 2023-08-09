@@ -5,7 +5,7 @@ import moment from 'moment';
 import FinanceEntry from 'finance-ui-ember/models/finance-entry';
 
 export default class EconomyService extends Service {
-  @service('currency') currencyService;
+  @service('user') userService;
   @service('requests') requestService;
   @service notifications;
 

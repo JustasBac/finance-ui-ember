@@ -6,7 +6,7 @@ import { inject as service } from '@ember/service';
 
 export default class ModalsCreateNewSavingPlanComponent extends Component {
   @service('input-validation') validationService;
-  @service('currency') currencyService;
+  @service('user') userService;
   @service('saving-plan') savingPlanService;
   @service notifications;
 
@@ -19,8 +19,7 @@ export default class ModalsCreateNewSavingPlanComponent extends Component {
 
     if (!currencyCode) {
       //if no currency was selected, apply currency that is selected as a global app currency
-      this.newSavingPlan.currencyCode =
-        this.currencyService.selectedCurrency.code;
+      this.newSavingPlan.currencyCode = this.userService.selectedCurrency.code;
     }
 
     if (!title || !targetAmount) {

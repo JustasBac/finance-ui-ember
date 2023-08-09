@@ -7,15 +7,15 @@
       tabindex="0"
       class="rounded cursor-pointer font-light text-bas btn btn-ghost hover:bg-slate-400/40 text-lg lowercase"
     >
-      {{this.currencyService.selectedCurrency.symbol}}
+      {{this.userService.selectedCurrency.symbol}}
       <Tooltip>
         <span class="font-bold">
           Selected currency:
         </span>
         <div>
-          {{this.currencyService.selectedCurrency.name}}
+          {{this.userService.selectedCurrency.name}}
           <span class="text-xs">
-            {{concat '(' this.currencyService.selectedCurrency.code ')'}}
+            {{concat '(' this.userService.selectedCurrency.code ')'}}
           </span>
         </div>
       </Tooltip>

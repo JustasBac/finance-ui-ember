@@ -3,8 +3,9 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class ChartsEconomyOverviewComponent extends Component {
-  @service('currency') currencyService;
+  @service('user') userService;
   @service('economy') economyService;
+  @service('requests') requestService;
 
   @tracked savedData = [];
 
@@ -26,13 +27,13 @@ export default class ChartsEconomyOverviewComponent extends Component {
       },
       yAxis: {
         title: {
-          text: this.currencyService.selectedCurrency.symbol,
+          text: this.userService.selectedCurrency.symbol,
         },
       },
       tooltip: {
         crosshairs: true,
         shared: true,
-        valueSuffix: this.currencyService.selectedCurrency.symbol,
+        valueSuffix: this.userService.selectedCurrency.symbol,
         pointFormatter: function () {
           return `<b>${this.series.name}:</b> ${this.y} ${this.currencyCode} <br/>`;
         },

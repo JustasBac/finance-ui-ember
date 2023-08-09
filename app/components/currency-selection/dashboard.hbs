@@ -23,7 +23,7 @@
     <span
       class="whitespace-nowrap text-sm hover:bg-gray-100 rounded p-2 cursor-pointer
         {{if
-          (eq currency.code this.currencyService.selectedCurrency.code)
+          (eq currency.code this.userService.selectedCurrency.code)
           'bg-gray-100'
         }}"
       {{on 'click' (fn this.selectCurrency currency)}}

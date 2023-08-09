@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "npm run tailwind:build && ember build --environment=production",
+    "build": "yarn tailwind:build && ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
@@ -53,6 +53,7 @@
     "ember-data": "~4.4.0",
     "ember-fetch": "^8.1.1",
     "ember-highcharts": "^3.2.1",
+    "ember-intl": "^6.0.0-beta.6",
     "ember-load-initializers": "^2.1.2",
     "ember-math-helpers": "^3.0.0",
     "ember-moment": "^10.0.0",

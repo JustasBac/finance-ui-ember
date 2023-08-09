@@ -5,7 +5,7 @@ import moment from 'moment';
 
 export default class SavingPlansTableComponent extends Component {
   @service('saving-plan') savingPlanService;
-  @service('currency') currencyService;
+  @service('user') userService;
 
   @action
   calculateMonthlySavingsNeeded(savingPlanInfo) {
@@ -19,7 +19,7 @@ export default class SavingPlansTableComponent extends Component {
 
     const amountToSavePerMonth = targetAmount / differenceFromNowUntilDeadline;
     const savingPlanCurrencySymbol =
-      this.currencyService.getCurrencySymbol(currencyCode);
+      this.userService.getCurrencySymbol(currencyCode);
 
     return `${Math.round(
       amountToSavePerMonth
@@ -34,7 +34,7 @@ export default class SavingPlansTableComponent extends Component {
 
     const amountToSavePerDay = targetAmount / differenceFromNowUntilDeadline;
     const savingPlanCurrencySymbol =
-      this.currencyService.getCurrencySymbol(currencyCode);
+      this.userService.getCurrencySymbol(currencyCode);
 
     return `${Math.round(amountToSavePerDay)} ${savingPlanCurrencySymbol}/day`;
   }

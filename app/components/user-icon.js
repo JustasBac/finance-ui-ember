@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 
 export default class UserIconComponent extends Component {
   @service session;
+  @service('user') userService;
 
   @action
   logout() {

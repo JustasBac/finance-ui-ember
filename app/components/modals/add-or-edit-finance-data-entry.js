@@ -5,8 +5,9 @@ import { action } from '@ember/object';
 import moment from 'moment';
 
 export default class ModalsAddOrEditFinanceDataEntryComponent extends Component {
-  @service('currency') currencyService;
+  @service('user') userService;
   @service('economy') economyService;
+  @service('requests') requestService;
 
   @tracked isModalOpen = false;
   @tracked valueInput = this.value || null; //used for input because we don't want to update the value without user confirming it
@@ -17,12 +18,12 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
 
   get currency() {
     if (!this.currentMonthData) {
-      return this.currencyService.selectedCurrency.symbol;
+      return this.userService.selectedCurrency.symbol;
     }
 
     return {
       code: this.currentMonthData.currencyCode,
-      symbol: this.currencyService.getCurrencySymbol(
+      symbol: this.userService.getCurrencySymbol(
         this.currentMonthData.currencyCode
       ),
     };
@@ -31,7 +32,7 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
   get currencyDiffersFromAppCurrency() {
     return (
       this.currentMonthData?.currencyCode !==
-      this.currencyService.selectedCurrency.code
+      this.userService.selectedCurrency.code
     );
   }
 
@@ -60,7 +61,7 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
 
     const currencyCode = this.currentMonthData
       ? this.currentMonthData.currencyCode
-      : this.currencyService.selectedCurrency.code;
+      : this.userService.selectedCurrency.code;
 
     const body = {
       id: this.currentMonthData?.id,

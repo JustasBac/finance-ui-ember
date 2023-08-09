@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class NavbarComponent extends Component {
-  @service('currency') currencyService;
+  @service('user') userService;
   @service session;
 
   @action

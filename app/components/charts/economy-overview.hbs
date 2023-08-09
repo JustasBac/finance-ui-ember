@@ -1,1 +1,7 @@
-<HighCharts @chartOptions={{this.chartOptions}} @content={{this.chartData}} />
+{{#if this.requestService.isAppDataLoading}}
+  <div class="flex items-center justify-center h-full">
+    <span class="loading loading-ring loading-lg"></span>
+  </div>
+{{else}}
+  <HighCharts @chartOptions={{this.chartOptions}} @content={{this.chartData}} />
+{{/if}}

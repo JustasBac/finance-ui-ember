@@ -2,12 +2,15 @@ import Service from '@ember/service';
 import ENV from 'finance-ui-ember/config/environment';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class RequestsService extends Service {
   @service('saving-plan') savingPlanService;
   @service('economy') economyService;
-  @service('currency') currencyService;
+  @service('user') userService;
   @service session;
+
+  @tracked isAppDataLoading = true;
 
   @computed(
     'session.data.authenticated.access_token',
@@ -99,10 +102,14 @@ export default class RequestsService extends Service {
   }
 
   async loadAppData() {
+    this.isAppDataLoading = true;
+
     await Promise.all([
       this.savingPlanService.fetchAndSetSavingPlans(),
       this.economyService.fetchAndSetFinanceData(),
-      this.currencyService.fetchAndSetCurrencyData(),
+      this.userService.fetchAndSetUserCurrencyData(),
     ]);
+
+    this.isAppDataLoading = false;
   }
 }

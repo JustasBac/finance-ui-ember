@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class FormsFinanceDataComponent extends Component {
-  @service('currency') currencyService;
+  @service('user') userService;
 
   @tracked selectedCurrency = this.getSelectedCurrency(); //on default take currency that is globaly selected
 
@@ -12,10 +12,10 @@ export default class FormsFinanceDataComponent extends Component {
     const { currencyCode } = this.args.data;
 
     if (!currencyCode) {
-      return this.currencyService.selectedCurrency;
+      return this.userService.selectedCurrency;
     }
 
-    return this.currencyService.currencies.find(
+    return this.userService.currencies.find(
       (currency) => currency.code === currencyCode
     );
   }
@@ -23,7 +23,7 @@ export default class FormsFinanceDataComponent extends Component {
   @action
   changeCurrency(newCurrency) {
     this.args.data.currencyCode = newCurrency.code;
-    this.args.data.currencySymbol = this.currencyService.getCurrencySymbol(
+    this.args.data.currencySymbol = this.userService.getCurrencySymbol(
       newCurrency.code
     );
     this.selectedCurrency = newCurrency;

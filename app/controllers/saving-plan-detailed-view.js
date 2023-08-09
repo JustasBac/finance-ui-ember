@@ -4,12 +4,12 @@ import moment from 'moment';
 import { tracked } from '@glimmer/tracking';
 
 export default class SavingPlanDetailedViewController extends Controller {
-  @service('currency') currencyService;
+  @service('user') userService;
 
   @tracked activeTab = 'planning'; //default
 
   get currency() {
-    return this.currencyService.getCurrencySymbol(this.model.currencyCode);
+    return this.userService.getCurrencySymbol(this.model.currencyCode);
   }
 
   get timeFromStartDate() {

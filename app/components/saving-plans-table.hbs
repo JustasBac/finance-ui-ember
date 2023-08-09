@@ -42,7 +42,7 @@
               {{savingPlan.targetAmount}}
               {{compute
                 (fn
-                  this.currencyService.getCurrencySymbol savingPlan.currencyCode
+                  this.userService.getCurrencySymbol savingPlan.currencyCode
                 )
               }}
             </td>

@@ -3,5 +3,6 @@ import { inject as service } from '@ember/service';
 
 export default class SavingPlansCardComponent extends Component {
   @service('saving-plan') savingPlanService;
-  @service('currency') currencyService;
+  @service('user') userService;
+  @service('requests') requestService;
 }

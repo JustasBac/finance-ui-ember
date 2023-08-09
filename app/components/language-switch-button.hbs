@@ -1,0 +1,51 @@
+<ul class="menu menu-horizontal" ...attributes>
+  <li class="rounded-lg">
+    <details {{did-insert this.registerElement}}>
+      <summary class="xl:!text-white">
+        {{#if (eq this.intl.primaryLocale 'en-us')}}
+          <img
+            class="object-fill w-8 h-5 rounded fade-in-animation"
+            src="/assets/images/english-flag.png"
+            alt="English flag"
+          />
+        {{else if (eq this.intl.primaryLocale 'de-de')}}
+          <img
+            class="object-fill w-8 h-5 rounded fade-in-animation"
+            src="/assets/images/german-flag.png"
+            alt="German flag"
+          />
+        {{/if}}
+      </summary>
+      <ul
+        class="bg-base-100 shadow text-gray-700 z-50 w-32 flex flex-col justify-center items-center"
+      >
+        <li class="w-full">
+          <div
+            class="swap-on flex items-center gap-1"
+            {{on 'click' (fn this.switchLanguage 'en-us')}}
+          >
+            <img
+              class="object-fill w-8 h-5 rounded"
+              src="/assets/images/english-flag.png"
+              alt="English flag"
+            />
+            English
+          </div>
+        </li>
+        <li class="w-full">
+          <div
+            class="swap-off flex items-center gap-1"
+            {{on 'click' (fn this.switchLanguage 'de-de')}}
+          >
+            <img
+              class="object-fill w-8 h-5 rounded"
+              src="/assets/images/german-flag.png"
+              alt="German flag"
+            />
+            Deutsch
+          </div>
+        </li>
+      </ul>
+    </details>
+  </li>
+</ul>

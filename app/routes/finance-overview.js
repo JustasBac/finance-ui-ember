@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default class FinanceOverviewRoute extends Route {
   @service('economy') economyService;
-  @service('currency') currencyService;
+  @service('user') userService;
   @service session;
 
   beforeModel(transition) {

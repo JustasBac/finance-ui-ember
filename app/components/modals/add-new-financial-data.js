@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class ModalsAddNewFinancialDataComponent extends Component {
-  @service('currency') currencyService;
+  @service('user') userService;
   @service('input-validation') validationService;
   @service notifications;
 
@@ -14,8 +14,8 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
     income: null,
     spendings: null,
     totalBalance: null,
-    currencyCode: this.currencyService.selectedCurrency.code,
-    currencySymbol: this.currencyService.selectedCurrency.symbol,
+    currencyCode: this.userService.selectedCurrency.code,
+    currencySymbol: this.userService.selectedCurrency.symbol,
   };
 
   @action
@@ -25,8 +25,8 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
       income: null,
       spendings: null,
       totalBalance: null,
-      currencyCode: this.currencyService.selectedCurrency.code,
-      currencySymbol: this.currencyService.selectedCurrency.symbol,
+      currencyCode: this.userService.selectedCurrency.code,
+      currencySymbol: this.userService.selectedCurrency.symbol,
     };
   }
 

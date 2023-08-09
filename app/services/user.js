@@ -1,14 +1,19 @@
 import Service from '@ember/service';
-import currencies from 'finance-ui-ember/static-data/currencies';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+import currencies from 'finance-ui-ember/static-data/currencies';
+import { action } from '@ember/object';
 
-export default class CurrencyService extends Service {
+export default class UserService extends Service {
   @service('requests') requestService;
+  @service('saving-plan') savingPlanService;
+  @service('economy') economyService;
+  @service('user') userService;
   @service notifications;
+  @service session;
 
   @tracked selectedCurrency = {};
+  username = '';
 
   currencies = this.getCurrencies();
 
@@ -21,10 +26,12 @@ export default class CurrencyService extends Service {
     return currencies;
   }
 
-  async fetchAndSetCurrencyData() {
+  async fetchAndSetUserCurrencyData() {
     const response = await this.requestService.fetch('app_currency');
 
     const userCurrencyCode = response['app_currency_code'];
+
+    this.username = response['username'];
 
     this.selectedCurrency = this.currencies.find(
       (currency) => currency.code === userCurrencyCode
@@ -52,5 +59,31 @@ export default class CurrencyService extends Service {
   getCurrencySymbol(currencyCode) {
     return this.currencies.find((currency) => currency.code === currencyCode)
       .symbol;
+  }
+
+  async authenticate(username, password) {
+    try {
+      await this.session.authenticate('authenticator:jwt', {
+        username,
+        password,
+      });
+
+      await this.requestService.loadAppData();
+
+      return true;
+      // load initial display name mapping after internal login
+    } catch (e) {
+      if (e.status === 401) {
+        return this.notifications.error('Invalid credentials', {
+          autoClear: true,
+        });
+      }
+
+      this.notifications.error(`Unknown authentication error: ${e}`, {
+        autoClear: true,
+      });
+
+      return false;
+    }
   }
 }

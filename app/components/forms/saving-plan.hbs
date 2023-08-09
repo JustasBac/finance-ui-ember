@@ -33,7 +33,7 @@
     <PowerSelect
       class="h-[3rem] !p-2"
       @selected={{this.selectedCurrency}}
-      @options={{this.currencyService.currencies}}
+      @options={{this.userService.currencies}}
       @searchEnabled={{true}}
       @searchField="searchableText"
       @onChange={{this.changeCurrency}} as |currency|

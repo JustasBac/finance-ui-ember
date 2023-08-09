@@ -6,13 +6,13 @@ import { tracked } from '@glimmer/tracking';
 export default class LoginController extends Controller {
   @service('input-validation') validationService;
   @service notifications;
-  @service('authentication') authenticationService;
+  @service('user') userService;
 
   @tracked username = '';
   @tracked password = '';
 
   @action
-  async signIn() {
+  signIn() {
     const { username, password } = this;
 
     if (!username || !password) {
@@ -23,9 +23,6 @@ export default class LoginController extends Controller {
       return;
     }
 
-    const loginResponse = await this.authenticationService.authenticate(
-      username,
-      password
-    );
+    this.userService.authenticate(username, password);
   }
 }
