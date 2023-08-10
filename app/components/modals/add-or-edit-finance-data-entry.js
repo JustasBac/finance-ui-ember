@@ -8,6 +8,7 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
   @service('user') userService;
   @service('economy') economyService;
   @service('requests') requestService;
+  @service intl;
 
   @tracked isModalOpen = false;
   @tracked valueInput = this.value || null; //used for input because we don't want to update the value without user confirming it
@@ -40,6 +41,12 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
     return (
       this.currentMonthData.currencyCode !==
       this.userService.selectedCurrency.code
+    );
+  }
+
+  get type() {
+    return this.intl.t(
+      `home-page.edit-finance-modal.${this.args.type.split(' ').join('-')}`
     );
   }
 

@@ -15,3 +15,30 @@ register-page:
   create-account: Ein Konto erstellen
   create-account-button: Benutzerkonto erstellen
   already-have-an-account: Sie haben bereits ein Konto?
+home-page:
+  title: Überblick
+  total-balance:
+    title: Gesamtsaldo
+    tooltip-info: |-
+      Ihre gesamten Ersparnisse. 
+      Sie können es jederzeit bearbeiten
+    open-panel-tooltip: Öffnen Sie das Finanzübersichtsfenster
+  edit-finance-modal:
+    total-balance: Gesamtsaldo
+    spendings: Ausgaben
+    income: Einkommen
+    input-label: Geben Sie Ihren {type} für {month} ein
+  income: Einkommen
+  spendings: Ausgaben
+  saving-plans-card:
+    title: Sparpläne
+    table:
+      name: Name
+      progress: Fortschritt
+      deadline: Frist
+      details-button: Details
+    alert-no-saving-plans: Sie haben keine Sparpläne
+    create-new-button: Erstellen
+modals:
+  close-button: Schließen
+  save-button: Speichern

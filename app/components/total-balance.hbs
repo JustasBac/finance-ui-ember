@@ -3,11 +3,11 @@
     class="card-body flex flex-col justify-start items-center p-4 relative fade-in-animation"
   >
     <h2 class="text-base text-gray-600">
-      Total Balance
+      {{t 'home-page.total-balance.title'}}
       <span class="ml-1">
         <FaIcon @icon="circle-info" />
         <Tooltip>
-          Your total savings. You can edit it any time
+          {{t 'home-page.total-balance.tooltip-info'}}
         </Tooltip>
       </span>
       <div class="text-sm text-gray-500 text-center">
@@ -20,7 +20,7 @@
       >
         <FaIcon @icon="sliders" />
         <Tooltip>
-          Open finance overview panel
+          {{t 'home-page.total-balance.open-panel-tooltip'}}
         </Tooltip>
       </LinkTo>
     </h2>

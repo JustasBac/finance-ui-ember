@@ -3,7 +3,7 @@
     class="card-body flex flex-col justify-between h-[19rem] p-6 fade-in-animation"
   >
     <h2 class="text-xl ml-4">
-      Saving Plans
+      {{t 'home-page.saving-plans-card.title'}}
     </h2>
     {{#if this.requestService.isAppDataLoading}}
       <div class="text-center">
@@ -16,13 +16,13 @@
           <thead>
             <tr>
               <th class="bg-base-100 !relative">
-                Name
+                {{t 'home-page.saving-plans-card.table.name'}}
               </th>
               <th class="bg-base-100 hidden xl:flex">
-                Progress
+                {{t 'home-page.saving-plans-card.table.progress'}}
               </th>
               <th class="bg-base-100">
-                Deadline
+                {{t 'home-page.saving-plans-card.table.deadline'}}
               </th>
             </tr>
           </thead>
@@ -75,7 +75,7 @@
                     @route="saving-plan-detailed-view"
                     @model={{savingPlan.id}}
                   >
-                    Details
+                    {{t 'home-page.saving-plans-card.table.details-button'}}
                   </LinkTo>
                 </td>
               </tr>
@@ -85,7 +85,9 @@
       </div>
     {{else}}
       <div class="flex justify-center">
-        <Alert @text="You have no saving plans" />
+        <Alert
+          @text={{t 'home-page.saving-plans-card.alert-no-saving-plans'}}
+        />
       </div>
     {{/if}}
     <div class="self-end mt-4">

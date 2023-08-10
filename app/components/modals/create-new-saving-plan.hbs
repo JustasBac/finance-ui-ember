@@ -3,8 +3,8 @@
     class="btn btn-primary btn-sm"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
-    <FaIcon @icon="plus" class="mr-1" />
-    Create a new
+    <FaIcon @icon="plus" />
+    {{t 'home-page.saving-plans-card.create-new-button'}}
   </span>
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>

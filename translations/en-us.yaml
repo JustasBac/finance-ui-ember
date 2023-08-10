@@ -15,3 +15,28 @@ register-page:
   create-account: Create your account
   create-account-button: Create account
   already-have-an-account: Already have an account?
+home-page:
+  title: Overview
+  total-balance:
+    title: Total Balance
+    tooltip-info: Your total savings. You can edit it any time
+    open-panel-tooltip: Open finance overview panel
+  edit-finance-modal:
+    total-balance: Total balance
+    spendings: Spendings
+    income: Income
+    input-label: Enter your {type} for {month}
+  income: Income
+  spendings: Spendings
+  saving-plans-card:
+    title: Saving Plans
+    table:
+      name: Name
+      progress: Progress
+      deadline: Deadline
+      details-button: Details
+    alert-no-saving-plans: You have no saving plans
+    create-new-button: Create a new
+modals:
+  close-button: Close
+  save-button: Save

@@ -38,21 +38,25 @@
   <:body>
     <InputField
       class="mr-2"
-      @label={{concat (capitalize @type) ' (' this.currency.symbol ')'}}
+      @label={{concat (capitalize this.type) ' (' this.currency.symbol ')'}}
       @type="number"
       @value={{this.valueInput}}
       @onInput={{fn (mut this.valueInput)}}
-      @placeholder="Enter your {{@type}} for {{this.month}}"
+      @placeholder={{t
+        'home-page.edit-finance-modal.input-label'
+        type=this.type
+        month=this.month
+      }}
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
-          Close
+          {{t 'modals.close-button'}}
         </Button>
       </Modals::-TriggerButton>
       <Button class="btn-primary" {{on 'click' this.saveChanges}}>
-        <FaIcon @icon="floppy-disk" class="mr-1" />
-        Save
+        <FaIcon @icon="floppy-disk" />
+        {{t 'modals.save-button'}}
       </Button>
     </div>
   </:body>

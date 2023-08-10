@@ -8,6 +8,7 @@ export default class ApplicationRoute extends Route {
   @service router;
   @service session;
   @service intl;
+  @service moment;
 
   async beforeModel() {
     await this.session.setup();
@@ -18,8 +19,11 @@ export default class ApplicationRoute extends Route {
       const language = localStorage.getItem('language');
 
       this.intl.setLocale(language);
+
+      this.moment.setLocale(language.split('-')[0]); //de-de ----> de
     } else {
       this.intl.setLocale('en-us');
+      this.moment.setLocale('en');
     }
 
     //save previous route name in the router service. Used for <GoBackButton /> component
