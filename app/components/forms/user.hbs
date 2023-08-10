@@ -2,13 +2,13 @@
   class="mb-4"
   @value={{@username}}
   @onInput={{fn (mut @username)}}
-  @label="Username"
-  @placeholder="Enter your username"
+  @label={{t 'login-page.username'}}
+  @placeholder={{t 'login-page.username-placeholder'}}
 />
 <InputField
   @value={{@password}}
   @onInput={{fn (mut @password)}}
   @type="password"
-  @label="Password"
-  @placeholder="Enter your password"
+  @label={{t 'login-page.password'}}
+  @placeholder={{t 'login-page.password-placeholder'}}
 />

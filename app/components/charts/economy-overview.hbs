@@ -1,7 +1,14 @@
+<h3 class="text-center text-xl my-1">
+  My finance data
+</h3>
 {{#if this.requestService.isAppDataLoading}}
   <div class="flex items-center justify-center h-full">
     <span class="loading loading-ring loading-lg"></span>
   </div>
-{{else}}
+{{else if this.chartData}}
   <HighCharts @chartOptions={{this.chartOptions}} @content={{this.chartData}} />
+{{else}}
+  <div class="flex justify-center items-center h-full">
+    <Alert class="mb-12" @text="There is no financial data" />
+  </div>
 {{/if}}

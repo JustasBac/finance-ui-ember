@@ -18,7 +18,10 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
 
   get currency() {
     if (!this.currentMonthData) {
-      return this.userService.selectedCurrency.symbol;
+      return {
+        code: this.userService.selectedCurrency.code,
+        symbol: this.userService.selectedCurrency.symbol,
+      };
     }
 
     return {
@@ -30,8 +33,12 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
   }
 
   get currencyDiffersFromAppCurrency() {
+    if (!this.currentMonthData) {
+      return false;
+    }
+
     return (
-      this.currentMonthData?.currencyCode !==
+      this.currentMonthData.currencyCode !==
       this.userService.selectedCurrency.code
     );
   }

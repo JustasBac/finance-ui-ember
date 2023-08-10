@@ -2,23 +2,25 @@
 <div
   class="flex flex-col gap-4 justify-center items-center h-full z-10 mb-36 fade-in-animation"
 >
-  <div class="bg-white p-12 w-200 rounded-2xl">
+  <div class="bg-white p-12 w-[25rem] rounded-2xl shadow-md">
     <div class="mb-4">
       <h3 class="font-semibold text-2xl text-gray-800">
-        Welcome!
+        {{t 'register-page.welcome'}}
       </h3>
       <p class="text-gray-500 font-light">
-        Create your account
+        {{t 'register-page.create-account'}}
       </p>
     </div>
-    <Forms::User @username={{this.username}} @password={{this.password}} />
-    <Button class="w-full mt-8 btn-neutral">
-      Create account
-    </Button>
+    <form {{on 'submit' this.createAccount}}>
+      <Forms::User @username={{this.username}} @password={{this.password}} />
+      <Button class="w-full mt-8 btn-neutral" @type="submit">
+        {{t 'register-page.create-account-button'}}
+      </Button>
+    </form>
     <div class="text-center mt-8 font-light text-gray-500">
-      Already have an account?
+      {{t 'register-page.already-have-an-account'}}
       <LinkTo @route="login" class="font-bold hover:underline">
-        Sign in
+        {{t 'login-page.login-button'}}
       </LinkTo>
     </div>
   </div>

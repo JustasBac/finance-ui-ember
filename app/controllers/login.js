@@ -12,7 +12,9 @@ export default class LoginController extends Controller {
   @tracked password = '';
 
   @action
-  signIn() {
+  signIn(e) {
+    e.preventDefault(); //default behaviour: reloads page
+
     const { username, password } = this;
 
     if (!username || !password) {

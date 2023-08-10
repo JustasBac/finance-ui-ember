@@ -7,23 +7,25 @@
       @text="TODO: Info card about test user. With button to fill everything auto"
     />
   </div>
-  <div class="bg-white p-12 w-200 rounded-2xl">
+  <div class="bg-white p-12 w-[25rem] rounded-2xl shadow-md">
     <div class="mb-4">
       <h3 class="font-semibold text-2xl text-gray-800">
-        Sign In
+        {{t 'login-page.login'}}
       </h3>
       <p class="text-gray-500 font-light">
-        Please sign in to your account.
+        {{t 'login-page.please-sign-in'}}
       </p>
     </div>
-    <Forms::User @username={{this.username}} @password={{this.password}} />
-    <Button class="w-full mt-8 btn-neutral" {{on 'click' this.signIn}}>
-      Log in
-    </Button>
+    <form {{on 'submit' this.signIn}}>
+      <Forms::User @username={{this.username}} @password={{this.password}} />
+      <Button @type="submit" class="w-full mt-8 btn-neutral">
+        {{t 'login-page.login-button'}}
+      </Button>
+    </form>
     <div class="text-center mt-8 font-light text-gray-500">
-      Don't have an account?
+      {{t 'login-page.dont-have-an-account'}}
       <LinkTo @route="register" class="font-bold hover:underline">
-        Sign up
+        {{t 'login-page.sign-up'}}
       </LinkTo>
     </div>
   </div>

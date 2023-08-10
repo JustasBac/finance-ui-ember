@@ -17,7 +17,7 @@ export default class ChartsEconomyOverviewComponent extends Component {
         backgroundColor: 'transparent',
       },
       title: {
-        text: 'My finance overview',
+        text: null,
       },
       xAxis: {
         categories: this.xAxisCategories,
@@ -46,6 +46,10 @@ export default class ChartsEconomyOverviewComponent extends Component {
   }
 
   get chartData() {
+    if (!this.economyService.financeDataList.length) {
+      return null;
+    }
+
     return [
       {
         name: 'Total Savings',

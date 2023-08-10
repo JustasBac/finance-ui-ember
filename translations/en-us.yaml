@@ -1,2 +1,17 @@
-hello:
-  world: Hello World!
+login-page:
+  please-sign-in: Please sign in to your account.
+  login: Login
+  login-button: Login
+  username: Username
+  password: Password
+  username-placeholder: Enter your username
+  password-placeholder: Enter your password
+  dont-have-an-account: Don't have an account?
+  sign-up: Sign up
+footer:
+  built-with: Built with Ember.js
+register-page:
+  welcome: Welcome!
+  create-account: Create your account
+  create-account-button: Create account
+  already-have-an-account: Already have an account?

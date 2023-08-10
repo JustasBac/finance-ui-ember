@@ -19,10 +19,8 @@
     type={{this.type}}
     min={{@min}}
     placeholder={{@placeholder}}
-    class="input input-bordered w-full
+    class="input input-bordered w-full text-sm
       {{if @size (concat 'input-' @size)}}
-
-      {{this.size}}
 
       {{unless this.isFormValidated (unless @exceptFromValidation 'input-error')
       }}"

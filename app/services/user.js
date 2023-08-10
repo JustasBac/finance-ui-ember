@@ -61,6 +61,22 @@ export default class UserService extends Service {
       .symbol;
   }
 
+  async createNewAccountAndLogin(username, password) {
+    const body = {
+      username,
+      password,
+    };
+
+    const response = await this.requestService.post('register', body);
+
+    if (!response.ok) {
+      this.notifications.error(`Request error: ${response.message}`);
+      return;
+    }
+
+    this.authenticate(username, password);
+  }
+
   async authenticate(username, password) {
     try {
       await this.session.authenticate('authenticator:jwt', {
@@ -73,6 +89,7 @@ export default class UserService extends Service {
       return true;
       // load initial display name mapping after internal login
     } catch (e) {
+      console.log('error');
       if (e.status === 401) {
         return this.notifications.error('Invalid credentials', {
           autoClear: true,

@@ -1,2 +1,17 @@
-hello:
-  world: Hallo Welt!
+login-page:
+  please-sign-in: Bitte melden Sie sich bei Ihrem Konto an.
+  login: Login
+  login-button: Einloggen
+  username: Benutzername
+  password: Passwort
+  username-placeholder: Geben Sie Ihren Benutzernamen ein
+  password-placeholder: Geben Sie Ihr Passwort ein
+  dont-have-an-account: Sie haben noch kein Konto?
+  sign-up: Registrieren
+footer:
+  built-with: Gebaut mit Ember.js
+register-page:
+  welcome: Willkommen!
+  create-account: Ein Konto erstellen
+  create-account-button: Benutzerkonto erstellen
+  already-have-an-account: Sie haben bereits ein Konto?
