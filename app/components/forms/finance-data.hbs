@@ -36,12 +36,3 @@
   @onInput={{fn (mut @data.spendings)}}
   @placeholder="Enter spendings"
 />
-<InputField
-  class="mt-3"
-  @type="number"
-  @value={{@data.totalBalance}}
-  @min={{1}}
-  @label="Total balance ({{this.selectedCurrency.symbol}})"
-  @onInput={{fn (mut @data.totalBalance)}}
-  @placeholder="Enter total balance"
-/>

@@ -13,7 +13,6 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
     month: this.args.candidateMonth,
     income: null,
     spendings: null,
-    totalBalance: null,
     currencyCode: this.userService.selectedCurrency.code,
     currencySymbol: this.userService.selectedCurrency.symbol,
   };
@@ -24,7 +23,6 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
       month: this.args.candidateMonth,
       income: null,
       spendings: null,
-      totalBalance: null,
       currencyCode: this.userService.selectedCurrency.code,
       currencySymbol: this.userService.selectedCurrency.symbol,
     };
@@ -32,9 +30,9 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
 
   @action
   addDataForNewMonth() {
-    const { income, spendings, totalBalance } = this.financeData;
+    const { income, spendings } = this.financeData;
 
-    if (!income || !spendings || !totalBalance) {
+    if (!income || !spendings) {
       this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
 
       this.notifications.error('Make sure all fields are filled!', {

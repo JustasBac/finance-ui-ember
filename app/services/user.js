@@ -93,7 +93,6 @@ export default class UserService extends Service {
       });
 
       await this.requestService.loadAppData();
-
       return true;
       // load initial display name mapping after internal login
     } catch (e) {

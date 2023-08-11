@@ -23,6 +23,8 @@ export default class EconomyService extends Service {
         el.currency_code
       );
     });
+
+    console.log('SEEET');
   }
 
   getCurrentMonthsData() {
@@ -40,8 +42,7 @@ export default class EconomyService extends Service {
   }
 
   async updateOrAddNewEntry(financeData) {
-    const { month, currencyCode, income, spendings, totalBalance, id } =
-      financeData;
+    const { month, currencyCode, income, spendings, id } = financeData;
 
     const existingEntry = this.financeDataList.find(
       (el) => el.month === financeData.month
@@ -52,7 +53,6 @@ export default class EconomyService extends Service {
       currency_code: currencyCode,
       income,
       spendings,
-      total_balance: totalBalance,
     };
 
     if (!existingEntry) {

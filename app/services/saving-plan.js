@@ -14,7 +14,8 @@ export default class SavingPlanService extends Service {
 
     this.savingPlans = [];
 
-    for (const savingPlan of savingPlans) {
+    for (const savingPlan of savingPlans.reverse()) {
+      // .reverse() because the API returns data with the newest entities first. In the UI we want to show the oldest on top of the list
       const monthlySavings = savingPlan['monthly_savings_list'].map((el) => {
         return { month: el.month, amountSaved: el['amount_saved'], id: el.id };
       });

@@ -15,15 +15,20 @@
           <span class="loading loading-ring loading-lg"></span>
         {{else}}
           {{if this.data.savings this.data.savings '-'}}
-          <CurrencyInfo @currencyCode={{this.data.currencyCode}} />
+          <CurrencyInfo
+            class={{unless this.data 'ml-1'}}
+            @currencyCode={{this.data.currencyCode}}
+          />
         {{/if}}
-        <Popover @side="bottom">
-          {{concat this.data.income this.currencySymbol}}
-          -
-          {{concat this.data.spendings this.currencySymbol}}
-          =
-          {{concat this.data.savings this.currencySymbol}}
-        </Popover>
+        {{#if this.data}}
+          <Popover @side="bottom">
+            {{concat this.data.income this.currencySymbol}}
+            -
+            {{concat this.data.spendings this.currencySymbol}}
+            =
+            {{concat this.data.savings this.currencySymbol}}
+          </Popover>
+        {{/if}}
       </p>
     </div>
   </div>

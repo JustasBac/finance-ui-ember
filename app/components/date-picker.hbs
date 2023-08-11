@@ -20,7 +20,7 @@
           </h3>
           <PowerCalendar
             @selected={{@selectedDate}}
-            @onSelect={{this.changeDate}}
+            @onSelect={{queue this.changeDate dd.actions.close}}
             @center={{this.month}}
             @onCenterChange={{action (mut this.month) value='date'
             }} as |calendar|
