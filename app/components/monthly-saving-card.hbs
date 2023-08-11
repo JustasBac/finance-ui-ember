@@ -18,14 +18,14 @@
   <span class="flex flex-col text-xs mt-2">
     Target
     <span class="font-bold text-base leading-tight">
-      {{concat (round @monthInfo.targetSavings) @currency}}
+      {{concat (round @monthInfo.targetSavings) @currencySymbol}}
     </span>
     <Tooltip>
       In
       {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
       you are expected to save
       {{round @monthInfo.targetSavings decimals=2}}
-      {{@currency}}
+      {{@currencySymbol}}
     </Tooltip>
   </span>
   <span class="flex flex-col text-xs mt-2 relative">
@@ -35,7 +35,7 @@
         <div class="absolute right-0">
           <Modals::EditMonthSavings
             @monthInfo={{@monthInfo}}
-            @currency={{@currency}}
+            @currencySymbol={{@currencySymbol}}
             @savingPlan={{@savingPlan}}
           />
         </div>
@@ -45,14 +45,16 @@
       <span class="font-bold text-base leading-tight">
         {{concat
           (if
-            @monthInfo.savedAmount (concat @monthInfo.savedAmount @currency) '-'
+            @monthInfo.savedAmount
+            (concat @monthInfo.savedAmount @currencySymbol)
+            '-'
           )
         }}
         <Tooltip>
           In
           {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
           you saved
-          {{concat @monthInfo.savedAmount @currency}}
+          {{concat @monthInfo.savedAmount @currencySymbol}}
         </Tooltip>
       </span>
       {{#if this.progressPercentage}}

@@ -3,13 +3,7 @@
   <PageLayout @pageTitle="Finance overview">
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
       {{#if this.model.length}}
-        <div class="overflow-x-auto p-3">
-          <div class="mb-3 flex justify-center">
-            <Modals::AddNewFinancialData
-              @candidateMonth={{this.previousMonth}}
-              @onAddNewMonth={{this.addNewMonth}}
-            />
-          </div>
+        <div class="overflow-x-auto rounded-lg">
           <table class="table w-full">
             <thead class="bg-neutral-100 rounded-lg">
               <tr>
@@ -23,7 +17,7 @@
                   Spendings
                 </th>
                 <th>
-                  Total Balance
+                  Savings
                 </th>
                 <th>
                   Actions
@@ -50,7 +44,7 @@
                   </td>
                   <td>
                     <span class="flex">
-                      {{if row.totalBalance row.totalBalance '-'}}
+                      {{row.savings}}
                       <CurrencyInfo @currencyCode={{row.currencyCode}} />
                     </span>
                   </td>

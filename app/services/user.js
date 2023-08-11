@@ -13,6 +13,8 @@ export default class UserService extends Service {
   @service session;
 
   @tracked selectedCurrency = {};
+  @tracked totalBalance = null;
+
   username = '';
 
   currencies = this.getCurrencies();
@@ -36,6 +38,12 @@ export default class UserService extends Service {
     this.selectedCurrency = this.currencies.find(
       (currency) => currency.code === userCurrencyCode
     );
+  }
+
+  async fetchAndSetUserTotalBalance() {
+    const response = await this.requestService.fetch('user_total_balance');
+
+    this.totalBalance = response['total_balance'];
   }
 
   async selectNewCurrency(newCurrencyCode) {

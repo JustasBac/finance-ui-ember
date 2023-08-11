@@ -35,7 +35,7 @@
                 <td class="hidden xl:flex">
                   <div class="flex flex-col mt-2">
                     <span class="text-xs leading-[0]">
-                      {{savingPlan.totalBalance}}
+                      {{sum savingPlan.totalSavings savingPlan.startingCapital}}
                       {{get
                         (find-by
                           'code'
@@ -48,7 +48,8 @@
                     <div>
                       <progress
                         class="progress progress-primary w-60"
-                        value="10"
+                        value={{compute (fn this.progressPercentage savingPlan)
+                        }}
                         max="100"
                       ></progress>
                       <span class="opacity-50 text-xs">

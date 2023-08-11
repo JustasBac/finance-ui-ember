@@ -37,9 +37,9 @@ export default class ChartsSavingProgressPieComponent extends Component {
   };
 
   get chartData() {
-    const { totalBalance, targetAmount, currencyCode } = this.args.data;
+    const { totalSavings, targetAmount, currencyCode } = this.args.data;
 
-    const alreadySavedInPercent = (totalBalance * 100) / targetAmount;
+    const alreadySavedInPercent = (totalSavings * 100) / targetAmount;
 
     return [
       {
@@ -51,7 +51,7 @@ export default class ChartsSavingProgressPieComponent extends Component {
             sliced: true,
             custom: {
               extraInformation: `${
-                targetAmount - totalBalance
+                targetAmount - totalSavings
               } ${currencyCode}`,
             },
             color: 'var(--light-gray)',
@@ -60,7 +60,7 @@ export default class ChartsSavingProgressPieComponent extends Component {
             name: 'Already saved',
             y: alreadySavedInPercent,
             custom: {
-              extraInformation: `${totalBalance} ${currencyCode}`,
+              extraInformation: `${totalSavings} ${currencyCode}`,
             },
             color: 'var(--success-green)',
           },

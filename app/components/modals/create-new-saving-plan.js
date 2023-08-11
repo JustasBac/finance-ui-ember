@@ -14,6 +14,11 @@ export default class ModalsCreateNewSavingPlanComponent extends Component {
   @tracked isModalOpen = false;
 
   @action
+  initiateNewSavingPlan() {
+    this.newSavingPlan = new SavingPlan();
+  }
+
+  @action
   createSavingPlan() {
     const { currencyCode, targetAmount, title } = this.newSavingPlan;
 
@@ -32,6 +37,8 @@ export default class ModalsCreateNewSavingPlanComponent extends Component {
     }
 
     this.savingPlanService.addNewSavingPlan(this.newSavingPlan);
+
+    console.log('this.newSavingPlan', this.newSavingPlan);
 
     this.isModalOpen = false;
   }

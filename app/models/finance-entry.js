@@ -5,16 +5,18 @@ export default class FinanceEntry {
   month = '';
   @tracked income = null;
   @tracked spendings = null;
-  @tracked totalBalance = null;
   @tracked currencyCode = '';
 
-  constructor(id, month, income, spendings, totalBalance, currencyCode) {
+  constructor(id, month, income, spendings, currencyCode) {
     this.id = id;
     this.month = month;
     this.income = +income;
     this.spendings = +spendings;
-    this.totalBalance = +totalBalance;
     this.currencyCode = currencyCode;
+  }
+
+  get savings() {
+    return this.income - this.spendings;
   }
 
   copy() {
@@ -23,7 +25,6 @@ export default class FinanceEntry {
       this.month,
       this.income,
       this.spendings,
-      this.totalBalance,
       this.currencyCode
     );
   }

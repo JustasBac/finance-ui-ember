@@ -25,7 +25,7 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
       },
       yAxis: {
         title: {
-          text: this.args.currency,
+          text: this.args.currencySymbol,
         },
       },
       legend: {
@@ -36,7 +36,7 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
           stacking: 'normal',
           tooltip: {
             pointFormatter: function () {
-              const { currency } = _this.args;
+              const { currencySymbol } = _this.args;
 
               const savedAmount = this.custom.savedAmount
                 ? this.custom.savedAmount
@@ -44,7 +44,7 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
 
               return `Target amount: <b>${roundNumber(
                 this.custom.targetSavings
-              )}</b>${currency}<br/>Saved amount: <b>${savedAmount}</b>${currency}`;
+              )}</b>${currencySymbol}<br/>Saved amount: <b>${savedAmount}</b>${currencySymbol}`;
             },
             shared: true,
           },

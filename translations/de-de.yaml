@@ -28,7 +28,6 @@ home-page:
     spendings: Ausgaben
     income: Einkommen
     input-label: Geben Sie Ihren {type} für {month} ein
-  income: Einkommen
   spendings: Ausgaben
   saving-plans-card:
     title: Sparpläne

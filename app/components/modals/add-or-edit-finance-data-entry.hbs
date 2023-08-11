@@ -6,8 +6,7 @@
     {{#if this.requestService.isAppDataLoading}}
       <span class="loading loading-ring loading-lg"></span>
     {{else}}
-      {{if this.value this.value '-'}}
-      {{this.currency.symbol}}
+      {{concat (if this.value this.value '- ') this.currency.symbol}}
       {{#if this.currencyDiffersFromAppCurrency}}
         <FaIcon
           class="text-base text-yellow-600 mb-0.5"

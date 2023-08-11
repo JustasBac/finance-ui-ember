@@ -1,0 +1,30 @@
+<div class="card bg-base-100 shadow-xl" ...attributes>
+  <div class="card-body flex flex-col py-3 px-6 fade-in-animation">
+    <h2 class="text-base text-center text-gray-600">
+      Savings
+      <div class="text-gray-500 text-sm">
+        {{moment-format (now) 'MMMM YYYY'}}
+      </div>
+    </h2>
+    <div class="flex justify-center items-center">
+      <p
+        class="text-2xl font-bold whitespace-nowrap lowercase flex justify-center py-2"
+        {{on 'click' (fn (mut this.isModalOpen) true)}}
+      >
+        {{#if this.requestService.isAppDataLoading}}
+          <span class="loading loading-ring loading-lg"></span>
+        {{else}}
+          {{if this.data.savings this.data.savings '-'}}
+          <CurrencyInfo @currencyCode={{this.data.currencyCode}} />
+        {{/if}}
+        <Popover @side="bottom">
+          {{concat this.data.income this.currencySymbol}}
+          -
+          {{concat this.data.spendings this.currencySymbol}}
+          =
+          {{concat this.data.savings this.currencySymbol}}
+        </Popover>
+      </p>
+    </div>
+  </div>
+</div>

@@ -113,7 +113,6 @@ export default class SavingPlanService extends Service {
 
     if (monthThatAlreadyHasSavedAmount) {
       //PUT
-
       const monthId = savingPlan.savingsPerMonth.find(
         (el) => el.month === monthInfo.formatedDate
       ).id;
@@ -142,7 +141,7 @@ export default class SavingPlanService extends Service {
 
       const response = await this.requestService.post('monthly_savings', body);
 
-      if (!response.id) {
+      if (!response || !response.id) {
         this.notifications.error('Request error');
         return;
       }
@@ -150,9 +149,12 @@ export default class SavingPlanService extends Service {
       savingPlan.savingsPerMonth.pushObject({
         month: monthInfo.formatedDate,
         amountSaved: +savedAmount,
+        id: response.id,
       });
     }
 
-    savingPlan.totalBalance = savingPlan.calculateTotalBalance();
+    savingPlan.monthsListUntilDeadline =
+      savingPlan.getMonthsListUntilDeadline();
+    savingPlan.totalSavings = savingPlan.calculateTotalSavings();
   }
 }

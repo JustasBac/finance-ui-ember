@@ -26,7 +26,6 @@ home-page:
     spendings: Spendings
     income: Income
     input-label: Enter your {type} for {month}
-  income: Income
   spendings: Spendings
   saving-plans-card:
     title: Saving Plans

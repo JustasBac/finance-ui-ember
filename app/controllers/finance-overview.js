@@ -8,13 +8,6 @@ export default class FinanceOverviewController extends Controller {
   @service('user') userService;
   @service notifications;
 
-  get previousMonth() {
-    return moment(this.model[0].month, 'MMMM YYYY')
-      .subtract(1, 'months')
-      .endOf('month')
-      .format('MMMM YYYY');
-  }
-
   get nextMonth() {
     return moment(this.model[this.model.length - 1].month, 'MMMM YYYY')
       .add(1, 'months')

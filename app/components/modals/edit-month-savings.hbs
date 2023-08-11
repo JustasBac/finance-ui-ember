@@ -17,12 +17,12 @@
     <div class="font-light text-left mt-1 mb-2">
       Target:
       <span class="font-normal">
-        {{concat (round @monthInfo.targetSavings decimals=2) @currency}}
+        {{concat (round @monthInfo.targetSavings decimals=2) @currencySymbol}}
       </span>
     </div>
     <InputField
-      @label="Amount saved this month ({{@currency}})"
-      @placeholder="Enter value {{@currency}}"
+      @label="Amount saved this month ({{@currencySymbol}})"
+      @placeholder="Enter value {{@currencySymbol}}"
       @value={{this.savedAmount}}
       @type="number"
       @onInput={{fn (mut this.savedAmount)}}
@@ -36,13 +36,7 @@
       </Modals::-TriggerButton>
       <Button
         class="btn-primary"
-        {{on
-          'click'
-          (queue
-            this.closeModalAndUpdateDatabase
-            (fn (mut @monthInfo.savedAmount) this.savedAmount)
-          )
-        }}
+        {{on 'click' this.closeModalAndUpdateDatabase}}
       >
         <FaIcon @icon="floppy-disk" class="mr-1" />
         Save

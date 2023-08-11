@@ -10,7 +10,7 @@ export default class SavingPlan {
   @tracked deadlineDate;
   @tracked savingsPerMonth = [];
   @tracked startingCapital;
-  @tracked totalBalance;
+  @tracked totalSavings;
   @tracked monthsListUntilDeadline = [];
 
   constructor(
@@ -31,7 +31,7 @@ export default class SavingPlan {
     this.deadlineDate = deadlineDate;
     this.savingsPerMonth = savingsPerMonth;
     this.startingCapital = startingCapital;
-    this.totalBalance = this.calculateTotalBalance();
+    this.totalSavings = this.calculateTotalSavings();
     this.monthsListUntilDeadline = this.getMonthsListUntilDeadline();
   }
 
@@ -45,12 +45,12 @@ export default class SavingPlan {
       this.deadlineDate,
       this.savingsPerMonth,
       this.startingCapital,
-      this.totalBalance,
+      this.totalSavings,
       this.monthsListUntilDeadline
     );
   }
 
-  calculateTotalBalance() {
+  calculateTotalSavings() {
     let sum = 0;
 
     this.savingsPerMonth.forEach((el) => {
@@ -72,13 +72,16 @@ export default class SavingPlan {
 
     if (monthsListUntilDeadline.length <= 2) {
       //if there are just 1 or 2 months to save the calculation logic is different
-      return this.getShortTimeMonthsListWithInfo(
+
+      const opa = this.getShortTimeMonthsListWithInfo(
         monthsListUntilDeadline,
         savingsPerFullMonthNeeded,
         startDate,
         deadlineDate,
-        targetAmount
+        targetAmount - startingCapital
       );
+
+      return opa;
     }
 
     const startingMonthInfo = this.getSavingPlanningForNotAFullMonth(

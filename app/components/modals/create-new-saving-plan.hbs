@@ -15,7 +15,10 @@
   </:header>
   <:body>
     <Forms::SavingPlan @savingPlanInformation={{this.newSavingPlan}} />
-    <div class="flex justify-between items-center mt-5">
+    <div
+      class="flex justify-between items-center mt-5"
+      {{did-insert this.initiateNewSavingPlan}}
+    >
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
           Close me

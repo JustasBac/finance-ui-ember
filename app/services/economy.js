@@ -20,7 +20,6 @@ export default class EconomyService extends Service {
         el.month,
         el.income,
         el.spendings,
-        el.total_balance,
         el.currency_code
       );
     });
@@ -71,7 +70,6 @@ export default class EconomyService extends Service {
           response.month,
           response.income,
           response.spendings,
-          response.total_balance,
           response.currency_code
         )
       );

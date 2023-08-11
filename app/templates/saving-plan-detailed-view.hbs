@@ -1,6 +1,6 @@
 {{page-title 'Details'}}
 <EmberWormhole @to="page-body-wormhole">
-  <PageLayout @pageTitle="Saving Plan - {{this.model.title}}">
+  <PageLayout @pageTitle="Saving Plan - {{@model.title}}">
     <div
       class="flex justify-center xl:justify-start flex-wrap 3xl:flex-nowrap gap-8 mb-8"
     >
@@ -59,7 +59,7 @@
             <div class="flex">
               Total saved:
               <span class="ml-1 font-bold flex">
-                {{@model.totalBalance}}
+                {{@model.totalSavings}}
                 <CurrencyInfo @currencyCode={{@model.currencyCode}} />
               </span>
             </div>
@@ -114,25 +114,25 @@
         </a>
       </div>
       <div class="card-body px-4 py-6 overflow-auto">
-        {{#if (eq this.activeTab 'planning')}}
+        {{#if (eq this.activeTab 'progress')}}
+          <div class="fade-in-animation overflow-hidden">
+            <Charts::SavingProgressPie @data={{this.model}} />
+          </div>
+        {{else if (eq this.activeTab 'planning')}}
           <div class="flex gap-8 flex-wrap mt-1 fade-in-animation">
             {{#each @model.monthsListUntilDeadline as |monthInfo|}}
               <MonthlySavingCard
                 @savingPlan={{@model}}
                 @monthInfo={{monthInfo}}
-                @currency={{this.currency}}
+                @currencySymbol={{this.currencySymbol}}
               />
             {{/each}}
-          </div>
-        {{else if (eq this.activeTab 'progress')}}
-          <div class="fade-in-animation overflow-hidden">
-            <Charts::SavingProgressPie @data={{this.model}} />
           </div>
         {{else if (eq this.activeTab 'monthly-analysis')}}
           <div class="fade-in-animation overflow-hidden">
             <Charts::MonthlySavingStats
               @data={{@model.monthsListUntilDeadline}}
-              @currency={{this.currency}}
+              @currencySymbol={{this.currencySymbol}}
             />
           </div>
         {{/if}}
