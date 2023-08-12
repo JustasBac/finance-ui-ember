@@ -5,8 +5,8 @@
   >
     <FaIcon @icon="pen-to-square" />
     <Tooltip>
-      Edit income, spendings, total balance for
-      {{@data.date}}
+      Edit financial entries for
+      {{@data.month}}
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
@@ -18,7 +18,7 @@
   </:header>
   <:body>
     <div class="flex justify-between items-center">
-      {{@data.date}}
+      {{@data.month}}
       <Button
         class="btn-sm btn-outline"
         {{on 'click' this.resetEditableValuesToDefault}}
@@ -27,7 +27,7 @@
         Reset
       </Button>
     </div>
-    <Forms::FinanceData @data={{this.copiedData}} />
+    <Forms::FinanceData @editMode={{true}} @data={{this.copiedData}} />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>

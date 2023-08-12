@@ -15,14 +15,22 @@ export default class ModalsEditFinanceDataComponent extends Component {
   saveChanges() {
     this.isModalOpen = false;
 
+    const { income, spendings, currencyCode, initialTotalBalance } =
+      this.copiedData;
+
     if (
-      this.args.data.income === this.copiedData.income &&
-      this.args.data.spendings === this.copiedData.spendings &&
-      this.args.data.totalBalance === this.copiedData.totalBalance &&
-      this.args.data.currencyCode === this.copiedData.currencyCode
+      this.args.data.income === income &&
+      this.args.data.spendings === spendings &&
+      this.args.data.currencyCode === currencyCode
     ) {
       return;
     }
+
+    const updatedTotalBalance = initialTotalBalance + (income - spendings); //recalculate total balance
+
+    this.copiedData.totalBalanceDifferenceFromTheLastValue =
+      updatedTotalBalance - this.copiedData.updatedTotalBalance;
+    this.copiedData.updatedTotalBalance = updatedTotalBalance;
 
     this.args.onSave(this.copiedData);
   }

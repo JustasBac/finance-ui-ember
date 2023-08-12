@@ -11,10 +11,33 @@
       </div>
       <SavingPlansCard class="basis-3/4" />
     </div>
-    <div
-      class="card bg-base-100 shadow-xl mt-6 qHd:mt-16 pt-2 fade-in-animation min-h-[23rem]"
-    >
-      <Charts::EconomyOverview class="shrink-0" />
+    <div class="flex mt-6 qHd:mt-16 gap-8">
+      <div
+        class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
+      >
+        <div class="tabs flex justify-center">
+          <a
+            class="tab tab-bordered
+              {{if (eq this.activeTab 'progress') 'tab-active'}}"
+            {{on 'click' (fn (mut this.activeTab) 'progress')}}
+          >
+            Total balance timeline
+          </a>
+          <a
+            class="tab tab-bordered
+              {{if (eq this.activeTab 'planning') 'tab-active'}}"
+            {{on 'click' (fn (mut this.activeTab) 'planning')}}
+          >
+            Savings timeline
+          </a>
+        </div>
+      </div>
+      <div
+        class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
+      >
+        {{! <Charts::EconomyOverview class="shrink-0" /> }}
+        <Charts::SpendingsIncomeOverview />
+      </div>
     </div>
   </PageLayout>
 </EmberWormhole>

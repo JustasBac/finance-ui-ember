@@ -9,20 +9,19 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
   @service notifications;
 
   @tracked isModalOpen = false;
-  @tracked financeData = {
-    month: this.args.candidateMonth,
-    income: null,
-    spendings: null,
-    currencyCode: this.userService.selectedCurrency.code,
-    currencySymbol: this.userService.selectedCurrency.symbol,
-  };
+  @tracked financeData = this.initFinanceData();
 
   @action
   resetEditableValues() {
-    this.financeData = {
+    this.financeData = this.initFinanceData();
+  }
+
+  initFinanceData() {
+    return {
       month: this.args.candidateMonth,
       income: null,
       spendings: null,
+      initialTotalBalance: this.userService.totalBalance,
       currencyCode: this.userService.selectedCurrency.code,
       currencySymbol: this.userService.selectedCurrency.symbol,
     };
@@ -40,6 +39,9 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
       });
       return;
     }
+
+    this.financeData.updatedTotalBalance =
+      this.userService.totalBalance + (income - spendings);
 
     this.isModalOpen = false;
 

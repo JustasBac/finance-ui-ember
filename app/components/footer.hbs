@@ -1,16 +1,18 @@
 <footer
-  class="xl:h-14 flex items-center justify-between p-2 xl:p-4 bg-navbar-footer text-neutral-content"
+  class="xl:h-9 flex items-center justify-between p-2 xl:p-4 bg-navbar-footer text-neutral-content"
   ...attributes
 >
-  <div class="text-sm xl:text-base flex items-center whitespace-nowrap">
+  <div class="xl:text-base flex items-center whitespace-nowrap">
     <div class="avatar mr-1">
-      <div class="w-6 xl:w-10 rounded">
+      <div class="w-4 xl:w-5 rounded">
         <img src="/assets/images/ember-logo.png" alt="Logo" />
       </div>
     </div>
-    {{t 'footer.built-with'}}
+    <span class="text-sm">
+      {{t 'footer.built-with'}}
+    </span>
   </div>
-  <div class="text-right text-2xl">
+  <div class="text-right text-xl">
     <a href={{this.linkedinLink}} target="_blank" rel="noopener noreferrer">
       <FaIcon
         @icon="linkedin"

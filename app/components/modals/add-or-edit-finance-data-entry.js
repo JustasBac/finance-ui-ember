@@ -44,7 +44,7 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
     );
   }
 
-  get type() {
+  get typeWithTranslation() {
     return this.intl.t(
       `home-page.edit-finance-modal.${this.args.type.split(' ').join('-')}`
     );
@@ -57,21 +57,31 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
   }
 
   get value() {
+    const { type } = this.args;
+
+    if (type === 'total balance') {
+      return this.userService.totalBalance;
+    }
+
     const currentMonthData = this.economyService.getCurrentMonthsData();
 
     if (!currentMonthData) {
       return null;
     }
 
-    const { type } = this.args;
-
-    return currentMonthData[type === 'total balance' ? 'totalBalance' : type];
+    return currentMonthData[type];
   }
 
   @action
   async saveChanges() {
-    const type =
-      this.args.type === 'total balance' ? 'totalBalance' : this.args.type;
+    const { type } = this.args;
+
+    if (type === 'total balance') {
+      this.userService.updateUserTotalBalance(this.valueInput);
+
+      this.isModalOpen = false;
+      return;
+    }
 
     const currencyCode = this.currentMonthData
       ? this.currentMonthData.currencyCode
@@ -83,7 +93,6 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
       currencyCode,
       income: this.currentMonthData?.income,
       spendings: this.currentMonthData?.spendings,
-      totalBalance: this.currentMonthData?.totalBalance,
     };
 
     body[type] = this.valueInput;

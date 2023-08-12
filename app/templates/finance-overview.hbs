@@ -20,12 +20,16 @@
                   Savings
                 </th>
                 <th>
+                  Total Balance
+                </th>
+                <th>
                   Actions
                 </th>
               </tr>
             </thead>
             <tbody>
               {{#each this.model as |row|}}
+                {{log row}}
                 <tr>
                   <td>
                     {{row.month}}
@@ -45,6 +49,12 @@
                   <td>
                     <span class="flex">
                       {{row.savings}}
+                      <CurrencyInfo @currencyCode={{row.currencyCode}} />
+                    </span>
+                  </td>
+                  <td>
+                    <span class="flex">
+                      {{row.updatedTotalBalance}}
                       <CurrencyInfo @currencyCode={{row.currencyCode}} />
                     </span>
                   </td>

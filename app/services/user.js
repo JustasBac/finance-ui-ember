@@ -46,6 +46,19 @@ export default class UserService extends Service {
     this.totalBalance = response['total_balance'];
   }
 
+  async updateUserTotalBalance(totalBalance) {
+    const body = { total_balance: totalBalance };
+
+    const response = await this.requestService.put('user_total_balance', body);
+
+    if (!response) {
+      this.notifications.error('Request error');
+      return;
+    }
+
+    this.totalBalance = response['total_balance'];
+  }
+
   async selectNewCurrency(newCurrencyCode) {
     const body = {
       app_currency_code: newCurrencyCode,

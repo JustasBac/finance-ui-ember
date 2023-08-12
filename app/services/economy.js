@@ -20,11 +20,11 @@ export default class EconomyService extends Service {
         el.month,
         el.income,
         el.spendings,
+        el.initial_total_balance,
+        el.updated_total_balance,
         el.currency_code
       );
     });
-
-    console.log('SEEET');
   }
 
   getCurrentMonthsData() {
@@ -42,7 +42,16 @@ export default class EconomyService extends Service {
   }
 
   async updateOrAddNewEntry(financeData) {
-    const { month, currencyCode, income, spendings, id } = financeData;
+    const {
+      month,
+      currencyCode,
+      income,
+      spendings,
+      initialTotalBalance,
+      updatedTotalBalance,
+      totalBalanceDifferenceFromTheLastValue,
+      id,
+    } = financeData;
 
     const existingEntry = this.financeDataList.find(
       (el) => el.month === financeData.month
@@ -53,9 +62,11 @@ export default class EconomyService extends Service {
       currency_code: currencyCode,
       income,
       spendings,
+      updated_total_balance: updatedTotalBalance,
     };
 
     if (!existingEntry) {
+      body.initial_total_balance = initialTotalBalance;
       //POST
       const response = await this.requestService.post('finance_data', body);
 
@@ -64,12 +75,16 @@ export default class EconomyService extends Service {
         return false;
       }
 
+      this.userService.updateUserTotalBalance(updatedTotalBalance);
+
       this.financeDataList.pushObject(
         new FinanceEntry(
           response.id,
           response.month,
           response.income,
           response.spendings,
+          response.initial_total_balance,
+          response.updated_total_balance,
           response.currency_code
         )
       );
@@ -84,8 +99,29 @@ export default class EconomyService extends Service {
       this.notifications.error('Request error');
       return false;
     }
+    this.userService.updateUserTotalBalance(updatedTotalBalance);
+
+    if (totalBalanceDifferenceFromTheLastValue) {
+      //for cases when user has data for several months, and updates data for the months that are infront. Then we need to recalculate total balance
+      this.recalculateTotalBalanceValues(
+        month,
+        totalBalanceDifferenceFromTheLastValue
+      );
+    }
 
     return true;
+  }
+
+  recalculateTotalBalanceValues(startMonth, difference) {
+    //if we edit income or spendings of already existing month, we need to re-adjust the months that are in the future. Their total balance values should be updated
+    this.financeDataList.forEach((el) => {
+      if (moment(el.month, 'MMMM YYYY').isAfter(startMonth, 'MMMM YYYY')) {
+        el.initialTotalBalance = el.initialTotalBalance + difference;
+        el.updatedTotalBalance = el.updatedTotalBalance + difference;
+
+        this.updateOrAddNewEntry(el);
+      }
+    });
   }
 
   async deleteFinanceData(data, strictDelete = false) {

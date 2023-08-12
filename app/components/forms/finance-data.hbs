@@ -1,28 +1,30 @@
-<div class="mt-3">
-  <label class="label py-1">
-    <span class="label-text leading-none">
-      Currency
-    </span>
-  </label>
-  <PowerSelect
-    class="h-[3rem] !p-2"
-    @selected={{this.selectedCurrency}}
-    @options={{this.userService.currencies}}
-    @searchEnabled={{true}}
-    @searchField="searchableText"
-    @onChange={{this.changeCurrency}} as |currency|
-  >
-    {{currency.code}}
-    <span class="text-xs opacity-70">
-      {{concat '(' currency.symbol ')'}}
-    </span>
-  </PowerSelect>
-</div>
+{{#if @editMode}}
+  <div class="mt-3">
+    <label class="label py-1">
+      <span class="label-text leading-none">
+        Currency
+      </span>
+    </label>
+    <PowerSelect
+      class="h-[3rem] !p-2"
+      @selected={{this.selectedCurrency}}
+      @options={{this.userService.currencies}}
+      @searchEnabled={{true}}
+      @searchField="searchableText"
+      @onChange={{this.changeCurrency}} as |currency|
+    >
+      {{currency.code}}
+      <span class="text-xs opacity-70">
+        {{concat '(' currency.symbol ')'}}
+      </span>
+    </PowerSelect>
+  </div>
+{{/if}}
 <InputField
   class="mt-3"
   @type="number"
   @value={{@data.income}}
-  @min={{1}}
+  @min={{0}}
   @label="Income ({{this.selectedCurrency.symbol}})"
   @onInput={{fn (mut @data.income)}}
   @placeholder="Enter income"
@@ -31,8 +33,26 @@
   class="mt-3"
   @type="number"
   @value={{@data.spendings}}
-  @min={{1}}
+  @min={{0}}
   @label="Spendings ({{this.selectedCurrency.symbol}})"
   @onInput={{fn (mut @data.spendings)}}
   @placeholder="Enter spendings"
 />
+<div class="text-sm mt-3">
+  Savings:
+  {{concat (sub @data.income @data.spendings) this.selectedCurrency.symbol}}
+</div>
+<div class="text-sm mt-1 mb-3">
+  Total Balance:
+  {{#if @editMode}}
+    {{concat
+      (sum @data.initialTotalBalance (sub @data.income @data.spendings))
+      this.selectedCurrency.symbol
+    }}
+  {{else}}
+    {{concat
+      (sum this.userService.totalBalance (sub @data.income @data.spendings))
+      this.selectedCurrency.symbol
+    }}
+  {{/if}}
+</div>

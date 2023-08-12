@@ -52,21 +52,21 @@
             <div class="flex">
               Starting capital:
               <span class="ml-1 font-bold flex">
-                {{@model.startingCapital}}
+                {{round @model.startingCapital}}
                 <CurrencyInfo @currencyCode={{@model.currencyCode}} />
               </span>
             </div>
             <div class="flex">
               Total saved:
               <span class="ml-1 font-bold flex">
-                {{@model.totalSavings}}
+                {{round @model.totalSavings}}
                 <CurrencyInfo @currencyCode={{@model.currencyCode}} />
               </span>
             </div>
             <div class="flex">
               Left to save:
               <span class="ml-1 font-bold flex">
-                {{this.remainingAmountToSave}}
+                {{round this.remainingAmountToSave}}
                 <CurrencyInfo @currencyCode={{@model.currencyCode}} />
               </span>
             </div>

@@ -49,13 +49,13 @@ export default class FinanceOverviewController extends Controller {
     if (!response) {
       return;
     }
-    this.notifications.success(`Changes for ${newRowData.date} were saved`, {
+    this.notifications.success(`Changes for ${newRowData.month} were saved`, {
       autoClear: true,
     });
 
     currentRowData.income = newRowData.income;
     currentRowData.spendings = newRowData.spendings;
-    currentRowData.totalBalance = newRowData.totalBalance;
+    currentRowData.updatedTotalBalance = newRowData.updatedTotalBalance;
     currentRowData.currencyCode = newRowData.currencyCode;
 
     this.sortRowsFromEarliestToLatest();
@@ -90,13 +90,13 @@ export default class FinanceOverviewController extends Controller {
 
   @action
   isDeleteAllowed(row) {
-    const { income, spendings, totalBalance } = row;
+    const { income, spendings } = row;
 
     if (this.isElementFirstOrLastInArray(this.model, row)) {
       return true;
     }
 
-    if (!income && !spendings && !totalBalance) {
+    if (!income && !spendings) {
       return false;
     }
 

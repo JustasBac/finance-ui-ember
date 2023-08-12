@@ -37,13 +37,18 @@
   <:body>
     <InputField
       class="mr-2"
-      @label={{concat (capitalize this.type) ' (' this.currency.symbol ')'}}
+      @label={{concat
+        (capitalize this.typeWithTranslation)
+        ' ('
+        this.currency.symbol
+        ')'
+      }}
       @type="number"
       @value={{this.valueInput}}
       @onInput={{fn (mut this.valueInput)}}
       @placeholder={{t
         'home-page.edit-finance-modal.input-label'
-        type=this.type
+        type=this.typeWithTranslation
         month=this.month
       }}
     />
