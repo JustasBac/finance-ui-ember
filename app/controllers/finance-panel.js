@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import moment from 'moment';
 import { inject as service } from '@ember/service';
 
-export default class FinanceOverviewController extends Controller {
+export default class FinancePanelController extends Controller {
   @service('finance') financeService;
   @service('user') userService;
   @service notifications;
@@ -32,14 +32,9 @@ export default class FinanceOverviewController extends Controller {
       return;
     }
 
-    if (strictDelete) {
-      this.model.removeObject(rowData);
-      return;
-    }
-
     rowData.income = null;
     rowData.spendings = null;
-    rowData.totalBalance = null;
+    rowData.updatedTotalBalance = rowData.initialTotalBalance;
   }
 
   @action

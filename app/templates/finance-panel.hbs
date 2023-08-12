@@ -1,10 +1,10 @@
-{{page-title 'Finance overview'}}
+{{page-title 'Finance panel'}}
 <EmberWormhole @to="page-body-wormhole">
-  <PageLayout @pageTitle="Finance overview">
+  <PageLayout @pageTitle="Finance panel">
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
       {{#if this.model.length}}
         <div class="overflow-x-auto rounded-lg">
-          <table class="table w-full">
+          <table class="table w-full fade-in-animation">
             <thead class="bg-neutral-100 rounded-lg">
               <tr>
                 <th class="!relative">
@@ -29,7 +29,6 @@
             </thead>
             <tbody>
               {{#each this.model as |row|}}
-                {{log row}}
                 <tr>
                   <td>
                     {{row.month}}

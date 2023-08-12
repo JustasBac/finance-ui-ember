@@ -6,7 +6,7 @@ import moment from 'moment';
 
 export default class ModalsAddOrEditFinanceDataEntryComponent extends Component {
   @service('user') userService;
-  @service('economy') economyService;
+  @service('finance') financeService;
   @service('requests') requestService;
   @service intl;
 
@@ -14,7 +14,7 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
   @tracked valueInput = this.value || null; //used for input because we don't want to update the value without user confirming it
 
   get currentMonthData() {
-    return this.economyService.getCurrentMonthsData();
+    return this.financeService.getCurrentMonthsData();
   }
 
   get currency() {
@@ -63,7 +63,7 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
       return this.userService.totalBalance;
     }
 
-    const currentMonthData = this.economyService.getCurrentMonthsData();
+    const currentMonthData = this.financeService.getCurrentMonthsData();
 
     if (!currentMonthData) {
       return null;
@@ -97,7 +97,7 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
 
     body[type] = this.valueInput;
 
-    const response = await this.economyService.updateOrAddNewEntry(body);
+    const response = await this.financeService.updateOrAddNewEntry(body);
 
     this.isModalOpen = false;
 
@@ -105,7 +105,7 @@ export default class ModalsAddOrEditFinanceDataEntryComponent extends Component 
       return;
     }
 
-    const currentMonthData = this.economyService.getCurrentMonthsData();
+    const currentMonthData = this.financeService.getCurrentMonthsData();
 
     currentMonthData[type] = +this.valueInput;
   }

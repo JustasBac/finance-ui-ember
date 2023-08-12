@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 import moment from 'moment';
 import FinanceEntry from 'finance-ui-ember/models/finance-entry';
 
-export default class EconomyService extends Service {
+export default class FinanceService extends Service {
   @service('user') userService;
   @service('requests') requestService;
   @service notifications;
@@ -25,6 +25,16 @@ export default class EconomyService extends Service {
         el.currency_code
       );
     });
+
+    this.sortFinancialDataByDate();
+  }
+
+  sortFinancialDataByDate() {
+    this.financeDataList = this.financeDataList.sort(
+      (a, b) => new Date(a.month) - new Date(b.month)
+    );
+
+    console.log('sorted', this.financeDataList);
   }
 
   getCurrentMonthsData() {
@@ -88,7 +98,7 @@ export default class EconomyService extends Service {
           response.currency_code
         )
       );
-
+      this.sortFinancialDataByDate();
       return true;
     }
 
@@ -133,6 +143,21 @@ export default class EconomyService extends Service {
     if (!response.ok) {
       this.notifications.error('Delete request error');
       return false;
+    }
+
+    if (strictDelete) {
+      this.financeDataList.removeObject(data);
+
+      const relevantTotalBalance =
+        this.financeDataList[this.financeDataList.length - 1]
+          .updatedTotalBalance;
+
+      this.userService.updateUserTotalBalance(relevantTotalBalance);
+    } else {
+      const difference = data.spendings - data.income; //when user deletes finance entry that is surounded by months that have data, recalculate total balance of the months after
+
+      console.log('difference', difference);
+      this.recalculateTotalBalanceValues(data.month, difference);
     }
 
     this.notifications.success(`Finance data for ${data.month} was deleted`, {

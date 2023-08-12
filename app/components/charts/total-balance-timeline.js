@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 
-export default class ChartsSpendingsIncomeOverviewComponent extends Component {
+export default class ChartsTotalBalanceTimelineComponent extends Component {
   @service('user') userService;
   @service('finance') financeService;
   @service('requests') requestService;
@@ -11,7 +11,7 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
 
     return {
       chart: {
-        type: 'column',
+        type: 'line',
         height: '360px',
         backgroundColor: 'transparent',
       },
@@ -30,27 +30,15 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
         },
       },
       plotOptions: {
-        column: {
-          stacking: 'normal',
-          shared: true,
+        line: {
           dataLabels: {
             enabled: true,
             formatter: function () {
-              const currencySymbol = _this.userService.getCurrencySymbol(
-                this.point.currencyCode
-              );
-
-              return this.y + currencySymbol;
+              return this.y + _this.userService.selectedCurrency.symbol;
             },
+            padding: 10,
           },
-        },
-      },
-      tooltip: {
-        crosshairs: true,
-        shared: true,
-        valueSuffix: this.userService.selectedCurrency.symbol,
-        pointFormatter: function () {
-          return `<b>${this.series.name}:</b> ${this.y} ${this.currencyCode} <br/>`;
+          enableMouseTracking: false,
         },
       },
     };
@@ -64,25 +52,16 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
     if (!this.financeService.financeDataList.length) {
       return null;
     }
-
+    console.log(
+      'this.financeService.financeDataList',
+      this.financeService.financeDataList
+    );
     return [
       {
-        name: 'Income',
-        marker: {
-          symbol: 'square',
-        },
-        data: this.financeService.financeDataList.map((el) => {
-          return { y: +el.income, currencyCode: el.currencyCode };
-        }),
-      },
-      {
-        name: 'Spendings',
-        marker: {
-          symbol: 'diamond',
-        },
-        data: this.financeService.financeDataList.map((el) => {
-          return { y: +el.spendings, currencyCode: el.currencyCode };
-        }),
+        name: 'Total Balance',
+        data: this.financeService.financeDataList.map(
+          (el) => +el.updatedTotalBalance
+        ),
       },
     ];
   }

@@ -6,7 +6,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class RequestsService extends Service {
   @service('saving-plan') savingPlanService;
-  @service('economy') economyService;
+  @service('finance') financeService;
   @service('user') userService;
   @service session;
 
@@ -106,7 +106,7 @@ export default class RequestsService extends Service {
 
     await Promise.all([
       this.savingPlanService.fetchAndSetSavingPlans(),
-      this.economyService.fetchAndSetFinanceData(),
+      this.financeService.fetchAndSetFinanceData(),
       this.userService.fetchAndSetUserCurrencyData(),
       this.userService.fetchAndSetUserTotalBalance(),
     ]);

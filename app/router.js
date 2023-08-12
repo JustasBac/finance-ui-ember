@@ -7,12 +7,12 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('home', { path: '/' });
   this.route('saving-plan-detailed-view', {
     path: 'saving-plan/:saving_plan_id',
   });
-  this.route('finance-overview');
   this.route('currency-selection');
   this.route('login');
   this.route('register');
+  this.route('finance-panel');
+  this.route('overview', { path: '/' });
 });

@@ -7,7 +7,7 @@ import { action } from '@ember/object';
 export default class UserService extends Service {
   @service('requests') requestService;
   @service('saving-plan') savingPlanService;
-  @service('economy') economyService;
+  @service('finance') financeService;
   @service('user') userService;
   @service notifications;
   @service session;

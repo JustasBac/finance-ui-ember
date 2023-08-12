@@ -2,11 +2,11 @@ import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 
 export default class SavingsCardComponent extends Component {
-  @service('economy') economyService;
+  @service('finance') financeService;
   @service('user') userService;
 
   get data() {
-    return this.economyService.getCurrentMonthsData();
+    return this.financeService.getCurrentMonthsData();
   }
 
   get currencySymbol() {

@@ -1,0 +1,49 @@
+{{page-title 'Overview'}}
+<EmberWormhole @to="page-body-wormhole">
+  <PageLayout @pageTitle={{t 'home-page.title'}}>
+    <div class="flex flex-col xl:flex-row gap-8">
+      <div class="basis-1/4 flex flex-col justify-between gap-3">
+        <TotalBalance class="basis-1/2 min-w-[23rem]" />
+        <div class="flex gap-3 basis-1/2">
+          <SpendingCard class="basis-1/2" />
+          <SavingsCard class="basis-1/2" />
+        </div>
+      </div>
+      <SavingPlansCard class="basis-3/4" />
+    </div>
+    <div class="flex mt-6 qHd:mt-16 gap-8">
+      <div
+        class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
+      >
+        <div class="text-center w-full flex justify-center">
+          <div class="tabs w-[25rem] mb-2">
+            <a
+              class="tab tab-bordered basis-1/2 whitespace-nowrap
+                {{if (eq this.activeTab 'totalBalance') 'tab-active'}}"
+              {{on 'click' (fn (mut this.activeTab) 'totalBalance')}}
+            >
+              Total balance timeline
+            </a>
+            <a
+              class="tab tab-bordered basis-1/2
+                {{if (eq this.activeTab 'savings') 'tab-active'}}"
+              {{on 'click' (fn (mut this.activeTab) 'savings')}}
+            >
+              Savings timeline
+            </a>
+          </div>
+        </div>
+        {{#if (eq this.activeTab 'totalBalance')}}
+          <Charts::TotalBalanceTimeline />
+        {{else if (eq this.activeTab 'savings')}}
+          <Charts::SavingsTimeline />
+        {{/if}}
+      </div>
+      <div
+        class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
+      >
+        <Charts::SpendingsIncomeOverview />
+      </div>
+    </div>
+  </PageLayout>
+</EmberWormhole>

@@ -29,15 +29,15 @@
                 </div>
                 <ul class="menu menu-vertical">
                   <li class="bg-gray-200 rounded">
-                    <LinkTo @route="home" class="gap-x-2">
+                    <LinkTo @route="overview" class="gap-x-2">
                       <FaIcon @icon="house" />
-                      Home
+                      Overview
                     </LinkTo>
                   </li>
                   <li class="bg-gray-200 rounded my-3">
-                    <LinkTo @route="finance-overview" class="gap-x-2">
+                    <LinkTo @route="finance-panel" class="gap-x-2">
                       <FaIcon @icon="coins" />
-                      Finance overview
+                      Finance panel
                     </LinkTo>
                   </li>
                   <li class="bg-gray-200 rounded">
@@ -59,7 +59,7 @@
         </div>
         <LinkTo
           class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
-          @route="home"
+          @route="overview"
         >
           <FaIcon @icon="landmark" class="mr-2" />
           Finance App
@@ -68,15 +68,15 @@
       <div class="hidden xl:flex w-full justify-end">
         <div class="menu menu-horizontal px-1">
           <li class="rounded-lg bg-neutral-500/10">
-            <LinkTo @route="home" class="gap-x-2 !text-white">
+            <LinkTo @route="overview" class="gap-x-2 !text-white">
               <FaIcon @icon="house" />
-              Home
+              Overview
             </LinkTo>
           </li>
           <li class="ml-2 rounded-lg bg-neutral-500/10">
-            <LinkTo @route="finance-overview" class="gap-x-2 !text-white">
+            <LinkTo @route="finance-panel" class="gap-x-2 !text-white">
               <FaIcon @icon="coins" />
-              Finance overview
+              Finance panel
             </LinkTo>
           </li>
         </div>
@@ -96,7 +96,7 @@
   >
     <LinkTo
       class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
-      @route="home"
+      @route="overview"
     >
       <FaIcon @icon="landmark" class="mr-2" />
       Finance App
