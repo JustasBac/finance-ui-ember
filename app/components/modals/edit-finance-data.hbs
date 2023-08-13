@@ -6,7 +6,7 @@
     <FaIcon @icon="pen-to-square" />
     <Tooltip>
       Edit financial entries for
-      {{@data.month}}
+      {{moment-format @data.datetime 'MMMM YYYY'}}
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
@@ -18,7 +18,7 @@
   </:header>
   <:body>
     <div class="flex justify-between items-center">
-      {{@data.month}}
+      {{moment-format @data.datetime 'MMMM YYYY'}}
       <Button
         class="btn-sm btn-outline"
         {{on 'click' this.resetEditableValuesToDefault}}

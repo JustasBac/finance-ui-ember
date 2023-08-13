@@ -4,7 +4,7 @@ import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module(
-  'Integration | Component | modals/add-or-edit-finance-data-entry',
+  'Integration | Component | modals/add-or-edit-initial-total-balance',
   function (hooks) {
     setupRenderingTest(hooks);
 
@@ -12,15 +12,15 @@ module(
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.set('myAction', function(val) { ... });
 
-      await render(hbs`<Modals::AddOrEditFinanceDataEntry />`);
+      await render(hbs`<Modals::AddOrEditInitialTotalBalance />`);
 
       assert.dom(this.element).hasText('');
 
       // Template block usage:
       await render(hbs`
-      <Modals::AddOrEditFinanceDataEntry>
+      <Modals::AddOrEditInitialTotalBalance>
         template block text
-      </Modals::AddOrEditFinanceDataEntry>
+      </Modals::AddOrEditInitialTotalBalance>
     `);
 
       assert.dom(this.element).hasText('template block text');

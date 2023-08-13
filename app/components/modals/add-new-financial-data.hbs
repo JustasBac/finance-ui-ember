@@ -7,7 +7,7 @@
     <Tooltip>
       Add financial data for
       <span class="whitespace-nowrap font-bold">
-        {{@candidateMonth}}
+        {{moment-format @candidateDatetime 'MMMM YYYY'}}
       </span>
     </Tooltip>
   </span>
@@ -16,7 +16,7 @@
   <:header>
     <div>
       Add data for
-      {{@candidateMonth}}
+      {{moment-format @candidateDatetime 'MMMM YYYY'}}
     </div>
   </:header>
   <:body>
@@ -24,7 +24,7 @@
       class="flex justify-between items-center"
       {{did-insert this.resetEditableValues}}
     >
-      {{@candidateMonth}}
+      {{moment-format @candidateDatetime 'MMMM YYYY'}}
       <Button
         class="btn-sm btn-outline"
         {{on 'click' this.resetEditableValues}}

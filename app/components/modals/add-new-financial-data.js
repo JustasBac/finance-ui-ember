@@ -18,10 +18,10 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
 
   initFinanceData() {
     return {
-      month: this.args.candidateMonth,
+      datetime: this.args.candidateDatetime,
       income: null,
       spendings: null,
-      initialTotalBalance: this.userService.totalBalance,
+      initialTotalBalance: this.userService.initialTotalBalance,
       currencyCode: this.userService.selectedCurrency.code,
       currencySymbol: this.userService.selectedCurrency.symbol,
     };
@@ -41,7 +41,7 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
     }
 
     this.financeData.updatedTotalBalance =
-      this.userService.totalBalance + (income - spendings);
+      this.userService.initialTotalBalance + (income - spendings);
 
     this.isModalOpen = false;
 

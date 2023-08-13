@@ -23,11 +23,6 @@ home-page:
       Ihre gesamten Ersparnisse. 
       Sie können es jederzeit bearbeiten
     open-panel-tooltip: Öffnen Sie das Finanzübersichtsfenster
-  edit-finance-modal:
-    total-balance: Gesamtsaldo
-    spendings: Ausgaben
-    income: Einkommen
-    input-label: Geben Sie Ihren {type} für {month} ein
   spendings: Ausgaben
   saving-plans-card:
     title: Sparpläne

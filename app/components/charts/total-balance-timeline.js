@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
+import moment from 'moment';
 
 export default class ChartsTotalBalanceTimelineComponent extends Component {
   @service('user') userService;
@@ -45,17 +46,16 @@ export default class ChartsTotalBalanceTimelineComponent extends Component {
   }
 
   get xAxisCategories() {
-    return this.financeService.financeDataList.map((el) => el.month); //assuming all three have the same date
+    return this.financeService.financeDataList.map((el) =>
+      moment(el.datetime).format('MMMM YYYY')
+    );
   }
 
   get chartData() {
     if (!this.financeService.financeDataList.length) {
       return null;
     }
-    console.log(
-      'this.financeService.financeDataList',
-      this.financeService.financeDataList
-    );
+
     return [
       {
         name: 'Total Balance',

@@ -108,7 +108,7 @@ export default class RequestsService extends Service {
       this.savingPlanService.fetchAndSetSavingPlans(),
       this.financeService.fetchAndSetFinanceData(),
       this.userService.fetchAndSetUserCurrencyData(),
-      this.userService.fetchAndSetUserTotalBalance(),
+      this.userService.fetchAndSetUserInitialTotalBalance(),
     ]);
 
     this.isAppDataLoading = false;

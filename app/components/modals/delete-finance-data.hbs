@@ -6,7 +6,7 @@
     <FaIcon @icon="trash" />
     <Tooltip>
       Delete financial data for
-      {{@data.month}}
+      {{moment-format @data.datetime 'MMMM YYYY'}}
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
@@ -16,7 +16,7 @@
   </:header>
   <:body>
     Are you sure you want to delete data for
-    {{@data.month}}
+    {{moment-format @data.datetime 'MMMM YYYY'}}
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>

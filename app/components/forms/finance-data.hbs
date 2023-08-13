@@ -51,7 +51,9 @@
     }}
   {{else}}
     {{concat
-      (sum this.userService.totalBalance (sub @data.income @data.spendings))
+      (sum
+        this.userService.initialTotalBalance (sub @data.income @data.spendings)
+      )
       this.selectedCurrency.symbol
     }}
   {{/if}}

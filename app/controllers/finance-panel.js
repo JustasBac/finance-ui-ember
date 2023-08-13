@@ -9,10 +9,17 @@ export default class FinancePanelController extends Controller {
   @service notifications;
 
   get nextMonth() {
-    return moment(this.model[this.model.length - 1].month, 'MMMM YYYY')
-      .add(1, 'months')
-      .endOf('month')
-      .format('MMMM YYYY');
+    return moment(this.model[this.model.length - 1].datetime).add(1, 'months');
+  }
+
+  get initialTotalBalanceMonth() {
+    if (this.financeService.financeDataList.length) {
+      const firstMonthEntryDatetime =
+        this.financeService.financeDataList[0].datetime;
+      return moment(firstMonthEntryDatetime).format('MMMM YYYY');
+    }
+
+    return moment().format('MMMM YYYY');
   }
 
   @action
@@ -53,30 +60,26 @@ export default class FinancePanelController extends Controller {
     currentRowData.updatedTotalBalance = newRowData.updatedTotalBalance;
     currentRowData.currencyCode = newRowData.currencyCode;
 
-    this.sortRowsFromEarliestToLatest();
+    // this.sortRowsFromEarliestToLatest();
   }
 
   @action
   async addNewMonth(newMonthData) {
-    const response = await this.financeService.updateOrAddNewEntry(
-      newMonthData
-    );
-
-    if (!response) {
-      return;
-    }
-
-    this.sortRowsFromEarliestToLatest();
+    this.financeService.updateOrAddNewEntry(newMonthData);
   }
 
-  sortRowsFromEarliestToLatest() {
-    this.model.sort((a, b) => new Date(a.month) - new Date(b.month));
-  }
+  // sortRowsFromEarliestToLatest() {
+  //   this.model.sort((a, b) => new Date(a.month) - new Date(b.month));
+  // }
 
   isElementFirstOrLastInArray(array, element) {
     const positionInArray = array.indexOf(element);
 
-    if (array.length - 1 === positionInArray || positionInArray === 0) {
+    if (positionInArray === 0) {
+      return false;
+    }
+
+    if (array.length - 1 === positionInArray) {
       return true;
     }
 

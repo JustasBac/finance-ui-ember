@@ -6,27 +6,17 @@
     {{#if this.requestService.isAppDataLoading}}
       <span class="loading loading-ring loading-lg"></span>
     {{else}}
-      {{concat (if this.value this.value '- ') this.currency.symbol}}
-      {{#if this.currencyDiffersFromAppCurrency}}
-        <FaIcon
-          class="text-base text-yellow-600 mb-0.5"
-          @icon="circle-exclamation"
-        />
-      {{/if}}
+      {{concat
+        (if
+          this.userService.initialTotalBalance
+          this.userService.initialTotalBalance
+          '- '
+        )
+        this.currency.symbol
+      }}
     {{/if}}
     <Tooltip @side="bottom">
-      Click to edit
-      {{#if this.currencyDiffersFromAppCurrency}}
-        <div class="mt-2">
-          <span class="font-bold">
-            Warning!
-          </span>
-          Currency
-          {{this.currency.code}}
-          differs from the selected app currency
-          {{this.userService.selectedCurrency.code}}
-        </div>
-      {{/if}}
+      Click to change initial total balance value
     </Tooltip>
   </p>
 </Modals::-TriggerButton>
@@ -37,20 +27,11 @@
   <:body>
     <InputField
       class="mr-2"
-      @label={{concat
-        (capitalize this.typeWithTranslation)
-        ' ('
-        this.currency.symbol
-        ')'
-      }}
+      @label={{concat 'Initial total balance' ' (' this.currency.symbol ')'}}
       @type="number"
       @value={{this.valueInput}}
       @onInput={{fn (mut this.valueInput)}}
-      @placeholder={{t
-        'home-page.edit-finance-modal.input-label'
-        type=this.typeWithTranslation
-        month=this.month
-      }}
+      @placeholder="Edit initial total balance ()"
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>

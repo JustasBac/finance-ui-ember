@@ -21,11 +21,6 @@ home-page:
     title: Total Balance
     tooltip-info: Your total savings. You can edit it any time
     open-panel-tooltip: Open finance overview panel
-  edit-finance-modal:
-    total-balance: Total balance
-    spendings: Spendings
-    income: Income
-    input-label: Enter your {type} for {month}
   spendings: Spendings
   saving-plans-card:
     title: Saving Plans

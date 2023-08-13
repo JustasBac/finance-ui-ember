@@ -2,6 +2,13 @@
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Finance panel">
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
+      <span class="flex items-center my-3 ml-8">
+        Initial total balance
+        <span class="text-sm ml-1">
+          {{concat '(' this.initialTotalBalanceMonth '):'}}
+        </span>
+        <Modals::AddOrEditInitialTotalBalance />
+      </span>
       {{#if this.model.length}}
         <div class="overflow-x-auto rounded-lg">
           <table class="table w-full fade-in-animation">
@@ -31,7 +38,7 @@
               {{#each this.model as |row|}}
                 <tr>
                   <td>
-                    {{row.month}}
+                    {{moment-format row.datetime 'MMMM YYYY'}}
                   </td>
                   <td>
                     <span class="flex">
@@ -75,7 +82,7 @@
           </table>
           <div class="mt-3 flex justify-center">
             <Modals::AddNewFinancialData
-              @candidateMonth={{this.nextMonth}}
+              @candidateDatetime={{this.nextMonth}}
               @onAddNewMonth={{this.addNewMonth}}
             />
           </div>
@@ -86,7 +93,7 @@
             Add
           </Alert>
           <Modals::AddNewFinancialData
-            @candidateMonth={{moment-format (now) 'MMMM YYYY'}}
+            @candidateDatetime={{moment-format (now)}}
             @onAddNewMonth={{this.addNewMonth}}
           />
         </div>

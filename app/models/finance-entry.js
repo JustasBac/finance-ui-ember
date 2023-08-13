@@ -2,7 +2,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class FinanceEntry {
   id = null;
-  month = '';
+  datetime = '';
   initialTotalBalance = null;
   @tracked income = null;
   @tracked spendings = null;
@@ -11,7 +11,7 @@ export default class FinanceEntry {
 
   constructor(
     id,
-    month,
+    datetime,
     income,
     spendings,
     initialTotalBalance,
@@ -19,7 +19,7 @@ export default class FinanceEntry {
     currencyCode
   ) {
     this.id = id;
-    this.month = month;
+    this.datetime = datetime;
     this.income = +income;
     this.spendings = +spendings;
     this.initialTotalBalance = +initialTotalBalance;
@@ -34,7 +34,7 @@ export default class FinanceEntry {
   copy() {
     return new FinanceEntry(
       this.id,
-      this.month,
+      this.datetime,
       this.income,
       this.spendings,
       this.initialTotalBalance,

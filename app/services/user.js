@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import currencies from 'finance-ui-ember/static-data/currencies';
 import { action } from '@ember/object';
+import moment from 'moment';
 
 export default class UserService extends Service {
   @service('requests') requestService;
@@ -13,7 +14,7 @@ export default class UserService extends Service {
   @service session;
 
   @tracked selectedCurrency = {};
-  @tracked totalBalance = null;
+  @tracked initialTotalBalance = null;
 
   username = '';
 
@@ -40,23 +41,44 @@ export default class UserService extends Service {
     );
   }
 
-  async fetchAndSetUserTotalBalance() {
-    const response = await this.requestService.fetch('user_total_balance');
+  async fetchAndSetUserInitialTotalBalance() {
+    const response = await this.requestService.fetch(
+      'user_initial_total_balance'
+    );
 
-    this.totalBalance = response['total_balance'];
+    this.initialTotalBalance = response['initial_total_balance'];
   }
 
-  async updateUserTotalBalance(totalBalance) {
-    const body = { total_balance: totalBalance };
+  async updateUserInitialTotalBalance(updatedInitialtotalBalance) {
+    const body = { initial_total_balance: updatedInitialtotalBalance };
 
-    const response = await this.requestService.put('user_total_balance', body);
+    console.log('current this.initialTotalBalance', this.initialTotalBalance);
+
+    const response = await this.requestService.put(
+      'user_initial_total_balance',
+      body
+    );
 
     if (!response) {
       this.notifications.error('Request error');
       return;
     }
 
-    this.totalBalance = response['total_balance'];
+    if (this.initialTotalBalance) {
+      const totalBalanceDifferenceFromTheLastValue =
+        updatedInitialtotalBalance - this.initialTotalBalance;
+
+      const startMonthForRecalculation = moment(
+        this.financeService.financeDataList[0].datetime
+      ).subtract(1, 'month'); //we want to apply it to all existing months. Substract 1 month in order to fool .isAfter() function inside the function
+
+      this.financeService.recalculateTotalBalanceValues(
+        startMonthForRecalculation,
+        totalBalanceDifferenceFromTheLastValue
+      );
+    }
+
+    this.initialTotalBalance = response['initial_total_balance'];
   }
 
   async selectNewCurrency(newCurrencyCode) {

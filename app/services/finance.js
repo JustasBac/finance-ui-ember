@@ -17,7 +17,7 @@ export default class FinanceService extends Service {
     this.financeDataList = financeData.map((el) => {
       return new FinanceEntry(
         el.id,
-        el.month,
+        el.datetime,
         el.income,
         el.spendings,
         el.initial_total_balance,
@@ -25,8 +25,8 @@ export default class FinanceService extends Service {
         el.currency_code
       );
     });
-
-    this.sortFinancialDataByDate();
+    console.log('this.financeDataList', this.financeDataList);
+    // this.sortFinancialDataByDate();
   }
 
   sortFinancialDataByDate() {
@@ -41,7 +41,7 @@ export default class FinanceService extends Service {
     const currentMonth = moment().format('MMMM YYYY');
 
     const currentMonthData = this.financeDataList.find(
-      (el) => el.month === currentMonth
+      (el) => moment(el.datetime).format('MMMM YYYY') === currentMonth
     );
 
     if (!currentMonthData) {
@@ -53,7 +53,7 @@ export default class FinanceService extends Service {
 
   async updateOrAddNewEntry(financeData) {
     const {
-      month,
+      datetime,
       currencyCode,
       income,
       spendings,
@@ -64,11 +64,11 @@ export default class FinanceService extends Service {
     } = financeData;
 
     const existingEntry = this.financeDataList.find(
-      (el) => el.month === financeData.month
+      (el) => el.datetime === financeData.datetime
     );
 
     const body = {
-      month,
+      datetime, //moment formats date to the first day of the month. We care about a month and a year. Add 2 days to avoid problems with UTC offset
       currency_code: currencyCode,
       income,
       spendings,
@@ -85,12 +85,10 @@ export default class FinanceService extends Service {
         return false;
       }
 
-      this.userService.updateUserTotalBalance(updatedTotalBalance);
-
       this.financeDataList.pushObject(
         new FinanceEntry(
           response.id,
-          response.month,
+          response.datetime,
           response.income,
           response.spendings,
           response.initial_total_balance,
@@ -109,12 +107,11 @@ export default class FinanceService extends Service {
       this.notifications.error('Request error');
       return false;
     }
-    this.userService.updateUserTotalBalance(updatedTotalBalance);
 
     if (totalBalanceDifferenceFromTheLastValue) {
       //for cases when user has data for several months, and updates data for the months that are infront. Then we need to recalculate total balance
       this.recalculateTotalBalanceValues(
-        month,
+        datetime,
         totalBalanceDifferenceFromTheLastValue
       );
     }
@@ -125,7 +122,7 @@ export default class FinanceService extends Service {
   recalculateTotalBalanceValues(startMonth, difference) {
     //if we edit income or spendings of already existing month, we need to re-adjust the months that are in the future. Their total balance values should be updated
     this.financeDataList.forEach((el) => {
-      if (moment(el.month, 'MMMM YYYY').isAfter(startMonth, 'MMMM YYYY')) {
+      if (moment(el.datetime).isAfter(startMonth)) {
         el.initialTotalBalance = el.initialTotalBalance + difference;
         el.updatedTotalBalance = el.updatedTotalBalance + difference;
 
@@ -147,12 +144,6 @@ export default class FinanceService extends Service {
 
     if (strictDelete) {
       this.financeDataList.removeObject(data);
-
-      const relevantTotalBalance =
-        this.financeDataList[this.financeDataList.length - 1]
-          .updatedTotalBalance;
-
-      this.userService.updateUserTotalBalance(relevantTotalBalance);
     } else {
       const difference = data.spendings - data.income; //when user deletes finance entry that is surounded by months that have data, recalculate total balance of the months after
 
