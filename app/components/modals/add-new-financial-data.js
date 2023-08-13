@@ -2,9 +2,11 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import moment from 'moment';
 
 export default class ModalsAddNewFinancialDataComponent extends Component {
   @service('user') userService;
+  @service('finance') financeService;
   @service('input-validation') validationService;
   @service notifications;
 
@@ -17,11 +19,24 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
   }
 
   initFinanceData() {
+    let initialTotalBalance = this.userService.initialTotalBalance;
+
+    if (this.financeService.financeDataList.length) {
+      const previousMonth = moment(this.args.candidateDatetime)
+        .subtract(1, 'month')
+        .format('MMMM YYYY');
+
+      const previousMonthData = this.financeService.financeDataList.find(
+        (el) => moment(el.datetime).format('MMMM YYYY') === previousMonth
+      );
+      initialTotalBalance = previousMonthData.updatedTotalBalance;
+    }
+
     return {
       datetime: this.args.candidateDatetime,
       income: null,
       spendings: null,
-      initialTotalBalance: this.userService.initialTotalBalance,
+      initialTotalBalance,
       currencyCode: this.userService.selectedCurrency.code,
       currencySymbol: this.userService.selectedCurrency.symbol,
     };
@@ -29,7 +44,7 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
 
   @action
   addDataForNewMonth() {
-    const { income, spendings } = this.financeData;
+    const { income, spendings, initialTotalBalance } = this.financeData;
 
     if (!income || !spendings) {
       this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
@@ -40,8 +55,12 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
       return;
     }
 
+    console.log('this.financeData', this.financeData);
+
+    //TODO: middle month on delete updates bad
+
     this.financeData.updatedTotalBalance =
-      this.userService.initialTotalBalance + (income - spendings);
+      initialTotalBalance + (income - spendings);
 
     this.isModalOpen = false;
 

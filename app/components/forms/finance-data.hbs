@@ -44,17 +44,8 @@
 </div>
 <div class="text-sm mt-1 mb-3">
   Total Balance:
-  {{#if @editMode}}
-    {{concat
-      (sum @data.initialTotalBalance (sub @data.income @data.spendings))
-      this.selectedCurrency.symbol
-    }}
-  {{else}}
-    {{concat
-      (sum
-        this.userService.initialTotalBalance (sub @data.income @data.spendings)
-      )
-      this.selectedCurrency.symbol
-    }}
-  {{/if}}
+  {{concat
+    (sum @data.initialTotalBalance (sub @data.income @data.spendings))
+    this.selectedCurrency.symbol
+  }}
 </div>

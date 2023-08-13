@@ -1,6 +1,7 @@
-<Modals::-TriggerButton class="mt-1">
+<Modals::-TriggerButton>
   <p
-    class="text-2xl text-center font-bold whitespace-nowrap lowercase btn btn-ghost inline py-2"
+    class="{{if @buttonSmall 'text-lg py-1.5' 'text-2xl py-2'}}
+       text-center font-bold whitespace-nowrap lowercase btn btn-ghost inline"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
     {{#if this.requestService.isAppDataLoading}}

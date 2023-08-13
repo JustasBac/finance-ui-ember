@@ -64,7 +64,10 @@ export default class UserService extends Service {
       return;
     }
 
-    if (this.initialTotalBalance) {
+    if (
+      this.initialTotalBalance &&
+      this.financeService.financeDataList.length
+    ) {
       const totalBalanceDifferenceFromTheLastValue =
         updatedInitialtotalBalance - this.initialTotalBalance;
 

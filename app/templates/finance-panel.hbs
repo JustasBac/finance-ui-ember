@@ -2,15 +2,15 @@
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Finance panel">
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
-      <span class="flex items-center my-3 ml-8">
+      <span class="flex font-light items-center my-4 ml-8">
         Initial total balance
-        <span class="text-sm ml-1">
-          {{concat '(' this.initialTotalBalanceMonth '):'}}
+        <span class="ml-1 text-sm">
+          {{concat '(before ' this.initialTotalBalanceMonth ' savings):'}}
         </span>
-        <Modals::AddOrEditInitialTotalBalance />
+        <Modals::AddOrEditInitialTotalBalance @buttonSmall={{true}} />
       </span>
       {{#if this.model.length}}
-        <div class="overflow-x-auto rounded-lg">
+        <div class="overflow-x-auto rounded-lg px-8">
           <table class="table w-full fade-in-animation">
             <thead class="bg-neutral-100 rounded-lg">
               <tr>

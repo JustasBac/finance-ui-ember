@@ -21,29 +21,29 @@
         {{/if}}
         {{#if this.data}}
           <Popover @side="bottom">
-            <div class="mb-2 flex items-center gap-2 text-xs">
-              <span class="px-1 py-0.5 border rounded-md text-center shadow">
+            <div class="mb-2 flex items-center gap-2 text-xs font-light">
+              <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
                 Income
               </span>
               -
-              <span class="px-1 py-0.5 border rounded-md text-center shadow">
+              <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
                 Spendings
               </span>
               =
-              <span class="px-1 py-0.5 border rounded-md text-center shadow">
+              <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
                 Savings
               </span>
             </div>
-            <div class="flex items-center gap-2 text-xs">
-              <span class="px-1 py-0.5 border rounded-md text-center shadow">
+            <div class="flex items-center gap-2 text-xs font-light">
+              <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
                 {{concat this.data.income this.currencySymbol}}
               </span>
               -
-              <span class="px-1 py-0.5 border rounded-md text-center shadow">
+              <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
                 {{concat this.data.spendings this.currencySymbol}}
               </span>
               =
-              <span class="px-1 py-0.5 border rounded-md text-center shadow">
+              <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
                 {{concat this.data.savings this.currencySymbol}}
               </span>
             </div>
