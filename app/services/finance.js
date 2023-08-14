@@ -26,15 +26,6 @@ export default class FinanceService extends Service {
       );
     });
     console.log('this.financeDataList', this.financeDataList);
-    // this.sortFinancialDataByDate();
-  }
-
-  sortFinancialDataByDate() {
-    this.financeDataList = this.financeDataList.sort(
-      (a, b) => new Date(a.month) - new Date(b.month)
-    );
-
-    console.log('sorted', this.financeDataList);
   }
 
   getCurrentMonthsData() {
@@ -96,7 +87,7 @@ export default class FinanceService extends Service {
           response.currency_code
         )
       );
-      this.sortFinancialDataByDate();
+
       return true;
     }
 
@@ -147,13 +138,17 @@ export default class FinanceService extends Service {
     } else {
       const difference = data.spendings - data.income; //when user deletes finance entry that is surounded by months that have data, recalculate total balance of the months after
 
-      console.log('difference', difference);
-      this.recalculateTotalBalanceValues(data.month, difference);
+      this.recalculateTotalBalanceValues(data.datetime, difference);
     }
 
-    this.notifications.success(`Finance data for ${data.month} was deleted`, {
-      autoClear: true,
-    });
+    this.notifications.success(
+      `Finance data for ${moment(data.datetime).format(
+        'MMMM YYYY'
+      )} was deleted`,
+      {
+        autoClear: true,
+      }
+    );
 
     return true;
   }

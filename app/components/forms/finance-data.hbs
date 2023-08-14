@@ -40,12 +40,14 @@
 />
 <div class="text-sm mt-3">
   Savings:
-  {{concat (sub @data.income @data.spendings) this.selectedCurrency.symbol}}
+  {{concat
+    (round (sub @data.income @data.spendings) this.selectedCurrency.symbol)
+  }}
 </div>
 <div class="text-sm mt-1 mb-3">
   Total Balance:
   {{concat
-    (sum @data.initialTotalBalance (sub @data.income @data.spendings))
+    (round (sum @data.initialTotalBalance (sub @data.income @data.spendings)))
     this.selectedCurrency.symbol
   }}
 </div>

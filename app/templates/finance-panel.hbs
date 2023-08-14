@@ -42,25 +42,25 @@
                   </td>
                   <td>
                     <span class="flex">
-                      {{if row.income row.income '-'}}
+                      {{if row.income (round row.income) '-'}}
                       <CurrencyInfo @currencyCode={{row.currencyCode}} />
                     </span>
                   </td>
                   <td>
                     <span class="flex">
-                      {{if row.spendings row.spendings '-'}}
+                      {{if row.spendings (round row.spendings) '-'}}
                       <CurrencyInfo @currencyCode={{row.currencyCode}} />
                     </span>
                   </td>
                   <td>
                     <span class="flex">
-                      {{row.savings}}
+                      {{round row.savings}}
                       <CurrencyInfo @currencyCode={{row.currencyCode}} />
                     </span>
                   </td>
                   <td>
                     <span class="flex">
-                      {{row.updatedTotalBalance}}
+                      {{round row.updatedTotalBalance}}
                       <CurrencyInfo @currencyCode={{row.currencyCode}} />
                     </span>
                   </td>

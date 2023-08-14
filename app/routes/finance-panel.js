@@ -11,8 +11,6 @@ export default class FinancePanelRoute extends Route {
   }
 
   model() {
-    const data = this.financeService.financeDataList;
-
-    return data.sort((a, b) => new Date(a.month) - new Date(b.month));
+    return this.financeService.financeDataList;
   }
 }

@@ -32,8 +32,6 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
       },
       plotOptions: {
         column: {
-          stacking: 'normal',
-          shared: true,
           dataLabels: {
             enabled: true,
             formatter: function () {

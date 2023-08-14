@@ -20,8 +20,8 @@ export default class FinanceEntry {
   ) {
     this.id = id;
     this.datetime = datetime;
-    this.income = +income;
-    this.spendings = +spendings;
+    this.income = +income || null;
+    this.spendings = +spendings || null;
     this.initialTotalBalance = +initialTotalBalance;
     this.updatedTotalBalance = +updatedTotalBalance;
     this.currencyCode = currencyCode;

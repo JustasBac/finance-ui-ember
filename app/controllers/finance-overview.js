@@ -57,8 +57,6 @@ export default class FinanceOverviewController extends Controller {
     currentRowData.spendings = newRowData.spendings;
     currentRowData.updatedTotalBalance = newRowData.updatedTotalBalance;
     currentRowData.currencyCode = newRowData.currencyCode;
-
-    this.sortRowsFromEarliestToLatest();
   }
 
   @action
@@ -70,12 +68,6 @@ export default class FinanceOverviewController extends Controller {
     if (!response) {
       return;
     }
-
-    this.sortRowsFromEarliestToLatest();
-  }
-
-  sortRowsFromEarliestToLatest() {
-    this.model.sort((a, b) => new Date(a.month) - new Date(b.month));
   }
 
   isElementFirstOrLastInArray(array, element) {

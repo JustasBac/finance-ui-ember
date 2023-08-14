@@ -59,8 +59,6 @@ export default class FinancePanelController extends Controller {
     currentRowData.spendings = newRowData.spendings;
     currentRowData.updatedTotalBalance = newRowData.updatedTotalBalance;
     currentRowData.currencyCode = newRowData.currencyCode;
-
-    // this.sortRowsFromEarliestToLatest();
   }
 
   @action
@@ -68,10 +66,6 @@ export default class FinancePanelController extends Controller {
     console.log('newMonthData', newMonthData);
     this.financeService.updateOrAddNewEntry(newMonthData);
   }
-
-  // sortRowsFromEarliestToLatest() {
-  //   this.model.sort((a, b) => new Date(a.month) - new Date(b.month));
-  // }
 
   isElementFirstOrLastInArray(array, element) {
     const positionInArray = array.indexOf(element);
