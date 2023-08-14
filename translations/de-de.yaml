@@ -1,5 +1,5 @@
 login-page:
-  please-sign-in: Bitte melden Sie sich bei Ihrem Konto an.
+  sign-in-text: Melden Sie sich bei Ihrem Konto an
   login: Login
   login-button: Einloggen
   username: Benutzername
@@ -8,6 +8,8 @@ login-page:
   password-placeholder: Geben Sie Ihr Passwort ein
   dont-have-an-account: Sie haben noch kein Konto?
   sign-up: Registrieren
+  or: oder
+  login-demo-user-button: Mit einem Demo-Benutzer einloggen
 footer:
   built-with: Gebaut mit Ember.js
 register-page:
@@ -33,6 +35,40 @@ home-page:
       details-button: Details
     alert-no-saving-plans: Sie haben keine Sparpläne
     create-new-button: Erstellen
+    modal:
+      header: Neuen Sparplan erstellen
+  savings: Ersparnisse
+  income: Einkommen
+  tabs:
+    total-balance-timeline: Zeitleiste des Gesamtsaldos
+    savings-timeline: Zeitleiste der Einsparungen
+  spendings-and-income-card-title: Ausgaben
 modals:
   close-button: Schließen
   save-button: Speichern
+hero-section:
+  description: >-
+    Organisieren, behalten den Überblick über Ihre Finanzen und verfolgen Ihre
+    Sparziele
+finance-panel:
+  title: Finanzpanel
+navbar:
+  currency-settings-button: Währungseinstellungen
+currency-dashboard:
+  selected-currency: 'Ausgewählte Währung:'
+  choose-currency: Wählen Sie eine Währung
+  input-placeholder: Suchen Sie nach einer Währung
+user-dropdown:
+  logout-button: Ausloggen
+forms:
+  saving-plan:
+    goal-name-input: Zielname
+    goal-name-placeholder: Geben Sie den Zielnamen ein
+    start-date-label: Startdatum
+    deadline-label: Frist
+    target-amount-label: Zielbetrag
+    starting-capital-label: Startkapital
+    starting-capital-placeholder: Geben Sie das Startkapital ein
+    starting-capital-tooltip: Geldbetrag, den Sie für dieses Ziel bereits gespart haben
+    target-amount-placeholder: Zielbetrag eingeben
+currency: Währung

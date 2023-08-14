@@ -31,19 +31,19 @@
                   <li class="bg-gray-200 rounded">
                     <LinkTo @route="overview" class="gap-x-2">
                       <FaIcon @icon="house" />
-                      Overview
+                      {{t 'home-page.title'}}
                     </LinkTo>
                   </li>
                   <li class="bg-gray-200 rounded my-3">
                     <LinkTo @route="finance-panel" class="gap-x-2">
                       <FaIcon @icon="coins" />
-                      Finance panel
+                      {{t 'finance-panel.title'}}
                     </LinkTo>
                   </li>
                   <li class="bg-gray-200 rounded">
                     <LinkTo @route="currency-selection" class="gap-x-2">
                       <FaIcon @icon="money-bill" />
-                      Currency settings
+                      {{t 'navbar.currency-settings-button'}}
                     </LinkTo>
                   </li>
                 </ul>
@@ -70,13 +70,13 @@
           <li class="rounded-lg bg-neutral-500/10">
             <LinkTo @route="overview" class="gap-x-2 !text-white">
               <FaIcon @icon="house" />
-              Overview
+              {{t 'home-page.title'}}
             </LinkTo>
           </li>
           <li class="ml-2 rounded-lg bg-neutral-500/10">
             <LinkTo @route="finance-panel" class="gap-x-2 !text-white">
               <FaIcon @icon="coins" />
-              Finance panel
+              {{t 'finance-panel.title'}}
             </LinkTo>
           </li>
         </div>

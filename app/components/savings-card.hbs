@@ -1,7 +1,7 @@
 <div class="card bg-base-100 shadow-xl" ...attributes>
   <div class="card-body flex flex-col py-3 px-6 fade-in-animation">
     <h2 class="text-base text-center text-gray-600">
-      Savings
+      {{t 'home-page.savings'}}
       <div class="text-gray-500 text-sm">
         {{moment-format (now) 'MMMM YYYY'}}
       </div>
@@ -23,15 +23,15 @@
           <Popover @side="bottom">
             <div class="mb-2 flex items-center gap-2 text-xs font-light">
               <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
-                Income
+                {{t 'home-page.income'}}
               </span>
               -
               <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
-                Spendings
+                {{t 'home-page.spendings'}}
               </span>
               =
               <span class="px-1.5 py-0.5 border rounded-md text-center shadow">
-                Savings
+                {{t 'home-page.savings'}}
               </span>
             </div>
             <div class="flex items-center gap-2 text-xs font-light">

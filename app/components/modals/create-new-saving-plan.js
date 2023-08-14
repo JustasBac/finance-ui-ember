@@ -38,8 +38,6 @@ export default class ModalsCreateNewSavingPlanComponent extends Component {
 
     this.savingPlanService.addNewSavingPlan(this.newSavingPlan);
 
-    console.log('this.newSavingPlan', this.newSavingPlan);
-
     this.isModalOpen = false;
   }
 }

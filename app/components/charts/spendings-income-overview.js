@@ -6,6 +6,7 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
   @service('user') userService;
   @service('finance') financeService;
   @service('requests') requestService;
+  @service intl;
 
   get chartOptions() {
     const _this = this;
@@ -66,25 +67,41 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
       return null;
     }
 
+    const incomeData = this.getDataByType('income');
+
+    const spendingsData = this.getDataByType('spendings');
+
+    if (!incomeData.length && !spendingsData.length) {
+      return null;
+    }
+
     return [
       {
-        name: 'Income',
+        name: this.intl.t('home-page.income'),
         marker: {
           symbol: 'square',
         },
-        data: this.financeService.financeDataList.map((el) => {
-          return { y: +el.income, currencyCode: el.currencyCode };
-        }),
+        data: incomeData,
       },
       {
-        name: 'Spendings',
+        name: this.intl.t('home-page.spendings'),
         marker: {
           symbol: 'diamond',
         },
-        data: this.financeService.financeDataList.map((el) => {
-          return { y: +el.spendings, currencyCode: el.currencyCode };
-        }),
+        data: spendingsData,
       },
     ];
+  }
+
+  getDataByType(type) {
+    return this.financeService.financeDataList
+      .map((el) => {
+        if (el[type] === null) {
+          return;
+        }
+
+        return { y: +el[type], currencyCode: el.currencyCode };
+      })
+      .filter((el) => el);
   }
 }

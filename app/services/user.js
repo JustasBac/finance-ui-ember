@@ -52,8 +52,6 @@ export default class UserService extends Service {
   async updateUserInitialTotalBalance(updatedInitialtotalBalance) {
     const body = { initial_total_balance: updatedInitialtotalBalance };
 
-    console.log('current this.initialTotalBalance', this.initialTotalBalance);
-
     const response = await this.requestService.put(
       'user_initial_total_balance',
       body
@@ -134,7 +132,6 @@ export default class UserService extends Service {
       return true;
       // load initial display name mapping after internal login
     } catch (e) {
-      console.log('error');
       if (e.status === 401) {
         return this.notifications.error('Invalid credentials', {
           autoClear: true,

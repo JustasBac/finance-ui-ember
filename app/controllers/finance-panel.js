@@ -63,7 +63,6 @@ export default class FinancePanelController extends Controller {
 
   @action
   async addNewMonth(newMonthData) {
-    console.log('newMonthData', newMonthData);
     this.financeService.updateOrAddNewEntry(newMonthData);
   }
 

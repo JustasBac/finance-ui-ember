@@ -10,7 +10,7 @@
       {{this.userService.selectedCurrency.symbol}}
       <Tooltip>
         <span class="font-bold">
-          Selected currency:
+          {{t 'currency-dashboard.selected-currency'}}
         </span>
         <div>
           {{this.userService.selectedCurrency.name}}
@@ -26,7 +26,7 @@
       <CurrencySelection::Dashboard @onCurrencyChange={{dd.actions.close}} />
       <div class="card-actions justify-end">
         <Button class="btn-sm" {{on 'click' dd.actions.close}}>
-          Close
+          {{t 'modals.close-button'}}
         </Button>
       </div>
     </div>

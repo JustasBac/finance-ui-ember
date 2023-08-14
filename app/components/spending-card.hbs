@@ -14,10 +14,14 @@
           <span class="loading loading-ring loading-lg"></span>
         {{else}}
           <span class="flex">
-            {{if this.currentMonthSpendings this.currentMonthSpendings '-'}}
+            {{if
+              this.currentMonthData.spendings
+              this.currentMonthData.spendings
+              '-'
+            }}
             <CurrencyInfo
-              class={{unless this.currentMonthSpendings 'ml-1'}}
-              @currencyCode={{this.data.currencyCode}}
+              class={{unless this.currentMonthData.spendings 'ml-1'}}
+              @currencyCode={{this.currentMonthData.currencyCode}}
             />
           </span>
         {{/if}}

@@ -6,6 +6,7 @@ export default class ChartsSavingsTimelineComponent extends Component {
   @service('user') userService;
   @service('finance') financeService;
   @service('requests') requestService;
+  @service intl;
 
   get chartOptions() {
     const _this = this;
@@ -59,7 +60,7 @@ export default class ChartsSavingsTimelineComponent extends Component {
     return [
       {
         color: 'blueviolet',
-        name: 'Savings',
+        name: this.intl.t('home-page.savings'),
         data: this.financeService.financeDataList.map((el) => +el.savings),
       },
     ];

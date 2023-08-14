@@ -25,7 +25,6 @@ export default class FinanceService extends Service {
         el.currency_code
       );
     });
-    console.log('this.financeDataList', this.financeDataList);
   }
 
   getCurrentMonthsData() {

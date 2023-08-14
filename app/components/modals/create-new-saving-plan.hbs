@@ -10,7 +10,7 @@
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     <div>
-      Create new saving plan
+      {{t 'home-page.saving-plans-card.modal.header'}}
     </div>
   </:header>
   <:body>
@@ -21,12 +21,12 @@
     >
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
-          Close me
+          {{t 'modals.close-button'}}
         </Button>
       </Modals::-TriggerButton>
       <Button class="btn-primary" {{on 'click' this.createSavingPlan}}>
-        <FaIcon @icon="floppy-disk" class="mr-1" />
-        Save
+        <FaIcon @icon="floppy-disk" />
+        {{t 'modals.save-button'}}
       </Button>
     </div>
   </:body>

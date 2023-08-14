@@ -1,13 +1,13 @@
 <div class="flex flex-col xl:flex-row items-center mb-3">
   <h2 class="card-title mr-4 mb-2 xl:mb-0">
-    Choose a currency
+    {{t 'currency-dashboard.choose-currency'}}
   </h2>
   <InputField
     class="max-w-xs"
     @size="sm"
     @value={{this.searchString}}
     @onInput={{fn (mut this.searchString)}}
-    @placeholder="Search for a currency"
+    @placeholder={{t 'currency-dashboard.input-placeholder'}}
     @exceptFromValidation={{true}}
   />
   <span

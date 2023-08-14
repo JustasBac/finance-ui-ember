@@ -16,20 +16,20 @@
         class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
       >
         <div class="text-center w-full flex justify-center">
-          <div class="tabs w-[25rem] mb-2">
+          <div class="tabs w-[30rem] mb-2">
             <a
               class="tab tab-bordered basis-1/2 whitespace-nowrap
                 {{if (eq this.activeTab 'totalBalance') 'tab-active'}}"
               {{on 'click' (fn (mut this.activeTab) 'totalBalance')}}
             >
-              Total balance timeline
+              {{t 'home-page.tabs.total-balance-timeline'}}
             </a>
             <a
-              class="tab tab-bordered basis-1/2
+              class="tab tab-bordered basis-1/2 whitespace-nowrap
                 {{if (eq this.activeTab 'savings') 'tab-active'}}"
               {{on 'click' (fn (mut this.activeTab) 'savings')}}
             >
-              Savings timeline
+              {{t 'home-page.tabs.savings-timeline'}}
             </a>
           </div>
         </div>

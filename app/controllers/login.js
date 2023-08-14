@@ -27,4 +27,9 @@ export default class LoginController extends Controller {
 
     this.userService.authenticate(username, password);
   }
+
+  @action
+  loginWithDemoUser() {
+    this.userService.authenticate('demo-user', 'demo');
+  }
 }

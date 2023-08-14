@@ -1,5 +1,5 @@
 login-page:
-  please-sign-in: Please sign in to your account.
+  sign-in-text: Sign in to your account
   login: Login
   login-button: Login
   username: Username
@@ -8,6 +8,8 @@ login-page:
   password-placeholder: Enter your password
   dont-have-an-account: Don't have an account?
   sign-up: Sign up
+  or: or
+  login-demo-user-button: Login with a demo user
 footer:
   built-with: Built with Ember.js
 register-page:
@@ -31,6 +33,38 @@ home-page:
       details-button: Details
     alert-no-saving-plans: You have no saving plans
     create-new-button: Create a new
+    modal:
+      header: Create new saving plan
+  savings: Savings
+  income: Income
+  tabs:
+    total-balance-timeline: Total balance timeline
+    savings-timeline: Savings timeline
+  spendings-and-income-card-title: Spendings & income overview
 modals:
   close-button: Close
   save-button: Save
+hero-section:
+  description: Organize, have overview of your finances and track your saving goals
+finance-panel:
+  title: Finance panel
+navbar:
+  currency-settings-button: Currency settings
+currency-dashboard:
+  selected-currency: 'Selected currency:'
+  input-placeholder: Search for a currency
+  choose-currency: Choose a currency
+user-dropdown:
+  logout-button: Logout
+forms:
+  saving-plan:
+    goal-name-input: Goal name
+    goal-name-placeholder: Enter goal name
+    start-date-label: Start date
+    deadline-label: Deadline
+    target-amount-label: Target amount
+    target-amount-placeholder: Enter target amount
+    starting-capital-label: Starting capital
+    starting-capital-placeholder: Enter starting capital
+    starting-capital-tooltip: Amount of money that you have already saved for this goal
+currency: Currency

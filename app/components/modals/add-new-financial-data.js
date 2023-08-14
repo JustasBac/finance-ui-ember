@@ -55,10 +55,6 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
       return;
     }
 
-    console.log('this.financeData', this.financeData);
-
-    //TODO: middle month on delete updates bad
-
     this.financeData.updatedTotalBalance =
       initialTotalBalance + (income - spendings);
 

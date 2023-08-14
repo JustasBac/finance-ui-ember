@@ -6,13 +6,15 @@ export default class SpendingCardComponent extends Component {
   @service('finance') financeService;
   @service('requests') requestService;
 
-  get currentMonthSpendings() {
+  get currentMonthData() {
     const currentMonth = moment().format('MMMM YYYY');
 
     const matchingMonth = this.financeService.financeDataList.find(
       (el) => moment(el.datetime).format('MMMM YYYY') === currentMonth
     );
 
-    return matchingMonth?.spendings;
+    console.log('matchingMonth', matchingMonth);
+
+    return matchingMonth;
   }
 }
