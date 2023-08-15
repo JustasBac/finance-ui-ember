@@ -28,6 +28,7 @@
   @label="Income ({{this.selectedCurrency.symbol}})"
   @onInput={{fn (mut @data.income)}}
   @placeholder="Enter income"
+  {{will-destroy this.resetFormValidations}}
 />
 <InputField
   class="mt-3"
@@ -41,7 +42,8 @@
 <div class="text-sm mt-3">
   Savings:
   {{concat
-    (round (sub @data.income @data.spendings) this.selectedCurrency.symbol)
+    (round (sub @data.income @data.spendings))
+    this.selectedCurrency.symbol
   }}
 </div>
 <div class="text-sm mt-1 mb-3">

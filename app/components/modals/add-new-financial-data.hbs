@@ -14,36 +14,76 @@
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
-    <div>
-      Add data for
-      {{moment-format @candidateDatetime 'MMMM YYYY'}}
-    </div>
+    {{#if this.isTotalBalanceModalOpen}}
+      Total Balance
+    {{else}}
+      Add data for{{moment-format @candidateDatetime 'MMMM YYYY'}}
+    {{/if}}
   </:header>
   <:body>
-    <div
-      class="flex justify-between items-center"
-      {{did-insert this.resetEditableValues}}
-    >
-      {{moment-format @candidateDatetime 'MMMM YYYY'}}
-      <Button
-        class="btn-sm btn-outline"
-        {{on 'click' this.resetEditableValues}}
-      >
-        <FaIcon @icon="rotate-right" class="mr-1" />
-        Reset
-      </Button>
-    </div>
-    <Forms::FinanceData @data={{this.financeData}} />
-    <div class="flex justify-between items-center mt-5">
-      <Modals::-TriggerButton>
-        <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
-          Close
-        </Button>
-      </Modals::-TriggerButton>
-      <Button class="btn-primary" {{on 'click' this.addDataForNewMonth}}>
-        <FaIcon @icon="floppy-disk" class="mr-1" />
-        Add & Save
-      </Button>
+    <div>
+      {{#if this.isTotalBalanceModalOpen}}
+        How much money do you have at the moment?
+        <InputField
+          class="mt-2 mr-2"
+          @label={{concat 'Total Balance' ' (' this.currencySymbol ')'}}
+          @type="number"
+          @value={{this.valueInput}}
+          @onInput={{fn (mut this.valueInput)}}
+          @placeholder="Enter amount of money"
+        />
+        <div class="flex justify-between items-center mt-5">
+          <Modals::-TriggerButton>
+            <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
+              {{t 'modals.close-button'}}
+            </Button>
+          </Modals::-TriggerButton>
+          <Button
+            class="btn-neutral"
+            {{on 'click' this.saveInitialTotalBalance}}
+          >
+            <FaIcon @icon="arrow-right" />
+            Continue
+          </Button>
+        </div>
+      {{else}}
+        <div
+          class="flex justify-between items-center"
+          {{did-insert this.resetEditableValues}}
+        >
+          {{moment-format @candidateDatetime 'MMMM YYYY'}}
+          <Button
+            class="btn-sm btn-outline"
+            {{on 'click' this.resetEditableValues}}
+          >
+            <FaIcon @icon="rotate-right" class="mr-1" />
+            Reset
+          </Button>
+        </div>
+        <Forms::FinanceData @data={{this.financeData}} />
+        <div class="flex justify-between items-center mt-5">
+          <div class="flex">
+            {{#unless this.financeService.financeDataList.length}}
+              <Button
+                class="btn-neutral mr-3"
+                {{on 'click' (fn (mut this.isTotalBalanceModalOpen) true)}}
+              >
+                <FaIcon @icon="arrow-left" />
+                Go back
+              </Button>
+            {{/unless}}
+            <Modals::-TriggerButton>
+              <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
+                Close
+              </Button>
+            </Modals::-TriggerButton>
+          </div>
+          <Button class="btn-primary" {{on 'click' this.addDataForNewMonth}}>
+            <FaIcon @icon="floppy-disk" class="mr-1" />
+            {{t 'modals.save-button'}}
+          </Button>
+        </div>
+      {{/if}}
     </div>
   </:body>
 </Modals::-base>

@@ -15,7 +15,9 @@ export default class TotalBalanceComponent extends Component {
     );
 
     if (!matchingMonth) {
-      return this.userService.initialTotalBalance;
+      return this.userService.initialTotalBalance === null
+        ? '-'
+        : this.userService.initialTotalBalance;
     }
 
     return matchingMonth.updatedTotalBalance;

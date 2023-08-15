@@ -4,6 +4,7 @@
   @onInput={{fn (mut @username)}}
   @label={{t 'login-page.username'}}
   @placeholder={{t 'login-page.username-placeholder'}}
+  {{will-destroy this.resetFormValidations}}
 />
 <InputField
   @value={{@password}}

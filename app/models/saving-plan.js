@@ -72,16 +72,13 @@ export default class SavingPlan {
 
     if (monthsListUntilDeadline.length <= 2) {
       //if there are just 1 or 2 months to save the calculation logic is different
-
-      const opa = this.getShortTimeMonthsListWithInfo(
+      return this.getShortTimeMonthsListWithInfo(
         monthsListUntilDeadline,
         savingsPerFullMonthNeeded,
         startDate,
         deadlineDate,
         targetAmount - startingCapital
       );
-
-      return opa;
     }
 
     const startingMonthInfo = this.getSavingPlanningForNotAFullMonth(
@@ -117,6 +114,62 @@ export default class SavingPlan {
       monthlySavingPlanningInfo.length - 1
     ].targetSavings = endingMonthInfo.monthSavingsTarget; //overwrite last month needed savings
 
+    return this.getWithoutSavingsAdjustedMonthTargetValues(
+      monthlySavingPlanningInfo
+    ); //when user saves less OR more than the target value, recalculate target values for months after
+  }
+
+  getWithoutSavingsAdjustedMonthTargetValues(monthlySavingPlanningInfo) {
+    if (!this.savingsPerMonth.length) {
+      return monthlySavingPlanningInfo;
+    }
+
+    const alreadySavedAmount = this.savingsPerMonth.reduce(
+      (sum, monthData) => sum + monthData.amountSaved,
+      0
+    );
+
+    const targetAmountForMonthsWithSavings = monthlySavingPlanningInfo.reduce(
+      (sum, monthData) => {
+        if (
+          this.savingsPerMonth.find((el) => el.month === monthData.formatedDate)
+        ) {
+          return sum + monthData.targetSavings;
+        }
+        return sum;
+      },
+      0
+    );
+
+    const difference = alreadySavedAmount - targetAmountForMonthsWithSavings;
+
+    const lastMonthWithEnteredSavings =
+      this.savingsPerMonth[this.savingsPerMonth.length - 1].month;
+
+    const divisor =
+      monthlySavingPlanningInfo
+        .map((el) => {
+          if (
+            moment(el.formatedDate, 'MMMM YYYY').isAfter(
+              lastMonthWithEnteredSavings,
+              'MMMM YYYY'
+            )
+          ) {
+            return el;
+          }
+        })
+        .filter((el) => el).length - 1;
+
+    monthlySavingPlanningInfo.forEach((el) => {
+      if (
+        moment(el.formatedDate, 'MMMM YYYY').isAfter(
+          lastMonthWithEnteredSavings,
+          'MMMM YYYY'
+        )
+      ) {
+        el.targetSavings = el.targetSavings - difference / divisor;
+      }
+    });
     return monthlySavingPlanningInfo;
   }
 
@@ -178,7 +231,7 @@ export default class SavingPlan {
         betweenMonths.push({
           date: date.format('MMMM YYYY'),
           momentObject: moment(date),
-          savedAmount: monthlySavings ? monthlySavings : null,
+          savedAmount: monthlySavings === undefined ? null : monthlySavings,
         });
         date.add(1, 'month');
       }

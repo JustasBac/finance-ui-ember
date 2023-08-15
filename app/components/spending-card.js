@@ -13,8 +13,6 @@ export default class SpendingCardComponent extends Component {
       (el) => moment(el.datetime).format('MMMM YYYY') === currentMonth
     );
 
-    console.log('matchingMonth', matchingMonth);
-
     return matchingMonth;
   }
 }

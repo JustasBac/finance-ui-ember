@@ -3,6 +3,7 @@
   @label={{t 'forms.saving-plan.goal-name-input'}}
   @onInput={{fn (mut @savingPlanInformation.title)}}
   @placeholder={{t 'forms.saving-plan.goal-name-placeholder'}}
+  {{will-destroy this.resetFormValidations}}
 />
 <DatePicker
   @label={{t 'forms.saving-plan.start-date-label'}}

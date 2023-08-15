@@ -24,11 +24,7 @@ export default class FinancePanelController extends Controller {
 
   @action
   async deleteRow(rowData) {
-    let strictDelete = false; //strictDelete = true -> deletes the entity;    stictDelete = false => deletes values in the entity
-
-    if (this.isElementFirstOrLastInArray(this.model, rowData)) {
-      strictDelete = true;
-    }
+    const strictDelete = this.getStrictDeleteState(this.model, rowData); //strictDelete = true -> deletes the entity;    stictDelete = false => deletes values in the entity
 
     const response = await this.financeService.deleteFinanceData(
       rowData,
@@ -66,25 +62,29 @@ export default class FinancePanelController extends Controller {
     this.financeService.updateOrAddNewEntry(newMonthData);
   }
 
-  isElementFirstOrLastInArray(array, element) {
+  getStrictDeleteState(array, element) {
     const positionInArray = array.indexOf(element);
 
-    if (positionInArray === 0) {
+    if (array.length > 1 && positionInArray === 0) {
       return false;
     }
 
-    if (array.length - 1 === positionInArray) {
-      return true;
+    if (
+      array.length > 2 &&
+      positionInArray != 0 &&
+      positionInArray != array.length - 1
+    ) {
+      return false;
     }
 
-    return false;
+    return true;
   }
 
   @action
   isDeleteAllowed(row) {
     const { income, spendings } = row;
 
-    if (this.isElementFirstOrLastInArray(this.model, row)) {
+    if (this.getStrictDeleteState(this.model, row)) {
       return true;
     }
 

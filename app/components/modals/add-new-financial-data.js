@@ -12,6 +12,14 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
 
   @tracked isModalOpen = false;
   @tracked financeData = this.initFinanceData();
+  @tracked valueInput = this.userService.initialTotalBalance; //used for input because we don't want to update the value without user confirming it
+
+  @tracked isTotalBalanceModalOpen =
+    this.financeService.financeDataList.length === 0;
+
+  get currencySymbol() {
+    return this.userService.selectedCurrency.symbol;
+  }
 
   @action
   resetEditableValues() {
@@ -68,5 +76,21 @@ export default class ModalsAddNewFinancialDataComponent extends Component {
         autoClear: true,
       }
     );
+  }
+
+  @action
+  async saveInitialTotalBalance() {
+    if (!this.valueInput) {
+      this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
+
+      this.notifications.error('Make sure all fields are filled!', {
+        autoClear: true,
+      });
+      return;
+    }
+
+    await this.userService.updateUserInitialTotalBalance(+this.valueInput);
+
+    this.isTotalBalanceModalOpen = false;
   }
 }

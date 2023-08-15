@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 export default class FormsSavingPlanComponent extends Component {
   @service('user') userService;
+  @service('input-validation') validationService;
 
   @tracked selectedCurrency = this.getSelectedCurrency(); //on default take currency that is globaly selected
 
@@ -23,5 +24,10 @@ export default class FormsSavingPlanComponent extends Component {
   changeCurrency(newCurrency) {
     this.args.savingPlanInformation.currencyCode = newCurrency.code;
     this.selectedCurrency = newCurrency;
+  }
+
+  @action
+  resetFormValidations() {
+    this.validationService.validationWasTriggered = false;
   }
 }

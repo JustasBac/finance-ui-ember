@@ -43,13 +43,8 @@
     </div>
     <div class="flex justify-center items-center relative">
       <span class="font-bold text-base leading-tight">
-        {{concat
-          (if
-            @monthInfo.savedAmount
-            (concat @monthInfo.savedAmount @currencySymbol)
-            '-'
-          )
-        }}
+        {{concat @monthInfo.savedAmount @currencySymbol}}
+        {{! TODO: }}
         <Tooltip>
           In
           {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}

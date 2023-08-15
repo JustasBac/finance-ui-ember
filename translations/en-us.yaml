@@ -37,10 +37,6 @@ home-page:
       header: Create new saving plan
   savings: Savings
   income: Income
-  tabs:
-    total-balance-timeline: Total balance timeline
-    savings-timeline: Savings timeline
-  spendings-and-income-card-title: Spendings & income overview
 modals:
   close-button: Close
   save-button: Save

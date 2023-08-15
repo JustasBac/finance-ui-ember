@@ -15,34 +15,12 @@
       <div
         class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
       >
-        <div class="text-center w-full flex justify-center">
-          <div class="tabs w-[30rem] mb-2">
-            <a
-              class="tab tab-bordered basis-1/2 whitespace-nowrap
-                {{if (eq this.activeTab 'totalBalance') 'tab-active'}}"
-              {{on 'click' (fn (mut this.activeTab) 'totalBalance')}}
-            >
-              {{t 'home-page.tabs.total-balance-timeline'}}
-            </a>
-            <a
-              class="tab tab-bordered basis-1/2 whitespace-nowrap
-                {{if (eq this.activeTab 'savings') 'tab-active'}}"
-              {{on 'click' (fn (mut this.activeTab) 'savings')}}
-            >
-              {{t 'home-page.tabs.savings-timeline'}}
-            </a>
-          </div>
-        </div>
-        {{#if (eq this.activeTab 'totalBalance')}}
-          <Charts::TotalBalanceTimeline />
-        {{else if (eq this.activeTab 'savings')}}
-          <Charts::SavingsTimeline />
-        {{/if}}
+        <Charts::TotalBalanceTimeline />
       </div>
       <div
         class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
       >
-        <Charts::SpendingsIncomeOverview />
+        <Charts::SavingsSpendingsOverview />
       </div>
     </div>
   </PageLayout>

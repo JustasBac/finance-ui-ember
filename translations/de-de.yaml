@@ -39,10 +39,6 @@ home-page:
       header: Neuen Sparplan erstellen
   savings: Ersparnisse
   income: Einkommen
-  tabs:
-    total-balance-timeline: Zeitleiste des Gesamtsaldos
-    savings-timeline: Zeitleiste der Einsparungen
-  spendings-and-income-card-title: Ausgaben
 modals:
   close-button: Schließen
   save-button: Speichern

@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class FormsFinanceDataComponent extends Component {
   @service('user') userService;
+  @service('input-validation') validationService;
 
   @tracked selectedCurrency = this.getSelectedCurrency(); //on default take currency that is globaly selected
 
@@ -27,5 +28,10 @@ export default class FormsFinanceDataComponent extends Component {
       newCurrency.code
     );
     this.selectedCurrency = newCurrency;
+  }
+
+  @action
+  resetFormValidations() {
+    this.validationService.validationWasTriggered = false;
   }
 }

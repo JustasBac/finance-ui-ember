@@ -21,6 +21,6 @@ export default class ModalsDeleteSavingPlanComponent extends Component {
     }
 
     this.isModalOpen = false;
-    this.router.transitionTo('home');
+    this.router.transitionTo('overview');
   }
 }

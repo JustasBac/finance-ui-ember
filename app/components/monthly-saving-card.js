@@ -10,7 +10,7 @@ export default class MonthlySavingCardComponent extends Component {
 
     const { savedAmount, targetSavings } = this.args.monthInfo;
 
-    if (!savedAmount) {
+    if (savedAmount === null) {
       return;
     }
 
@@ -34,6 +34,7 @@ export default class MonthlySavingCardComponent extends Component {
 
   get isEditAllowed() {
     //don't allow to edit your savings for months that are in the future
+
     return moment().isAfter(this.args.monthInfo.formatedDate, 'MMMM YYYY');
   }
 }

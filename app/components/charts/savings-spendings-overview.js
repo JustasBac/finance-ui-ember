@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 
-export default class ChartsSpendingsIncomeOverviewComponent extends Component {
+export default class ChartsSavingsSpendingsOverviewComponent extends Component {
   @service('user') userService;
   @service('finance') financeService;
   @service('requests') requestService;
@@ -28,29 +28,27 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
       },
       yAxis: {
         title: {
-          text: this.userService.selectedCurrency.symbol,
+          text: this.intl.t('home-page.income'),
+        },
+        stackLabels: {
+          enabled: true,
+          formatter: function () {
+            const currencySymbol =
+              this.axis.chart.userOptions.series[0].data[0].currencySymbol;
+
+            return this.total + currencySymbol;
+          },
         },
       },
       plotOptions: {
         column: {
+          stacking: 'normal',
           dataLabels: {
             enabled: true,
             formatter: function () {
-              const currencySymbol = _this.userService.getCurrencySymbol(
-                this.point.currencyCode
-              );
-
-              return this.y + currencySymbol;
+              return this.y + this.point.currencySymbol;
             },
           },
-        },
-      },
-      tooltip: {
-        crosshairs: true,
-        shared: true,
-        valueSuffix: this.userService.selectedCurrency.symbol,
-        pointFormatter: function () {
-          return `<b>${this.series.name}:</b> ${this.y} ${this.currencyCode} <br/>`;
         },
       },
     };
@@ -67,21 +65,20 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
       return null;
     }
 
-    const incomeData = this.getDataByType('income');
-
     const spendingsData = this.getDataByType('spendings');
+    const savingsData = this.getDataByType('savings');
 
-    if (!incomeData.length && !spendingsData.length) {
+    if (!spendingsData.length && !savingsData.length) {
       return null;
     }
 
     return [
       {
-        name: this.intl.t('home-page.income'),
+        name: this.intl.t('home-page.savings'),
         marker: {
-          symbol: 'square',
+          symbol: 'diamond',
         },
-        data: incomeData,
+        data: savingsData,
       },
       {
         name: this.intl.t('home-page.spendings'),
@@ -94,14 +91,16 @@ export default class ChartsSpendingsIncomeOverviewComponent extends Component {
   }
 
   getDataByType(type) {
-    return this.financeService.financeDataList
-      .map((el) => {
-        if (el[type] === null) {
-          return;
-        }
+    return this.financeService.financeDataList.map((el) => {
+      const currencySymbol = this.userService.getCurrencySymbol(
+        el.currencyCode
+      );
 
-        return { y: +el[type], currencyCode: el.currencyCode };
-      })
-      .filter((el) => el);
+      if (el[type] === null) {
+        return { y: 0, currencySymbol };
+      }
+
+      return { y: +el[type], currencySymbol };
+    });
   }
 }

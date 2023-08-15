@@ -1,8 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class ModalsEditFinanceDataComponent extends Component {
+  @service('input-validation') validationService;
+  @service notifications;
+
   @tracked isModalOpen = false;
   @tracked copiedData = this.args.data.copy();
 
@@ -13,10 +17,18 @@ export default class ModalsEditFinanceDataComponent extends Component {
 
   @action
   saveChanges() {
-    this.isModalOpen = false;
-
     const { income, spendings, currencyCode, initialTotalBalance } =
       this.copiedData;
+
+    if (!income || !spendings) {
+      this.validationService.validationWasTriggered = true;
+      this.notifications.error('Make sure all fields are filled!', {
+        autoClear: true,
+      });
+      return;
+    }
+
+    this.isModalOpen = false;
 
     if (
       this.args.data.income === income &&

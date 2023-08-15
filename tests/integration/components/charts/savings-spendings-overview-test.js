@@ -4,7 +4,7 @@ import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module(
-  'Integration | Component | charts/spendings-income-overview',
+  'Integration | Component | charts/savings-spendings-overview',
   function (hooks) {
     setupRenderingTest(hooks);
 
@@ -12,15 +12,15 @@ module(
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.set('myAction', function(val) { ... });
 
-      await render(hbs`<Charts::SpendingsIncomeOverview />`);
+      await render(hbs`<Charts::SavingsSpendingsOverview />`);
 
       assert.dom(this.element).hasText('');
 
       // Template block usage:
       await render(hbs`
-      <Charts::SpendingsIncomeOverview>
+      <Charts::SavingsSpendingsOverview>
         template block text
-      </Charts::SpendingsIncomeOverview>
+      </Charts::SavingsSpendingsOverview>
     `);
 
       assert.dom(this.element).hasText('template block text');
