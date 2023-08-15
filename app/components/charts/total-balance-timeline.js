@@ -13,7 +13,7 @@ export default class ChartsTotalBalanceTimelineComponent extends Component {
 
     return {
       chart: {
-        type: 'areaspline',
+        type: 'line',
         height: '360px',
         backgroundColor: 'transparent',
       },
@@ -32,7 +32,7 @@ export default class ChartsTotalBalanceTimelineComponent extends Component {
         },
       },
       plotOptions: {
-        areaspline: {
+        line: {
           dataLabels: {
             enabled: true,
             formatter: function () {
