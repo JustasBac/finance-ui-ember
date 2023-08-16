@@ -1,6 +1,6 @@
-{{page-title 'Finance panel'}}
+{{page-title (t 'finance-panel.title')}}
 <EmberWormhole @to="page-body-wormhole">
-  <PageLayout @pageTitle="Finance panel">
+  <PageLayout @pageTitle={{t 'finance-panel.title'}}>
     <div class="card h-full bg-base-100 shadow-xl" ...attributes>
       {{#if this.model.length}}
         <div class="overflow-x-auto rounded-lg">
@@ -8,22 +8,22 @@
             <thead class="bg-neutral-100 rounded-lg">
               <tr>
                 <th class="!relative">
-                  Date
+                  {{t 'finance-panel.table.date'}}
                 </th>
                 <th>
-                  Income
+                  {{t 'home-page.income'}}
                 </th>
                 <th>
-                  Spendings
+                  {{t 'home-page.spendings'}}
                 </th>
                 <th>
-                  Savings
+                  {{t 'home-page.savings'}}
                 </th>
                 <th>
-                  Total Balance
+                  {{t 'home-page.total-balance.title'}}
                 </th>
                 <th>
-                  Actions
+                  {{t 'finance-panel.table.actions'}}
                 </th>
               </tr>
             </thead>
@@ -73,8 +73,8 @@
               {{/each}}
             </tbody>
           </table>
-          <div class="mt-3 flex justify-center">
-            <Modals::AddNewFinancialData
+          <div class="my-3 flex justify-center">
+            <Modals::AddNewFinanceData
               @candidateDatetime={{this.nextMonth}}
               @onAddNewMonth={{this.addNewMonth}}
             />
@@ -82,16 +82,14 @@
         </div>
       {{else}}
         <div class="flex flex-col items-center justify-center mt-4 gap-4">
-          <Alert @text="You haven't added any financial data">
-            Add
-          </Alert>
-          <Modals::AddNewFinancialData
+          <Alert @text={{t 'alert.no-financial-data-added'}} />
+          <Modals::AddNewFinanceData
             @candidateDatetime={{moment-format (now)}}
             @onAddNewMonth={{this.addNewMonth}}
           />
         </div>
       {{/if}}
     </div>
-    <GoBackButton class="mt-8" />
+    <GoBackButton class="ml-2 xl:ml-0 mt-8" />
   </PageLayout>
 </EmberWormhole>

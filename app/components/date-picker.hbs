@@ -16,7 +16,7 @@
       <div class="card card-compact p-2 bg-white">
         <div class="card-body">
           <h3 class="card-title">
-            Pick a date
+            {{t 'date-picker.pick-a-date'}}
           </h3>
           <PowerCalendar
             @selected={{@selectedDate}}
@@ -65,7 +65,7 @@
           </PowerCalendar>
           <div class="card-actions justify-end">
             <Button class="btn-sm" {{on 'click' dd.actions.close}}>
-              Close
+              {{t 'modals.close-button'}}
             </Button>
           </div>
         </div>

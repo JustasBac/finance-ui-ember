@@ -34,7 +34,10 @@ export default class MonthlySavingCardComponent extends Component {
 
   get isEditAllowed() {
     //don't allow to edit your savings for months that are in the future
+    const now = moment();
 
-    return moment().isAfter(this.args.monthInfo.formatedDate, 'MMMM YYYY');
+    const date = moment(this.args.monthInfo.formatedDate, 'MMMM YYYY');
+
+    return date.isSameOrBefore(now);
   }
 }

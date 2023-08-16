@@ -4,12 +4,12 @@ login-page:
   login-button: Einloggen
   username: Benutzername
   password: Passwort
-  username-placeholder: Geben Sie Ihren Benutzernamen ein
-  password-placeholder: Geben Sie Ihr Passwort ein
+  username-placeholder: Geben Sie einen Benutzernamen ein
+  password-placeholder: Geben Sie ein Passwort ein
   dont-have-an-account: Sie haben noch kein Konto?
   sign-up: Registrieren
   or: oder
-  login-demo-user-button: Mit einem Demo-Benutzer einloggen
+  login-demo-user-button: Mit dem Demo-Benutzer einloggen
 footer:
   built-with: Gebaut mit Ember.js
 register-page:
@@ -17,14 +17,12 @@ register-page:
   create-account: Ein Konto erstellen
   create-account-button: Benutzerkonto erstellen
   already-have-an-account: Sie haben bereits ein Konto?
+  page-title: Registrieren
 home-page:
   title: Überblick
   total-balance:
     title: Gesamtsaldo
-    tooltip-info: |-
-      Ihre gesamten Ersparnisse. 
-      Sie können es jederzeit bearbeiten
-    open-panel-tooltip: Öffnen Sie das Finanzübersichtsfenster
+    open-panel-tooltip: Finanzpanel öffnen
   spendings: Ausgaben
   saving-plans-card:
     title: Sparpläne
@@ -42,12 +40,35 @@ home-page:
 modals:
   close-button: Schließen
   save-button: Speichern
+  edit-finance-data:
+    tooltip: Finanzeinträge für <br> {month} bearbeiten
+    header: Finanzdaten bearbeiten
+  delete-finance-data:
+    tooltip: Finanzdaten für <br> {month} löschen
+    header: Finanzdaten löschen
+    are-u-sure-text: Sind Sie sicher, dass Sie die {month} Daten löschen möchten?
+  cancel-button: Abbrechen
+  confirm-button: Bestätigen
+  add-finance-data:
+    tooltip: Finanzdaten für <br> {month} hinzufügen
+    input-placeholder: Geben Sie den Geldbetrag ein
+    total-balance-question: Wie viel Geld ({currency}) haben Sie im Moment?
+    header: Finanzdaten für {month} hinzufügen
+  continue-button: Weitermachen
+  edit-saving-plan-month-savings:
+    header: '{month} Ersparnisse für "{goalName}"'
+    target: 'Ziel:'
+    input-label: In diesem Monat gesparter Betrag ({currency})
+    placeholder: Wert eingeben
 hero-section:
   description: >-
-    Organisieren, behalten den Überblick über Ihre Finanzen und verfolgen Ihre
+    Organisieren Sie, behalten Sie den Überblick über Ihre Finanzen und verfolgen Sie Ihre
     Sparziele
 finance-panel:
   title: Finanzpanel
+  table:
+    date: Datum
+    actions: Aktionen
 navbar:
   currency-settings-button: Währungseinstellungen
 currency-dashboard:
@@ -67,4 +88,56 @@ forms:
     starting-capital-placeholder: Geben Sie das Startkapital ein
     starting-capital-tooltip: Geldbetrag, den Sie für dieses Ziel bereits gespart haben
     target-amount-placeholder: Zielbetrag eingeben
+  finance-data:
+    income-placeholder: Einkommen eingeben
+    spendings-placeholder: Ausgaben eingeben
+    savings: 'Ersparnisse:'
+    total-balance: 'Gesamtsaldo:'
+  edit-saving-plan:
+    title: Sparplan bearbeiten
+  delete-saving-plan:
+    title: Sparplan löschen
+    are-you-sure: Sind Sie sicher, dass Sie den Sparplan "{title}" löschen möchten?
 currency: Währung
+charts:
+  total-balance-timeline-title: Entwicklung des Gesamtsaldos
+  savings-spendings-overview-title: Ersparnisse & Ausgaben Übersicht
+  saving-progress-pie:
+    left-to-save-label: Zum Speichern übrig
+    already-saved-label: Bereits gespeichert
+  monthly-saving-stats:
+    target: 'Ziel:'
+    saved: 'Gespart:'
+    left-to-save: Zum Speichern übrig
+    saved-amount: Gesparter Betrag
+alert:
+  no-financial-data: Es liegen keine Finanzdaten vor
+  no-financial-data-added: Sie haben keine Finanzdaten hinzugefügt
+currency-info-component:
+  warning: Warnung!
+  warning-content: >-
+    Währung {selectedCurrency} unterscheidet sich von der ausgewählten
+    App-Währung ({appCurrency})
+reset-button: Zurücksetzen
+notifications:
+  make-sure-all-are-filled: Stellen Sie sicher, dass alle Felder ausgefüllt sind!
+go-back-button: Zurück
+saving-plan-detail-page:
+  time-from-start-date-format: Vor Y [Jahre] M [Monate] d [Tage]
+  time-until-deadline-format: In Y [Jahre] M [Monate] d [Tage]
+  savings: Ersparnisse
+  starting-capital: 'Startkapital:'
+  saved: 'Gespart:'
+  left-to-save: 'Zum Speichern übrig:'
+  actions: Aktionen
+  tabs:
+    saving-progress: Sparfortschritt
+    monthly-planning: Monatliche Planung
+    monthly-analysis: Monatliche Analyse
+  monthly-planning-card:
+    target: Ziel
+    tooltip: Im {month} sollen Sie voraussichtlich {amount}{currency} sparen
+    tooltip-saved-amount: Im {month} haben Sie {amount}{currency} gespart
+  page-title: Sparplan "{savingPlan}"
+date-picker:
+  pick-a-date: Datum wählen

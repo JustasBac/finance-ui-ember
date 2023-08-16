@@ -8,12 +8,13 @@
       />
       <Popover>
         <span class="font-bold">
-          Warning!
+          {{t 'currency-info-component.warning'}}
         </span>
-        Currency
-        {{concat '(' @currencyCode ')'}}
-        differs from the selected app currency
-        {{this.userService.selectedCurrency.code}}
+        {{t
+          'currency-info-component.warning-content'
+          selectedCurrency=@currencyCode
+          appCurrency=this.userService.selectedCurrency.code
+        }}
       </Popover>
     </span>
   {{/if}}

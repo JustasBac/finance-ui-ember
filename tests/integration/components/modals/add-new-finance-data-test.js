@@ -4,7 +4,7 @@ import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module(
-  'Integration | Component | modals/add-new-financial-data',
+  'Integration | Component | modals/add-new-finance-data',
   function (hooks) {
     setupRenderingTest(hooks);
 
@@ -12,15 +12,15 @@ module(
       // Set any properties with this.set('myProperty', 'value');
       // Handle any actions with this.set('myAction', function(val) { ... });
 
-      await render(hbs`<Modals::AddNewFinancialData />`);
+      await render(hbs`<Modals::AddNewFinanceData />`);
 
       assert.dom(this.element).hasText('');
 
       // Template block usage:
       await render(hbs`
-      <Modals::AddNewFinancialData>
+      <Modals::AddNewFinanceData>
         template block text
-      </Modals::AddNewFinancialData>
+      </Modals::AddNewFinanceData>
     `);
 
       assert.dom(this.element).hasText('template block text');

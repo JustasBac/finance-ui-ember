@@ -16,21 +16,22 @@
     />
   </div>
   <span class="flex flex-col text-xs mt-2">
-    Target
+    {{t 'saving-plan-detail-page.monthly-planning-card.target'}}
     <span class="font-bold text-base leading-tight">
       {{concat (round @monthInfo.targetSavings) @currencySymbol}}
     </span>
     <Tooltip>
-      In
-      {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
-      you are expected to save
-      {{round @monthInfo.targetSavings decimals=2}}
-      {{@currencySymbol}}
+      {{t
+        'saving-plan-detail-page.monthly-planning-card.tooltip'
+        month=(moment-format @monthInfo.momentDate 'MMMM YYYY')
+        amount=(round @monthInfo.targetSavings decimals=2)
+        currency=@currencySymbol
+      }}
     </Tooltip>
   </span>
   <span class="flex flex-col text-xs mt-2 relative">
     <div class="flex justify-center items-center">
-      Saved
+      {{t 'saving-plan-detail-page.saved'}}
       {{#if this.isEditAllowed}}
         <div class="absolute right-0">
           <Modals::EditMonthSavings
@@ -44,12 +45,13 @@
     <div class="flex justify-center items-center relative">
       <span class="font-bold text-base leading-tight">
         {{concat @monthInfo.savedAmount @currencySymbol}}
-        {{! TODO: }}
         <Tooltip>
-          In
-          {{moment-format @monthInfo.momentDate 'MMMM YYYY'}}
-          you saved
-          {{concat @monthInfo.savedAmount @currencySymbol}}
+          {{t
+            'saving-plan-detail-page.monthly-planning-card.tooltip-saved-amount'
+            month=(moment-format @monthInfo.momentDate 'MMMM YYYY')
+            amount=@monthInfo.savedAmount
+            currency=@currencySymbol
+          }}
         </Tooltip>
       </span>
       {{#if this.progressPercentage}}

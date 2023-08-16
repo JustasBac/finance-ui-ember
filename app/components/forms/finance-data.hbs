@@ -2,7 +2,7 @@
   <div class="mt-3">
     <label class="label py-1">
       <span class="label-text leading-none">
-        Currency
+        {{t 'currency'}}
       </span>
     </label>
     <PowerSelect
@@ -25,9 +25,9 @@
   @type="number"
   @value={{@data.income}}
   @min={{0}}
-  @label="Income ({{this.selectedCurrency.symbol}})"
+  @label="{{t 'home-page.income'}} ({{this.selectedCurrency.symbol}})"
   @onInput={{fn (mut @data.income)}}
-  @placeholder="Enter income"
+  @placeholder={{t 'forms.finance-data.income-placeholder'}}
   {{will-destroy this.resetFormValidations}}
 />
 <InputField
@@ -35,19 +35,19 @@
   @type="number"
   @value={{@data.spendings}}
   @min={{0}}
-  @label="Spendings ({{this.selectedCurrency.symbol}})"
+  @label="{{t 'home-page.spendings'}} ({{this.selectedCurrency.symbol}})"
   @onInput={{fn (mut @data.spendings)}}
-  @placeholder="Enter spendings"
+  @placeholder={{t 'forms.finance-data.spendings-placeholder'}}
 />
 <div class="text-sm mt-3">
-  Savings:
+  {{t 'forms.finance-data.savings'}}
   {{concat
     (round (sub @data.income @data.spendings))
     this.selectedCurrency.symbol
   }}
 </div>
 <div class="text-sm mt-1 mb-3">
-  Total Balance:
+  {{t 'forms.finance-data.total-balance'}}
   {{concat
     (round (sum @data.initialTotalBalance (sub @data.income @data.spendings)))
     this.selectedCurrency.symbol

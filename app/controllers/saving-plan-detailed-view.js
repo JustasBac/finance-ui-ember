@@ -2,10 +2,10 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
 
 export default class SavingPlanDetailedViewController extends Controller {
   @service('user') userService;
+  @service intl;
 
   @tracked activeTab = 'planning'; //default
 
@@ -17,7 +17,9 @@ export default class SavingPlanDetailedViewController extends Controller {
     const start = this.model.startDate;
     const end = moment();
     const duration = moment.duration(end.diff(start), 'ms');
-    const format = `Y [years] M [months] d [days]`;
+    const format = this.intl.t(
+      'saving-plan-detail-page.time-from-start-date-format'
+    );
 
     return duration.format(format, { trim: 'both' });
   }
@@ -26,7 +28,9 @@ export default class SavingPlanDetailedViewController extends Controller {
     const now = moment();
     const end = moment(this.model.deadlineDate);
     const duration = moment.duration(end.diff(now), 'ms');
-    const format = `Y [years] M [months] d [days]`;
+    const format = this.intl.t(
+      'saving-plan-detail-page.time-until-deadline-format'
+    );
 
     return duration.format(format, { trim: 'both' });
   }

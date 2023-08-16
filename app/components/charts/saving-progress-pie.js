@@ -1,6 +1,9 @@
 import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
 
 export default class ChartsSavingProgressPieComponent extends Component {
+  @service intl;
+
   chartOptions = {
     chart: {
       plotBackgroundColor: null,
@@ -46,7 +49,7 @@ export default class ChartsSavingProgressPieComponent extends Component {
         colorByPoint: true,
         data: [
           {
-            name: 'Left to save',
+            name: this.intl.t('charts.saving-progress-pie.left-to-save-label'),
             y: 100 - alreadySavedInPercent,
             sliced: true,
             custom: {
@@ -57,7 +60,7 @@ export default class ChartsSavingProgressPieComponent extends Component {
             color: 'var(--light-gray)',
           },
           {
-            name: 'Already saved',
+            name: this.intl.t('charts.saving-progress-pie.already-saved-label'),
             y: alreadySavedInPercent,
             custom: {
               extraInformation: `${totalSavings} ${currencyCode}`,

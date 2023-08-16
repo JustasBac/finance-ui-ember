@@ -1,5 +1,5 @@
 <h3 class="text-center text-lg my-1">
-  Savings & spendings overview
+  {{t 'charts.savings-spendings-overview-title'}}
 </h3>
 {{#if this.requestService.isAppDataLoading}}
   <div class="flex items-center justify-center h-full">
@@ -9,6 +9,6 @@
   <HighCharts @chartOptions={{this.chartOptions}} @content={{this.chartData}} />
 {{else}}
   <div class="flex justify-center items-center h-full">
-    <Alert class="mb-12" @text="There is no financial data" />
+    <Alert class="mb-12" @text={{t 'alert.no-financial-data'}} />
   </div>
 {{/if}}

@@ -7,22 +7,23 @@
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
-    <div>
-      {{@monthInfo.formatedDate}}
-      savings for
-      {{@savingPlan.title}}
-    </div>
+    {{t
+      'modals.edit-saving-plan-month-savings.header'
+      month=@monthInfo.formatedDate
+      goalName=@savingPlan.title
+    }}
   </:header>
   <:body>
-    <div class="font-light text-left mt-1 mb-2">
-      Target:
-      <span class="font-normal">
-        {{concat (round @monthInfo.targetSavings decimals=2) @currencySymbol}}
-      </span>
+    <div class="text-left mt-1 mb-2">
+      {{t 'modals.edit-saving-plan-month-savings.target'}}
+      {{concat (round @monthInfo.targetSavings decimals=2) @currencySymbol}}
     </div>
     <InputField
-      @label="Amount saved this month ({{@currencySymbol}})"
-      @placeholder="Enter value {{@currencySymbol}}"
+      @label={{t
+        'modals.edit-saving-plan-month-savings.input-label'
+        currency=@currencySymbol
+      }}
+      @placeholder={{t 'modals.edit-saving-plan-month-savings.placeholder'}}
       @value={{this.savedAmount}}
       @type="number"
       @onInput={{fn (mut this.savedAmount)}}
@@ -31,7 +32,7 @@
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
-          Close me
+          {{t 'modals.close-button'}}
         </Button>
       </Modals::-TriggerButton>
       <Button
@@ -39,7 +40,7 @@
         {{on 'click' this.closeModalAndUpdateDatabase}}
       >
         <FaIcon @icon="floppy-disk" class="mr-1" />
-        Save
+        {{t 'modals.save-button'}}
       </Button>
     </div>
   </:body>

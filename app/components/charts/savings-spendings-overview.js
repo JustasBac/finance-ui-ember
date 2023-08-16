@@ -9,8 +9,6 @@ export default class ChartsSavingsSpendingsOverviewComponent extends Component {
   @service intl;
 
   get chartOptions() {
-    const _this = this;
-
     return {
       chart: {
         type: 'column',

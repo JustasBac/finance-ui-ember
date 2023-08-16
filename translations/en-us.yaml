@@ -9,7 +9,7 @@ login-page:
   dont-have-an-account: Don't have an account?
   sign-up: Sign up
   or: or
-  login-demo-user-button: Login with a demo user
+  login-demo-user-button: Login with demo user
 footer:
   built-with: Built with Ember.js
 register-page:
@@ -17,11 +17,11 @@ register-page:
   create-account: Create your account
   create-account-button: Create account
   already-have-an-account: Already have an account?
+  page-title: Register
 home-page:
   title: Overview
   total-balance:
     title: Total Balance
-    tooltip-info: Your total savings. You can edit it any time
     open-panel-tooltip: Open finance overview panel
   spendings: Spendings
   saving-plans-card:
@@ -40,10 +40,33 @@ home-page:
 modals:
   close-button: Close
   save-button: Save
+  edit-finance-data:
+    tooltip: Edit financial entries for {month}
+    header: Edit financial data
+  delete-finance-data:
+    tooltip: Delete financial data for {month}
+    header: Delete financial data
+    are-u-sure-text: Are you sure you want to delete data for {month}
+  cancel-button: Cancel
+  confirm-button: Confirm
+  add-finance-data:
+    tooltip: Add financial data for {month}
+    total-balance-question: How much money ({currency}) do you have at the moment?
+    input-placeholder: Enter amount of money
+    header: Add financial data for {month}
+  continue-button: Continue
+  edit-saving-plan-month-savings:
+    header: '{month} savings for "{goalName}"'
+    target: 'Target:'
+    input-label: Amount saved this month ({currency})
+    placeholder: Enter value
 hero-section:
   description: Organize, have overview of your finances and track your saving goals
 finance-panel:
   title: Finance panel
+  table:
+    date: Date
+    actions: Actions
 navbar:
   currency-settings-button: Currency settings
 currency-dashboard:
@@ -63,4 +86,56 @@ forms:
     starting-capital-label: Starting capital
     starting-capital-placeholder: Enter starting capital
     starting-capital-tooltip: Amount of money that you have already saved for this goal
+  finance-data:
+    income-placeholder: Enter income
+    spendings-placeholder: Enter spendings
+    savings: 'Savings:'
+    total-balance: 'Total Balance:'
+  edit-saving-plan:
+    title: Edit saving plan
+  delete-saving-plan:
+    title: Delete saving plan
+    are-you-sure: Are you sure you want to delete the saving plan "{title}"?
 currency: Currency
+charts:
+  total-balance-timeline-title: Total balance timeline
+  savings-spendings-overview-title: Savings & spendings overview
+  saving-progress-pie:
+    left-to-save-label: Left to save
+    already-saved-label: Already saved
+  monthly-saving-stats:
+    target: 'Target:'
+    saved: 'Saved:'
+    left-to-save: Left to save
+    saved-amount: Saved amount
+alert:
+  no-financial-data: There is no financial data
+  no-financial-data-added: You haven't added any financial data
+currency-info-component:
+  warning: Warning!
+  warning-content: >-
+    Currency {selectedCurrency} differs from the selected app currency
+    ({appCurrency})
+reset-button: Reset
+notifications:
+  make-sure-all-are-filled: Make sure all fields are filled!
+go-back-button: Go back
+saving-plan-detail-page:
+  time-from-start-date-format: Y [years] M [months] d [days] [ago]
+  time-until-deadline-format: In Y [years] M [months] d [days]
+  savings: Savings
+  starting-capital: 'Starting capital:'
+  saved: 'Saved:'
+  left-to-save: 'Left to save:'
+  actions: Actions
+  tabs:
+    saving-progress: Saving progress
+    monthly-planning: Monthly planning
+    monthly-analysis: Monthly analysis
+  monthly-planning-card:
+    target: Target
+    tooltip: In {month} you are expected to save {amount}{currency}
+    tooltip-saved-amount: In {month} you saved {amount}{currency}
+  page-title: Saving Plan "{savingPlan}"
+date-picker:
+  pick-a-date: Pick a date

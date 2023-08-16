@@ -3,10 +3,13 @@
   <div class="basis-1/2 h-full hidden xl:inline">
     <HeroSection />
   </div>
-  <div class="basis-1/2 flex justify-center items-center h-full z-10">
+  <div class="basis-1/2 flex flex-col justify-around items-center h-full">
+    <div>
+      {{! Empty div is here on purpose of centering divs }}
+    </div>
     <div class="card bg-white h-fit p-8 fade-in-animation shadow-lg">
       <div
-        class="flex flex-col justify-center border-opacity-50 w-[20rem] xl:w-[25rem]"
+        class="flex flex-col justify-center border-opacity-50 w-[22rem] xl:w-[25rem]"
       >
         <h3 class="font-semibold text-3xl text-[#243246] mb-8">
           {{t 'login-page.login'}}
@@ -15,8 +18,13 @@
           class="mb-1 w-full bg-gray-100"
           {{on 'click' this.loginWithDemoUser}}
         >
-          <FaIcon @icon="user-doctor" class="text-[#3d39a0] text-xl" />
-          {{t 'login-page.login-demo-user-button'}}
+          <span class="whitespace-nowrap">
+            <FaIcon
+              @icon="user-doctor"
+              class="text-[#3d39a0] text-xl xl:mr-1"
+            />
+            {{t 'login-page.login-demo-user-button'}}
+          </span>
         </Button>
         <div class="divider text-gray-400 my-6">
           {{t 'login-page.or'}}
@@ -43,10 +51,8 @@
         </div>
       </div>
     </div>
-    <span
-      class="absolute bottom-16 font-light opacity-50 flex items-center gap-1"
-    >
+    <div class="font-light opacity-50 flex items-center gap-1">
       <CopyrightInfo />
-    </span>
+    </div>
   </div>
 </div>

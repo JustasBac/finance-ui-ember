@@ -5,15 +5,18 @@
   >
     <FaIcon @icon="pen-to-square" />
     <Tooltip>
-      Edit financial entries for
-      {{moment-format @data.datetime 'MMMM YYYY'}}
+      {{t
+        'modals.edit-finance-data.tooltip'
+        month=(moment-format @data.datetime 'MMMM YYYY')
+        htmlSafe=true
+      }}
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     <div>
-      Edit financial data
+      {{t 'modals.edit-finance-data.header'}}
     </div>
   </:header>
   <:body>
@@ -23,20 +26,20 @@
         class="btn-sm btn-outline"
         {{on 'click' this.resetEditableValuesToDefault}}
       >
-        <FaIcon @icon="rotate-right" class="mr-1" />
-        Reset
+        <FaIcon @icon="rotate-right" />
+        {{t 'reset-button'}}
       </Button>
     </div>
     <Forms::FinanceData @editMode={{true}} @data={{this.copiedData}} />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
-          Close
+          {{t 'modals.close-button'}}
         </Button>
       </Modals::-TriggerButton>
       <Button class="btn-primary" {{on 'click' this.saveChanges}}>
-        <FaIcon @icon="floppy-disk" class="mr-1" />
-        Save
+        <FaIcon @icon="floppy-disk" />
+        {{t 'modals.save-button'}}
       </Button>
     </div>
   </:body>

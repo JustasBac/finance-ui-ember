@@ -1,4 +1,4 @@
-{{page-title 'Overview'}}
+{{page-title (t 'home-page.title')}}
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle={{t 'home-page.title'}}>
     <div class="flex flex-col xl:flex-row gap-8">
@@ -11,14 +11,14 @@
       </div>
       <SavingPlansCard class="basis-3/4" />
     </div>
-    <div class="flex mt-6 qHd:mt-16 gap-8">
+    <div class="flex flex-col xl:flex-row mt-6 qHd:mt-16 gap-8">
       <div
         class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
       >
         <Charts::TotalBalanceTimeline />
       </div>
       <div
-        class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem]"
+        class="basis-1/2 card bg-base-100 shadow-xl pt-2 fade-in-animation min-h-[25rem] mb-12 xl:mb-0"
       >
         <Charts::SavingsSpendingsOverview />
       </div>

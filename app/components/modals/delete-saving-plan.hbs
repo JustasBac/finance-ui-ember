@@ -5,25 +5,24 @@
   >
     <FaIcon @icon="trash" />
     <Tooltip>
-      Delete saving plan
+      {{t 'forms.delete-saving-plan.title'}}
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
-    Delete saving plan
+    {{t 'forms.delete-saving-plan.title'}}
   </:header>
   <:body>
-    Are you sure you want to delete saving plan for
-    {{concat @savingPlan.title '?'}}
+    {{t 'forms.delete-saving-plan.are-you-sure' title=@savingPlan.title}}
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
-          Cancel
+          {{t 'modals.cancel-button'}}
         </Button>
       </Modals::-TriggerButton>
       <Button class="btn-primary" {{on 'click' this.deleteSavingPlan}}>
-        Confirm
+        {{t 'modals.confirm-button'}}
       </Button>
     </div>
   </:body>

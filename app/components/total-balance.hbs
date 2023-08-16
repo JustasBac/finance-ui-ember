@@ -4,12 +4,6 @@
   >
     <h2 class="text-base text-gray-600">
       {{t 'home-page.total-balance.title'}}
-      <span class="ml-1">
-        <FaIcon @icon="circle-info" />
-        <Tooltip>
-          {{t 'home-page.total-balance.tooltip-info'}}
-        </Tooltip>
-      </span>
       <div class="text-sm text-gray-500 text-center">
         {{moment-format (now) 'MMMM YYYY'}}
       </div>

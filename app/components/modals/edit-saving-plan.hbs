@@ -5,15 +5,13 @@
   >
     <FaIcon @icon="pen-to-square" />
     <Tooltip>
-      Edit saving plan
+      {{t 'forms.edit-saving-plan.title'}}
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
-    <div>
-      Edit saving plan
-    </div>
+    {{t 'forms.edit-saving-plan.title'}}
   </:header>
   <:body>
     <Forms::SavingPlan
@@ -23,12 +21,12 @@
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <Button class="btn" {{on 'click' (fn (mut this.isModalOpen) false)}}>
-          Close
+          {{t 'modals.close-button'}}
         </Button>
       </Modals::-TriggerButton>
       <Button class="btn-primary" {{on 'click' this.saveChanges}}>
         <FaIcon @icon="floppy-disk" class="mr-1" />
-        Save
+        {{t 'modals.save-button'}}
       </Button>
     </div>
   </:body>

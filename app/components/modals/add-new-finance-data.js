@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
 
-export default class ModalsAddNewFinancialDataComponent extends Component {
+export default class ModalsAddNewFinanceDataComponent extends Component {
   @service('user') userService;
   @service('finance') financeService;
   @service('input-validation') validationService;

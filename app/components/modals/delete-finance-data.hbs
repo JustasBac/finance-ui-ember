@@ -5,22 +5,27 @@
   >
     <FaIcon @icon="trash" />
     <Tooltip>
-      Delete financial data for
-      {{moment-format @data.datetime 'MMMM YYYY'}}
+      {{t
+        'modals.delete-finance-data.tooltip'
+        month=(moment-format @data.datetime 'MMMM YYYY')
+        htmlSafe=true
+      }}
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
-    Delete financial data
+    {{t 'modals.delete-finance-data.header'}}
   </:header>
   <:body>
-    Are you sure you want to delete data for
-    {{moment-format @data.datetime 'MMMM YYYY'}}
+    {{t
+      'modals.delete-finance-data.are-u-sure-text'
+      month=(moment-format @data.datetime 'MMMM YYYY')
+    }}
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
         <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
-          Cancel
+          {{t 'modals.cancel-button'}}
         </Button>
       </Modals::-TriggerButton>
       <Button
@@ -30,7 +35,7 @@
           (queue @onConfirmDeletion (fn (mut this.isModalOpen) false))
         }}
       >
-        Confirm
+        {{t 'modals.confirm-button'}}
       </Button>
     </div>
   </:body>

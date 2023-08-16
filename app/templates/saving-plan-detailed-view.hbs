@@ -1,12 +1,15 @@
-{{page-title 'Details'}}
+{{page-title (t 'saving-plan-detail-page.page-title' savingPlan=@model.title)}}
 <EmberWormhole @to="page-body-wormhole">
-  <PageLayout @pageTitle="Saving Plan - {{@model.title}}">
+  <PageLayout
+    @pageTitle={{t 'saving-plan-detail-page.page-title' savingPlan=@model.title
+    }}
+  >
     <div
       class="flex justify-center xl:justify-start flex-wrap 3xl:flex-nowrap gap-8 mb-8"
     >
       <Card class="basis-1/5" @icon="sack-dollar">
         <:header>
-          Target amount
+          {{t 'forms.saving-plan.target-amount-label'}}
         </:header>
         <:body>
           <span class="flex">
@@ -17,7 +20,7 @@
       </Card>
       <Card class="basis-1/5" @icon="calendar-days">
         <:header>
-          Start date
+          {{t 'forms.saving-plan.start-date-label'}}
         </:header>
         <:body>
           <span class="xl:text-xl">
@@ -25,46 +28,44 @@
           </span>
           <span class="text-sm opacity-50 font-light whitespace-nowrap">
             {{this.timeFromStartDate}}
-            ago
           </span>
         </:body>
       </Card>
       <Card class="basis-1/5" @icon="calendar-days">
         <:header>
-          Deadline
+          {{t 'forms.saving-plan.deadline-label'}}
         </:header>
         <:body>
           <span class="xl:text-lg">
             {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
           </span>
           <span class="text-sm opacity-50 font-light whitespace-nowrap">
-            in
             {{this.timeUntilDeadline}}
           </span>
         </:body>
       </Card>
       <Card class="basis-1/5" @icon="hand-holding-dollar">
         <:header>
-          Savings
+          {{t 'saving-plan-detail-page.savings'}}
         </:header>
         <:body>
           <div class="flex flex-col text-sm font-normal whitespace-nowrap">
             <div class="flex">
-              Starting capital:
+              {{t 'saving-plan-detail-page.starting-capital'}}
               <span class="ml-1 font-bold flex">
                 {{round @model.startingCapital}}
                 <CurrencyInfo @currencyCode={{@model.currencyCode}} />
               </span>
             </div>
             <div class="flex">
-              Total saved:
+              {{t 'saving-plan-detail-page.saved'}}
               <span class="ml-1 font-bold flex">
                 {{round @model.totalSavings}}
                 <CurrencyInfo @currencyCode={{@model.currencyCode}} />
               </span>
             </div>
             <div class="flex">
-              Left to save:
+              {{t 'saving-plan-detail-page.left-to-save'}}
               <span class="ml-1 font-bold flex">
                 {{round this.remainingAmountToSave}}
                 <CurrencyInfo @currencyCode={{@model.currencyCode}} />
@@ -75,7 +76,7 @@
       </Card>
       <Card class="basis-1/5" @icon="hammer">
         <:header>
-          Actions
+          {{t 'saving-plan-detail-page.actions'}}
         </:header>
         <:body>
           <div class="flex">
@@ -96,26 +97,26 @@
             {{if (eq this.activeTab 'progress') 'tab-active'}}"
           {{on 'click' (fn (mut this.activeTab) 'progress')}}
         >
-          Saving progress
+          {{t 'saving-plan-detail-page.tabs.saving-progress'}}
         </a>
         <a
           class="tab tab-bordered
             {{if (eq this.activeTab 'planning') 'tab-active'}}"
           {{on 'click' (fn (mut this.activeTab) 'planning')}}
         >
-          Monthly planning
+          {{t 'saving-plan-detail-page.tabs.monthly-planning'}}
         </a>
         <a
           class="tab tab-bordered mt-3 xl:mt-0
             {{if (eq this.activeTab 'monthly-analysis') 'tab-active'}}"
           {{on 'click' (fn (mut this.activeTab) 'monthly-analysis')}}
         >
-          Monthly analysis
+          {{t 'saving-plan-detail-page.tabs.monthly-analysis'}}
         </a>
       </div>
       <div class="card-body px-4 py-6 overflow-auto">
         {{#if (eq this.activeTab 'progress')}}
-          <div class="fade-in-animation overflow-hidden">
+          <div class="fade-in-animation overflow-hidden qHd:mt-24">
             <Charts::SavingProgressPie @data={{this.model}} />
           </div>
         {{else if (eq this.activeTab 'planning')}}
@@ -129,7 +130,7 @@
             {{/each}}
           </div>
         {{else if (eq this.activeTab 'monthly-analysis')}}
-          <div class="fade-in-animation overflow-hidden">
+          <div class="fade-in-animation overflow-hidden qHd:mt-24">
             <Charts::MonthlySavingStats
               @data={{@model.monthsListUntilDeadline}}
               @currencySymbol={{this.currencySymbol}}

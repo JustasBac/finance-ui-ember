@@ -5,32 +5,38 @@
   >
     <FaIcon @icon="plus" />
     <Tooltip>
-      Add financial data for
-      <span class="whitespace-nowrap font-bold">
-        {{moment-format @candidateDatetime 'MMMM YYYY'}}
-      </span>
+      {{t
+        'modals.add-finance-data.tooltip'
+        month=(moment-format @candidateDatetime 'MMMM YYYY')
+        htmlSafe=true
+      }}
     </Tooltip>
   </span>
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
     {{#if this.isTotalBalanceModalOpen}}
-      Total Balance
+      {{t 'home-page.total-balance.title'}}
     {{else}}
-      Add data for{{moment-format @candidateDatetime 'MMMM YYYY'}}
+      {{t
+        'modals.add-finance-data.header'
+        month=(moment-format @candidateDatetime 'MMMM YYYY')
+      }}
     {{/if}}
   </:header>
   <:body>
     <div>
       {{#if this.isTotalBalanceModalOpen}}
-        How much money do you have at the moment?
+        {{t
+          'modals.add-finance-data.total-balance-question'
+          currency=this.currencySymbol
+        }}
         <InputField
           class="mt-2 mr-2"
-          @label={{concat 'Total Balance' ' (' this.currencySymbol ')'}}
           @type="number"
           @value={{this.valueInput}}
           @onInput={{fn (mut this.valueInput)}}
-          @placeholder="Enter amount of money"
+          @placeholder={{t 'modals.add-finance-data.input-placeholder'}}
         />
         <div class="flex justify-between items-center mt-5">
           <Modals::-TriggerButton>
@@ -43,7 +49,7 @@
             {{on 'click' this.saveInitialTotalBalance}}
           >
             <FaIcon @icon="arrow-right" />
-            Continue
+            {{t 'modals.continue-button'}}
           </Button>
         </div>
       {{else}}
@@ -57,7 +63,7 @@
             {{on 'click' this.resetEditableValues}}
           >
             <FaIcon @icon="rotate-right" class="mr-1" />
-            Reset
+            {{t 'reset-button'}}
           </Button>
         </div>
         <Forms::FinanceData @data={{this.financeData}} />
@@ -69,12 +75,12 @@
                 {{on 'click' (fn (mut this.isTotalBalanceModalOpen) true)}}
               >
                 <FaIcon @icon="arrow-left" />
-                Go back
+                {{t 'go-back-button'}}
               </Button>
             {{/unless}}
             <Modals::-TriggerButton>
               <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
-                Close
+                {{t 'modals.close-button'}}
               </Button>
             </Modals::-TriggerButton>
           </div>

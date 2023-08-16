@@ -1,8 +1,11 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { roundNumber } from 'finance-ui-ember/helpers/round-number';
+import { inject as service } from '@ember/service';
 
 export default class ChartsMonthlySavingStatsComponent extends Component {
+  @service intl;
+
   @tracked savedData = [];
 
   get chartOptions() {
@@ -42,9 +45,13 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
                 ? this.custom.savedAmount
                 : 0;
 
-              return `Target amount: <b>${roundNumber(
+              return `${_this.intl.t(
+                'charts.monthly-saving-stats.target'
+              )}: <b>${roundNumber(
                 this.custom.targetSavings
-              )}</b>${currencySymbol}<br/>Saved amount: <b>${savedAmount}</b>${currencySymbol}`;
+              )}</b>${currencySymbol}<br/>${_this.intl.t(
+                'charts.monthly-saving-stats.saved'
+              )}: <b>${savedAmount}</b>${currencySymbol}`;
             },
             shared: true,
           },
@@ -60,7 +67,7 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
   get chartData() {
     return [
       {
-        name: 'Left to save', //if saved amount is higher than (or equal to) target amount, then show target amount pecentage as 0%, so it looks that saved amount is 100%
+        name: this.intl.t('charts.monthly-saving-stats.left-to-save'), //if saved amount is higher than (or equal to) target amount, then show target amount pecentage as 0%, so it looks that saved amount is 100%
         data: this.args.data.map((el) => {
           return {
             y:
@@ -77,7 +84,7 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
         color: 'var(--light-gray)', //very light gray
       },
       {
-        name: 'Saved amount',
+        name: this.intl.t('charts.monthly-saving-stats.saved-amount'),
         data: this.args.data.map((el) => {
           return {
             y: +el.savedAmount ? +el.savedAmount : 0,
