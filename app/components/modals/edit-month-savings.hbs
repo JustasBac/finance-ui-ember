@@ -31,7 +31,10 @@
     />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
-        <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
+        <Button
+          class="dark:bg-gray-950"
+          {{on 'click' (fn (mut this.isModalOpen) false)}}
+        >
           {{t 'modals.close-button'}}
         </Button>
       </Modals::-TriggerButton>

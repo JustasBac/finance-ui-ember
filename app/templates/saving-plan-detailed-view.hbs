@@ -93,22 +93,31 @@
     >
       <div class="tabs flex justify-center">
         <a
-          class="tab tab-bordered dark:text-gray-200 dark:hover:text-white dark:border-gray-200
-            {{if (eq this.activeTab 'progress') 'tab-active'}}"
+          class="tab tab-bordered dark:text-gray-200 dark:hover:text-white dark:border-gray-600
+            {{if
+              (eq this.activeTab 'progress')
+              'tab-active dark:!border-gray-300'
+            }}"
           {{on 'click' (fn (mut this.activeTab) 'progress')}}
         >
           {{t 'saving-plan-detail-page.tabs.saving-progress'}}
         </a>
         <a
-          class="tab tab-bordered dark:text-gray-200 dark:hover:text-white dark:border-gray-200
-            {{if (eq this.activeTab 'planning') 'tab-active'}}"
+          class="tab tab-bordered dark:text-gray-200 dark:hover:text-white dark:border-gray-600
+            {{if
+              (eq this.activeTab 'planning')
+              'tab-active dark:!border-gray-300'
+            }}"
           {{on 'click' (fn (mut this.activeTab) 'planning')}}
         >
           {{t 'saving-plan-detail-page.tabs.monthly-planning'}}
         </a>
         <a
-          class="tab tab-bordered mt-3 xl:mt-0 dark:text-gray-200 dark:hover:text-white dark:border-gray-200
-            {{if (eq this.activeTab 'monthly-analysis') 'tab-active'}}"
+          class="tab tab-bordered mt-3 xl:mt-0 dark:text-gray-200 dark:hover:text-white dark:border-gray-600
+            {{if
+              (eq this.activeTab 'monthly-analysis')
+              'tab-active dark:!border-gray-300'
+            }}"
           {{on 'click' (fn (mut this.activeTab) 'monthly-analysis')}}
         >
           {{t 'saving-plan-detail-page.tabs.monthly-analysis'}}

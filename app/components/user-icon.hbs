@@ -14,7 +14,10 @@
         <FaIcon class="mr-0.5" @icon="user" />
         {{this.userService.username}}
       </span>
-      <Button class="btn-ghost bg-gray-200" {{on 'click' this.logout}}>
+      <Button
+        class="btn-ghost bg-gray-200 dark:bg-gray-900/70 dark:hover:bg-gray-900"
+        {{on 'click' this.logout}}
+      >
         <FaIcon @icon="right-from-bracket" class="mr-1" />
         {{t 'user-dropdown.logout-button'}}
       </Button>

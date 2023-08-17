@@ -14,6 +14,7 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
     return {
       chart: {
         type: 'column',
+        backgroundColor: 'transparent',
       },
       title: {
         text: null,

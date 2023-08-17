@@ -21,10 +21,10 @@
 <div class="grid grid-cols-4 xl:grid-cols-10 gap-4">
   {{#each this.currencies as |currency|}}
     <span
-      class="whitespace-nowrap text-sm hover:bg-gray-100 rounded p-2 cursor-pointer
+      class="whitespace-nowrap text-sm hover:bg-gray-100 dark:hover:bg-gray-900 rounded p-2 cursor-pointer
         {{if
           (eq currency.code this.userService.selectedCurrency.code)
-          'bg-gray-100'
+          'bg-gray-100 dark:bg-gray-900'
         }}"
       {{on 'click' (fn this.selectCurrency currency)}}
     >

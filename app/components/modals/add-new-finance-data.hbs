@@ -1,6 +1,6 @@
 <Modals::-TriggerButton>
   <span
-    class="btn btn-sm btn-ghost bg-gray-200/80"
+    class="btn btn-sm btn-ghost bg-gray-200/80 dark:bg-gray-950/80 dark:text-gray-100 dark:hover:bg-gray-950"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
     <FaIcon @icon="plus" />
@@ -59,7 +59,7 @@
         >
           {{moment-format @candidateDatetime 'MMMM YYYY'}}
           <Button
-            class="btn-sm btn-outline"
+            class="btn-sm btn-outline dark:bg-gray-700/70 dark:hover:bg-gray-700"
             {{on 'click' this.resetEditableValues}}
           >
             <FaIcon @icon="rotate-right" class="mr-1" />
@@ -79,7 +79,10 @@
               </Button>
             {{/unless}}
             <Modals::-TriggerButton>
-              <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
+              <Button
+                class="dark:bg-gray-950"
+                {{on 'click' (fn (mut this.isModalOpen) false)}}
+              >
                 {{t 'modals.close-button'}}
               </Button>
             </Modals::-TriggerButton>

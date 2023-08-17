@@ -1,11 +1,18 @@
 <div
-  class="flex flex-col w-36 text-center rounded shadow p-2 text-sm
-    {{if this.isCurrentMonth 'bg-gray-300/70' 'bg-gray-200/70'}}"
+  class="flex flex-col w-36 text-center rounded shadow p-2 text-sm dark:text-gray-300
+    {{if
+      this.isCurrentMonth
+      'bg-gray-300/70 dark:bg-gray-950'
+      'bg-gray-200/70 dark:bg-gray-950/70'
+    }}"
 >
   <div class="flex justify-center">
     <span
       class="text-xs
-        {{if this.isCurrentMonth 'text-gray-800 font-semibold' 'text-gray-500'
+        {{if
+          this.isCurrentMonth
+          'text-gray-800 dark:text-gray-200 font-semibold'
+          'text-gray-500 dark:text-gray-300 '
         }}"
     >
       {{@monthInfo.formatedDate}}

@@ -10,6 +10,7 @@ export default class ChartsSavingProgressPieComponent extends Component {
       plotBorderWidth: null,
       plotShadow: false,
       type: 'pie',
+      backgroundColor: 'transparent',
     },
     title: { text: null },
     tooltip: {

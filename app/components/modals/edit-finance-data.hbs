@@ -1,6 +1,6 @@
 <Modals::-TriggerButton>
   <span
-    class="btn btn-sm btn-ghost bg-gray-200/80"
+    class="btn btn-sm btn-ghost bg-gray-200/80 dark:bg-gray-950/70 dark:hover:bg-gray-950"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
     <FaIcon @icon="pen-to-square" />
@@ -23,7 +23,7 @@
     <div class="flex justify-between items-center">
       {{moment-format @data.datetime 'MMMM YYYY'}}
       <Button
-        class="btn-sm btn-outline"
+        class="btn-sm btn-outline dark:bg-gray-700/70 dark:hover:bg-gray-700"
         {{on 'click' this.resetEditableValuesToDefault}}
       >
         <FaIcon @icon="rotate-right" />
@@ -33,7 +33,10 @@
     <Forms::FinanceData @editMode={{true}} @data={{this.copiedData}} />
     <div class="flex justify-between items-center mt-5">
       <Modals::-TriggerButton>
-        <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
+        <Button
+          class="dark:bg-gray-950"
+          {{on 'click' (fn (mut this.isModalOpen) false)}}
+        >
           {{t 'modals.close-button'}}
         </Button>
       </Modals::-TriggerButton>
