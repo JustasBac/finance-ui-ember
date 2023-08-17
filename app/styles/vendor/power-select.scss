@@ -1,20 +1,33 @@
 .ember-power-select-trigger {
   border-color: rgba(31, 41, 55, 0.2);
   border-radius: 0.4rem;
+  background-color: var(--powerSelectBackground);
 }
 
 .ember-power-select-search-input {
-  border-color: lightgray;
+  background-color: var(--powerSelectSearchInput);
+  border: none;
   border-radius: 0.2rem;
   &:focus {
     outline: none;
+    border: none;
   }
 }
 
 .ember-power-select-option[aria-current='true'] {
-  background-color: gray;
+  background-color: var(--powerSelectSelectedOption);
+  color: var(--textColor);
+}
+
+.ember-power-select-option[aria-selected='true'] {
+  background-color: var(--powerSelectSelectedOption);
 }
 
 .ember-power-select-dropdown {
   border: none;
+}
+
+.ember-basic-dropdown-content {
+  background-color: var(--powerSelectBackground);
+  color: var(--textColor);
 }

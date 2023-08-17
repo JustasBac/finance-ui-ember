@@ -23,4 +23,5 @@ module.exports = {
     themes: ['fantasy'],
   },
   plugins: [require('daisyui')],
+  darkMode: 'class',
 };

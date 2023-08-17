@@ -1,0 +1,45 @@
+.highcharts-wrapper {
+  .highcharts-axis-labels text {
+    fill: var(--textColor) !important;
+  }
+
+  .highcharts-axis text {
+    fill: var(--textColor) !important;
+  }
+
+  .highcharts-yaxis-grid {
+    path {
+      stroke: var(--chartGrid);
+    }
+  }
+
+  .highcharts-axis-line {
+    stroke: var(--textColor);
+  }
+
+  .highcharts-legend-item text {
+    fill: var(--textColor) !important;
+  }
+
+  .highcharts-label:not(.highcharts-data-label-color-0):not(
+      .highcharts-data-label-color-1
+    ) {
+    text {
+      fill: var(--textColor) !important;
+      .highcharts-text-outline {
+        stroke: none !important;
+      }
+    }
+  }
+
+  .highcharts-data-label-color-0 text {
+    fill: var(--textColor) !important;
+    .highcharts-text-outline {
+      stroke: var(--chartLabelStroke) !important;
+    }
+  }
+
+  [class='highcharts-label-box highcharts-tooltip-box'] {
+    fill: var(--chartTooltipBackground);
+  }
+}

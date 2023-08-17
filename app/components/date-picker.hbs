@@ -1,19 +1,21 @@
 <div class="flex flex-col">
-  <span class="mt-3 label-text ml-1">
+  <span class="mt-3 label-text ml-1 dark:text-gray-400">
     {{@label}}
   </span>
   <BasicDropdown @verticalPosition="below" as |dd|>
     <dd.Trigger>
       <label
         tabindex="0"
-        class="border bg-white rounded p-3 flex justify-between items-center cursor-pointer hover:bg-gray-50"
+        class="border dark:border-none bg-white dark:bg-gray-900 rounded p-3 flex justify-between items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-950 dark:text-gray-300"
       >
         {{moment-format @selectedDate 'MMMM DD, YYYY'}}
-        <FaIcon @icon="calendar-days" />
+        <FaIcon @icon="calendar-days" class="dark:text-gray-400" />
       </label>
     </dd.Trigger>
-    <dd.Content>
-      <div class="card card-compact p-2 bg-white">
+    <dd.Content
+      class="bg-white dark:bg-gray-800 dark:border dark:border-gray-700 dark:text-gray-200"
+    >
+      <div class="card card-compact p-2">
         <div class="card-body">
           <h3 class="card-title">
             {{t 'date-picker.pick-a-date'}}
@@ -64,7 +66,10 @@
             <calendar.Days />
           </PowerCalendar>
           <div class="card-actions justify-end">
-            <Button class="btn-sm" {{on 'click' dd.actions.close}}>
+            <Button
+              class="btn-sm dark:bg-gray-900"
+              {{on 'click' dd.actions.close}}
+            >
               {{t 'modals.close-button'}}
             </Button>
           </div>

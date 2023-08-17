@@ -1,5 +1,5 @@
 {{page-title 'Login'}}
-<div class="flex justify-center items-center h-full z-10 bg-base-600">
+<div class="flex justify-center items-center h-full z-10">
   <div class="basis-1/2 h-full hidden xl:inline">
     <HeroSection />
   </div>
@@ -7,21 +7,25 @@
     <div>
       {{! Empty div is here on purpose of centering divs }}
     </div>
-    <div class="card bg-white h-fit p-8 fade-in-animation shadow-lg">
+    <div
+      class="card bg-white dark:bg-gray-800 h-fit p-8 fade-in-animation shadow-lg"
+    >
       <div
         class="flex flex-col justify-center border-opacity-50 w-[22rem] xl:w-[25rem]"
       >
-        <h3 class="font-semibold text-3xl text-[#243246] mb-8">
+        <h3
+          class="font-semibold text-3xl text-[#243246] dark:text-gray-200 mb-8"
+        >
           {{t 'login-page.login'}}
         </h3>
         <Button
-          class="mb-1 w-full bg-gray-100"
+          class="mb-1 w-full bg-gray-100 dark:bg-gray-900"
           {{on 'click' this.loginWithDemoUser}}
         >
-          <span class="whitespace-nowrap">
+          <span class="whitespace-nowrap flex items-center">
             <FaIcon
               @icon="user-doctor"
-              class="text-[#3d39a0] text-xl xl:mr-1"
+              class="text-[#3d39a0] text-xl xl:mr-1.5"
             />
             {{t 'login-page.login-demo-user-button'}}
           </span>
@@ -30,7 +34,7 @@
           {{t 'login-page.or'}}
         </div>
         <div class="mb-4">
-          <p class="text-gray-500 font-light">
+          <p class="text-gray-500 dark:text-gray-300 font-light">
             {{t 'login-page.sign-in-text'}}
           </p>
         </div>
@@ -43,7 +47,9 @@
             {{t 'login-page.login-button'}}
           </Button>
         </form>
-        <div class="text-center mt-8 font-light text-gray-500">
+        <div
+          class="text-center mt-8 font-light text-gray-500 dark:text-gray-300"
+        >
           {{t 'login-page.dont-have-an-account'}}
           <LinkTo @route="register" class="font-bold hover:underline">
             {{t 'login-page.sign-up'}}

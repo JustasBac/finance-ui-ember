@@ -1,5 +1,9 @@
-<EmberPopover @popperContainer="#wormhole" @side={{if @side @side 'top'}}>
-  <span class="font-light text-center">
+<EmberPopover
+  @tooltipClass="dark:bg-gray-700 dark:!border-none"
+  @popperContainer="#wormhole"
+  @side={{if @side @side 'top'}}
+>
+  <span class="font-light text-center dark:text-white">
     {{yield}}
   </span>
 </EmberPopover>

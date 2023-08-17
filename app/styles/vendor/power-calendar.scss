@@ -2,7 +2,7 @@
   @include ember-power-calendar($cell-size: 40px, $primary-color: #26243a);
 
   // border: 1px solid rgba(0, 40, 100, 0.1);
-  background: #fff;
+  background: var(--calendarBackground);
   // border-radius: 1rem;
   top: 3px;
 
@@ -10,17 +10,21 @@
     border-radius: 0.7rem;
 
     &.ember-power-calendar-day--current-month {
-      color: #3b3b3b;
+      color: var(--calendarDays);
       background: transparent;
     }
 
     &.ember-power-calendar-day--selected {
       color: #fff;
-      background-color: hsl(var(--n));
+      background-color: var(--calendarSelectedDayBackground);
       &:hover {
-        background-color: hsl(var(--n));
+        background-color: var(--calendarSelectedDayBackground);
         color: #fff;
       }
+    }
+
+    &:not([disabled]):hover {
+      background-color: var(--calendarDayHover);
     }
 
     &.ember-power-calendar-day--focused {

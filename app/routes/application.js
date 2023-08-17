@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default class ApplicationRoute extends Route {
   @service('requests') requestService;
+  @service('darkMode') darkModeService;
   @service router;
   @service session;
   @service intl;
@@ -25,6 +26,8 @@ export default class ApplicationRoute extends Route {
       this.intl.setLocale('en-us');
       this.moment.setLocale('en');
     }
+
+    this.darkModeService.setUserTheme();
 
     //save previous route name in the router service. Used for <GoBackButton /> component
     this.router.on('routeDidChange', (transition) => {

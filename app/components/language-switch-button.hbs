@@ -10,18 +10,18 @@
           />
         {{else if (eq this.intl.primaryLocale 'de-de')}}
           <img
-            class="object-fill w-8 h-5 rounded fade-in-animation"
+            class="object-fill w-8 h-5 rounded fade-in-animation dark:outline dark:outline-gray-800"
             src="/assets/images/german-flag.png"
             alt="German flag"
           />
         {{/if}}
       </summary>
       <ul
-        class="bg-base-100 shadow text-gray-700 z-50 w-32 flex flex-col justify-center items-center"
+        class="bg-base-100 dark:bg-gray-700 shadow text-gray-700 dark:text-gray-100 z-50 w-32 flex flex-col justify-center items-center"
       >
         <li class="w-full">
           <div
-            class="swap-on flex items-center gap-1"
+            class="swap-on flex items-center gap-1 hover:text-gray-400"
             {{on 'click' (fn this.switchLanguage 'en-us')}}
           >
             <img
@@ -34,7 +34,7 @@
         </li>
         <li class="w-full">
           <div
-            class="swap-off flex items-center gap-1"
+            class="swap-off flex items-center gap-1 hover:text-gray-400"
             {{on 'click' (fn this.switchLanguage 'de-de')}}
           >
             <img

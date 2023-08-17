@@ -1,3 +1,7 @@
-<button class="btn w-fit" ...attributes type={{if @type @type 'button'}}>
+<button
+  class="btn w-fit dark:text-gray-200 dark:border-none dark:hover:bg-gray-700"
+  ...attributes
+  type={{if @type @type 'button'}}
+>
   {{yield}}
 </button>

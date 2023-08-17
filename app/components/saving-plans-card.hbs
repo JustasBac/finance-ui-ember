@@ -1,6 +1,6 @@
-<div class="card bg-base-100 shadow-xl" ...attributes>
+<div class="card bg-base-100 shadow-xl dark:bg-gray-800" ...attributes>
   <div
-    class="card-body flex flex-col justify-between h-[19rem] p-6 fade-in-animation"
+    class="card-body flex flex-col justify-between h-[19rem] p-6 fade-in-animation dark:text-gray-200"
   >
     <h2 class="text-xl ml-4">
       {{t 'home-page.saving-plans-card.title'}}
@@ -14,21 +14,21 @@
         <table class="table w-full">
           {{! head }}
           <thead>
-            <tr>
-              <th class="bg-base-100 !relative">
+            <tr class="dark:text-white dark:border-gray-950">
+              <th>
                 {{t 'home-page.saving-plans-card.table.name'}}
               </th>
-              <th class="bg-base-100 hidden xl:flex">
+              <th class="hidden xl:flex">
                 {{t 'home-page.saving-plans-card.table.progress'}}
               </th>
-              <th class="bg-base-100">
+              <th>
                 {{t 'home-page.saving-plans-card.table.deadline'}}
               </th>
             </tr>
           </thead>
           <tbody>
             {{#each this.savingPlanService.savingPlans as |savingPlan|}}
-              <tr>
+              <tr class="dark:border-gray-950">
                 <td>
                   {{savingPlan.title}}
                 </td>
@@ -47,7 +47,7 @@
                     </span>
                     <div>
                       <progress
-                        class="progress progress-primary w-60"
+                        class="progress progress-primary w-60 dark:bg-gray-500"
                         value={{compute (fn this.progressPercentage savingPlan)
                         }}
                         max="100"
@@ -71,7 +71,7 @@
                 </td>
                 <td>
                   <LinkTo
-                    class="btn btn-outline btn-primary btn-sm"
+                    class="btn btn-outline btn-primary btn-sm dark:border-fuchsia-700 dark:text-fuchsia-700"
                     type="button"
                     @route="saving-plan-detailed-view"
                     @model={{savingPlan.id}}
