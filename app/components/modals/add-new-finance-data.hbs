@@ -40,14 +40,14 @@
         />
         <div class="flex justify-between items-center mt-5">
           <Modals::-TriggerButton>
-            <Button {{on 'click' (fn (mut this.isModalOpen) false)}}>
+            <Button
+              class="dark:bg-gray-950"
+              {{on 'click' (fn (mut this.isModalOpen) false)}}
+            >
               {{t 'modals.close-button'}}
             </Button>
           </Modals::-TriggerButton>
-          <Button
-            class="btn-neutral"
-            {{on 'click' this.saveInitialTotalBalance}}
-          >
+          <Button class="btn-ghost" {{on 'click' this.saveInitialTotalBalance}}>
             <FaIcon @icon="arrow-right" />
             {{t 'modals.continue-button'}}
           </Button>
@@ -71,7 +71,7 @@
           <div class="flex">
             {{#unless this.financeService.financeDataList.length}}
               <Button
-                class="btn-neutral mr-3"
+                class="btn-ghost mr-3"
                 {{on 'click' (fn (mut this.isTotalBalanceModalOpen) true)}}
               >
                 <FaIcon @icon="arrow-left" />

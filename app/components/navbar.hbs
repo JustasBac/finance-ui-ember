@@ -5,6 +5,7 @@
   >
     <div class="w-full">
       <div class="flex w-full justify-center xl:justify-start relative">
+        {{! mobile view }}
         <div class="absolute left-0">
           <BasicDropdown
             @verticalPosition="below"
@@ -28,19 +29,28 @@
                   </Button>
                 </div>
                 <ul class="menu menu-vertical">
-                  <li class="bg-gray-200 rounded">
+                  <li
+                    class="bg-gray-200 dark:bg-gray-900 rounded"
+                    {{on 'click' dd.actions.close}}
+                  >
                     <LinkTo @route="overview" class="gap-x-2">
                       <FaIcon @icon="house" />
                       {{t 'home-page.title'}}
                     </LinkTo>
                   </li>
-                  <li class="bg-gray-200 rounded my-3">
+                  <li
+                    class="bg-gray-200 dark:bg-gray-900 rounded my-3"
+                    {{on 'click' dd.actions.close}}
+                  >
                     <LinkTo @route="finance-panel" class="gap-x-2">
                       <FaIcon @icon="coins" />
                       {{t 'finance-panel.title'}}
                     </LinkTo>
                   </li>
-                  <li class="bg-gray-200 rounded">
+                  <li
+                    class="bg-gray-200 dark:bg-gray-900 rounded"
+                    {{on 'click' dd.actions.close}}
+                  >
                     <LinkTo @route="currency-selection" class="gap-x-2">
                       <FaIcon @icon="money-bill" />
                       {{t 'navbar.currency-settings-button'}}
@@ -56,6 +66,7 @@
               </div>
             </dd.Content>
           </BasicDropdown>
+          {{! mobile view END}}
         </div>
         <LinkTo
           class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
@@ -64,6 +75,9 @@
           <FaIcon @icon="landmark" class="mr-2" />
           Finance App
         </LinkTo>
+        {{! mobile view }}
+        <LightDarkModeSwitch class="xl:hidden absolute right-0 top-2" />
+        {{! mobile view END}}
       </div>
       <div class="hidden xl:flex w-full justify-end">
         <div class="menu menu-horizontal px-1">

@@ -1,7 +1,9 @@
 {{page-title 'Currency settings'}}
 <EmberWormhole @to="page-body-wormhole">
   <PageLayout @pageTitle="Currency settings">
-    <div class="card h-full bg-base-100 shadow-xl p-8 overflow-auto">
+    <div
+      class="card h-full bg-base-100 dark:bg-gray-800 shadow-xl p-8 overflow-auto dark:text-white"
+    >
       <CurrencySelection::Dashboard />
     </div>
     <GoBackButton class="mt-8" />
