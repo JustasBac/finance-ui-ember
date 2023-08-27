@@ -18,7 +18,7 @@ export default class SavingPlanDetailedViewRoute extends Route {
     );
 
     if (!savingPlan) {
-      this.router.transitionTo('home');
+      this.router.transitionTo('overview');
     }
 
     return savingPlan;
