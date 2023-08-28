@@ -23,7 +23,7 @@ build:
     - mv .git/objects/pack/pack*.pack .
     - git unpack-objects < $(ls pack*.pack)
   script:
-    - docker build -f docker/Dockerfile --platform=linux/amd64 -t $NAME_VERSION -t $NAME_MAJOR -t $NAME_MINOR .
+    - docker build -f docker/Dockerfile --platform=linux/arm64 -t $NAME_VERSION -t $NAME_MAJOR -t $NAME_MINOR .
     - docker push $NAME_MAJOR
     - docker push $NAME_MINOR
     - docker push $NAME_VERSION
