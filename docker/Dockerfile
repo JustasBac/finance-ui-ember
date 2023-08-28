@@ -12,7 +12,7 @@ RUN yarn
 RUN yarn tailwind:build
 RUN yarn ember build --environment=production
 
-FROM busybox
+FROM alpine:3.10
 
 WORKDIR /
 RUN mkdir /webapp/
