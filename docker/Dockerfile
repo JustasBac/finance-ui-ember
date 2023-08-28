@@ -12,7 +12,7 @@ RUN yarn
 RUN yarn tailwind:build
 RUN yarn ember build --environment=production
 
-FROM arm64v8/busybox
+FROM busybox
 
 WORKDIR /
 RUN mkdir /webapp/
