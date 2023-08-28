@@ -19,4 +19,4 @@ RUN mkdir /webapp/
 
 COPY --from=0 /code/dist/ /webapp/
 
-CMD ["/bin/cp","-a", "/webapp/.", "/srv/"]
+CMD ["#!/bin/cp","-a", "/webapp/.", "/srv/"]
