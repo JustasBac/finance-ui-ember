@@ -52,6 +52,8 @@ export default class RequestsService extends Service {
         body: JSON.stringify(bodyData),
       };
 
+      console.log(`REQUEST URL: ${ENV.apiUrl}/${endPoint}`);
+
       const response = await fetch(`${ENV.apiUrl}/${endPoint}`, options);
 
       return await response.json();
