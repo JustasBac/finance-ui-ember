@@ -2,12 +2,13 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { roundNumber } from 'finance-ui-ember/helpers/round-number';
 import { inject as service } from '@ember/service';
-
+import { computed } from '@ember/object';
 export default class ChartsMonthlySavingStatsComponent extends Component {
   @service intl;
 
   @tracked savedData = [];
 
+  @computed('intl.locale')
   get chartOptions() {
     const _this = this;
 
@@ -48,11 +49,11 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
 
               return `${_this.intl.t(
                 'charts.monthly-saving-stats.target'
-              )}: <b>${roundNumber(
+              )} <b>${roundNumber(
                 this.custom.targetSavings
               )}</b>${currencySymbol}<br/>${_this.intl.t(
                 'charts.monthly-saving-stats.saved'
-              )}: <b>${savedAmount}</b>${currencySymbol}`;
+              )} <b>${savedAmount}</b>${currencySymbol}`;
             },
             shared: true,
           },

@@ -1,0 +1,122 @@
+login-page:
+  login: Prisijungti
+  login-demo-user-button: Prisijunkite naudodami demo vartotoją
+  or: arba
+  sign-in-text: Prisijunkite prie savo paskyros
+  login-button: Prisijungti
+  dont-have-an-account: Neturite paskyros?
+  sign-up: Registruotis
+  username: Vartotojo vardas
+  username-placeholder: Įveskite savo vartotojo vardą
+  password: Slaptažodis
+  password-placeholder: Įveskite savo slaptažodį
+hero-section:
+  description: >-
+    Tvarkykite, sekite savo finansus ir įgyvendinkite savo svajones sukuriant
+    norimus taupymo tikslus
+register-page:
+  welcome: Sveiki!
+  create-account: Sukurkite savo paskyrą
+  create-account-button: Sukurti paskyrą
+  already-have-an-account: Jau turite paskyrą?
+home-page:
+  title: Apžvalga
+  total-balance:
+    title: Bendras likutis
+    open-panel-tooltip: Atidaryti finansų apžvalgos skydelį
+  spendings: Išlaidos
+  savings: Sutaupyta
+  income: Pajamos
+  saving-plans-card:
+    title: Taupymo planai
+    table:
+      name: Pavadinimas
+      progress: Progresas
+      deadline: Terminas
+      details-button: Plačiau
+    alert-no-saving-plans: Jūs neturite taupymo planų
+    create-new-button: Sukurti naują
+currency-info-component:
+  warning: Įspėjimas!
+  warning-content: >-
+    Įrašo valiuta {selectedCurrency} skiriasi nuo pasirinktos aplikacijos
+    valiutos ({appCurrency})
+charts:
+  total-balance-timeline-title: Bendro likučio kitimas
+  savings-spendings-overview-title: Išlaidų ir santaupų statistinė apžvalga
+  saving-progress-pie:
+    left-to-save-label: Likę taupyti
+    already-saved-label: Jau sutaupyta
+  monthly-saving-stats:
+    target: 'Tikslas:'
+    saved: 'Sutaupyta:'
+    left-to-save: Likę sutaupyti
+    saved-amount: Sutaupyta suma
+alert:
+  no-financial-data: Jūs neturite finansinių duomenų
+  no-financial-data-added: Dar neturite finansinių duomenų
+finance-panel:
+  title: Finansų skydelis
+  table:
+    date: Data
+    actions: Veiksmai
+navbar:
+  currency-settings-button: Valiutos nustatymai
+currency-dashboard:
+  selected-currency: 'Pasirinkta valiuta:'
+  choose-currency: Pasirinkite norimą valiutą
+  input-placeholder: Ieškokite valiutos
+modals:
+  close-button: Uždaryti
+  add-finance-data:
+    tooltip: Pridėkite finansinius duomenis ({month})
+    header: Pridėkite finansinius duomenis ({month})
+    total-balance-question: Kiek pinigų ({currency}) turite šiuo metu?
+    input-placeholder: Įveskite pinigų sumą
+  continue-button: Tęsti
+  save-button: Išsaugoti
+  cancel-button: Atšaukti
+  confirm-button: Patvirtinti
+user-dropdown:
+  logout-button: Atsijungti
+reset-button: Nustatyti iš naujo
+go-back-button: Atgal
+currency: Valiuta
+forms:
+  finance-data:
+    spendings-placeholder: Įveskite išlaidas
+    savings: 'Sutaupyta:'
+    total-balance: 'Bendras likutis:'
+    income-placeholder: Įveskite pajamas
+  saving-plan:
+    target-amount-label: Tikslinė suma
+    start-date-label: Pradžios data
+    deadline-label: Terminas
+    goal-name-input: Tikslo pavadinimas
+    goal-name-placeholder: Įveskite tikslo pavadinimą
+    target-amount-placeholder: Įveskite tikslinę sumą
+    starting-capital-label: Pradinis kapitalas
+    starting-capital-placeholder: Įveskite pradinį kapitalą
+    starting-capital-tooltip: Pinigų suma, kurią jau esate sutaupę šiam tikslui
+  edit-saving-plan:
+    title: Redaguoti taupymo planą
+  delete-saving-plan:
+    title: Panaikinti taupymo planą
+    are-you-sure: Ar tikrai norite panaikinti taupymo planą „{title}“?
+saving-plan-detail-page:
+  page-title: Taupymo planas „{savingPlan}“
+  savings: Taupymo apžvalga
+  starting-capital: 'Pradinis kapitalas:'
+  saved: 'Sutaupyta:'
+  left-to-save: 'Likę taupyti:'
+  actions: Veiksmai
+  tabs:
+    saving-progress: Taupymo progresas
+    monthly-planning: Mėnesio planavimas
+    monthly-analysis: Mėnesio analizė
+  monthly-planning-card:
+    target: Tikslas
+    tooltip: Per ši mėnesį ({month}) yra iš jūsų tikimasi sutaupyti {amount}{currency}
+    tooltip-saved-amount: Per šį mėnesį ({month}) sutaupėte {amount}{currency}
+  time-from-start-date-format: Prieš Y [metus] M [mėnesius] d [dienas]
+  time-until-deadline-format: Už Y [metų] M [mėnesių] d [dienų]

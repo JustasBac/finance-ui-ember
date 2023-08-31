@@ -14,6 +14,12 @@
             src="/assets/images/german-flag.png"
             alt="German flag"
           />
+        {{else if (eq this.intl.primaryLocale 'lt-lt')}}
+          <img
+            class="object-fill w-8 h-5 rounded fade-in-animation dark:outline dark:outline-gray-800"
+            src="/assets/images/lithuanian-flag.png"
+            alt="Lithuanian flag"
+          />
         {{/if}}
       </summary>
       <ul
@@ -43,6 +49,19 @@
               alt="German flag"
             />
             Deutsch
+          </div>
+        </li>
+        <li class="w-full">
+          <div
+            class="swap-off flex items-center gap-1 hover:text-gray-400"
+            {{on 'click' (fn this.switchLanguage 'lt-lt')}}
+          >
+            <img
+              class="object-fill w-8 h-5 rounded"
+              src="/assets/images/lithuanian-flag.png"
+              alt="Lithuanian flag"
+            />
+            Lietuvių
           </div>
         </li>
       </ul>
