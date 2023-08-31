@@ -60,7 +60,7 @@
                 <div class="flex items-center mt-6">
                   <UserIcon />
                   <span class="ml-2">
-                    Nickname
+                    {{this.userService.username}}
                   </span>
                 </div>
               </div>
@@ -72,7 +72,7 @@
           class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
           @route="overview"
         >
-          <FaIcon @icon="landmark" class="mr-2" />
+          <FaIcon @icon="landmark" class="mr-0.5" />
           Finance App
         </LinkTo>
         {{! mobile view }}
@@ -112,7 +112,7 @@
       class="btn btn-ghost normal-case text-xl p-0 whitespace-nowrap"
       @route="overview"
     >
-      <FaIcon @icon="landmark" class="mr-2" />
+      <FaIcon @icon="landmark" class="mr-0.5" />
       Finance App
     </LinkTo>
     <LanguageSwitchButton class="float-right" />

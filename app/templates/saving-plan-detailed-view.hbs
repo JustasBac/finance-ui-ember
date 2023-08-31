@@ -5,7 +5,7 @@
     }}
   >
     <div
-      class="flex justify-center xl:justify-start flex-wrap 3xl:flex-nowrap gap-8 mb-8"
+      class="flex justify-center xl:justify-start flex-wrap 3xl:flex-nowrap gap-4 xl:gap-8 mb-12"
     >
       <Card class="basis-1/5" @icon="sack-dollar">
         <:header>
@@ -89,7 +89,7 @@
       </Card>
     </div>
     <div
-      class="card grow bg-base-100 dark:bg-gray-800 shadow-xl p-2 xl:px-8 min-h-[30rem] qHd:min-h-[35rem]"
+      class="card grow bg-base-100 dark:bg-gray-800 shadow-xl p-2 xl:px-8 min-h-[30rem] qHd:min-h-[35rem] mb-8 xl:mb-0"
     >
       <div class="tabs flex justify-center">
         <a
@@ -123,13 +123,15 @@
           {{t 'saving-plan-detail-page.tabs.monthly-analysis'}}
         </a>
       </div>
-      <div class="card-body px-4 py-6 overflow-auto">
+      <div class="card-body p-1 xl:px-4 py-6 overflow-auto">
         {{#if (eq this.activeTab 'progress')}}
           <div class="fade-in-animation overflow-hidden qHd:mt-24">
             <Charts::SavingProgressPie @data={{this.model}} />
           </div>
         {{else if (eq this.activeTab 'planning')}}
-          <div class="flex gap-8 flex-wrap mt-1 fade-in-animation">
+          <div
+            class="flex gap-4 xl:gap-8 flex-wrap justify-center xl:justify-start mt-1 fade-in-animation"
+          >
             {{#each @model.monthsListUntilDeadline as |monthInfo|}}
               <MonthlySavingCard
                 @savingPlan={{@model}}

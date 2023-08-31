@@ -84,7 +84,9 @@
           </div>
         </div>
       {{else}}
-        <div class="flex flex-col items-center justify-center mt-4 gap-4">
+        <div
+          class="flex flex-col items-center justify-center mt-4 gap-4 px-4 xl:px-0"
+        >
           <Alert @text={{t 'alert.no-financial-data-added'}} />
           <Modals::AddNewFinanceData
             @candidateDatetime={{moment-format (now)}}

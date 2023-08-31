@@ -1,49 +1,25 @@
 {{page-title (t 'register-page.page-title')}}
-<div class="flex justify-center items-center h-full z-10 bg-base-600">
-  <div class="basis-1/2 h-full hidden xl:inline">
-    <HeroSection />
-  </div>
-  <div class="basis-1/2 flex flex-col justify-around items-center h-full z-10">
-    <div>
-      {{! Empty div is here on purpose of centering divs }}
+<LoginRegisterPageLayout>
+  <div class="flex flex-col justify-center border-opacity-50 xl:w-[25rem]">
+    <h3 class="font-semibold text-3xl text-[#243246] dark:text-gray-200 mb-8">
+      {{t 'register-page.welcome'}}
+    </h3>
+    <div class="mb-4">
+      <p class="text-gray-500 dark:text-gray-200 font-light">
+        {{t 'register-page.create-account'}}
+      </p>
     </div>
-    <div
-      class="card bg-white dark:bg-gray-800 h-fit p-8 fade-in-animation shadow-lg"
-    >
-      <div
-        class="flex flex-col justify-center border-opacity-50 w-[22rem] xl:w-[25rem]"
-      >
-        <h3
-          class="font-semibold text-3xl text-[#243246] dark:text-gray-200 mb-8"
-        >
-          {{t 'register-page.welcome'}}
-        </h3>
-        <div class="mb-4">
-          <p class="text-gray-500 dark:text-gray-200 font-light">
-            {{t 'register-page.create-account'}}
-          </p>
-        </div>
-        <form {{on 'submit' this.createAccount}}>
-          <Forms::User
-            @username={{this.username}}
-            @password={{this.password}}
-          />
-          <Button @type="submit" class="w-full mt-8 bg-[#3d39a0] text-white">
-            {{t 'register-page.create-account-button'}}
-          </Button>
-        </form>
-        <div
-          class="text-center mt-8 font-light text-gray-500 dark:text-gray-300"
-        >
-          {{t 'register-page.already-have-an-account'}}
-          <LinkTo @route="login" class="font-bold hover:underline">
-            {{t 'login-page.login-button'}}
-          </LinkTo>
-        </div>
-      </div>
+    <form {{on 'submit' this.createAccount}}>
+      <Forms::User @username={{this.username}} @password={{this.password}} />
+      <Button @type="submit" class="w-full mt-8 bg-[#3d39a0] text-white">
+        {{t 'register-page.create-account-button'}}
+      </Button>
+    </form>
+    <div class="text-center mt-8 font-light text-gray-500 dark:text-gray-300">
+      {{t 'register-page.already-have-an-account'}}
+      <LinkTo @route="login" class="font-bold hover:underline">
+        {{t 'login-page.login-button'}}
+      </LinkTo>
     </div>
-    <span class="font-light opacity-50 flex items-center gap-1">
-      <CopyrightInfo />
-    </span>
   </div>
-</div>
+</LoginRegisterPageLayout>

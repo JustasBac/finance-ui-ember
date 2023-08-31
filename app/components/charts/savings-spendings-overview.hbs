@@ -8,7 +8,7 @@
 {{else if this.chartData}}
   <HighCharts @chartOptions={{this.chartOptions}} @content={{this.chartData}} />
 {{else}}
-  <div class="flex justify-center items-center h-full">
-    <Alert class="mb-12" @text={{t 'alert.no-financial-data'}} />
+  <div class="flex justify-center items-center h-52 xl:h-full px-4 xl:px-0">
+    <Alert class="xl:mb-12" @text={{t 'alert.no-financial-data'}} />
   </div>
 {{/if}}
