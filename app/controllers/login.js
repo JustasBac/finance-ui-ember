@@ -5,7 +5,6 @@ import { tracked } from '@glimmer/tracking';
 
 export default class LoginController extends Controller {
   @service('input-validation') validationService;
-  @service notifications;
   @service('user') userService;
 
   @tracked username = '';
@@ -18,10 +17,7 @@ export default class LoginController extends Controller {
     const { username, password } = this;
 
     if (!username || !password) {
-      this.validationService.validationWasTriggered = true;
-      this.notifications.error('Make sure all fields are filled!', {
-        autoClear: true,
-      });
+      this.validationService.triggerValidation();
       return;
     }
 

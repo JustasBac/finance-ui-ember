@@ -9,6 +9,7 @@ export default class ModalsAddNewFinanceDataComponent extends Component {
   @service('finance') financeService;
   @service('input-validation') validationService;
   @service notifications;
+  @service intl;
 
   @tracked isModalOpen = false;
   @tracked financeData = this.initFinanceData();
@@ -55,11 +56,7 @@ export default class ModalsAddNewFinanceDataComponent extends Component {
     const { income, spendings, initialTotalBalance } = this.financeData;
 
     if (!income || !spendings) {
-      this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
-
-      this.notifications.error('Make sure all fields are filled!', {
-        autoClear: true,
-      });
+      this.validationService.triggerValidation();
       return;
     }
 
@@ -71,7 +68,9 @@ export default class ModalsAddNewFinanceDataComponent extends Component {
     this.args.onAddNewMonth(this.financeData);
 
     this.notifications.success(
-      `Financial data for ${this.financeData.month} was added`,
+      this.intl.t('notifications.financial-data-added', {
+        month: this.financeData.month,
+      }),
       {
         autoClear: true,
       }
@@ -81,11 +80,7 @@ export default class ModalsAddNewFinanceDataComponent extends Component {
   @action
   async saveInitialTotalBalance() {
     if (!this.valueInput) {
-      this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
-
-      this.notifications.error('Make sure all fields are filled!', {
-        autoClear: true,
-      });
+      this.validationService.triggerValidation();
       return;
     }
 

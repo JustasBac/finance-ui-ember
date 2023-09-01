@@ -15,11 +15,31 @@ export default class SavingPlanDetailedViewController extends Controller {
 
   get timeFromStartDate() {
     const start = this.model.startDate;
-    const end = moment();
-    const duration = moment.duration(end.diff(start), 'ms');
-    const format = this.intl.t(
+    const today = moment();
+
+    if (moment(start).isSame(today, 'day')) {
+      // if saving plan starts today
+      return this.intl.t('saving-plan-detail-page.today');
+    }
+
+    let format = this.intl.t(
       'saving-plan-detail-page.time-from-start-date-format'
     );
+    let duration = moment.duration(today.diff(start), 'ms');
+
+    if (moment(start).isAfter(today)) {
+      //if saving plan starts in future
+      format = this.intl.t(
+        'saving-plan-detail-page.time-until-deadline-format'
+      );
+
+      duration = moment.duration(start.diff(today), 'ms');
+    }
+
+    if (duration._data.days === 0 && duration._data.seconds > 0) {
+      // if saving plan starts today
+      return this.intl.t('saving-plan-detail-page.tomorrow');
+    }
 
     return duration.format(format, { trim: 'both' });
   }

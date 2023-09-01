@@ -40,4 +40,10 @@ export default class MonthlySavingCardComponent extends Component {
 
     return moment(this.args.monthInfo.date).isSameOrBefore(now);
   }
+
+  get savedAmount() {
+    const savedAmount = this.args.monthInfo.savedAmount ?? '- ';
+
+    return `${savedAmount}${this.args.currencySymbol}`;
+  }
 }

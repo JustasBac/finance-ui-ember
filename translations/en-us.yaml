@@ -117,6 +117,16 @@ currency-info-component:
 reset-button: Reset
 notifications:
   make-sure-all-are-filled: Make sure all fields are filled!
+  username-and-password-length: Username and password should be longer than 3 symbols!
+  only-future-day-allowed: Only a future date is allowed
+  financial-data-added: Financial data for {month} was added
+  saving-plan-updated: Saving plan was successfully updated
+  finance-changes-saved: Changes for {month} were saved
+  request-error: Request error
+  finance-data-deleted: Finance data for {month} was deleted
+  saving-plan-created: New saving plan "{title}" was successfully created
+  saving-plan-deleted: Saving plan was deleted
+  invalid-credentials: Invalid credentials
 go-back-button: Go back
 saving-plan-detail-page:
   time-from-start-date-format: Y [years] M [months] d [days] [ago]
@@ -134,6 +144,9 @@ saving-plan-detail-page:
     target: Target
     tooltip: In {month} you are expected to save {amount}{currency}
     tooltip-saved-amount: In {month} you saved {amount}{currency}
+    no-savings-yet: You haven't entered any savings for this month yet
   page-title: Saving Plan "{savingPlan}"
+  today: Today
+  tomorrow: Tomorrow
 date-picker:
   pick-a-date: Pick a date

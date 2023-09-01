@@ -12,6 +12,7 @@ export default class UserService extends Service {
   @service('user') userService;
   @service notifications;
   @service session;
+  @service intl;
 
   @tracked selectedCurrency = {};
   @tracked initialTotalBalance = null;
@@ -58,7 +59,7 @@ export default class UserService extends Service {
     );
 
     if (!response) {
-      this.notifications.error('Request error');
+      this.notifications.error(this.intl.t('notifications.request-error'));
       return;
     }
 
@@ -96,7 +97,7 @@ export default class UserService extends Service {
       return;
     }
 
-    this.notifications.error('Request error');
+    this.notifications.error(this.intl.t('notifications.request-error'));
   }
 
   @action
@@ -114,7 +115,9 @@ export default class UserService extends Service {
     const response = await this.requestService.post('register', body);
 
     if (!response.ok) {
-      this.notifications.error(`Request error: ${response.message}`);
+      this.notifications.error(
+        `${this.intl.t('notifications.request-error')}: ${response.message}`
+      );
       return;
     }
 
@@ -133,14 +136,20 @@ export default class UserService extends Service {
       // load initial display name mapping after internal login
     } catch (e) {
       if (e.status === 401) {
-        return this.notifications.error('Invalid credentials', {
-          autoClear: true,
-        });
+        return this.notifications.error(
+          this.intl.t('notifications.invalid-credentials'),
+          {
+            autoClear: true,
+          }
+        );
       }
 
-      this.notifications.error(`Unknown authentication error: ${e}`, {
-        autoClear: true,
-      });
+      this.notifications.error(
+        `${this.intl.t('notifications.request-error')}: ${e}`,
+        {
+          autoClear: true,
+        }
+      );
 
       return false;
     }

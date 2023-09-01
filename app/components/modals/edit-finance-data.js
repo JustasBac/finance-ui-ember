@@ -5,8 +5,6 @@ import { inject as service } from '@ember/service';
 
 export default class ModalsEditFinanceDataComponent extends Component {
   @service('input-validation') validationService;
-  @service notifications;
-  @service intl;
 
   @tracked isModalOpen = false;
   @tracked copiedData = this.args.data.copy();
@@ -22,13 +20,7 @@ export default class ModalsEditFinanceDataComponent extends Component {
       this.copiedData;
 
     if (!income || !spendings) {
-      this.validationService.validationWasTriggered = true;
-      this.notifications.error(
-        this.intl.t('notifications.make-sure-all-are-filled'),
-        {
-          autoClear: true,
-        }
-      );
+      this.validationService.triggerValidation();
       return;
     }
 

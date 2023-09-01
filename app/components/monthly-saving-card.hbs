@@ -56,14 +56,18 @@
     </div>
     <div class="flex justify-center items-center relative">
       <span class="font-bold text-base leading-tight">
-        {{concat @monthInfo.savedAmount @currencySymbol}}
+        {{this.savedAmount}}
         <Tooltip>
-          {{t
-            'saving-plan-detail-page.monthly-planning-card.tooltip-saved-amount'
-            month=(moment-format @monthInfo.momentDate 'MMMM YYYY')
-            amount=@monthInfo.savedAmount
-            currency=@currencySymbol
-          }}
+          {{#if (eq @monthInfo.savedAmount null)}}
+            {{t 'saving-plan-detail-page.monthly-planning-card.no-savings-yet'}}
+          {{else}}
+            {{t
+              'saving-plan-detail-page.monthly-planning-card.tooltip-saved-amount'
+              month=(moment-format @monthInfo.momentDate 'MMMM YYYY')
+              amount=@monthInfo.savedAmount
+              currency=@currencySymbol
+            }}
+          {{/if}}
         </Tooltip>
       </span>
       {{#if this.progressPercentage}}

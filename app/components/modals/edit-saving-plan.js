@@ -6,9 +6,9 @@ import { inject as service } from '@ember/service';
 export default class ModalsEditSavingPlanComponent extends Component {
   @service('saving-plan') savingPlanService;
   @service notifications;
+  @service intl;
 
   @tracked isModalOpen = false;
-
   @tracked copyOfEditableSavingPlan = this.args.savingPlan.copy();
 
   @action
@@ -40,9 +40,12 @@ export default class ModalsEditSavingPlanComponent extends Component {
     this.args.savingPlan.monthsListUntilDeadline =
       this.args.savingPlan.getMonthsListUntilDeadline();
 
-    this.notifications.success('Saving plan was successfully updated', {
-      autoClear: true,
-    });
+    this.notifications.success(
+      this.intl.t('notifications.saving-plan-updated'),
+      {
+        autoClear: true,
+      }
+    );
 
     this.isModalOpen = false;
   }

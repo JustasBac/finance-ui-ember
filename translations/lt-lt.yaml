@@ -36,6 +36,8 @@ home-page:
       details-button: Plačiau
     alert-no-saving-plans: Jūs neturite taupymo planų
     create-new-button: Sukurti naują
+    modal:
+      header: Sukurkite naują taupymo planą
 currency-info-component:
   warning: Įspėjimas!
   warning-content: >-
@@ -130,5 +132,22 @@ saving-plan-detail-page:
     target: Tikslas
     tooltip: Per ši mėnesį ({month}) iš jūsų yra tikimasi sutaupyti {amount}{currency}
     tooltip-saved-amount: Per šį mėnesį ({month}) sutaupėte {amount}{currency}
+    no-savings-yet: Dar neįvedėte šio mėnesio santaupų
   time-from-start-date-format: Prieš Y [metus] M [mėnesius] d [dienas]
   time-until-deadline-format: Už Y [metų] M [mėnesių] d [dienų]
+  today: Šiandien
+  tomorrow: Rytoj
+notifications:
+  make-sure-all-are-filled: Visi laukeliai turi būti užpildyti!
+  username-and-password-length: Vartotojo vardas ir slaptažodis turi būti ilgesni nei 3 simboliai!
+  only-future-day-allowed: Leidžiama pasirinkti tik būsimą data
+  financial-data-added: Nauji finansiniai duomenys buvo pridėti {month}
+  saving-plan-updated: Taupymo planas sėkmingai atnaujintas
+  finance-changes-saved: 'Pakeitimai buvo išsaugoti {month} '
+  request-error: Sistemos klaida
+  finance-data-deleted: 'Finansiniai duomenys buvo ištrinti {month} '
+  saving-plan-created: Naujas taupymo planas „{title}“ sėkmingai sukurtas
+  saving-plan-deleted: Taupymo planas ištrintas
+  invalid-credentials: Neteisingi prisijungimo duomenys
+date-picker:
+  pick-a-date: Pasirinkite datą

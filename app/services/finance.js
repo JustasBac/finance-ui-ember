@@ -8,6 +8,7 @@ export default class FinanceService extends Service {
   @service('user') userService;
   @service('requests') requestService;
   @service notifications;
+  @service intl;
 
   @tracked financeDataList = [];
 
@@ -71,7 +72,7 @@ export default class FinanceService extends Service {
       const response = await this.requestService.post('finance_data', body);
 
       if (!response || !response.id) {
-        this.notifications.error('Request error');
+        this.notifications.error(this.intl.t('notifications.request-error'));
         return false;
       }
 
@@ -94,7 +95,7 @@ export default class FinanceService extends Service {
     const response = await this.requestService.put(`finance_data/${id}`, body);
 
     if (!response || !response.id) {
-      this.notifications.error('Request error');
+      this.notifications.error(this.intl.t('notifications.request-error'));
       return false;
     }
 
@@ -128,7 +129,7 @@ export default class FinanceService extends Service {
     );
 
     if (!response.ok) {
-      this.notifications.error('Delete request error');
+      this.notifications.error(this.intl.t('notifications.request-error'));
       return false;
     }
 
@@ -141,9 +142,9 @@ export default class FinanceService extends Service {
     }
 
     this.notifications.success(
-      `Finance data for ${moment(data.datetime).format(
-        'MMMM YYYY'
-      )} was deleted`,
+      this.intl.t('notifications.finance-data-deleted', {
+        month: moment(data.datetime).format('MMMM YYYY'),
+      }),
       {
         autoClear: true,
       }

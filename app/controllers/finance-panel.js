@@ -7,6 +7,7 @@ export default class FinancePanelController extends Controller {
   @service('finance') financeService;
   @service('user') userService;
   @service notifications;
+  @service intl;
 
   get nextMonth() {
     return moment(this.model[this.model.length - 1].datetime).add(1, 'months');
@@ -47,9 +48,14 @@ export default class FinancePanelController extends Controller {
     if (!response) {
       return;
     }
-    this.notifications.success(`Changes for ${newRowData.month} were saved`, {
-      autoClear: true,
-    });
+    this.notifications.success(
+      this.intl.t('notifications.finance-changes-saved', {
+        month: newRowData.month,
+      }),
+      {
+        autoClear: true,
+      }
+    );
 
     currentRowData.income = newRowData.income;
     currentRowData.spendings = newRowData.spendings;

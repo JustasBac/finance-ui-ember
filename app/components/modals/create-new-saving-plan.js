@@ -8,7 +8,6 @@ export default class ModalsCreateNewSavingPlanComponent extends Component {
   @service('input-validation') validationService;
   @service('user') userService;
   @service('saving-plan') savingPlanService;
-  @service notifications;
 
   @tracked newSavingPlan = new SavingPlan();
   @tracked isModalOpen = false;
@@ -28,11 +27,7 @@ export default class ModalsCreateNewSavingPlanComponent extends Component {
     }
 
     if (!title || !targetAmount) {
-      this.validationService.validationWasTriggered = true; //set it to true so that Input component knows that validations found some issues
-
-      this.notifications.error('Make sure all fields are filled!', {
-        autoClear: true,
-      });
+      this.validationService.triggerValidation();
       return;
     }
 

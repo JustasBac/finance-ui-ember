@@ -6,6 +6,7 @@ import { inject as service } from '@ember/service';
 export default class SavingPlanService extends Service {
   @service notifications;
   @service('requests') requestService;
+  @service intl;
 
   @tracked savingPlans = [];
 
@@ -54,7 +55,9 @@ export default class SavingPlanService extends Service {
     this.savingPlans.pushObject(newSavingPlan);
 
     this.notifications.success(
-      `New saving plan for ${newSavingPlan.title} was successfully created`,
+      this.intl.t('notifications.saving-plan-created', {
+        title: newSavingPlan.title,
+      }),
       {
         autoClear: true,
       }
@@ -68,13 +71,16 @@ export default class SavingPlanService extends Service {
     );
 
     if (!response.ok) {
-      this.notifications.error('Delete request error');
+      this.notifications.error(this.intl.t('notifications.request-error'));
       return false;
     }
 
-    this.notifications.success('Saving plan was deleted', {
-      autoClear: true,
-    });
+    this.notifications.success(
+      this.intl.t('notifications.saving-plan-deleted'),
+      {
+        autoClear: true,
+      }
+    );
 
     this.savingPlans.removeObject(savingPlan);
 
@@ -97,7 +103,7 @@ export default class SavingPlanService extends Service {
     );
 
     if (!response.id) {
-      this.notifications.error('Request error');
+      this.notifications.error(this.intl.t('notifications.request-error'));
       return false;
     }
 
@@ -124,7 +130,7 @@ export default class SavingPlanService extends Service {
         body
       );
       if (!response.id) {
-        this.notifications.error('Request error');
+        this.notifications.error(this.intl.t('notifications.request-error'));
         return;
       }
       monthThatAlreadyHasSavedAmount.amountSaved = +savedAmount;
@@ -139,7 +145,7 @@ export default class SavingPlanService extends Service {
       const response = await this.requestService.post('monthly_savings', body);
 
       if (!response || !response.id) {
-        this.notifications.error('Request error');
+        this.notifications.error(this.intl.t('notifications.request-error'));
         return;
       }
 

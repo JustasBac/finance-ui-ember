@@ -60,8 +60,8 @@ modals:
     placeholder: Wert eingeben
 hero-section:
   description: >-
-    Organisieren Sie, behalten Sie den Überblick über Ihre Finanzen und verfolgen Sie Ihre
-    Sparziele
+    Organisieren Sie, behalten Sie den Überblick über Ihre Finanzen und
+    verfolgen Sie Ihre Sparziele
 finance-panel:
   title: Finanzpanel
   table:
@@ -118,7 +118,17 @@ currency-info-component:
     App-Währung ({appCurrency})
 reset-button: Zurücksetzen
 notifications:
-  make-sure-all-are-filled: Stellen Sie sicher, dass alle Felder ausgefüllt sind!
+  make-sure-all-are-filled: Alle Felder müssen ausgefüllt werden!
+  username-and-password-length: Benutzername und Passwort sollten länger als 3 Zeichen sein!
+  only-future-day-allowed: Es ist nur ein zukünftiges Datum zulässig
+  financial-data-added: Finanzdaten für {month} wurden hinzugefügt
+  saving-plan-updated: Der Sparplan wurde erfolgreich aktualisiert
+  finance-changes-saved: Änderungen für {month} wurden gespeichert
+  request-error: Fehler bei der Anfrage
+  finance-data-deleted: Die Finanzdaten für {month} wurden gelöscht
+  saving-plan-created: Der neue Sparplan „{title}“ wurde erfolgreich erstellt
+  saving-plan-deleted: Sparplan wurde gelöscht
+  invalid-credentials: Ungültige Anmeldeinformationen
 go-back-button: Zurück
 saving-plan-detail-page:
   time-from-start-date-format: Vor Y [Jahre] M [Monate] d [Tage]
@@ -136,6 +146,9 @@ saving-plan-detail-page:
     target: Ziel
     tooltip: Im {month} sollen Sie voraussichtlich {amount}{currency} sparen
     tooltip-saved-amount: Im {month} haben Sie {amount}{currency} gespart
+    no-savings-yet: Sie haben für diesen Monat noch keine Ersparnisse eingegeben
   page-title: Sparplan "{savingPlan}"
+  today: Heute
+  tomorrow: Morgen
 date-picker:
   pick-a-date: Datum wählen
