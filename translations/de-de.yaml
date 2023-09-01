@@ -10,8 +10,6 @@ login-page:
   sign-up: Registrieren
   or: oder
   login-demo-user-button: Mit dem Demo-Benutzer einloggen
-footer:
-  built-with: Gebaut mit Ember.js
 register-page:
   welcome: Willkommen!
   create-account: Ein Konto erstellen

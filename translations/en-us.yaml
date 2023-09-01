@@ -10,8 +10,6 @@ login-page:
   sign-up: Sign up
   or: or
   login-demo-user-button: Login with demo user
-footer:
-  built-with: Built with Ember.js
 register-page:
   welcome: Welcome!
   create-account: Create your account
@@ -46,7 +44,7 @@ modals:
   delete-finance-data:
     tooltip: Delete financial data for {month}
     header: Delete financial data
-    are-u-sure-text: Are you sure you want to delete data for {month}
+    are-u-sure-text: Are you sure you want to delete data for {month}?
   cancel-button: Cancel
   confirm-button: Confirm
   add-finance-data:

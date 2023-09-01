@@ -15,12 +15,10 @@
 </Modals::-TriggerButton>
 <Modals::-base @isOpen={{this.isModalOpen}}>
   <:header>
-    <div>
-      {{t 'modals.edit-finance-data.header'}}
-    </div>
+    {{t 'modals.edit-finance-data.header'}}
   </:header>
   <:body>
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center capitalize">
       {{moment-format @data.datetime 'MMMM YYYY'}}
       <Button
         class="btn-sm btn-outline dark:bg-gray-700/70 dark:hover:bg-gray-700"

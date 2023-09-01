@@ -82,6 +82,13 @@ modals:
     target: 'Tikslas:'
     input-label: Šį mėnesį sutaupyta suma ({currency})
     placeholder: Įveskite sumą
+  edit-finance-data:
+    tooltip: Redaguoti šio mėnesio ({month}) finansinius duomenis
+    header: Redaguoti finansinius duomenis
+  delete-finance-data:
+    tooltip: Ištrinkite šio mėnesio ({month}) finansinius duomenis
+    header: Ištrinkite finansinius duomenis
+    are-u-sure-text: Ar tikrai norite ištrinti šio mėnesio ({month}) duomenis?
 user-dropdown:
   logout-button: Atsijungti
 reset-button: Nustatyti iš naujo
