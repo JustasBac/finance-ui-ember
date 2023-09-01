@@ -77,6 +77,11 @@ modals:
   save-button: Išsaugoti
   cancel-button: Atšaukti
   confirm-button: Patvirtinti
+  edit-saving-plan-month-savings:
+    header: Šio mėnesio ({month}) santaupos tikslui „{goalName}“
+    target: 'Tikslas:'
+    input-label: Šį mėnesį sutaupyta suma ({currency})
+    placeholder: Įveskite sumą
 user-dropdown:
   logout-button: Atsijungti
 reset-button: Nustatyti iš naujo
@@ -116,7 +121,7 @@ saving-plan-detail-page:
     monthly-analysis: Mėnesio analizė
   monthly-planning-card:
     target: Tikslas
-    tooltip: Per ši mėnesį ({month}) yra iš jūsų tikimasi sutaupyti {amount}{currency}
+    tooltip: Per ši mėnesį ({month}) iš jūsų yra tikimasi sutaupyti {amount}{currency}
     tooltip-saved-amount: Per šį mėnesį ({month}) sutaupėte {amount}{currency}
   time-from-start-date-format: Prieš Y [metus] M [mėnesius] d [dienas]
   time-until-deadline-format: Už Y [metų] M [mėnesių] d [dienų]

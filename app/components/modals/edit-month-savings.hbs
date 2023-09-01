@@ -9,7 +9,7 @@
   <:header>
     {{t
       'modals.edit-saving-plan-month-savings.header'
-      month=@monthInfo.formatedDate
+      month=(moment-format @monthInfo.date 'MMMM YYYY')
       goalName=@savingPlan.title
     }}
   </:header>

@@ -108,34 +108,31 @@ export default class SavingPlanService extends Service {
     //decide between POST and PUT request
 
     const monthThatAlreadyHasSavedAmount = savingPlan.savingsPerMonth.find(
-      (el) => el.month === monthInfo.formatedDate
+      (el) => moment(el.month).isSame(monthInfo.date, 'month')
     );
 
     if (monthThatAlreadyHasSavedAmount) {
-      //PUT
+      // PUT
       const monthId = savingPlan.savingsPerMonth.find(
-        (el) => el.month === monthInfo.formatedDate
+        (el) => moment(el.month).format() === moment(monthInfo.date).format()
       ).id;
-
       const body = {
         amount_saved: +savedAmount,
       };
-
       const response = await this.requestService.put(
         `monthly_savings/${monthId}`,
         body
       );
-
       if (!response.id) {
         this.notifications.error('Request error');
         return;
       }
-
       monthThatAlreadyHasSavedAmount.amountSaved = +savedAmount;
     } else {
+      //POST
       const body = {
         saving_plan_id: savingPlan.id,
-        month: monthInfo.formatedDate,
+        month: monthInfo.date,
         amount_saved: +savedAmount,
       };
 
@@ -147,7 +144,7 @@ export default class SavingPlanService extends Service {
       }
 
       savingPlan.savingsPerMonth.pushObject({
-        month: monthInfo.formatedDate,
+        month: monthInfo.date,
         amountSaved: +savedAmount,
         id: response.id,
       });

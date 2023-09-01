@@ -23,7 +23,7 @@
           {{t 'forms.saving-plan.start-date-label'}}
         </:header>
         <:body>
-          <span class="xl:text-xl">
+          <span class="xl:text-xl capitalize">
             {{moment-format @model.startDate 'MMMM DD, YYYY'}}
           </span>
           <span class="text-sm opacity-50 font-light whitespace-nowrap">
@@ -36,7 +36,7 @@
           {{t 'forms.saving-plan.deadline-label'}}
         </:header>
         <:body>
-          <span class="xl:text-lg">
+          <span class="xl:text-lg capitalize">
             {{moment-format @model.deadlineDate 'MMMM DD, YYYY'}}
           </span>
           <span class="text-sm opacity-50 font-light whitespace-nowrap">

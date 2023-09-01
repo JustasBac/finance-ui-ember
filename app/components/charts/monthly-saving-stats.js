@@ -3,12 +3,13 @@ import { tracked } from '@glimmer/tracking';
 import { roundNumber } from 'finance-ui-ember/helpers/round-number';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import moment from 'moment';
+
 export default class ChartsMonthlySavingStatsComponent extends Component {
   @service intl;
 
   @tracked savedData = [];
 
-  @computed('intl.locale')
   get chartOptions() {
     const _this = this;
 
@@ -62,8 +63,10 @@ export default class ChartsMonthlySavingStatsComponent extends Component {
     };
   }
 
+  @computed('intl.locale')
   get xAxisCategories() {
-    return this.args.data.map((el) => el.formatedDate);
+    this.intl.locale;
+    return this.args.data.map((el) => moment(el.date).format('MMMM YYYY'));
   }
 
   get chartData() {

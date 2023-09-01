@@ -100,7 +100,7 @@ export default class SavingPlan {
 
     monthlySavingPlanningInfo = monthsListUntilDeadline.map((month) => {
       return {
-        formatedDate: month.date,
+        date: month.date,
         targetSavings: savingsPerFullMonthNeeded,
         momentDate: month.momentObject,
         savedAmount: month.savedAmount,
@@ -132,7 +132,10 @@ export default class SavingPlan {
     const targetAmountForMonthsWithSavings = monthlySavingPlanningInfo.reduce(
       (sum, monthData) => {
         if (
-          this.savingsPerMonth.find((el) => el.month === monthData.formatedDate)
+          this.savingsPerMonth.find(
+            (el) =>
+              moment(el.month).format() === moment(monthData.date).format()
+          )
         ) {
           return sum + monthData.targetSavings;
         }
@@ -149,24 +152,14 @@ export default class SavingPlan {
     const divisor =
       monthlySavingPlanningInfo
         .map((el) => {
-          if (
-            moment(el.formatedDate, 'MMMM YYYY').isAfter(
-              lastMonthWithEnteredSavings,
-              'MMMM YYYY'
-            )
-          ) {
+          if (moment(el.date).isAfter(lastMonthWithEnteredSavings)) {
             return el;
           }
         })
         .filter((el) => el).length - 1;
 
     monthlySavingPlanningInfo.forEach((el) => {
-      if (
-        moment(el.formatedDate, 'MMMM YYYY').isAfter(
-          lastMonthWithEnteredSavings,
-          'MMMM YYYY'
-        )
-      ) {
+      if (moment(el.date).isAfter(lastMonthWithEnteredSavings)) {
         el.targetSavings = el.targetSavings - difference / divisor;
       }
     });
@@ -205,7 +198,7 @@ export default class SavingPlan {
       }
 
       return {
-        formatedDate: month.date,
+        date: month.date,
         targetSavings,
         momentDate: month.momentObject,
         savedAmount: month.savedAmount,
@@ -225,14 +218,15 @@ export default class SavingPlan {
 
       while (date < endDateClone.endOf('month')) {
         const monthlySavings = this.savingsPerMonth.find(
-          (el) => el.month === moment(date).format('MMMM YYYY')
+          (el) => moment(el.month).format() === moment(date).format()
         )?.amountSaved;
 
         betweenMonths.push({
-          date: date.format('MMMM YYYY'),
+          date: date.format(),
           momentObject: moment(date),
           savedAmount: monthlySavings === undefined ? null : monthlySavings,
         });
+
         date.add(1, 'month');
       }
     }

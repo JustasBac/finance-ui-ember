@@ -29,15 +29,15 @@ export default class MonthlySavingCardComponent extends Component {
   get isCurrentMonth() {
     const currentMonth = moment().format('MMMM YYYY'); //now
 
-    return currentMonth === this.args.monthInfo.formatedDate;
+    return (
+      currentMonth === moment(this.args.monthInfo.date).format('MMMM YYYY')
+    );
   }
 
   get isEditAllowed() {
     //don't allow to edit your savings for months that are in the future
     const now = moment();
 
-    const date = moment(this.args.monthInfo.formatedDate, 'MMMM YYYY');
-
-    return date.isSameOrBefore(now);
+    return moment(this.args.monthInfo.date).isSameOrBefore(now);
   }
 }

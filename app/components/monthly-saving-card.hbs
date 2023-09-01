@@ -8,14 +8,14 @@
 >
   <div class="flex justify-center">
     <span
-      class="text-xs
+      class="text-xs capitalize
         {{if
           this.isCurrentMonth
           'text-gray-800 dark:text-gray-200 font-semibold'
           'text-gray-500 dark:text-gray-300 '
         }}"
     >
-      {{@monthInfo.formatedDate}}
+      {{moment-format @monthInfo.date 'MMMM YYYY'}}
     </span>
     <CurrencyInfo
       @hideCurrencySymbol={{true}}
@@ -25,7 +25,12 @@
   <span class="flex flex-col text-xs mt-2">
     {{t 'saving-plan-detail-page.monthly-planning-card.target'}}
     <span class="font-bold text-base leading-tight">
-      {{concat (round @monthInfo.targetSavings) @currencySymbol}}
+      {{concat
+        (if
+          (lte @monthInfo.targetSavings 0) '0' (round @monthInfo.targetSavings)
+        )
+        @currencySymbol
+      }}
     </span>
     <Tooltip>
       {{t

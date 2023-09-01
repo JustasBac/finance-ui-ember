@@ -4,7 +4,9 @@
   >
     <h2 class="text-base text-gray-600 dark:text-gray-200">
       {{t 'home-page.total-balance.title'}}
-      <div class="text-sm text-gray-500 dark:text-gray-400 text-center">
+      <div
+        class="text-sm text-gray-500 dark:text-gray-400 text-center capitalize"
+      >
         {{moment-format (now) 'MMMM YYYY'}}
       </div>
       <LinkTo
