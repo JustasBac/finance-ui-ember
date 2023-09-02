@@ -1,6 +1,6 @@
 login-page:
   login: Prisijungti
-  login-demo-user-button: Prisijunkite naudodami demo vartotoją
+  login-demo-user-button: Prisijunkite su demo vartotoju
   or: arba
   sign-in-text: Prisijunkite prie savo paskyros
   login-button: Prisijungti
@@ -68,6 +68,7 @@ currency-dashboard:
   selected-currency: 'Pasirinkta valiuta:'
   choose-currency: Pasirinkite norimą valiutą
   input-placeholder: Ieškokite valiutos
+  currency-settings: Valiutos nustatymai
 modals:
   close-button: Uždaryti
   add-finance-data:

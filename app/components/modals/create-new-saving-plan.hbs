@@ -1,4 +1,5 @@
 <Modals::-TriggerButton>
+  {{! cannot use Button component here because it doesnt trigger modal }}
   <span
     class="btn btn-primary btn-sm whitespace-nowrap"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
@@ -26,7 +27,7 @@
         </Button>
       </Modals::-TriggerButton>
       <Button class="btn-primary" {{on 'click' this.createSavingPlan}}>
-        <FaIcon @icon="floppy-disk" />
+        <FaIcon @icon="floppy-disk" class="mr-0.5" />
         {{t 'modals.save-button'}}
       </Button>
     </div>

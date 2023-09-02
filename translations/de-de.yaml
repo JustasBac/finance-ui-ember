@@ -73,6 +73,7 @@ currency-dashboard:
   selected-currency: 'Ausgewählte Währung:'
   choose-currency: Wählen Sie eine Währung
   input-placeholder: Suchen Sie nach einer Währung
+  currency-settings: Währungseinstellungen
 user-dropdown:
   logout-button: Ausloggen
 forms:
