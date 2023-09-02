@@ -1,56 +1,61 @@
-# finance-ui-ember
+# Finance UI app
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This repository contains the frontend code for a Finance App built using Ember.js, styled with Tailwind CSS, and utilizing Highcharts for data visualization. It utilizes Yarn as the package manager and includes Highcharts for data visualization
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
+- [Git](https://git-scm.com/)
+- [Node (16 or higher)](https://nodejs.org/)
+- [Ember CLI](https://cli.emberjs.com/release/)
+- Yarn
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://cli.emberjs.com/release/)
-* [Google Chrome](https://google.com/chrome/)
+## Getting started
 
-## Installation
+- `git clone <this-repository-url>`
+- `cd finance-ui-ember`
+- `yarn install`
 
-* `git clone <repository-url>` this repository
-* `cd finance-ui-ember`
-* `npm install`
+## Configuration (ENV variables)
 
-## Running / Development
+```bash
+cp .dist-env-development .env-development
+cp .dist-env-production .env-production
+```
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+## Running the Application
+
+To run the application locally, use the following command:
+
+```bash
+ember serve
+```
+
+This will start a development server, and you can access the application in your web browser at `http://localhost:4200`
+
+## Building Tailwind CSS
+
+To generate the Tailwind CSS classes, you can use the following command:
+
+```bash
+yarn:tailwind:build
+```
+
+This command will process your Tailwind CSS configuration and generate the necessary CSS file.
+
+## Tracking Tailwind CSS Classes
+
+To track Tailwind CSS classes in your application, you can use the following command:
+
+```bash
+yarn tailwind:watch
+```
+
+This command will analyze your application code and generate a report of the used and unused Tailwind CSS classes.
 
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
 
-### Running Tests
+## Using Highcharts
 
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `npm run lint`
-* `npm run lint:fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://cli.emberjs.com/release/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+The Finance App frontend utilizes Highcharts for data visualization. You can refer to the [Highcharts documentation](https://www.highcharts.com/docs/index) for detailed information on how to create and customize charts.
