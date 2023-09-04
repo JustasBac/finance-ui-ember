@@ -1,7 +1,7 @@
 <Modals::-TriggerButton>
   {{! cannot use Button component here because it doesnt trigger modal }}
   <span
-    class="btn btn-primary btn-sm whitespace-nowrap inline"
+    class="btn btn-primary btn-sm whitespace-nowrap inline xl:flex"
     {{on 'click' (fn (mut this.isModalOpen) true)}}
   >
     <FaIcon @icon="plus" />
